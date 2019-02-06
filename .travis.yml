@@ -27,7 +27,7 @@ deploy:
     provider: script
     skip_cleanup: true
     script:
-        - npm run lerna:publish
+        - yarn run lerna:publish
     on:
         branch: master
 
