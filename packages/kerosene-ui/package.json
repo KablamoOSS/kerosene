@@ -30,5 +30,5 @@
     "scripts": {
         "build": "tsc"
     },
-    "gitHead": "e9844a7cf3a277b697be705df05aa96614d375c7"
+    "gitHead": "57999cb1fae5050be36e77c7c3669e0fcd9118f0"
 }

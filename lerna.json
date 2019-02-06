@@ -4,7 +4,8 @@
     "npmClientArgs": ["--no-lockfile"],
     "useWorkspaces": true,
     "publishConfig": {
-        "--access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
     "command": {
         "version": {
