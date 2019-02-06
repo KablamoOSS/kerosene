@@ -1,5 +1,7 @@
 {
-    "packages": ["packages/*"],
+    "packages": [
+        "packages/*"
+    ],
     "useWorkspaces": true,
     "publishConfig": {
         "access": "public",
@@ -10,5 +12,5 @@
             "allowBranch": "master"
         }
     },
-    "version": "0.0.0"
+    "version": "0.0.1"
 }
