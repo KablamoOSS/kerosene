@@ -6,7 +6,7 @@
     "repository": "git@github.com:KablamoOSS/kerosene.git",
     "author": "Kablamo",
     "license": "MIT",
-    "private": true,
+    "private": false,
     "workspaces": {
         "packages": [
             "packages/*"
