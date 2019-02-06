@@ -4,7 +4,7 @@
     "npmClientArgs": ["--no-lockfile"],
     "useWorkspaces": true,
     "publishConfig": {
-        "access": "public"
+        "--access": "public"
     },
     "command": {
         "version": {
