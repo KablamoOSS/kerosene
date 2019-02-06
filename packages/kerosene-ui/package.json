@@ -6,6 +6,7 @@
         "url": "https://github.com/KablamoOSS/kerosene.git",
         "directory": "packages/kerosene-ui"
     },
+    "private": false,
     "license": "MIT",
     "main": ".dist/index.js",
     "browser": ".dist/index.js",
@@ -29,5 +30,5 @@
     "scripts": {
         "build": "tsc"
     },
-    "gitHead": "0f65e5ecad9de2738ca117f302ff20f2e6ff52a0"
+    "gitHead": "4fd7b985da44a0bd310cdd398b051a269435f8f9"
 }
