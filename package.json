@@ -1,0 +1,41 @@
+{
+    "name": "kerosene",
+    "version": "1.0.0",
+    "description": "A collection of useful modules",
+    "main": "index.js",
+    "repository": "git@github.com:KablamoOSS/kerosene.git",
+    "author": "Kablamo",
+    "license": "MIT",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ]
+    },
+    "scripts": {
+        "build": "yarn workspaces run build",
+        "test": "yarn workspaces run test",
+        "watch": "jest --expand --watch",
+        "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
+        "lerna:publish": "lerna publish from-package --yes"
+    },
+    "devDependencies": {
+        "@types/enzyme": "^3.1.16",
+        "@types/enzyme-adapter-react-16": "^1.0.3",
+        "@types/jest": "^23.0.0",
+        "enzyme-adapter-react-16": "^1.9.1",
+        "jest": "^23.1.0",
+        "jsdom": "^13.2.0",
+        "jsdom-global": "^3.0.2",
+        "lerna": "^3.10.7",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "ts-jest": "^23.10.5",
+        "typescript": "^3.3.1"
+    },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "jsdom",
+        "setupTestFrameworkScriptFile": "./test/setup.ts"
+    }
+}

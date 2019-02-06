@@ -1,0 +1,29 @@
+if: tag IS blank
+
+language: node_js
+
+node_js:
+    - "10"
+
+os:
+    - linux
+
+cache: yarn
+
+script:
+    - yarn run prettier:check
+    - yarn run test
+    - yarn run build
+
+before_deploy:
+    - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
+deploy:
+    provider: script
+    skip_cleanup: true
+    script:
+        - npm run lerna:publish
+    on:
+        branch: master
+
+tags: true

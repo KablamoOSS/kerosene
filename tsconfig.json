@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "declaration": true,
+        "noImplicitAny": true,
+        "removeComments": false,
+        "moduleResolution": "node",
+        "allowJs": false,
+        "strict": true,
+        "sourceMap": true,
+        "inlineSources": false,
+        "strictNullChecks": true,
+        "watch": false,
+        "lib": ["esnext", "dom"],
+        "jsx": "react",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "outDir": ".dist"
+    },
+    "include": ["./packages/**/*.ts", "./packages/**/*.tsx"],
+    "exclude": ["./packages/**/*.spec.ts", "./packages/**/*.spec.tsx"]
+}
