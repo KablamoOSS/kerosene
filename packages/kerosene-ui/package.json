@@ -6,10 +6,20 @@
         "url": "https://github.com/KablamoOSS/kerosene.git",
         "directory": "packages/kerosene-ui"
     },
+    "bugs": {
+        "url": "https://github.com/KablamoOSS/kerosene/issues"
+    },
+    "homepage": "https://github.com/KablamoOSS/kerosene",
     "private": false,
     "license": "MIT",
     "main": ".dist/index.js",
     "browser": ".dist/index.js",
+    "directories": {
+        "doc": "readme.md"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
     "dependencies": {
         "ansi-styles": "^3.2.0",
         "jest-get-type": "^24.0.0",
