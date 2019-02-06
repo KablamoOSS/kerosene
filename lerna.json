@@ -1,7 +1,5 @@
 {
     "packages": ["packages/*"],
-    "npmClient": "yarn",
-    "npmClientArgs": ["--no-lockfile"],
     "useWorkspaces": true,
     "publishConfig": {
         "access": "public",
