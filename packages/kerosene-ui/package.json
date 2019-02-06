@@ -4,7 +4,7 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/KablamoOSS/kerosene.git",
-        "directory": "packages/expect"
+        "directory": "packages/kerosene-ui"
     },
     "license": "MIT",
     "main": ".dist/index.js",
@@ -28,5 +28,6 @@
     },
     "scripts": {
         "build": "tsc"
-    }
+    },
+    "gitHead": "0ca484624e262fa3f1447fb7f0617aaa7b9b8d35"
 }
