@@ -27,7 +27,6 @@
         "jest": "^24.1.0"
     },
     "scripts": {
-        "build": "tsc",
-        "test": "jest"
+        "build": "tsc"
     }
 }

@@ -14,7 +14,7 @@
     },
     "scripts": {
         "build": "yarn workspaces run build",
-        "test": "yarn workspaces run test",
+        "test": "jest --expand",
         "watch": "jest --expand --watch",
         "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
         "lerna:publish": "lerna publish from-package --yes"
