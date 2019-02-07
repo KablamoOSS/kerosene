@@ -11,13 +11,11 @@ import { flag } from "@kablamo/kerosene-feature-flag";
 
 const flags = {
     FEATURE123: flag(c => [
-        c.condition("environment").must.not.any.of(["development", "staging"]),
-        c.condition("group").must.not.be.exactly("beta"),
+        c.condition("environment").must.be.any.of(["development", "staging"]),
+        c.condition("group").must.be.exactly("users"),
     ]),
     FEATURE42: flag(c => [
-        c
-            .condition("environment")
-            .must.not.be.any.of(["development", "staging"]),
+        c.condition("environment").must.be.exactly("production"),
         c.condition("group").must.be.exactly("beta"),
     ]),
 };
@@ -41,7 +39,14 @@ if (flags.FEATURE123(runtime)) {
 } else {
     console.log("Old feature");
 }
-
 // output:
 // New feature
+
+if (flags.FEATURE42(runtime)) {
+    console.log("New feature");
+} else {
+    console.log("Old feature");
+}
+// output:
+// Old feature
 ```
