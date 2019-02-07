@@ -15,9 +15,9 @@
     "scripts": {
         "build": "yarn workspaces run build",
         "test": "jest --expand",
-        "watch": "jest --expand --watch",
+        "watch": "jest --watch --verbose=false",
         "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
-        "lerna:publish": "lerna publish from-package --yes"
+        "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
     },
     "devDependencies": {
         "@types/enzyme": "^3.1.16",
@@ -37,6 +37,11 @@
     "jest": {
         "preset": "ts-jest",
         "testEnvironment": "jsdom",
-        "setupTestFrameworkScriptFile": "./test/setup.ts"
+        "setupTestFrameworkScriptFile": "./testSetup.ts",
+        "globals": {
+            "ts-jest": {
+                "diagnostics": false
+            }
+        }
     }
 }
