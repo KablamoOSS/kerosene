@@ -15,7 +15,7 @@
     "scripts": {
         "build": "yarn workspaces run build",
         "test": "jest --expand --coverage",
-        "test:coverage": "jest --expand --coverageReporters=text-lcov | coveralls",
+        "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
         "watch": "jest --watch --verbose=false --coverage",
         "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
         "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
