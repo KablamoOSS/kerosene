@@ -1,4 +1,10 @@
-# Kerosene Feature Flag
+# Kerosene Feature Flags
+
+```
+yarn add @kablamo/kerosene-feature-flag
+
+npm install @kablamo/kerosene-feature-flag
+```
 
 A simple assertion style feature flag for use in CI/CD deployment pipelines, especially well suited to monorepos and Trunk Based Development.
 
