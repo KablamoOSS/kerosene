@@ -14,8 +14,9 @@
     },
     "scripts": {
         "build": "yarn workspaces run build",
-        "test": "jest --expand",
-        "watch": "jest --watch --verbose=false",
+        "test": "jest --expand --coverage",
+        "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
+        "watch": "jest --watch --verbose=false --coverage",
         "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
         "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
     },
@@ -23,6 +24,7 @@
         "@types/enzyme": "^3.1.16",
         "@types/enzyme-adapter-react-16": "^1.0.3",
         "@types/jest": "^23.0.0",
+        "coveralls": "^3.0.2",
         "enzyme-adapter-react-16": "^1.9.1",
         "jest": "^23.1.0",
         "jsdom": "^13.2.0",

@@ -20,7 +20,7 @@ before_install:
 
 script:
     - yarn run prettier:check
-    - yarn run test
+    - yarn run test:coverage
     - yarn run build
 
 before_deploy:
