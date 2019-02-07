@@ -6,3 +6,5 @@ node_modules
 
 TODO
 .DS_STORE
+
+coverage

@@ -14,9 +14,9 @@
     },
     "scripts": {
         "build": "yarn workspaces run build",
-        "test": "jest --expand",
-        "test:coverage": "jest --expand --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-        "watch": "jest --watch --verbose=false",
+        "test": "jest --expand --coverage",
+        "test:coverage": "jest --expand --coverageReporters=text-lcov && cat ./coverage/lcov.info | coveralls",
+        "watch": "jest --watch --verbose=false --coverage",
         "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
         "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
     },
