@@ -11,14 +11,14 @@
         "sourceMap": true,
         "inlineSources": false,
         "strictNullChecks": true,
+        "pretty": true,
         "watch": false,
         "lib": ["esnext", "dom"],
         "jsx": "react",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
-        "outDir": ".dist"
+        "baseUrl": "."
     },
-    "include": ["./packages/**/*.ts", "./packages/**/*.tsx"],
+
     "exclude": ["./packages/**/*.spec.ts", "./packages/**/*.spec.tsx"]
 }

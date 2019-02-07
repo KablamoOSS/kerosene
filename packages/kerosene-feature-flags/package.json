@@ -1,10 +1,10 @@
 {
-    "name": "@kablamo/kerosene-ui",
+    "name": "@kablamo/kerosene-feature-flags",
     "version": "0.0.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/KablamoOSS/kerosene.git",
-        "directory": "packages/kerosene-ui"
+        "directory": "packages/kerosene-feature-flags"
     },
     "bugs": {
         "url": "https://github.com/KablamoOSS/kerosene/issues"
