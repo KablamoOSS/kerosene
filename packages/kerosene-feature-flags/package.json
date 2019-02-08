@@ -1,6 +1,6 @@
 {
     "name": "@kablamo/kerosene-feature-flags",
-    "version": "0.0.2",
+    "version": "0.0.6",
     "repository": {
         "type": "git",
         "url": "https://github.com/KablamoOSS/kerosene.git",
@@ -9,6 +9,17 @@
     "bugs": {
         "url": "https://github.com/KablamoOSS/kerosene/issues"
     },
+    "contributors": [
+        {
+            "name": "Kablamo",
+            "url": "kablamo.com.au"
+        },
+        {
+            "name": "Owen Kelly",
+            "email": "owen@owenkelly.com.au",
+            "url": "owenkelly.com.au"
+        }
+    ],
     "homepage": "https://github.com/KablamoOSS/kerosene",
     "private": false,
     "license": "MIT",
@@ -23,6 +34,12 @@
     "engines": {
         "node": ">= 6"
     },
+    "keywords": [
+        "feature-flags",
+        "feature",
+        "flags",
+        "assertion"
+    ],
     "devDependencies": {
         "@types/jest": "^24.0.0",
         "@types/react": "^16.8.1",

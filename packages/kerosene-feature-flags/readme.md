@@ -1,19 +1,19 @@
 # Kerosene Feature Flags
 
-```
-yarn add @kablamo/kerosene-feature-flag
-
-npm install @kablamo/kerosene-feature-flag
-```
-
 A simple assertion style feature flag for use in CI/CD deployment pipelines, especially well suited to monorepos and Trunk Based Development.
 
 Feature Flags give you the ability to safely enable features in different environments, and for specific cohorts of people.
 
+```
+yarn add @kablamo/kerosene-feature-flags
+```
+
+## Getting Started
+
 With a Kerosene Feature Flag you define a flag as an assertion of conditions, and their expected values.
 
 ```typescript
-import { flag } from "@kablamo/kerosene-feature-flag";
+import { flag } from "@kablamo/kerosene-feature-flags";
 
 const flags = {
     FEATURE123: flag(c => [
