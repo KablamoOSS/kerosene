@@ -26,7 +26,7 @@ yarn add @kablamo/kerosene-ui
 
 React components to help with some common tasks.
 
-[View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene-ui)
+[View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene)
 
 ### Kerosene
 
