@@ -1,4 +1,4 @@
-# Kerosene Utils
+# Kerosene
 
 It's like `lodash`, but it's ours.
 
