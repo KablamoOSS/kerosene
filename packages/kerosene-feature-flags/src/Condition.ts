@@ -14,7 +14,7 @@ type Assertion = {
     exactly?: string | number;
 };
 
-type Runtime = { [key: string]: string | number };
+type Runtime = { [key: string]: string | number | string[] | number[] };
 
 class Condition {
     // Grammar types
@@ -22,6 +22,7 @@ class Condition {
     public to: this = this;
     public be: this = this;
     public any: this = this;
+    public all: this = this;
     public not: this = this;
 
     private assertions: Assertion[] = [];
@@ -49,13 +50,32 @@ class Condition {
                         if (typeof assert.of === "undefined") {
                             return false;
                         }
+                        if (Array.isArray(value)) {
+                            // Any can't handle array
+                            return false;
+                        }
                         compare = assert.of.some(
                             conditonValue => conditonValue === value,
                         );
                         break;
+                    case Comparison.ALL:
+                        if (typeof assert.of === "undefined") {
+                            return false;
+                        }
+                        if (!Array.isArray(value)) {
+                            // All must be array
+                            return false;
+                        }
+                        compare = assert.of.every((v, i) => v === value[i]);
+
+                        break;
                     case Comparison.EQUAL:
                         if (typeof assert.exactly === "undefined") {
                             return null;
+                        }
+                        if (Array.isArray(value)) {
+                            // Equal can't handle array
+                            return false;
                         }
                         compare = assert.exactly === value;
                         break;
@@ -63,11 +83,19 @@ class Condition {
                         if (typeof assert.exactly === "undefined") {
                             return null;
                         }
+                        if (Array.isArray(value)) {
+                            // Less Than can't handle array
+                            return false;
+                        }
                         compare = assert.exactly > value;
                         break;
                     case Comparison.GREATER_THAN:
                         if (typeof assert.exactly === "undefined") {
                             return null;
+                        }
+                        if (Array.isArray(value)) {
+                            // Greater Than can't handle array
+                            return false;
                         }
                         compare = assert.exactly < value;
                         break;
@@ -193,6 +221,17 @@ Object.defineProperty(Condition.prototype, "any", {
         this.assertions[this.assertions.length - 1] = {
             ...this.assertions[this.assertions.length - 1],
             comparison: Comparison.ANY,
+        };
+        return this;
+    },
+});
+
+Object.defineProperty(Condition.prototype, "all", {
+    set: () => {},
+    get: function() {
+        this.assertions[this.assertions.length - 1] = {
+            ...this.assertions[this.assertions.length - 1],
+            comparison: Comparison.ALL,
         };
         return this;
     },

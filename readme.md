@@ -10,11 +10,19 @@ _Use Kerosene to make your project *lit*_ ⛽💥🔥. Made by [Kablamo](https:/
 
 ### Feature Flags
 
+```
+yarn add @kablamo/kerosene-feature-flags
+```
+
 A simple assertion style feature flag for use in CI/CD deployment pipelines, especially well suited to monorepos and Trunk Based Development.
 
 [View Kerosene Feature Flags on npm](https://www.npmjs.com/package/@kablamo/kerosene-feature-flags)
 
 ### Kerosene-UI
+
+```
+yarn add @kablamo/kerosene-ui
+```
 
 React components to help with some common tasks.
 
