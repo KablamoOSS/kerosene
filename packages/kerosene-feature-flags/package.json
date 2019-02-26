@@ -1,6 +1,6 @@
 {
     "name": "@kablamo/kerosene-feature-flags",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "repository": {
         "type": "git",
         "url": "https://github.com/KablamoOSS/kerosene.git",
@@ -12,12 +12,12 @@
     "contributors": [
         {
             "name": "Kablamo",
-            "url": "kablamo.com.au"
+            "url": "https://kablamo.com.au"
         },
         {
             "name": "Owen Kelly",
             "email": "owen@owenkelly.com.au",
-            "url": "owenkelly.com.au"
+            "url": "https://owenkelly.com.au"
         }
     ],
     "homepage": "https://github.com/KablamoOSS/kerosene",
