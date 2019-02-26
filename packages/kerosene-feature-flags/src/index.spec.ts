@@ -25,6 +25,24 @@ const cases: Case[] = [
     },
     {
         conditions: {
+            groups: ["beta", "users"],
+        },
+        flag: flag(c => [
+            c.condition("groups").must.be.all.of(["beta", "users"]),
+        ]),
+        result: true,
+    },
+    {
+        conditions: {
+            groups: ["beta"],
+        },
+        flag: flag(c => [
+            c.condition("groups").must.be.all.of(["beta", "users"]),
+        ]),
+        result: false,
+    },
+    {
+        conditions: {
             environment: "production",
             group: "users",
             browser: "Firefox",
