@@ -20,11 +20,11 @@ React components to help with some common tasks.
 
 [View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene-ui)
 
-### Kerosene-Utils
+### Kerosene
 
-Like lodash, but it's ours.
+Like lodash, but it's ours. Basically some pure functions that do stuff useful for anybody
 
-_`Kerosene-Utils` is not on npm yet._
+_`Kerosene` is not on npm yet._
 
 ## FAQ
 
