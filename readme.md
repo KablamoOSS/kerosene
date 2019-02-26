@@ -19,3 +19,26 @@ A simple assertion style feature flag for use in CI/CD deployment pipelines, esp
 React components to help with some common tasks.
 
 [View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene-ui)
+
+### Kerosene-Utils
+
+Like lodash, but it's ours.
+
+_`Kerosene-Utils` is not on npm yet._
+
+## FAQ
+
+### How do I create a new package?
+
+Copy an existing one and change what you need. 
+
+Manual intervention is required the first time you want to publish to npm.
+
+### How do I run the tests?
+
+From a terminal, run:
+
+```bash
+cd kerosene
+yarn test
+```
