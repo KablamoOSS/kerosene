@@ -23,3 +23,10 @@ Immutably removes all instances of `needle` from `haystack`.
 Returns an empty array if `haystack` was empty.
 
 Returns a new array that is referentially-not-equal to `haystack` even if `needle` is not in `haystack`
+
+### `toggle`
+
+Immutably adds the target item to the target array if it's not already in there.
+
+Otherwise, immutably removes that item from the array.
+
