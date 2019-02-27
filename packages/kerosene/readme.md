@@ -30,3 +30,40 @@ Immutably adds the target item to the target array if it's not already in there.
 
 Otherwise, immutably removes that item from the array.
 
+## String
+
+### `caseInsensitiveEquals`
+
+Returns `true` if the two input strings are the same in all but casing.
+
+Returns `false` otherwise.
+
+### `elide`
+
+Chop the input string off at `maxLength` if it is too long.
+
+Defaults to adding a `...` if chopped, you can pass in any string to change 
+what the chopped string gets elided with.
+
+The chopped string will not be longer than `maxLength`, even with the custom 
+elider-string.
+
+### `getRandomString`
+
+It's a good-enough random string for non-cryptographic purposes.
+
+Always `32` characters long.
+
+### `isOnlyWhitespace`
+
+Returns `true` if the input string contains nothing other than whitespace.
+
+This includes newlines.
+
+Returns `false` otherwise
+
+### `removeLineBreaks`
+
+Replaces all newlines in the input string with single spaces.
+
+Returns the original string if no newlines were present.
