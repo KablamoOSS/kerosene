@@ -26,11 +26,12 @@ script:
 before_deploy:
     - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
 
+# When a commit lands in master attempt to publish our packages.
 deploy:
     provider: script
     skip_cleanup: true
     script:
-        - npm run lerna:publish
+        - yarn workspaces run publish --non-interactive --no-git-tag-version --no-commit-hooks
     on:
         branch: master
 
