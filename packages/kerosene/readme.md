@@ -67,3 +67,7 @@ Returns `false` otherwise
 Replaces all newlines in the input string with single spaces.
 
 Returns the original string if no newlines were present.
+
+### `replaceAll`
+
+Replace all instances of `needle` in `haystack` with `newNeedle`
