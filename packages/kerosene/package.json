@@ -1,0 +1,44 @@
+{
+    "name": "@kablamo/kerosene",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KablamoOSS/kerosene.git",
+        "directory": "packages/kerosene"
+    },
+    "bugs": {
+        "url": "https://github.com/KablamoOSS/kerosene/issues"
+    },
+    "homepage": "https://github.com/KablamoOSS/kerosene",
+    "private": false,
+    "license": "MIT",
+    "main": ".dist/index.js",
+    "browser": ".dist/index.js",
+    "directories": {
+        "doc": "readme.md"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">= 6"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.0.0",
+        "@types/react": "^16.8.1",
+        "ansi-styles": "^3.2.0",
+        "enzyme": "^3.8.0",
+        "jest": "^24.1.0",
+        "jest-get-type": "^24.0.0",
+        "jest-matcher-utils": "^24.0.0",
+        "jest-message-util": "^24.0.0",
+        "jest-regex-util": "^24.0.0"
+    },
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.121",
+        "lodash": "^4.17.11"
+    }
+}
