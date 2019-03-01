@@ -1,5 +1,9 @@
 # Kerosene
 
+```
+yarn add @kablamo/kerosene
+```
+
 It's like `lodash`, but it's ours.
 
 ## Available functions
@@ -18,7 +22,7 @@ You can pass in an `iteratee` as the third argument, like in `lodash`.
 
 ### `remove`
 
-Immutably removes all instances of `needle` from `haystack`. 
+Immutably removes all instances of `needle` from `haystack`.
 
 Returns an empty array if `haystack` was empty.
 
@@ -42,10 +46,10 @@ Returns `false` otherwise.
 
 Chop the input string off at `maxLength` if it is too long.
 
-Defaults to adding a `...` if chopped, you can pass in any string to change 
+Defaults to adding a `...` if chopped, you can pass in any string to change
 what the chopped string gets elided with.
 
-The chopped string will not be longer than `maxLength`, even with the custom 
+The chopped string will not be longer than `maxLength`, even with the custom
 elider-string.
 
 ### `getRandomString`
