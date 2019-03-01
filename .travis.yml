@@ -1,7 +1,7 @@
 if: tag IS blank
 
 env:
-    - secure: "rOT/95niw4VZAcfLA0OssAb6Bb4VzCy/2vf7JPoJsTbkWzxKw72YDxkx/xDlOApgBbRDiWar9lW21ibyhsGBCQr0kyROTQ58V7oad0AXD3ut9KvtkHoXoCxXRJIrbt8Ajhl4pMTiDBSRbFPCErbjM15GXwAU5tcW0XGmGa7y8ysyEorl5aB+1AjhXw+F2vEqBM8xVxqwBvXnLFjVO6q6lFgb7dqdvqwH4WAoLC6b2sP7v3CNhLrPL5b7NTgs6WZFfRt1EiyoLVnnThuBOZpxENNOdx9dv8pEkFdljTOpwFxJgINhIJ7WOYK2N4U7sfB/WXJHjEk5PZ4SivZbDsIqRPd3B6F+mGRQsJKIQ633eIbYGp/5JHdpyyF8kAFM0yXR7MoSAnwu0tledNwnFoQ2XA+tIBdzATohF1NY+iL1IWkuNeuB7wk5QTujvrz5owSWoqsGq4pBO83zFrYvml4xNomH5vpsrqhy/GXjAdKzbpq5CmOrA7nWQ7iCotLj/zFEN07ihhJKqQwrCq1vUlK1eP9Mn0YFAlpS4LzC7B6Ssh4/ZLnosRfdime8P/EtyGutjZmQuP+Vp475WKt+EsRRKMx5uQwbSZ3p+Rr29My43VcIwKhI5hJb9kaHxLFK3HH9NQU4NaZEN7hpD1tBls5kV5OpIrqTVwKMkvOvls36Joc="
+    - secure: "Pgsru9+3WGPHzZ19PTLHl1UnM19EvX2BE1KccExPUc4hnqTNub0cFB05dPyK0I7NuTmmJ+mejLfSnKEK0XSMbntLL/3LdNt3nYuOIleQdzPxv9KBRaS1mMp3c71lshhezq0jYe/8lF5M4MZqSka0dT/xSs3j3AXBpd/tJzUEX0NQGnb3ZxHFg+K2bMrh7dJ6Umazdz7Gs5WSIe+u/TN3EcDfH+5D4JCT+JFHPRs4HIMx7WhIG+Um18C9o/Texr9GpxItDQvCK9JIW/caqy8MfxcU/RGDosob6+LcO030W8RB1eEJXSWiVFIQKM7yo8pkTWf6RD0DWPV8x3lWRzNV5rnuJm/iWRPBruKE91MkZe3T/IJCnkh0UwhzBctQwv+oijNxKVEkUvbj+LX82O+lTHfK3G4VvVKw/VZWcM8k00Rvha/F2W3FfrmXo7fTDZ+sXD0Jnk+4CTEG+ZnrF2pChdfE78WgodZ9XxzhrTfEn6zwkz4qirBv0GdYTrt+9YiCQqMkyibrRApCFjU3+VH8z1vVu4kXi2M65mGQ0o+vzGGMCi49gRRanYkItUQ812ZPwGsSXolhEY+WEDeoQZ4GdR/kPjOtKrma6CJscapfU6P0mRrtNtXovMR0W7GUCGJZ3AZFSjdvMWnA+HNQBOJvkXEwUrer8kEKACq/gZCXpjc="
 
 language: node_js
 
@@ -31,7 +31,11 @@ deploy:
     provider: script
     skip_cleanup: true
     script:
-        - yarn workspaces run publish --non-interactive --no-git-tag-version --no-commit-hooks
+        - |
+        for f in ./packages/*; do ([ -d $$f ] && \
+        cd $$f && \
+        yarn publish --non-interactive --no-git-tag-version --no-commit-hooks | exit 0 && \
+        done;
     on:
         branch: master
 

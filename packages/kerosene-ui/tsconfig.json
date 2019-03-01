@@ -2,7 +2,7 @@
     "extends": "../../tsconfig",
     "compilerOptions": {
         "outDir": ".dist",
-        "baseUrl": "."
+        "baseUrl": "./src/"
     },
     "filesGlob": ["./src/**/*.ts", "./src/**/*.html"],
     "exclude": ["**/*.spec.ts"]
