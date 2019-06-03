@@ -27,15 +27,15 @@ describe("#elide", () => {
     const input = "Hello, world!" + getRandomString();
 
     expect(
-        elide(input, input.length / 2, ''),
+        elide(input, input.length / 2, ""),
     ).toEqual(
         input.slice(0, input.length / 2),
     );
   });
 
-  it('should return the first N characters, with the elide-string is tacked onto the end, overwriting any characters from the right, not increasing the max length, where the string length is longer than N', () => {
+  it("should return the first N characters, with the elide-string is tacked onto the end, overwriting any characters from the right, not increasing the max length, where the string length is longer than N", () => {
     const input =       "1234567890";
-    const elideString =    'CUTOFF';
+    const elideString =    "CUTOFF";
     expect(
         elide(input, "123CUTOFF".length, elideString)
     ).toBe(

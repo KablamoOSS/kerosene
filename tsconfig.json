@@ -1,24 +1,18 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "es6",
-        "declaration": true,
-        "noImplicitAny": true,
-        "removeComments": false,
-        "moduleResolution": "node",
-        "allowJs": false,
-        "strict": true,
-        "sourceMap": true,
-        "inlineSources": false,
-        "strictNullChecks": true,
-        "pretty": true,
-        "watch": false,
-        "lib": ["esnext", "dom"],
-        "jsx": "react",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": "."
-    },
-
-    "exclude": ["./packages/**/*.spec.ts", "./packages/**/*.spec.tsx"]
+  "compilerOptions": {
+    "pretty": true,
+    "target": "esnext",
+    "module":"commonjs",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react"
+  },
+  "exclude": [
+    "**/node_modules"
+  ]
 }

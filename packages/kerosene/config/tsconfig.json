@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "../lib/"
+  },
+  "include": ["../src/**/*.ts"],
+  "exclude": ["../src/**/*.spec.ts"]
+}

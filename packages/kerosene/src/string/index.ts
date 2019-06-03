@@ -1,15 +1,6 @@
-import caseInsensitiveEquals from "./caseInsensitiveEquals";
-import elide from "./elide";
-import getRandomString from "./getRandomString";
-import isOnlyWhitespace from "./isOnlyWhitespace";
-import removeLineBreaks from "./removeLineBreaks";
-import replaceAll from "./replaceAll";
-
-export {
-  caseInsensitiveEquals,
-  elide,
-  getRandomString,
-  isOnlyWhitespace,
-  removeLineBreaks,
-  replaceAll,
-};
+export { default as caseInsensitiveEquals } from "./caseInsensitiveEquals";
+export { default as elide } from "./elide";
+export { default as getRandomString } from "./getRandomString";
+export { default as isOnlyWhitespace } from "./isOnlyWhitespace";
+export { default as removeLineBreaks } from "./removeLineBreaks";
+export { default as replaceAll } from "./replaceAll";

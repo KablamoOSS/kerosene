@@ -18,7 +18,7 @@ describe("#isOnlyWhitespace", () => {
 
   it("should return true when the input string is a single space", () => {
     expect(
-        isOnlyWhitespace(' ')
+        isOnlyWhitespace(" ")
     ).toBe(
         true
     );
@@ -26,7 +26,7 @@ describe("#isOnlyWhitespace", () => {
 
   it("should return true when the input string is only multiple spaces", () => {
     expect(
-        isOnlyWhitespace(' '.repeat(20))
+        isOnlyWhitespace(" ".repeat(20))
     ).toBe(
         true
     );
@@ -34,13 +34,13 @@ describe("#isOnlyWhitespace", () => {
 
   it("should return true when the input string is one newline, of any type", () => {
     expect(
-        isOnlyWhitespace('\n')
+        isOnlyWhitespace("\n")
     ).toBe(
         true
     );
 
     expect(
-        isOnlyWhitespace('\r')
+        isOnlyWhitespace("\r")
     ).toBe(
         true
     );
@@ -49,7 +49,7 @@ describe("#isOnlyWhitespace", () => {
   it("should return true when the input string is a multiline template string", () => {
     expect(
         isOnlyWhitespace(`
-        
+
         `)
     ).toBe(
         true
@@ -58,19 +58,19 @@ describe("#isOnlyWhitespace", () => {
 
   it("should return true when the input string is only newlines of any type", () => {
     expect(
-        isOnlyWhitespace('\n\n\n')
+        isOnlyWhitespace("\n\n\n")
     ).toBe(
         true
     );
 
     expect(
-        isOnlyWhitespace('\r\r\r')
+        isOnlyWhitespace("\r\r\r")
     ).toBe(
         true
     );
 
     expect(
-        isOnlyWhitespace('\n\r\n\r\n\r')
+        isOnlyWhitespace("\n\r\n\r\n\r")
     ).toBe(
         true
     );
@@ -78,7 +78,7 @@ describe("#isOnlyWhitespace", () => {
 
   it("should return false when the input is only non-whitespace characters", () => {
     expect(
-        isOnlyWhitespace('HEYBARTWANNASEEMYNEWCHAINSAWANDHOCKEYMASK?')
+        isOnlyWhitespace("HEYBARTWANNASEEMYNEWCHAINSAWANDHOCKEYMASK?")
     ).toBe(
         false
     );

@@ -1,57 +1,58 @@
 {
-    "name": "@kablamo/kerosene-feature-flags",
-    "version": "1.0.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/KablamoOSS/kerosene.git",
-        "directory": "packages/kerosene-feature-flags"
+  "name": "@kablamo/kerosene-feature-flags",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/kerosene-feature-flags"
+  },
+  "bugs": {
+    "url": "https://github.com/KablamoOSS/kerosene/issues"
+  },
+  "contributors": [
+    {
+      "name": "Kablamo",
+      "url": "https://kablamo.com.au"
     },
-    "bugs": {
-        "url": "https://github.com/KablamoOSS/kerosene/issues"
-    },
-    "contributors": [
-        {
-            "name": "Kablamo",
-            "url": "https://kablamo.com.au"
-        },
-        {
-            "name": "Owen Kelly",
-            "email": "owen@owenkelly.com.au",
-            "url": "https://owenkelly.com.au"
-        }
-    ],
-    "homepage": "https://github.com/KablamoOSS/kerosene",
-    "private": false,
-    "license": "MIT",
-    "main": ".dist/index.js",
-    "browser": ".dist/index.js",
-    "directories": {
-        "doc": "readme.md"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "engines": {
-        "node": ">= 6"
-    },
-    "keywords": [
-        "feature-flags",
-        "feature",
-        "flags",
-        "assertion"
-    ],
-    "devDependencies": {
-        "@types/jest": "^24.0.0",
-        "@types/react": "^16.8.1",
-        "ansi-styles": "^3.2.0",
-        "enzyme": "^3.8.0",
-        "jest": "^24.1.0",
-        "jest-get-type": "^24.0.0",
-        "jest-matcher-utils": "^24.0.0",
-        "jest-message-util": "^24.0.0",
-        "jest-regex-util": "^24.0.0"
-    },
-    "scripts": {
-        "build": "tsc"
+    {
+      "name": "Owen Kelly",
+      "email": "owen@owenkelly.com.au",
+      "url": "https://owenkelly.com.au"
     }
+  ],
+  "homepage": "https://github.com/KablamoOSS/kerosene",
+  "private": false,
+  "license": "MIT",
+  "main": ".dist/index.js",
+  "browser": ".dist/index.js",
+  "directories": {
+    "doc": "readme.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature",
+    "flags",
+    "assertion"
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.0",
+    "@types/react": "^16.8.1",
+    "ansi-styles": "^3.2.0",
+    "enzyme": "^3.8.0",
+    "jest": "^24.1.0",
+    "jest-get-type": "^24.0.0",
+    "jest-matcher-utils": "^24.0.0",
+    "jest-message-util": "^24.0.0",
+    "jest-regex-util": "^24.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf .dist"
+  }
 }

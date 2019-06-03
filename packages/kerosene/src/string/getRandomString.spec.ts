@@ -1,8 +1,8 @@
 import getRandomString from "./getRandomString";
 
-describe('#getRandomString', () => {
+describe("#getRandomString", () => {
 
-  it('should return a different string every time', () => {
+  it("should return a different string every time", () => {
 
     const ITERATIONS_TO_TRY = 250;
     const iterations = new Set();

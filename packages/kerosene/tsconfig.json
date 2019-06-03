@@ -1,9 +1,0 @@
-{
-    "extends": "../../tsconfig",
-    "compilerOptions": {
-        "outDir": ".dist",
-        "baseUrl": "."
-    },
-    "filesGlob": ["./src/**/*.ts", "./src/**/*.html"],
-    "exclude": ["**/*.spec.ts"]
-}

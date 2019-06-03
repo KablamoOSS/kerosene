@@ -1,49 +1,63 @@
 {
-    "name": "kerosene",
-    "version": "1.0.0",
-    "description": "A collection of useful modules",
-    "main": "index.js",
-    "repository": "git@github.com:KablamoOSS/kerosene.git",
-    "author": "Kablamo",
-    "license": "MIT",
-    "private": true,
-    "workspaces": {
-        "packages": [
-            "packages/*"
-        ]
-    },
-    "scripts": {
-        "build": "yarn workspaces run build",
-        "test": "jest --expand --coverage",
-        "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
-        "watch": "jest --verbose=false --watch",
-        "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
-        "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
-    },
-    "devDependencies": {
-        "@types/enzyme": "^3.1.16",
-        "@types/enzyme-adapter-react-16": "^1.0.3",
-        "@types/jest": "^23.0.0",
-        "coveralls": "^3.0.2",
-        "enzyme-adapter-react-16": "^1.9.1",
-        "jest": "^23.1.0",
-        "jsdom": "^13.2.0",
-        "jsdom-global": "^3.0.2",
-        "lerna": "^3.10.7",
-        "prettier": "^1.16.4",
-        "react": "^16.7.0",
-        "react-dom": "^16.7.0",
-        "ts-jest": "^23.10.5",
-        "typescript": "^3.3.1"
-    },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "jsdom",
-        "setupTestFrameworkScriptFile": "./testSetup.ts",
-        "globals": {
-            "ts-jest": {
-                "diagnostics": false
-            }
-        }
+  "name": "kerosene",
+  "version": "1.0.0",
+  "description": "A collection of useful modules",
+  "main": "index.js",
+  "repository": "git@github.com:KablamoOSS/kerosene.git",
+  "author": "Kablamo",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
+    "test": "jest --expand --coverage",
+    "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "watch": "jest --verbose=false --watch",
+    "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
+    "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.4",
+    "@betit/rollup-plugin-rename-extensions": "^0.0.4",
+    "@types/enzyme": "^3.1.16",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.0.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "core-js": "^3.1.3",
+    "coveralls": "^3.0.2",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "jest": "^23.1.0",
+    "jsdom": "^13.2.0",
+    "jsdom-global": "^3.0.2",
+    "lerna": "^3.10.7",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.16.4",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.13.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^5.0.1",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.5.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "setupTestFrameworkScriptFile": "./testSetup.ts",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
     }
+  }
 }

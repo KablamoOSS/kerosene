@@ -1,9 +1,3 @@
-import contains from "./contains";
-import remove from "./remove";
-import toggle from "./toggle";
-
-export {
-  contains,
-  remove,
-  toggle,
-};
+export { default as contains } from "./contains";
+export { default as remove } from "./remove";
+export { default as toggle } from "./toggle";
