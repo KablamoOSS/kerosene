@@ -7,6 +7,6 @@
     "emitDeclarationOnly": true,
     "declarationDir": "../lib/"
   },
-  "include": ["../src/**/*.ts"],
+  "include": ["../src/**/*.ts", "../../../typings/**/*.d.ts"],
   "exclude": ["../src/**/*.spec.ts"]
 }
