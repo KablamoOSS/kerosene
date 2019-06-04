@@ -26,11 +26,17 @@ export const TITLE_CASE_LOWERCASE_WORDS = [
  * @param input
  * @param lowercaseWords Defaults to `TITLE_CASE_LOWERCASE_WORDS`
  */
-export default function toTitleCase(input: string, lowercaseWords: readonly string[] = TITLE_CASE_LOWERCASE_WORDS): string {
-  return input.split(" ")
+export default function toTitleCase(
+  input: string,
+  lowercaseWords: readonly string[] = TITLE_CASE_LOWERCASE_WORDS,
+): string {
+  return input
+    .split(" ")
     .map((word, index, array) => {
       const lowercase = word.toLowerCase();
-      return index === 0 || index === array.length - 1 || !lowercaseWords.includes(lowercase)
+      return index === 0 ||
+        index === array.length - 1 ||
+        !lowercaseWords.includes(lowercase)
         ? capitalize(word)
         : lowercase;
     })
