@@ -1,7 +1,6 @@
 import { shallow } from "enzyme";
 import * as React from "react";
-
-import { ShowWhen } from "./ShowWhen";
+import ShowWhen from ".";
 
 interface Case {
   name: string;

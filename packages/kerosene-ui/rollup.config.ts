@@ -21,17 +21,15 @@ const output = (file: string, format: ModuleFormat): OutputOptions => ({
 });
 
 const externals = [
-  "querystring",
-  ...[packageJson.dependencies, packageJson.peerDependencies].flatMap(
-    Object.keys,
-  ),
-];
+  packageJson.dependencies,
+  packageJson.peerDependencies,
+].flatMap(Object.keys);
 
 const external: ExternalOption = source =>
   externals.includes(source) ||
   externals.some(mod => source.startsWith(`${mod}/`));
 
-const extensions = [".js", ".ts"];
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 const plugins = [
   resolve({
@@ -47,7 +45,9 @@ const plugins = [
   }),
   renameExtensions({
     mappings: {
+      ".jsx": ".js",
       ".ts": ".js",
+      ".tsx": ".js",
     },
   }),
 ];

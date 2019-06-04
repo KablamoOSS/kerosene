@@ -4,6 +4,8 @@ node_modules
 es
 lib
 
+.vscode
+
 *.log
 
 TODO

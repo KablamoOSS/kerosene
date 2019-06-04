@@ -1,1 +1,1 @@
-export { ShowWhen } from "./ShowWhen/ShowWhen";
+export { default as ShowWhen } from "./ShowWhen";

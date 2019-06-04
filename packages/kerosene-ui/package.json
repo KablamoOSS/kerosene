@@ -12,20 +12,18 @@
   "homepage": "https://github.com/KablamoOSS/kerosene",
   "private": false,
   "license": "MIT",
-  "main": ".dist/index.js",
-  "browser": ".dist/index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "directories": {
     "doc": "readme.md"
   },
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "react": "^16.7.0"
-  },
   "engines": {
     "node": ">= 6"
   },
+  "dependencies": {},
   "devDependencies": {
     "ansi-styles": "^3.2.0",
     "jest-get-type": "^24.0.0",
@@ -35,10 +33,16 @@
     "@types/jest": "^24.0.0",
     "@types/react": "^16.8.1",
     "enzyme": "^3.8.0",
-    "jest": "^24.1.0"
+    "jest": "^24.1.0",
+    "react": "^16.7.0"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf .dist"
+    "build": "npm-run-all -p build:rollup build:typings",
+    "build:rollup": "rollup -c",
+    "build:typings": "tsc -p ./config/tsconfig.json",
+    "clean": "rimraf es lib"
   }
 }
