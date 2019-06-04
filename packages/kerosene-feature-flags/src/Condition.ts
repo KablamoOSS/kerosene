@@ -54,9 +54,7 @@ class Condition {
               // Any can't handle array
               return false;
             }
-            compare = assert.of.some(
-              conditonValue => conditonValue === value,
-            );
+            compare = assert.of.some(conditonValue => conditonValue === value);
             break;
           case Comparison.ALL:
             if (typeof assert.of === "undefined") {
@@ -147,9 +145,7 @@ class Condition {
       };
       return this;
     } else {
-      throw new Error(
-        "You didn't pass an number or string to flag.exactly",
-      );
+      throw new Error("You didn't pass an number or string to flag.exactly");
     }
   }
 

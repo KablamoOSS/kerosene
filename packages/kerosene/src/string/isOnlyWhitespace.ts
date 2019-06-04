@@ -1,4 +1,4 @@
-const isOnlyWhitespace = (input: string) : boolean => {
+const isOnlyWhitespace = (input: string): boolean => {
   return input.trim().length === 0;
 };
 

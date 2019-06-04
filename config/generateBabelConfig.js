@@ -9,13 +9,7 @@
  */
 function generateBabelConfig(modules = "commonjs") {
   return {
-    presets: [
-      [
-        "@babel/preset-env",
-        { modules },
-      ],
-      "@babel/preset-typescript",
-    ],
+    presets: [["@babel/preset-env", { modules }], "@babel/preset-typescript"],
     plugins: [
       "@babel/plugin-proposal-numeric-separator",
       "babel-plugin-lodash",

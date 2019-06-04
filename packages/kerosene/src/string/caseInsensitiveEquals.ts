@@ -1,4 +1,4 @@
-const caseInsensitiveEquals = (a: string, b: string) : boolean => {
+const caseInsensitiveEquals = (a: string, b: string): boolean => {
   return a.toLowerCase() === b.toLowerCase();
 };
 
