@@ -1,3 +1,1 @@
-import { ShowWhen } from "./ShowWhen/ShowWhen";
-
-export { ShowWhen };
+export { default as ShowWhen } from "./ShowWhen";

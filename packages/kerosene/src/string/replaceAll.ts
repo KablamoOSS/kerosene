@@ -1,4 +1,8 @@
-const replaceAll = (replaceThis: string, withThis: string, inThis: string): string => {
+const replaceAll = (
+  replaceThis: string,
+  withThis: string,
+  inThis: string,
+): string => {
   let result = inThis;
 
   while (result.includes(replaceThis)) {

@@ -1,16 +1,14 @@
 {
-    "packages": [
-        "packages/*"
-    ],
-    "useWorkspaces": true,
-    "publishConfig": {
-        "access": "public",
-        "registry": "https://registry.npmjs.org/"
-    },
-    "command": {
-        "version": {
-            "allowBranch": "master"
-        }
-    },
-    "version": "0.0.1"
+  "packages": ["packages/*"],
+  "useWorkspaces": true,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "command": {
+    "version": {
+      "allowBranch": "master"
+    }
+  },
+  "version": "0.0.1"
 }

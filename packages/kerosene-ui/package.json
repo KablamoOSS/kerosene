@@ -1,43 +1,48 @@
 {
-    "name": "@kablamo/kerosene-ui",
-    "version": "0.0.2",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/KablamoOSS/kerosene.git",
-        "directory": "packages/kerosene-ui"
-    },
-    "bugs": {
-        "url": "https://github.com/KablamoOSS/kerosene/issues"
-    },
-    "homepage": "https://github.com/KablamoOSS/kerosene",
-    "private": false,
-    "license": "MIT",
-    "main": ".dist/index.js",
-    "browser": ".dist/index.js",
-    "directories": {
-        "doc": "readme.md"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "dependencies": {
-        "react": "^16.7.0"
-    },
-    "engines": {
-        "node": ">= 6"
-    },
-    "devDependencies": {
-        "ansi-styles": "^3.2.0",
-        "jest-get-type": "^24.0.0",
-        "jest-matcher-utils": "^24.0.0",
-        "jest-message-util": "^24.0.0",
-        "jest-regex-util": "^24.0.0",
-        "@types/jest": "^24.0.0",
-        "@types/react": "^16.8.1",
-        "enzyme": "^3.8.0",
-        "jest": "^24.1.0"
-    },
-    "scripts": {
-        "build": "tsc"
-    }
+  "name": "@kablamo/kerosene-ui",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/kerosene-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/KablamoOSS/kerosene/issues"
+  },
+  "homepage": "https://github.com/KablamoOSS/kerosene",
+  "private": false,
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "directories": {
+    "doc": "readme.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ansi-styles": "^3.2.0",
+    "jest-get-type": "^24.0.0",
+    "jest-matcher-utils": "^24.0.0",
+    "jest-message-util": "^24.0.0",
+    "jest-regex-util": "^24.0.0",
+    "@types/jest": "^24.0.0",
+    "@types/react": "^16.8.1",
+    "enzyme": "^3.8.0",
+    "jest": "^24.1.0",
+    "react": "^16.7.0"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0"
+  },
+  "scripts": {
+    "build": "npm-run-all -p build:rollup build:typings",
+    "build:rollup": "rollup -c",
+    "build:typings": "tsc -p ./config/tsconfig.json",
+    "clean": "rimraf es lib"
+  }
 }
