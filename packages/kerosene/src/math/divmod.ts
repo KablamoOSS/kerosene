@@ -1,6 +1,5 @@
 /**
- * Returns the {@code quotient} and {@code remainder} for the
- * integer division of {@code dividend} by {@code divisor}
+ * Returns the `quotient` and `remainder` for the integer division of `dividend` by `divisor`
  * @param dividend Integer dividend
  * @param divisor Integer divisor
  * @returns [quotient, remainder]

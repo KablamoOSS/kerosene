@@ -34,6 +34,70 @@ Immutably adds the target item to the target array if it's not already in there.
 
 Otherwise, immutably removes that item from the array.
 
+## Datetime
+
+### `SECOND`
+
+1000 milliseconds
+
+### `MINUTE`
+
+60,000 milliseconds
+
+### `HOUR`
+
+3,600,000 milliseconds
+
+### `DAY`
+
+86,400,000 milliseconds
+
+### `Month`
+
+A 0-indexed enum for the months of the Gregorian Calendar
+
+### `DayOfWeek`
+
+A 0-indexed enum for the days of the week
+
+## Function
+
+### `timeout(delay)`
+
+Returns a `Promise` which resolves after the specified `delay` in milliseconds.
+
+### `waitForEventLoopToDrain`
+
+Returns a `Promise` which resolves after the current event loop drains.
+
+## Math
+
+### `floor`/`round`/`ceil`
+
+Like the corresponding `Math` functions of the same name, but takes a second parameter `precision` which allows for more/less precise rounding.
+
+For example, `round(1505, 10) === 1510` (round to the nearest 10).
+
+### `clamp(min, value, max)`
+
+Returns a `value` clamped between `min` and `max`.
+
+Similar to the [CSS `clamp()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp), this is resolved as `Math.max(min, Math.min(value, max))`.
+
+### `divmod(dividend, divisor)`
+
+Returns a 2-tuple containing `quotient` and `remainder` for the integer division of `dividend` by `divisor`.
+
+Similar to the [Python `divmod` function](https://docs.python.org/3/library/functions.html#divmod).
+
+### `isNegative`
+
+Returns whether or not the provided `value` is negative, considering positive and negative zero separately
+
+### `toDegrees`
+
+Converts the value in `radians` to degrees.
+
 ## String
 
 ### `caseInsensitiveEquals`
@@ -66,6 +130,10 @@ This includes newlines.
 
 Returns `false` otherwise
 
+### `parseSearch(search)`
+
+Uses `querystring.parse` to parse `Location#search`. When search is an empty string or contains no parameters, this will return an empty object.
+
 ### `removeLineBreaks`
 
 Replaces all newlines in the input string with single spaces.
@@ -75,3 +143,29 @@ Returns the original string if no newlines were present.
 ### `replaceAll`
 
 Replace all instances of `needle` in `haystack` with `newNeedle`
+
+### `toTitleCase`
+
+Converts a provided `input` to title case according to a list of `lowercaseWords` (default provided) which remain lowercase, unless they occur at the beginning or end.
+
+#### `TITLE_CASE_LOWERCASE_WORDS`
+
+The default list of `lowercaseWords` is exported as such.
+
+## Types
+
+### `DeepNonNullable<T>`
+
+Recursively traverses `T` to make all properties `Required` and `NonNullable`.
+
+### `DeepPartial<T>`
+
+Recursively traverses `T` to make all properties optional.
+
+### `ElementType<TCollection>`
+
+Infers the element type `T` from `T[]`, `Set<T>` or `Map<any, T>`.
+
+### `Mutable<T>`
+
+Removes the `readonly` modifier from all properties in `T`.
