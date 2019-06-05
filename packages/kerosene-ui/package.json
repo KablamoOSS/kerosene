@@ -23,7 +23,9 @@
   "engines": {
     "node": ">= 6"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@kablamo/kerosene": "^0.0.3"
+  },
   "devDependencies": {
     "react": "^16.7.0"
   },
