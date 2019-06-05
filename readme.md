@@ -26,11 +26,17 @@ yarn add @kablamo/kerosene-ui
 
 React components to help with some common tasks.
 
-[View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene)
+[View Kerosene-UI on npm](https://www.npmjs.com/package/@kablamo/kerosene-ui)
 
 ### Kerosene
 
-Like lodash, but it's ours. Basically some pure functions that do stuff useful for anybody
+```
+yarn add @kablamo/kerosene
+```
+
+Like lodash, but it's ours. Basically some pure functions that do stuff useful for anybody.
+
+[View Kerosene on npm](https://www.npmjs.com/package/@kablamo/kerosene)
 
 ## FAQ
 
