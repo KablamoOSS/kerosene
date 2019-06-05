@@ -1,6 +1,6 @@
 import createSandbox from "jest-sandbox";
 import { when } from "jest-when";
-import { getSafeAreaInsets } from "./getSafeAreaInsets";
+import getSafeAreaInsets from "./getSafeAreaInsets";
 
 const element = ({
   tagName: "div",

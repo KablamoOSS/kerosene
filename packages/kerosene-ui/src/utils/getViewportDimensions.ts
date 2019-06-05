@@ -17,7 +17,10 @@ const MOBILE_SAFARI_REGEX = /mobile\/\w+\ssafari/i;
  */
 export default function getViewportDimensions(): ViewportDimensions {
   // This will be true for an iOS PWA with no browser chrome
-  if (MOBILE_SAFARI_REGEX.test(navigator.userAgent) && navigator.standalone) {
+  if (
+    MOBILE_SAFARI_REGEX.test(navigator.userAgent) &&
+    (navigator as Navigator & { standalone?: boolean }).standalone
+  ) {
     const max = Math.max(screen.height, screen.width);
     const min = Math.min(screen.height, screen.width);
     const isPortrait = window.matchMedia("(orientation: portrait)").matches;

@@ -1,12 +1,3 @@
-declare global {
-  interface Navigator {
-    /**
-     * This is set to `true` on iOS when the page is a PWA with no browser chrome
-     */
-    standalone?: boolean;
-  }
-}
-
 export { default as ShowWhen } from "./ShowWhen";
 
 export { default as getSafeAreaInsets } from "./utils/getSafeAreaInsets";

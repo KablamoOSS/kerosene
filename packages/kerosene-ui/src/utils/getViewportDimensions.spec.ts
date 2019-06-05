@@ -15,7 +15,7 @@ window.matchMedia = _matchMedia;
 describe("getViewportDimensions", () => {
   describe("when the userAgent is mobile safari", () => {
     beforeEach(() => {
-      navigator.standalone = undefined;
+      Object.assign(navigator, { standalone: undefined });
       Object.defineProperty(navigator, "userAgent", {
         get: () => MOBILE_SAFARI_USER_AGENT,
         configurable: true,
@@ -27,7 +27,7 @@ describe("getViewportDimensions", () => {
     });
 
     it("should return the screen dimensions in portrait", () => {
-      navigator.standalone = true;
+      Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
         .mockReturnValue(({ matches: true } as Partial<
@@ -41,7 +41,7 @@ describe("getViewportDimensions", () => {
     });
 
     it("should return the screen dimensions in landscape", () => {
-      navigator.standalone = true;
+      Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
         .mockReturnValue(({ matches: false } as Partial<
@@ -55,7 +55,7 @@ describe("getViewportDimensions", () => {
     });
 
     it("should return window.innerHeight, window.innerWidth", () => {
-      navigator.standalone = false;
+      Object.assign(navigator, { standalone: false });
       expect(getViewportDimensions()).toEqual({
         height: window.innerHeight,
         width: window.innerWidth,

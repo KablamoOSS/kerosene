@@ -4,6 +4,6 @@
 export default function isPwa(): boolean {
   return (
     window.matchMedia("(display-mode: standalone)").matches ||
-    !!navigator.standalone
+    !!(navigator as Navigator & { standalone?: boolean }).standalone
   );
 }

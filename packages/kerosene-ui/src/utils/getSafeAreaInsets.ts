@@ -11,7 +11,7 @@ export type SafeAreaInsets = {
 /**
  * Return the safe area insets
  */
-export function getSafeAreaInsets(): SafeAreaInsets {
+export default function getSafeAreaInsets(): SafeAreaInsets {
   if (!SAFE_AREA_INSET_TEST_ELEMENT) {
     SAFE_AREA_INSET_TEST_ELEMENT = document.createElement("div");
     SAFE_AREA_INSET_TEST_ELEMENT.style.pointerEvents = "none";

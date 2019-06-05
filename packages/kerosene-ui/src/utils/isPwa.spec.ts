@@ -28,7 +28,7 @@ describe("#isPwa", () => {
         .mockReturnValue(({ matches: false } as Partial<
           MediaQueryList
         >) as MediaQueryList);
-      navigator.standalone = undefined;
+      Object.assign(navigator, { standalone: undefined });
     });
 
     it("should return false", () => {
@@ -43,7 +43,7 @@ describe("#isPwa", () => {
         .mockReturnValue(({ matches: false } as Partial<
           MediaQueryList
         >) as MediaQueryList);
-      navigator.standalone = false;
+      Object.assign(navigator, { standalone: false });
     });
 
     it("should return false", () => {
@@ -58,7 +58,7 @@ describe("#isPwa", () => {
         .mockReturnValue(({ matches: true } as Partial<
           MediaQueryList
         >) as MediaQueryList);
-      navigator.standalone = undefined;
+      Object.assign(navigator, { standalone: undefined });
     });
 
     it("should return true", () => {
@@ -73,7 +73,7 @@ describe("#isPwa", () => {
         .mockReturnValue(({ matches: false } as Partial<
           MediaQueryList
         >) as MediaQueryList);
-      navigator.standalone = true;
+      Object.assign(navigator, { standalone: true });
     });
 
     it("should return true", () => {

@@ -13,6 +13,7 @@
     ]
   },
   "scripts": {
+    "prebuild": "yarn workspace @kablamo/kerosene run build",
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "test": "jest --expand --coverage",
