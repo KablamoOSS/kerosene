@@ -60,6 +60,22 @@ A 0-indexed enum for the months of the Gregorian Calendar
 
 A 0-indexed enum for the days of the week
 
+## Fetch
+
+### `isNetworkError(error)`
+
+Returns whether or not `error` is a `fetch()` Network Error, accounting for browser differences.
+
+Can be used to detect when the network is not available, although may be falsely triggered by CORS.
+
+### `transform(response)`
+
+Returns a Promise which transforms the body of a `fetch()` request according to content type header.
+
+### `transformAndCheckStatus(response)`
+
+Returns a Promise which transforms the body of a `fetch()` request according to content type header and rejects if the status is not 2xx.
+
 ## Function
 
 ### `timeout(delay)`
