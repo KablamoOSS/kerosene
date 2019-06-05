@@ -1,4 +1,4 @@
-import { isNetworkError } from "./isNetworkError";
+import isNetworkError from "./isNetworkError";
 
 describe("isNetworkError", () => {
   [
