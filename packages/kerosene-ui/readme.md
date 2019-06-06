@@ -10,6 +10,32 @@ npm install @kablamo/kerosene-ui
 
 ### `<ShowWhen />`
 
+## React Hooks
+
+### `useInterval(callback, delay)`
+
+Custom hook that makes `setInterval` work declaritively with hooks. See https://overreacted.io/making-setinterval-declarative-with-react-hooks/ for more details.
+
+### `useKonamiCode(code, callback)`
+
+Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.
+
+### `usePopup(zIndex?, inside?)`
+
+Custom hook which creates an element with which to use as a target for `ReactDOM.createPortal()`. This hook also keeps tracking of the bounding rect of the element attached to the `ref` so that the `rect` coordinations may be used to position the portal element.
+
+Returns `{ open, setOpen, ref, rect, portalEl, scrollX, scrollY }`.
+
+### `useRafThrottle(callback)`
+
+Custom hook which throttles the provided callback with `requestAnimationFrame`.
+
+### `useRect(disable?)`
+
+Custom hook which measures the bounding rect of the element attached to `ref`. Listens to window resize events and any scroll event on the page.
+
+Returns `[ref, rect, { scrollX, scrollY }]`.
+
 ## Available functions
 
 ### `getSafeAreaInsets()`
@@ -32,9 +58,35 @@ Returns whether or not the provided `element` is inside the viewport.
 
 Returns whether or not the current page is being displayed in a Progressive Web App.
 
+### `mergeRefs(...refs)`
+
+Returns a new callback ref that effectively merges all provided `refs`.
+
+### `rafThrottle(callback)`
+
+Returns a throttled version of the provided `callback`. Uses `requestAnimationFrame` to throttle. To cancel any pending async operations, call `.cancel()` on the throttled version of the function.
+
 ### `waitForRepaint()`
 
 Returns a `Promise` that waits for a repaint/reflow to occur. May be cancelled by calling `.cancel()` on the returned `Promise`.
+
+## Useful constants
+
+### `ADD_EVENT_LISTENER_PASSIVE_OPTIONS`
+
+Returns `{ passive: true }` when passive event listeners are supported, otherwise `false`.
+
+### `REMOVE_EVENT_LISTENER_PASSIVE_OPTIONS`
+
+Returns `{}` when passive event listeners are supported, otherwise `false`.
+
+### `ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS`
+
+Returns `{ capture: true, passive: true }` when capture passive event listeners are supported, otherwise `true`.
+
+### `REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS`
+
+Returns `{ capture: true }` when capture passive event listeners are supported, otherwise `true`.
 
 ---
 

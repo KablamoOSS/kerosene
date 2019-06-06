@@ -1,12 +1,9 @@
 import { ElementType } from "@kablamo/kerosene";
+import { SIDES } from "./css";
 
 let SAFE_AREA_INSET_TEST_ELEMENT: HTMLDivElement | null = null;
 
-const DIRECTIONS = ["top", "left", "bottom", "right"] as const;
-
-export type SafeAreaInsets = {
-  [direction in ElementType<typeof DIRECTIONS>]: number
-};
+export type SafeAreaInsets = { [side in ElementType<typeof SIDES>]: number };
 
 /**
  * Return the safe area insets
@@ -15,19 +12,18 @@ export default function getSafeAreaInsets(): SafeAreaInsets {
   if (!SAFE_AREA_INSET_TEST_ELEMENT) {
     SAFE_AREA_INSET_TEST_ELEMENT = document.createElement("div");
     SAFE_AREA_INSET_TEST_ELEMENT.style.pointerEvents = "none";
-    DIRECTIONS.forEach(direction => {
+    SIDES.forEach(side => {
       SAFE_AREA_INSET_TEST_ELEMENT!.style[
-        direction
-      ] = `env(safe-area-inset-${direction}, 0px)`;
+        side
+      ] = `env(safe-area-inset-${side}, 0px)`;
     });
     document.body.appendChild(SAFE_AREA_INSET_TEST_ELEMENT);
   }
   const computed = window.getComputedStyle(SAFE_AREA_INSET_TEST_ELEMENT);
-  return DIRECTIONS.reduce(
-    (acc, direction) => ({
+  return SIDES.reduce(
+    (acc, side) => ({
       ...acc,
-      [direction]:
-        (computed[direction] && parseInt(computed[direction]!, 10)) || 0,
+      [side]: (computed[side] && parseInt(computed[side]!, 10)) || 0,
     }),
     ({} as Partial<SafeAreaInsets>) as SafeAreaInsets,
   );

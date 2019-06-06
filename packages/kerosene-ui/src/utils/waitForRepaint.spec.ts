@@ -1,23 +1,16 @@
+import createSandbox from "jest-sandbox";
 import waitForRepaint from "./waitForRepaint";
+
+const sandbox = createSandbox();
+
+const rAF = sandbox.spyOn(window, "requestAnimationFrame");
+const cAF = sandbox.spyOn(window, "cancelAnimationFrame");
 
 jest.useFakeTimers();
 
 describe("#waitForRepaint", () => {
-  let rAF: jest.Mock<number, [FrameRequestCallback]>;
-  let cAF: jest.Mock<void, [number]>;
-  beforeEach(() => {
-    rAF = jest
-      .fn()
-      .mockImplementation((callback: FrameRequestCallback) =>
-        setTimeout(() => callback(Date.now()), 17),
-      );
-    cAF = jest
-      .fn()
-      .mockImplementation((handle: number) => clearTimeout(handle));
-    Object.assign(window, {
-      requestAnimationFrame: rAF,
-      cancelAnimationFrame: cAF,
-    });
+  afterEach(() => {
+    sandbox.clear();
   });
 
   it("should call requestAnimationFrame twice", async () => {
