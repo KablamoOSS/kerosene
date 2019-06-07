@@ -16,7 +16,7 @@ const NETWORK_ERROR_MESSAGE_REGEX = /Failed to fetch|NetworkError|Network error|
  *
  * @param error
  */
-export function isNetworkError(error: unknown) {
+export default function isNetworkError(error: unknown) {
   return (
     error instanceof TypeError &&
     NETWORK_ERROR_MESSAGE_REGEX.test(error.message)
