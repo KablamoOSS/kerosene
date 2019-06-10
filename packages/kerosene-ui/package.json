@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/KablamoOSS/kerosene.git",
@@ -24,7 +24,7 @@
     "node": ">= 6"
   },
   "dependencies": {
-    "@kablamo/kerosene": "^0.0.3"
+    "@kablamo/kerosene": "^0.0.5"
   },
   "devDependencies": {
     "react": "^16.8.6",
