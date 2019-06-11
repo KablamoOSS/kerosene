@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-ui",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/KablamoOSS/kerosene.git",
@@ -23,12 +23,16 @@
   "engines": {
     "node": ">= 6"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@kablamo/kerosene": "^0.0.5"
+  },
   "devDependencies": {
-    "react": "^16.7.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "peerDependencies": {
-    "react": "^16.7.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "build": "npm-run-all -p build:rollup build:typings",
