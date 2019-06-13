@@ -7,8 +7,8 @@ import isBeforeDay from "./isBeforeDay";
  * @param dateToCompare
  */
 export default function isSameOrBeforeDay(
-  date: Date | number | string,
-  dateToCompare: Date | number | string,
+  date: Date | number,
+  dateToCompare: Date | number,
 ): boolean {
   return isSameDay(date, dateToCompare) || isBeforeDay(date, dateToCompare);
 }

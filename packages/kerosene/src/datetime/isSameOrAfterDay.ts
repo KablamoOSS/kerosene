@@ -7,8 +7,8 @@ import isAfterDay from "./isAfterDay";
  * @param dateToCompare
  */
 export default function isSameOrAfterDay(
-  date: Date | number | string,
-  dateToCompare: Date | number | string,
+  date: Date | number,
+  dateToCompare: Date | number,
 ): boolean {
   return isSameDay(date, dateToCompare) || isAfterDay(date, dateToCompare);
 }

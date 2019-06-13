@@ -6,8 +6,8 @@ import { startOfDay } from "date-fns";
  * @param dateToCompare
  */
 export default function isBeforeDay(
-  date: Date | number | string,
-  dateToCompare: Date | number | string,
+  date: Date | number,
+  dateToCompare: Date | number,
 ): boolean {
   return startOfDay(date).getTime() < startOfDay(dateToCompare).getTime();
 }

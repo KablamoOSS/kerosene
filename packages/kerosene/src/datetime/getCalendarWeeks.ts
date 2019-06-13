@@ -30,7 +30,7 @@ export type CalendarWeeks =
  * @param firstDayOfWeek 0-indexed `DayOfWeek`
  */
 export default function getCalendarWeeks(
-  month: Date | number | string,
+  month: Date | number,
   firstDayOfWeek: DayOfWeek,
 ): CalendarWeeks {
   const firstOfMonth = dateFns.startOfMonth(month);

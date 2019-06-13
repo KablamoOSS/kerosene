@@ -17,7 +17,10 @@ const expectSameDay = (
 
 describe("#getCalendarWeeks", () => {
   it("should return correctly for a month that exactly fits with (February 2021)", () => {
-    const weeks = getCalendarWeeks("2021-02-01T00:00:00.000", DayOfWeek.MONDAY);
+    const weeks = getCalendarWeeks(
+      dateFns.parseISO("2021-02-01T00:00:00.000"),
+      DayOfWeek.MONDAY,
+    );
     expect(weeks).toHaveLength(4);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
@@ -27,7 +30,10 @@ describe("#getCalendarWeeks", () => {
   });
 
   it("should return correctly for a regular month which starts on a Monday (April 2019)", () => {
-    const weeks = getCalendarWeeks("2019-04-01T00:00:00.000", DayOfWeek.MONDAY);
+    const weeks = getCalendarWeeks(
+      dateFns.parseISO("2019-04-01T00:00:00.000"),
+      DayOfWeek.MONDAY,
+    );
     expect(weeks).toHaveLength(5);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
@@ -42,7 +48,10 @@ describe("#getCalendarWeeks", () => {
   });
 
   it("should return correctly for a regular month which finishes on a Sunday (June 2019)", () => {
-    const weeks = getCalendarWeeks("2019-06-01T00:00:00.000", DayOfWeek.MONDAY);
+    const weeks = getCalendarWeeks(
+      dateFns.parseISO("2019-06-01T00:00:00.000"),
+      DayOfWeek.MONDAY,
+    );
     expect(weeks).toHaveLength(5);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
@@ -61,7 +70,10 @@ describe("#getCalendarWeeks", () => {
   });
 
   it("should return correctly for a regular month that starts on a Sunday (September 2019)", () => {
-    const weeks = getCalendarWeeks("2019-09-01T00:00:00.000", DayOfWeek.MONDAY);
+    const weeks = getCalendarWeeks(
+      dateFns.parseISO("2019-09-01T00:00:00.000"),
+      DayOfWeek.MONDAY,
+    );
     expect(weeks).toHaveLength(6);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
