@@ -60,6 +60,10 @@ A 0-indexed enum for the months of the Gregorian Calendar
 
 A 0-indexed enum for the days of the week
 
+### `getCalendarWeeks(month, startOfWeek)`
+
+Returns a 4-, 5-, or 6-tuple of calendar weeks (7-tuples of Dates) for the `month` of the Date provided (according to the timezone of the environment).
+
 ## Fetch
 
 ### `isNetworkError(error)`
@@ -113,12 +117,6 @@ Returns whether or not the provided `value` is negative, considering positive an
 ### `toDegrees`
 
 Converts the value in `radians` to degrees.
-
-## Moment
-
-### `getCalendarWeeks(month, startOfWeek)`
-
-Returns a 4-, 5-, or 6-tuple of calendar weeks (7-tuples of moments) for the `month` of the moment provided.
 
 ## String
 

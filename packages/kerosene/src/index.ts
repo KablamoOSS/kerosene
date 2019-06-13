@@ -21,8 +21,6 @@ export { default as isNegative } from "./math/isNegative";
 export { default as divmod } from "./math/divmod";
 export { default as toDegrees } from "./math/toDegrees";
 
-export * from "./moment";
-
 export * from "./string";
 
 export * from "./types";
