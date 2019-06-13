@@ -7,4 +7,5 @@ require("@babel/register")({
   extensions: [".js", ".ts"],
 });
 
+require("core-js/features/array/flat");
 require("core-js/features/array/flat-map");

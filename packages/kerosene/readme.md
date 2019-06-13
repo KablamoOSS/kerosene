@@ -60,6 +60,10 @@ A 0-indexed enum for the months of the Gregorian Calendar
 
 A 0-indexed enum for the days of the week
 
+### `getCalendarWeeks(month, startOfWeek)`
+
+Returns a 4-, 5-, or 6-tuple of calendar weeks (7-tuples of moments) for the `month` of the moment provided.
+
 ## Fetch
 
 ### `isNetworkError(error)`
