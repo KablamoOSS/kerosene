@@ -1,5 +1,6 @@
 import moment, { Moment } from "moment";
-import { getCalendarWeeks, DayOfWeek, DAYS_PER_WEEK, Month } from ".";
+import { Month, DayOfWeek, DAYS_PER_WEEK } from "../datetime";
+import { getCalendarWeeks } from ".";
 
 describe("#getCalendarWeeks", () => {
   it("should return correctly for a month that exactly fits with (February 2021)", () => {
