@@ -64,6 +64,22 @@ A 0-indexed enum for the days of the week
 
 Returns a 4-, 5-, or 6-tuple of calendar weeks (7-tuples of Dates) for the `month` of the Date provided (according to the timezone of the environment).
 
+### `isAfterDate(date, dateToCompare)`
+
+Returns whether the day of `date` is after the day of `dateToCompare`.
+
+### `isBeforeDate(date, dateToCompare)`
+
+Returns whether the day of `date` is before the day of `dateToCompare`.
+
+### `isSameOrAfterDate(date, dateToCompare)`
+
+Returns whether the day of `date` is the same or after the day of `dateToCompare`.
+
+### `isSameOrBeforeDate(date, dateToCompare)`
+
+Returns whether the day of `date` is the same or before the day of `dateToCompare`.
+
 ## Fetch
 
 ### `isNetworkError(error)`

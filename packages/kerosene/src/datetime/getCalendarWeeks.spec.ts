@@ -1,6 +1,6 @@
 import * as dateFns from "date-fns";
 import { Month, DayOfWeek, DAYS_PER_WEEK } from "../datetime";
-import { getCalendarWeeks } from ".";
+import getCalendarWeeks from "./getCalendarWeeks";
 
 const expectSameDay = (
   compare: Date,
