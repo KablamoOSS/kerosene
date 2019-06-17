@@ -122,6 +122,10 @@ Converts the value in `radians` to degrees.
 
 Converts the value in `degrees` to radians.
 
+### `toSignificantFigures(value, figures)`
+
+Returns the provided `value` rounded to the number of significant `figures` provided.
+
 ## String
 
 ### `caseInsensitiveEquals`
