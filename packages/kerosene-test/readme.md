@@ -1,6 +1,10 @@
 # 🔥 Kerosene-test
 
-`@kablamo/kerosene-test` is not yet available on npm.
+```
+yarn add --dev @kablamo/kerosene-test
+
+npm install --save-dev @kablamo/kerosene-test
+```
 
 ## Available Functions
 
