@@ -20,6 +20,10 @@ Otherwise, returns `false`
 
 You can pass in an `iteratee` as the third argument, like in `lodash`.
 
+### `product`
+
+Returns the cartesian product of the source arrays.
+
 ### `remove`
 
 Immutably removes all instances of `needle` from `haystack`.
