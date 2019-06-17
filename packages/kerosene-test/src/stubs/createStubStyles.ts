@@ -21,12 +21,12 @@ export default function createStubStyles<C extends string, V extends {}>(
   const obj = classNames.reduce<V & { [key in C]: string }>(
     (acc, className) =>
       ({
-        ...(acc as object),
+        ...(acc as V & { [key in C]: string }),
         [className]: `${kebabCase(className)}-local-class ${kebabCase(
           className,
         )}-webpack-composed-class`,
       } as V & { [key in C]: string }),
-    values as any,
+    values as V & { [key in C]: string },
   );
 
   // Use a Proxy to throw an error when trying to access styles which haven't been stubbed
