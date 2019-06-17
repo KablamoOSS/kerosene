@@ -114,6 +114,10 @@ Returns whether or not the provided `value` is negative, considering positive an
 
 Converts the value in `radians` to degrees.
 
+### `toRadians`
+
+Converts the value in `degrees` to radians.
+
 ## String
 
 ### `caseInsensitiveEquals`
