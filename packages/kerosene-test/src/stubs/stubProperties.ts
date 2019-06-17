@@ -1,5 +1,5 @@
 export type TypedPropertyDescriptorMap<T> = {
-  [P in keyof T]?: TypedPropertyDescriptor<T[P]>
+  [P in keyof T]?: TypedPropertyDescriptor<T[P]>;
 };
 
 /**
@@ -7,7 +7,7 @@ export type TypedPropertyDescriptorMap<T> = {
  * @param target
  * @param properties
  */
-export function stubProperties<T>(
+export default function stubProperties<T>(
   target: T,
   properties: TypedPropertyDescriptorMap<T> & ThisType<T>,
 ) {
