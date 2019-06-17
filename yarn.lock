@@ -831,10 +831,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@kablamo/kerosene@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@kablamo/kerosene/-/kerosene-0.0.5.tgz#91ace2685eadf74abe4ac2c4293e4bba832692dc"
-  integrity sha512-lO+WZia8JOlvrFjv6G7XojwB3JJZKavZXM36uksiVQuXHQQDdOVSV7fZ1FnrtX+RX5zqONVc+k7I4BBASt/aIQ==
+"@kablamo/kerosene@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@kablamo/kerosene/-/kerosene-0.0.6.tgz#df550c16a4ba56b8d819fb517d3902c371e32666"
+  integrity sha512-Qk7/goUpyVu962+fjjjDRmZMf67RYVdpe0FJMfjzMY4HKwFFGNb+BDlMlf/zDDEUAJhU8VUZa+XkdXJHp8tiUQ==
   dependencies:
     "@types/lodash" "^4.14.121"
     content-type "^1.0.4"
@@ -967,7 +967,7 @@
   dependencies:
     "@types/jest" "*"
 
-"@types/jest@*", "@types/jest@^24.0.13", "@types/jest@^24.0.14":
+"@types/jest@*", "@types/jest@^24.0.13":
   version "24.0.15"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.15.tgz#6c42d5af7fe3b44ffff7cc65de7bf741e8fa427f"
   integrity sha512-MU1HIvWUme74stAoc3mgAi+aMlgKOudgEvQDIm1v4RkrDudBh1T+NFp5sftpBAdXdx1J0PbdpJ+M2EsSOi1djA==
