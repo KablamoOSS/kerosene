@@ -1,0 +1,66 @@
+{
+  "name": "@kablamo/kerosene-test",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/kerosene-test"
+  },
+  "bugs": {
+    "url": "https://github.com/KablamoOSS/kerosene/issues"
+  },
+  "contributors": [
+    {
+      "name": "Kablamo",
+      "url": "https://www.kablamo.com.au"
+    },
+    {
+      "name": "Nathan Hardy",
+      "email": "nathan.hardy@kablamo.com.au",
+      "url": "https://nhardy.id.au"
+    }
+  ],
+  "homepage": "https://github.com/KablamoOSS/kerosene",
+  "private": false,
+  "license": "MIT",
+  "main": ".dist/index.js",
+  "directories": {
+    "doc": "readme.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "keywords": [
+    "jest",
+    "kablamo",
+    "kerosene",
+    "mock",
+    "react",
+    "sinon",
+    "stub",
+    "test",
+    "utils"
+  ],
+  "dependencies": {
+    "@types/jest": "^24.0.14",
+    "@types/lodash": "^4.14.134",
+    "@types/sinon": "^7.0.13",
+    "lodash": "^4.17.11",
+    "sinon": "^7.3.2"
+  },
+  "devDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf .dist"
+  }
+}
