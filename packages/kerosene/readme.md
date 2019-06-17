@@ -114,6 +114,10 @@ Returns whether or not the provided `value` is negative, considering positive an
 
 Converts the value in `radians` to degrees.
 
+### `toSignificantFigures(value, figures)`
+
+Returns the provided `value` rounded to the number of significant `figures` provided.
+
 ## String
 
 ### `caseInsensitiveEquals`
