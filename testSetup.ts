@@ -1,3 +1,4 @@
+import "core-js/features/array/flat-map";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import "jest-enzyme";

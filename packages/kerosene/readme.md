@@ -20,6 +20,10 @@ Otherwise, returns `false`
 
 You can pass in an `iteratee` as the third argument, like in `lodash`.
 
+### `product`
+
+Returns the cartesian product of the source arrays.
+
 ### `remove`
 
 Immutably removes all instances of `needle` from `haystack`.
@@ -113,6 +117,10 @@ Returns whether or not the provided `value` is negative, considering positive an
 ### `toDegrees`
 
 Converts the value in `radians` to degrees.
+
+### `toRadians`
+
+Converts the value in `degrees` to radians.
 
 ### `toSignificantFigures(value, figures)`
 
