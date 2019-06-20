@@ -48,6 +48,16 @@ Some useful testing tools for unit testing and stubbing.
 
 [View Kerosene-Test on npm](https://www.npmjs.com/package/@kablamo/kerosene-test)
 
+### Kerosene-Styles
+
+```
+yarn add @kablamo/kerosene-styles
+```
+
+Some useful stylings for UI-related code.
+
+[View Kerosene-Styles on npm](https://www.npmjs.com/package/@kablamo/kerosene-styles)
+
 ## FAQ
 
 ### How do I create a new package?
