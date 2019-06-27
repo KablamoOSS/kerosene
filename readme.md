@@ -5,6 +5,9 @@ A monorepo-style collection of useful bits and pieces.
 _Use Kerosene to make your project *lit*_ ⛽💥🔥. Made by [Kablamo](https://kablamo.com.au?ref=docs)
 
 [![Coverage Status](https://coveralls.io/repos/github/KablamoOSS/kerosene/badge.svg?branch=master)](https://coveralls.io/github/KablamoOSS/kerosene?branch=master)
+[![Code Count](https://sloc.xyz/github/KablamoOSS/kerosene/?category=code)](https://github.com/KablamoOSS/kerosene/)
+[![Comment Count](https://sloc.xyz/github/KablamoOSS/kerosene/?category=comments)](https://github.com/KablamoOSS/kerosene/)
+[![COCOMO Estimate](https://sloc.xyz/github/KablamoOSS/kerosene/?category=cocomo)](https://github.com/KablamoOSS/kerosene/)
 
 ## Modules Index
 
