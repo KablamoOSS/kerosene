@@ -1,31 +1,28 @@
 {
-    "name": "@kablamo/kerosene-styles",
-    "version": "0.0.1",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/KablamoOSS/kerosene.git",
-      "directory": "packages/kerosene-styles"
-    },
-    "bugs": {
-      "url": "https://github.com/KablamoOSS/kerosene/issues"
-    },
-    "homepage": "https://github.com/KablamoOSS/kerosene",
-    "private": false,
-    "license": "MIT",
-    "main": "lib/index.js",
-    "module": "es/index.js",
-    "sideEffects": false,
-    "directories": {
-      "doc": "readme.md"
-    },
-    "publishConfig": {
-      "access": "public"
-    },
-    "engines": {
-      "node": ">= 6"
-    },
-    "dependencies": {
-      "@kablamo/kerosene": "^0.0.6"
-    }
+  "name": "@kablamo/kerosene-styles",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/kerosene-styles"
+  },
+  "bugs": {
+    "url": "https://github.com/KablamoOSS/kerosene/issues"
+  },
+  "homepage": "https://github.com/KablamoOSS/kerosene",
+  "private": false,
+  "license": "MIT",
+  "directories": {
+    "doc": "readme.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "scripts": {
+    "build": "exit 0",
+    "clean": "exit 0"
   }
-  
+}
