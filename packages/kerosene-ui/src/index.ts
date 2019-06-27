@@ -1,5 +1,6 @@
 export { default as useInterval } from "./hooks/useInterval";
 export { default as useKonamiCode } from "./hooks/useKonamiCode";
+export { default as usePageVisibility } from "./hooks/usePageVisibility";
 export { default as usePopup } from "./hooks/usePopup";
 export { default as useRafThrottle } from "./hooks/useRafThrottle";
 export { default as useRect } from "./hooks/useRect";

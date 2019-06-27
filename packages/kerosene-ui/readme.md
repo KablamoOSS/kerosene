@@ -20,6 +20,10 @@ Custom hook that makes `setInterval` work declaritively with hooks. See https://
 
 Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.
 
+### `usePageVisibility(useState = true)`
+
+Custom hook which listens to the page visibility API. Returns either a 2-tuple containing the state of page visibility and a ref containing the same, or just a ref if `useState === false`.
+
 ### `usePopup(zIndex?, inside?)`
 
 Custom hook which creates an element with which to use as a target for `ReactDOM.createPortal()`. This hook also keeps tracking of the bounding rect of the element attached to the `ref` so that the `rect` coordinations may be used to position the portal element.
