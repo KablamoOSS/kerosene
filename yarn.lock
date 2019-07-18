@@ -831,16 +831,6 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@kablamo/kerosene@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@kablamo/kerosene/-/kerosene-0.0.6.tgz#df550c16a4ba56b8d819fb517d3902c371e32666"
-  integrity sha512-Qk7/goUpyVu962+fjjjDRmZMf67RYVdpe0FJMfjzMY4HKwFFGNb+BDlMlf/zDDEUAJhU8VUZa+XkdXJHp8tiUQ==
-  dependencies:
-    "@types/lodash" "^4.14.121"
-    content-type "^1.0.4"
-    core-js-pure "^3.1.3"
-    lodash "^4.17.11"
-
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.0.2", "@sinonjs/commons@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.4.0.tgz#7b3ec2d96af481d7a0321252e7b1c94724ec5a78"

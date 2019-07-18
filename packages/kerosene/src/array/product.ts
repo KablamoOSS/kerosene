@@ -1,3 +1,35 @@
+export default function product(): [[]];
+
+export default function product<T1>(source1: T1[]): [T1][];
+
+export default function product<T1, T2>(
+  source1: T1[],
+  source2: T2[],
+): [T1, T2][];
+
+export default function product<T1, T2, T3>(
+  source1: T1[],
+  source2: T2[],
+  source3: T3[],
+): [T1, T2, T3][];
+
+export default function product<T1, T2, T3, T4>(
+  source1: T1[],
+  source2: T2[],
+  source3: T3[],
+  source4: T4[],
+): [T1, T2, T3, T4][];
+
+export default function product<T1, T2, T3, T4, T5>(
+  source1: T1[],
+  source2: T2[],
+  source3: T3[],
+  source4: T4[],
+  source5: T5[],
+): [T1, T2, T3, T4, T5][];
+
+export default function product<T>(...sources: T[][]): T[][];
+
 /**
  * Returns the cartesian product of the source arrays
  *
