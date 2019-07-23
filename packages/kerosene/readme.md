@@ -214,6 +214,10 @@ Recursively traverses `T` to make all properties optional.
 
 Infers the element type `T` from `T[]`, `Set<T>` or `Map<any, T>`.
 
+### `KeysWhere<T, TValue>`
+
+Creates a union of all keys of `T` where `T[key]` has type `TValue`.
+
 ### `Mutable<T>`
 
 Removes the `readonly` modifier from all properties in `T`.
