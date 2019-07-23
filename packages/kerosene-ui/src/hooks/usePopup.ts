@@ -13,7 +13,7 @@ import useRect from "./useRect";
  */
 export default function usePopup(
   zIndex: string | null = null,
-  inside: React.RefObject<HTMLElement>[] = [],
+  inside: readonly React.RefObject<HTMLElement>[] = [],
 ) {
   const [open, setOpen] = React.useState(false);
 

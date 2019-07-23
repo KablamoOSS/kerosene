@@ -12,7 +12,7 @@ import * as React from "react";
  * @param callback
  */
 export default function useKonamiCode(
-  code: string | string[],
+  code: string | readonly string[],
   callback: () => void,
 ) {
   const pressed = React.useRef([] as string[]);
