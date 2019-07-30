@@ -218,6 +218,10 @@ Infers the element type `T` from `T[]`, `Set<T>` or `Map<any, T>`.
 
 Creates a union of all keys of `T` where `T[key]` has type `TValue`.
 
+### `MergedUnion<T>`
+
+From a union type `T`, allows properties which are not shared by all members to be `undefined`.
+
 ### `Mutable<T>`
 
 Removes the `readonly` modifier from all properties in `T`.

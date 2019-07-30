@@ -34,6 +34,18 @@ export type KeysWhere<T extends object, TValue extends unknown> = {
 }[keyof T];
 
 /**
+ * From a union type `T`, allows properties which are not shared by all members to be `undefined`
+ *
+ * e.g.
+ * ```typescript
+ * type FooBar = MergedUnion<{ common: string; foo: string } | { common: string; bar: string }>;
+ * // equivalent to
+ * type FooBar = { common: string; foo: string; bar?: undefined } | { common: string; foo?: undefined; bar: string };
+ * ```
+ */
+export type MergedUnion<T extends {}> = { [key in keyof T]?: undefined } & T;
+
+/**
  * Make all properties of `T` mutable
  */
 export type Mutable<T> = { -readonly [P in keyof T]: T[P] };
