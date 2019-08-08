@@ -212,7 +212,11 @@ Recursively traverses `T` to make all properties optional.
 
 ### `ElementType<TCollection>`
 
-Infers the element type `T` from `T[]`, `Set<T>` or `Map<any, T>`.
+Infers the element type `T` from `T[]`, `Set<T>`, `Map<any, T>`, or `{ [key: string]: T }`.
+
+### `Entries<T>`
+
+Infers the union of all object entry tuples for type `T`.
 
 ### `KeysWhere<T, TValue>`
 

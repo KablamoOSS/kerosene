@@ -15,6 +15,7 @@ export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
  * - `readonly T[]`
  * - `Set<T>`
  * - `Map<any, T>`
+ * - `{ [key: string]: T }`
  */
 export type ElementType<
   TCollection
@@ -24,7 +25,14 @@ export type ElementType<
   ? TSetElement
   : TCollection extends Map<any, infer TMapElement>
   ? TMapElement
+  : TCollection extends { readonly [key: string]: infer TObjectElement }
+  ? TObjectElement
   : never;
+
+/**
+ * Infers the union of all object entry tuples for type `T`
+ */
+export type Entries<T> = { [P in keyof T]: [P, T[P]] }[keyof T];
 
 /**
  * Creates a union of all keys of `T` where `T[key]` has type `TValue`
