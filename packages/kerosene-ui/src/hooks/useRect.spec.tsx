@@ -92,7 +92,7 @@ describe("useRect", () => {
 
   it("should add and remove listeners for event specified", () => {
     const Component = () => {
-      const [ref] = useRect(false, "transitionend");
+      const [ref] = useRect(false, ["transitionend"]);
       return (
         <div ref={ref as React.Ref<HTMLDivElement>}>
           <StubComponent />
