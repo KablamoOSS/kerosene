@@ -89,4 +89,35 @@ describe("useRect", () => {
       capture: true,
     });
   });
+
+  it("should add and remove listeners for event specified", () => {
+    const Component = () => {
+      const [ref] = useRect(false, "transitionend");
+      return (
+        <div ref={ref as React.Ref<HTMLDivElement>}>
+          <StubComponent />
+        </div>
+      );
+    };
+    const root = mount(<Component />);
+    // hack to force useEffect() to trigger
+    root.setProps({});
+
+    expect(_addEventListener).toHaveBeenCalledWith(
+      "transitionend",
+      expect.any(Function),
+      { capture: true, passive: true },
+    );
+
+    const onTransitionEnd = _addEventListener.mock.calls.find(
+      args => args[0] === "transitionend",
+    )![1] as EventListener;
+
+    root.unmount();
+
+    expect(_removeEventListener).toHaveBeenCalledWith("transitionend", onTransitionEnd, {
+      capture: true,
+    });
+  });
+
 });
