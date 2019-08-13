@@ -25,9 +25,11 @@ const DEFAULT_RECT: Rect = {
 /**
  * Custom React Hook for reading bounding rect of a DOM Element
  * @param disable When set to `true`, updating the rect will be disabled
+ * @param eventList Listens for specified event types and triggers update
  */
 export default function useRect(
   disable = false,
+  eventList: (keyof WindowEventMap)[] = [],
 ): [React.RefObject<Element>, Rect, ScrollPosition] {
   const ref = React.useRef<Element>(null);
   const [rect, setRect] = React.useState(DEFAULT_RECT);
@@ -35,6 +37,7 @@ export default function useRect(
     scrollX: 0,
     scrollY: 0,
   });
+  const events = ["scroll", ...eventList];
 
   const update = useRafThrottle(() => {
     const newRect = ref.current
@@ -56,19 +59,23 @@ export default function useRect(
   React.useEffect(() => {
     if (!disable) {
       window.addEventListener("resize", update);
-      window.addEventListener(
-        "scroll",
-        update,
-        ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
+      events.forEach(event =>
+        window.addEventListener(
+          event,
+          update,
+          ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
+        )
       );
     }
 
     return () => {
       window.removeEventListener("resize", update);
-      window.removeEventListener(
-        "scroll",
-        update,
-        REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
+      events.forEach(event =>
+        window.removeEventListener(
+          event,
+          update,
+          REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
+        )
       );
     };
   }, [disable, update]);
