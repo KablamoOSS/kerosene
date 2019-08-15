@@ -34,9 +34,9 @@ Returns `{ open, setOpen, ref, rect, portalEl, scrollX, scrollY }`.
 
 Custom hook which throttles the provided callback with `requestAnimationFrame`.
 
-### `useRect(disable?)`
+### `useRect(disable?, eventList?)`
 
-Custom hook which measures the bounding rect of the element attached to `ref`. Listens to window resize events and any scroll event on the page.
+Custom hook which measures the bounding rect of the element attached to `ref`. Listens to window resize events and any scroll event on the page, plus any extra event names passed to `eventList`. Stops listening when `disable` is set to `true`.
 
 Returns `[ref, rect, { scrollX, scrollY }]`.
 
