@@ -30,6 +30,10 @@ Custom hook which creates an element with which to use as a target for `ReactDOM
 
 Returns `{ open, setOpen, ref, rect, portalEl, scrollX, scrollY }`.
 
+### `usePrevious(value, initialValue?)`
+
+Custom hook which remembers the value from the previous render.
+
 ### `useRafThrottle(callback)`
 
 Custom hook which throttles the provided callback with `requestAnimationFrame`.
