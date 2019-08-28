@@ -30,6 +30,12 @@ Custom hook which creates an element with which to use as a target for `ReactDOM
 
 Returns `{ open, setOpen, ref, rect, portalEl, scrollX, scrollY }`.
 
+### `usePrevious(value, initialValue?)`
+
+Custom hook which remembers the value from the previous render.
+
+This hook is generally useful when the current render relies on data from the previous render. As an example, you may want to transition a value between renders with a library like [react-spring](https://github.com/react-spring/react-spring) using a multiplier that scales from 0 to 1. During the transition, the value will look something like `value * multiplier + previous * (1 - multiplier)` where the multiplier fades between the `previous` and new `value`.
+
 ### `useRafThrottle(callback)`
 
 Custom hook which throttles the provided callback with `requestAnimationFrame`.
