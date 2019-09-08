@@ -64,7 +64,7 @@ export default function createStubComponent<
         <div {...props}>
           {typeof children === "function"
             ? transformRenderPropResult(children(...getRenderProps!()))
-            : children}
+            : (children as React.ReactNode)}
         </div>
       ),
       { displayName },
@@ -83,7 +83,7 @@ export default function createStubComponent<
             ? transformRenderPropResult((children as (
                 ...args: RenderProps
               ) => React.ReactNode)(...getRenderProps!()) as any)
-            : children}
+            : (children as React.ReactNode)}
         </div>
       );
     }
