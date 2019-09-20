@@ -17,7 +17,7 @@
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "test": "jest --expand --coverage",
-    "test:coverage": "jest --coverage --coverageReporters=lcov --coverageDirectory=.coverage",
+    "test:coverage": "jest --coverage --coverageReporters=lcov --coverageDirectory=coverage",
     "watch": "jest --verbose=false --watch",
     "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
     "lerna:publish": "lerna publish from-package --cd-version patch --no-git-tag-version --no-push --yes"
