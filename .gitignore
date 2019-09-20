@@ -5,6 +5,7 @@ es
 lib
 
 .vscode
+.idea
 
 *.log
 
