@@ -68,6 +68,10 @@ Returns whether or not the provided `element` is inside the viewport.
 
 Returns whether or not the current page is being displayed in a Progressive Web App.
 
+### `measureCSSProperty(element, property, value)`
+
+Measures a CSS `property` at the provided `element` by injecting a `<noscript />` element and setting the style `property` to `value` and measuring with `window.getComputedStyle`.
+
 ### `mergeRefs(...refs)`
 
 Returns a new callback ref that effectively merges all provided `refs`.

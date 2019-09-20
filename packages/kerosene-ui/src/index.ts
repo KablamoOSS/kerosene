@@ -22,6 +22,7 @@ export type ViewportDimensions = _ViewportDimensions;
 export { default as isInViewport } from "./utils/isInViewport";
 export { default as isPwa } from "./utils/isPwa";
 export * from "./utils/listeners";
+export { default as measureCSSProperty } from "./utils/measureCSSProperty";
 export { default as mergeRefs } from "./utils/mergeRefs";
 export { default as rafThrottle } from "./utils/rafThrottle";
 export { default as waitForRepaint } from "./utils/waitForRepaint";
