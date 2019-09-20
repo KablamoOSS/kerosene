@@ -22,5 +22,9 @@ jobs:
         npm install yarn
         yarn install
         yarn test:coverage
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
       env:
         CI: true
