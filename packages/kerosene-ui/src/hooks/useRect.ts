@@ -29,7 +29,7 @@ const DEFAULT_RECT: Rect = {
  */
 export default function useRect(
   disable = false,
-  eventList: (keyof WindowEventMap)[] = [],
+  eventList: ReadonlyArray<keyof WindowEventMap> = [],
 ): [React.RefObject<Element>, Rect, ScrollPosition] {
   const ref = React.useRef<Element>(null);
   const [rect, setRect] = React.useState(DEFAULT_RECT);
@@ -37,7 +37,10 @@ export default function useRect(
     scrollX: 0,
     scrollY: 0,
   });
-  const events = ["scroll", ...eventList];
+  const events = React.useMemo<ReadonlyArray<keyof WindowEventMap>>(
+    () => ["scroll", ...eventList],
+    [eventList],
+  );
 
   const update = useRafThrottle(() => {
     const newRect = ref.current
@@ -64,7 +67,7 @@ export default function useRect(
           event,
           update,
           ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
-        )
+        ),
       );
     }
 
@@ -75,10 +78,10 @@ export default function useRect(
           event,
           update,
           REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
-        )
+        ),
       );
     };
-  }, [disable, update]);
+  }, [disable, update, events]);
 
   return [ref, rect, scroll];
 }
