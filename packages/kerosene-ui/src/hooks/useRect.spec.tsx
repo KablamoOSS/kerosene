@@ -1,4 +1,4 @@
-import { identity } from "lodash";
+import { findLast, identity } from "lodash";
 import { mount } from "enzyme";
 import createSandbox from "jest-sandbox";
 import * as React from "react";
@@ -64,10 +64,12 @@ describe("useRect", () => {
       expect.any(Function),
       { capture: true, passive: true },
     );
-    const onResize = _addEventListener.mock.calls.find(
+    const onResize = findLast(
+      _addEventListener.mock.calls,
       args => args[0] === "resize",
     )![1] as EventListener;
-    const onScroll = _addEventListener.mock.calls.find(
+    const onScroll = findLast(
+      _addEventListener.mock.calls,
       args => args[0] === "scroll",
     )![1] as EventListener;
 
@@ -91,17 +93,24 @@ describe("useRect", () => {
   });
 
   it("should add and remove listeners for events specified", () => {
-    const Component = () => {
-      const [ref] = useRect(false, ["transitionend"]);
+    const Component = ({
+      eventList,
+    }: {
+      eventList: ReadonlyArray<keyof WindowEventMap>;
+    }) => {
+      const [ref] = useRect(false, eventList);
       return (
         <div ref={ref as React.Ref<HTMLDivElement>}>
           <StubComponent />
         </div>
       );
     };
-    const root = mount(<Component />);
+    let props: React.ComponentPropsWithoutRef<typeof Component> = {
+      eventList: ["transitionend"],
+    };
+    const root = mount(<Component {...props} />);
     // hack to force useEffect() to trigger
-    root.setProps({});
+    root.setProps(props);
 
     expect(_addEventListener).toHaveBeenCalledWith(
       "transitionend",
@@ -114,21 +123,75 @@ describe("useRect", () => {
       { capture: true, passive: true },
     );
 
-    const onTransitionEnd = _addEventListener.mock.calls.find(
-      args => args[0] === "transitionend",
-    )![1] as EventListener;
-    const onScroll = _addEventListener.mock.calls.find(
-      args => args[0] === "scroll",
-    )![1] as EventListener;
+    const getOnTransitionEnd = () =>
+      findLast(
+        _addEventListener.mock.calls,
+        args => args[0] === "transitionend",
+      )![1] as EventListener;
+    const getOnScroll = () =>
+      findLast(
+        _addEventListener.mock.calls,
+        args => args[0] === "scroll",
+      )![1] as EventListener;
 
-    root.unmount();
+    const onTransitionEnd1 = getOnTransitionEnd();
+    const onScroll1 = getOnScroll();
 
-    expect(_removeEventListener).toHaveBeenCalledWith("transitionend", onTransitionEnd, {
+    _addEventListener.mockReset();
+    props = { eventList: ["transitionend", "click"] };
+    root.setProps(props);
+    // hack to trigger useEffect()
+    root.setProps(props);
+
+    expect(_removeEventListener).toHaveBeenCalledWith(
+      "transitionend",
+      onTransitionEnd1,
+      {
+        capture: true,
+      },
+    );
+    expect(_removeEventListener).toHaveBeenCalledWith("scroll", onScroll1, {
       capture: true,
     });
-    expect(_removeEventListener).toHaveBeenCalledWith("scroll", onScroll, {
+
+    expect(_addEventListener).toHaveBeenCalledWith(
+      "transitionend",
+      expect.any(Function),
+      { capture: true, passive: true },
+    );
+    expect(_addEventListener).toHaveBeenCalledWith(
+      "click",
+      expect.any(Function),
+      { capture: true, passive: true },
+    );
+    expect(_addEventListener).toHaveBeenCalledWith(
+      "scroll",
+      expect.any(Function),
+      { capture: true, passive: true },
+    );
+
+    const onTransitionEnd2 = getOnTransitionEnd();
+    const onClick = findLast(
+      _addEventListener.mock.calls,
+      args => args[0] === "click",
+    )![1] as EventListener;
+    const onScroll2 = getOnScroll();
+
+    _removeEventListener.mockReset();
+    root.unmount();
+
+    expect(_removeEventListener).toHaveBeenCalledWith(
+      "transitionend",
+      onTransitionEnd2,
+      {
+        capture: true,
+      },
+    );
+    expect(_removeEventListener).toHaveBeenCalledWith("click", onClick, {
+      capture: true,
+    });
+    expect(_removeEventListener).toHaveBeenCalledWith("scroll", onScroll2, {
       capture: true,
     });
   });
-
 });
