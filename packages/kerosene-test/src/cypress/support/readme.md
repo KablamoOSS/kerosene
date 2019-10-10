@@ -1,6 +1,6 @@
 # Cypress Commands
 
-Import these commands by adding a file as below to `cypress/support/commands.js`, or add this to your existing commands file.
+Import these commands by adding a file as below to `cypress/support/index.js`.
 
 ```js
 require("@kablamo/kerosene-test/src/cypress/support/commands");
