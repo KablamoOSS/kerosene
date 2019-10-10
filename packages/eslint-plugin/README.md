@@ -22,7 +22,7 @@ You can still suffix variables to the end of your test id for example `data-test
 
 ### `test-id-consistent-naming`
 
-This rule ensures common misspellings always get fixed to the snake-case `data-test-id`.
+This rule ensures common misspellings always get fixed to the kebab-case `data-test-id`.
 
 ## Configurations
 
