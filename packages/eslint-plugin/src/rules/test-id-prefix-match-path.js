@@ -21,7 +21,7 @@ module.exports = {
           if (node.arguments.length < 0) {
             return context.report({
               node,
-              message: "missing arguments for createTestIds"
+              message: "missing arguments for createTestIds",
             });
           }
 
@@ -35,13 +35,13 @@ module.exports = {
               fix(fixer) {
                 return fixer.replaceTextRange(
                   node.arguments[0].range,
-                  `"${validPrefix}"`
+                  `"${validPrefix}"`,
                 );
-              }
+              },
             });
           }
         }
-      }
+      },
     };
   },
   meta: {
@@ -49,9 +49,9 @@ module.exports = {
     docs: {
       description: "ensure createTestId prefix matches path",
       category: "Possible Errors",
-      recommended: true
+      recommended: true,
     },
     fixable: "code",
-    schema: []
-  }
+    schema: [],
+  },
 };

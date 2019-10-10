@@ -3,7 +3,7 @@
 const enforceKey = (context, validName) => jsxAttribute => {
   context.report({
     node: jsxAttribute,
-    message: `Test ID attribute should be named ${validName}.`,
+    message: `Test ID attribute should be named ${validName}`,
     fix(fixer) {
       return fixer.replaceTextRange(jsxAttribute.name.range, validName);
     },
@@ -12,42 +12,56 @@ const enforceKey = (context, validName) => jsxAttribute => {
 
 module.exports = {
   create(context) {
+    const pragma = context.options[0] || "data-test-id";
+
+    const match = {
+      'JSXAttribute[name.name = "testId"]': enforceKey(context, pragma),
+      'JSXAttribute[name.name = "data-id-test"]': enforceKey(context, pragma),
+      'JSXAttribute[name.name = "data-idtest"]': enforceKey(context, pragma),
+      'JSXAttribute[name.name = "dataTestId"]': enforceKey(context, pragma),
+      'JSXAttribute[name.name = "datatestid"]': enforceKey(context, pragma),
+    };
+
+    const pragmaMatch =
+      pragma === "data-test-id"
+        ? {
+            'JSXAttribute[name.name = "data-testid"]': enforceKey(
+              context,
+              pragma,
+            ),
+            'JSXAttribute[name.name = "data-testId"]': enforceKey(
+              context,
+              pragma,
+            ),
+            'JSXAttribute[name.name = "data-testID"]': enforceKey(
+              context,
+              pragma,
+            ),
+          }
+        : {
+            'JSXAttribute[name.name = "data-test-id"]': enforceKey(
+              context,
+              pragma,
+            ),
+          };
+
     return {
-      'JSXAttribute[name.name = "testId"]': enforceKey(context, "data-test-id"),
-      'JSXAttribute[name.name = "data-id-test"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
-      'JSXAttribute[name.name = "data-testId"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
-      'JSXAttribute[name.name = "data-testID"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
-      'JSXAttribute[name.name = "dataTestId"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
-      'JSXAttribute[name.name = "datatestid"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
-      'JSXAttribute[name.name = "data-testid"]': enforceKey(
-        context,
-        "data-test-id",
-      ),
+      ...match,
+      ...pragmaMatch,
     };
   },
   meta: {
     type: "code",
     docs: {
-      description: "ensure a single consistent naming of data-test-id",
+      description: "ensure a single consistent naming of data test id",
       category: "Possible Errors",
       recommended: true,
     },
     fixable: "code",
-    schema: [],
+    schema: [
+      {
+        enum: ["data-test-id", "data-testid"],
+      },
+    ],
   },
 };
