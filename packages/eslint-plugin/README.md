@@ -18,7 +18,7 @@ module.exports = {
 This rule fixes the first argument of `createTestIds(prefix, [ ...ids])` to be a prefix derived from the files
 current directory. This ensures consistent unique prefixes per component.
 
-You can still suffix variables to the end of your test id for example `data-test-id={\`${testId.myId}-${uuid}}\``.
+You can still suffix variables to the end of your test id for example `data-test-id={\`${testId.myId}-${uuid}\`}`.
 
 ### `test-id-consistent-naming`
 
