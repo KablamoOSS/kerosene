@@ -13,42 +13,28 @@ const enforceKey = (context, validName) => jsxAttribute => {
 module.exports = {
   create(context) {
     const pragma = context.options[0] || "data-test-id";
+    console.log(pragma);
+    const attributes = [
+      "data-test-id",
+      "testId",
+      "data-id-test",
+      "data-testId",
+      "data-testID",
+      "dataTestId",
+      "datatestid",
+      "data-testid",
+      "testid",
+    ];
 
-    const match = {
-      'JSXAttribute[name.name = "testId"]': enforceKey(context, pragma),
-      'JSXAttribute[name.name = "data-id-test"]': enforceKey(context, pragma),
-      'JSXAttribute[name.name = "data-idtest"]': enforceKey(context, pragma),
-      'JSXAttribute[name.name = "dataTestId"]': enforceKey(context, pragma),
-      'JSXAttribute[name.name = "datatestid"]': enforceKey(context, pragma),
-    };
-
-    const pragmaMatch =
-      pragma === "data-test-id"
-        ? {
-            'JSXAttribute[name.name = "data-testid"]': enforceKey(
-              context,
-              pragma,
-            ),
-            'JSXAttribute[name.name = "data-testId"]': enforceKey(
-              context,
-              pragma,
-            ),
-            'JSXAttribute[name.name = "data-testID"]': enforceKey(
-              context,
-              pragma,
-            ),
-          }
-        : {
-            'JSXAttribute[name.name = "data-test-id"]': enforceKey(
-              context,
-              pragma,
-            ),
-          };
-
-    return {
-      ...match,
-      ...pragmaMatch,
-    };
+    return attributes
+      .filter(name => name !== pragma)
+      .reduce(
+        (acc, name) => ({
+          ...acc,
+          [`JSXAttribute[name.name = "${name}"]`]: enforceKey(context, pragma),
+        }),
+        {},
+      );
   },
   meta: {
     type: "code",
