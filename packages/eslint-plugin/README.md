@@ -31,7 +31,7 @@ module.exports = {
   plugins: ["@kablamo"],
   extends: ["plugin:@kablamo/recommended"],
   rules: {
-    "test-id-consistent-naming": ["data-testid"],
+    "test-id-consistent-naming": ["error", "data-testid"],
   },
 };
 ```
