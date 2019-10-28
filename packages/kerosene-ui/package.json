@@ -25,11 +25,11 @@
     "node": ">= 6"
   },
   "dependencies": {
-    "@kablamo/kerosene": "^0.0.13"
+    "@kablamo/kerosene": "^0.0.15"
   },
   "devDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "peerDependencies": {
     "react": "^16.8.6",

@@ -8,6 +8,8 @@ export { default as useRect } from "./hooks/useRect";
 
 export { default as ShowWhen } from "./ShowWhen";
 
+export * from "./types";
+
 export { default as getSafeAreaInsets } from "./utils/getSafeAreaInsets";
 import { SafeAreaInsets as _SafeAreaInsets } from "./utils/getSafeAreaInsets";
 export type SafeAreaInsets = _SafeAreaInsets;
