@@ -61,7 +61,7 @@ export default function createStubComponent<
   if (functional) {
     return Object.assign(
       ({ children, ...props }: Props) => (
-        <div {...props}>
+        <div __displayName__={displayName} {...props}>
           {typeof children === "function"
             ? transformRenderPropResult(children(...getRenderProps!()))
             : (children as React.ReactNode)}
@@ -78,7 +78,7 @@ export default function createStubComponent<
       const { children, ...props } = this.props;
 
       return (
-        <div {...props}>
+        <div __displayName__={displayName} {...props}>
           {typeof children === "function"
             ? transformRenderPropResult((children as (
                 ...args: RenderProps
