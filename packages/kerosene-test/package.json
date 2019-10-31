@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-test",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/KablamoOSS/kerosene.git",
@@ -9,8 +9,7 @@
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Kablamo",
       "url": "https://www.kablamo.com.au"
     },
@@ -18,6 +17,11 @@
       "name": "Nathan Hardy",
       "email": "nathan.hardy@kablamo.com.au",
       "url": "https://nhardy.id.au"
+    },
+    {
+      "name": "George El-Khoury",
+      "email": "george.elkhoury@kablamo.com.au",
+      "url": "https://gekdesign.com.au"
     }
   ],
   "homepage": "https://github.com/KablamoOSS/kerosene",
