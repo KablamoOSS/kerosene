@@ -16,8 +16,8 @@ export default function usePageVisibility(
 export default function usePageVisibility(
   useState = true,
 ): [boolean, React.RefObject<boolean>] | React.RefObject<boolean> {
-  const [visible, setVisible] = React.useState(false);
-  const visibility = React.useRef(false);
+  const [visible, setVisible] = React.useState(!document.hidden);
+  const visibility = React.useRef(!document.hidden);
 
   const onVisibilityChange = React.useCallback(() => {
     // Fallback to `document.hidden=false` if the API is not present
