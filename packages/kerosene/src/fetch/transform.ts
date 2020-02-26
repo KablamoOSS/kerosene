@@ -22,11 +22,10 @@ export default function transform(response: Response) {
     case "application/json":
       return response.json();
 
-    case "application/pdf":
-      return response.blob();
-
     case "text/plain":
-    default:
       return response.text();
+
+    default:
+      return response.blob();
   }
 }
