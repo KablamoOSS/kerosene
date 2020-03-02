@@ -110,6 +110,12 @@ Returns a `Promise` which resolves after the specified `delay` in milliseconds.
 
 Returns a `Promise` which resolves after the current event loop drains.
 
+## Iterable
+
+### `isEquivalentSet(iterable1, iterable2)`
+
+Returns whether `iterable1` is an equivalent set to `iterable2`.
+
 ## Math
 
 ### `floor`/`round`/`ceil`
