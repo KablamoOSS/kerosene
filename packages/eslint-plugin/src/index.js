@@ -6,8 +6,8 @@ module.exports.rules = {
 module.exports.configs = {
   recommended: {
     rules: {
-      "@kablamo/eslint-plugin/test-id-prefix-match-path": [2, "data-test-id"],
-      "@kablamo/eslint-plugin/test-id-consistent-naming": 2,
+      "@kablamo/test-id-prefix-match-path": 2,
+      "@kablamo/test-id-consistent-naming": [2, "data-test-id"],
     },
   },
 };
