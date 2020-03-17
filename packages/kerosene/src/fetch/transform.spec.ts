@@ -46,6 +46,16 @@ describe("transform", () => {
       method: "blob",
       content: Symbol("Blob"),
     },
+    {
+      type: "application/zip",
+      method: "blob",
+      content: Symbol("Blob"),
+    },
+    {
+      type: "application/octet-stream",
+      method: "blob",
+      content: Symbol("Blob"),
+    },
   ].forEach(({ type, method, content }) => {
     it(`should use ${method}() for ${type}`, async () => {
       const header = `${type}; charset=utf-8`;
