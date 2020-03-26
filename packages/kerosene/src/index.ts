@@ -13,6 +13,8 @@ export {
   default as waitForEventLoopToDrain,
 } from "./function/waitForEventLoopToDrain";
 
+export { default as isEquivalentSet } from "./iterable/isEquivalentSet";
+
 export { default as ceil } from "./math/ceil";
 export { default as floor } from "./math/floor";
 export { default as round } from "./math/round";

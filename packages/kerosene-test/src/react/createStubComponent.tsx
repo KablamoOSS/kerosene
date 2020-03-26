@@ -3,21 +3,21 @@ import * as React from "react";
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends any[] = any[]
+  RenderProps extends readonly any[] = any[]
 >(displayName: string, functional?: false): React.ComponentClass<Props>;
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends any[] = any[]
+  RenderProps extends readonly any[] = any[]
 >(displayName: string, functional: true): React.FunctionComponent<Props>;
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends any[] = any[]
+  RenderProps extends readonly any[] = any[]
 >(
   displayName: string,
   functional: false | undefined,
-  getRenderProps: () => RenderProps,
+  getRenderProps: (props: Omit<Props, "children">) => RenderProps,
   transformRenderPropResult?: (
     result: (props: any) => React.ReactNode,
   ) => React.ReactNode,
@@ -27,11 +27,11 @@ export default function createStubComponent<
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends any[] = any[]
+  RenderProps extends readonly any[] = any[]
 >(
   displayName: string,
   functional: true,
-  getRenderProps: () => RenderProps,
+  getRenderProps: (props: Omit<Props, "children">) => RenderProps,
   transformRenderPropResult?: (
     result: (props: any) => React.ReactNode,
   ) => React.ReactNode,
@@ -49,11 +49,11 @@ export default function createStubComponent<
  */
 export default function createStubComponent<
   Props extends { children?: unknown } = { [prop: string]: unknown },
-  RenderProps extends any[] = any[]
+  RenderProps extends readonly any[] = any[]
 >(
   displayName: string,
   functional = false,
-  getRenderProps?: () => RenderProps,
+  getRenderProps?: (props: Omit<Props, "children">) => RenderProps,
   transformRenderPropResult: (
     result: (props: any) => React.ReactNode,
   ) => React.ReactNode = identity,
@@ -63,7 +63,7 @@ export default function createStubComponent<
       ({ children, ...props }: Props) => (
         <div __displayName__={displayName} {...props}>
           {typeof children === "function"
-            ? transformRenderPropResult(children(...getRenderProps!()))
+            ? transformRenderPropResult(children(...getRenderProps!(props)))
             : (children as React.ReactNode)}
         </div>
       ),
@@ -82,7 +82,7 @@ export default function createStubComponent<
           {typeof children === "function"
             ? transformRenderPropResult((children as (
                 ...args: RenderProps
-              ) => React.ReactNode)(...getRenderProps!()) as any)
+              ) => React.ReactNode)(...getRenderProps!(props)) as any)
             : (children as React.ReactNode)}
         </div>
       );
