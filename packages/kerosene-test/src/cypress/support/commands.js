@@ -6,6 +6,6 @@ Cypress.Commands.add("visitStorybook", (path, storybookName, options = {}) => {
     options,
   );
 });
-Cypress.Commands.add("testId", testId => {
-  cy.get(`[data-test-id="${testId}"]`);
+Cypress.Commands.add("testId", (testId, options) => {
+  cy.get(`[data-test-id="${testId}"]`, options);
 });
