@@ -10,6 +10,12 @@ npm install @kablamo/kerosene-ui
 
 ### `<ShowWhen />`
 
+## Utility Types
+
+### `UnwrapComponent<T>`
+
+Unwraps the decorated typings from a decorator-wrapped components to provide the original type of the underlying component. Useful in unit testing when stubbing decorators with the identity function.
+
 ## React Hooks
 
 ### `useInterval(callback, delay)`
