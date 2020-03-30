@@ -1,8 +1,7 @@
 // This test almost works
 // eslint isn't being pulled in and configure correctly to run it yet
 
-"use strict";
-
+import { Rule } from "eslint";
 import rule from "./test-id-prefix-match-path";
 import ruleTester from "../test/rule-tester";
 
@@ -15,7 +14,7 @@ const testIds = createTestIds("${prefix}", [
   ]);
 `;
 
-ruleTester.run("test-id-prefix-match-path", rule, {
+ruleTester.run("test-id-prefix-match-path", rule as Rule.RuleModule, {
   valid: [
     {
       code: testCode("components-atoms-button"),

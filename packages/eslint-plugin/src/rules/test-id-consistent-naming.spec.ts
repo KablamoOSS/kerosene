@@ -1,10 +1,10 @@
-"use strict";
+import { Rule } from "eslint";
 import rule from "./test-id-consistent-naming";
 import ruleTester from "../test/rule-tester";
 
 const happyPath = "const element = () => <div data-test-id={testIds.button} />";
 
-ruleTester.run("test-id-consistent-naming", rule, {
+ruleTester.run("test-id-consistent-naming", rule as Rule.RuleModule, {
   valid: [
     {
       code: "const element = () => <div data-test-id={testIds.button} />",
