@@ -1,11 +1,7 @@
 {
   "name": "@kablamo/kerosene-test",
   "version": "0.0.6",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KablamoOSS/kerosene.git",
-    "directory": "packages/kerosene-test"
-  },
+  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-test",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },
@@ -36,7 +32,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">= 10"
   },
   "keywords": [
     "jest",
@@ -50,14 +46,14 @@
     "utils"
   ],
   "dependencies": {
-    "@types/lodash": "^4.14.138",
+    "@types/lodash": "^4.14.149",
     "@types/sinon": "^7.0.13",
     "lodash": "^4.17.15",
     "sinon": "^7.4.1"
   },
   "devDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "peerDependencies": {
     "react": "^16.8.6",

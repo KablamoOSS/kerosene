@@ -1,11 +1,7 @@
 {
   "name": "@kablamo/kerosene-feature-flags",
   "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KablamoOSS/kerosene.git",
-    "directory": "packages/kerosene-feature-flags"
-  },
+  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-feature-flags",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },
@@ -32,7 +28,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">= 10"
   },
   "keywords": [
     "feature-flags",

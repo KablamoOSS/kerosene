@@ -1,11 +1,7 @@
 {
   "name": "@kablamo/kerosene-ui",
   "version": "0.0.15",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KablamoOSS/kerosene.git",
-    "directory": "packages/kerosene-ui"
-  },
+  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-ui",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },
@@ -22,7 +18,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">= 10"
   },
   "dependencies": {
     "@kablamo/kerosene": "^0.0.15"
