@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": {
     "build": "exit 0",
+    "clean": "exit 0",
     "test": "src/test.js"
   },
   "peerDependencies": {
