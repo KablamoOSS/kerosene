@@ -224,6 +224,10 @@ Infers the element type `T` from `T[]`, `Set<T>`, `Map<any, T>`, or `{ [key: str
 
 Infers the union of all object entry tuples for type `T`.
 
+### `KeysOfUnion<T>`
+
+Like `keyof T`, but distributes across all members of unions to include all keys (including those not shared by all members).
+
 ### `KeysWhere<T, TValue>`
 
 Creates a union of all keys of `T` where `T[key]` has type `TValue`.
@@ -235,3 +239,11 @@ From a union type `T`, allows properties which are not shared by all members to 
 ### `Mutable<T>`
 
 Removes the `readonly` modifier from all properties in `T`.
+
+### `PickBy<T, TValue>`
+
+Creates a new type from `T` including only keys where the value is assignable to type `TValue`.
+
+### `RequireAtLeastOne<T>`
+
+Creates a new type from `T` where at least one key is required and all others are optional.
