@@ -1,6 +1,6 @@
 import * as dateFns from "date-fns";
 import { range } from "lodash";
-import { DAYS_PER_WEEK, DayOfWeek } from ".";
+import { DAYS_PER_WEEK, DayOfWeek } from "./constants";
 
 /**
  * 7-tuple containing moments for each day of the calendar week
@@ -20,7 +20,7 @@ export type CalendarWeeks =
       CalendarWeek,
       CalendarWeek,
       CalendarWeek,
-      CalendarWeek
+      CalendarWeek,
     ];
 
 /**
