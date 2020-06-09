@@ -21,6 +21,7 @@
     "node": ">= 10"
   },
   "dependencies": {
+    "@babel/runtime": "^7.10.2",
     "@kablamo/kerosene": "^0.0.16"
   },
   "devDependencies": {
