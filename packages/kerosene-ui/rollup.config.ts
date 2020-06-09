@@ -1,4 +1,4 @@
-import renameExtensions from "@betit/rollup-plugin-rename-extensions";
+import babel from "@rollup/plugin-babel";
 import path from "path";
 import {
   ModuleFormat,
@@ -6,7 +6,6 @@ import {
   OutputOptions,
   ExternalOption,
 } from "rollup";
-import babel from "rollup-plugin-babel";
 import resolve from "rollup-plugin-node-resolve";
 import packageJson from "./package.json";
 import generateBabelConfig from "../../config/generateBabelConfig";
@@ -41,14 +40,9 @@ const plugins = [
   babel({
     ...generateBabelConfig(false),
     babelrc: false,
+    configFile: false,
     extensions,
-  }),
-  renameExtensions({
-    mappings: {
-      ".jsx": ".js",
-      ".ts": ".js",
-      ".tsx": ".js",
-    },
+    babelHelpers: "runtime",
   }),
 ];
 
