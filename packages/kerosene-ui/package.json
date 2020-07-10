@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-ui",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-ui",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -21,8 +21,10 @@
     "node": ">= 10"
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.2",
-    "@kablamo/kerosene": "^0.0.17"
+    "@babel/runtime": "^7.10.4",
+    "@kablamo/kerosene": "^0.0.18",
+    "@types/lodash": "^4.14.157",
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "react": "^16.13.1",

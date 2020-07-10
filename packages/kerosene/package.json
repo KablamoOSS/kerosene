@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -21,12 +21,12 @@
     "node": ">= 10"
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.2",
-    "@types/lodash": "^4.14.149",
+    "@babel/runtime": "^7.10.4",
+    "@types/lodash": "^4.14.157",
     "content-type": "^1.0.4",
-    "core-js-pure": "^3.6.4",
-    "date-fns": "^2.10.0",
-    "lodash": "^4.17.15"
+    "core-js-pure": "^3.6.5",
+    "date-fns": "^2.14.0",
+    "lodash": "^4.17.19"
   },
   "devDependencies": {},
   "peerDependencies": {},
