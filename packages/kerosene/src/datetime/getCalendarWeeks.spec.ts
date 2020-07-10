@@ -24,7 +24,7 @@ describe("#getCalendarWeeks", () => {
     expect(weeks).toHaveLength(4);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
-    weeks.flat<Date>().forEach((day, index) => {
+    weeks.flat().forEach((day, index) => {
       expectSameDay(day, 2021, Month.FEBRUARY, index + 1);
     });
   });
@@ -37,7 +37,7 @@ describe("#getCalendarWeeks", () => {
     expect(weeks).toHaveLength(5);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
-    weeks.flat<Date>().forEach((day, index) => {
+    weeks.flat().forEach((day, index) => {
       expectSameDay(
         day,
         2019,
@@ -55,7 +55,7 @@ describe("#getCalendarWeeks", () => {
     expect(weeks).toHaveLength(5);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
-    weeks.flat<Date>().forEach((day, index) => {
+    weeks.flat().forEach((day, index) => {
       expectSameDay(
         day,
         2019,
@@ -77,7 +77,7 @@ describe("#getCalendarWeeks", () => {
     expect(weeks).toHaveLength(6);
     weeks.forEach(week => expect(week).toHaveLength(DAYS_PER_WEEK));
 
-    weeks.flat<Date>().forEach((day, index) => {
+    weeks.flat().forEach((day, index) => {
       expectSameDay(
         day,
         2019,
