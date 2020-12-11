@@ -52,6 +52,7 @@
     "sinon": "^9.0.2"
   },
   "devDependencies": {
+    "@types/puppeteer": "^5.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
