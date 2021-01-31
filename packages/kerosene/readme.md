@@ -262,6 +262,22 @@ From a union type `T`, allows properties which are not shared by all members to 
 
 Removes the `readonly` modifier from all properties in `T`.
 
+### `Overloads<T>`
+
+From an overloaded function `T`, infer each overload as a tuple element.
+
+### `OverloadedParameters<T>`
+
+For an overloaded function `T`, infer the union of parameters for all overloads.
+
+### `OverloadedReturnType<T>`
+
+For an overloaded function `T`, infer the union of return types for all overloads.
+
+### `OverloadedReturnTypeWhen<T, P>`
+
+For an overloaded function `T`, infer the return type for the specific overload when parameters match `P`.
+
 ### `PickBy<T, TValue>`
 
 Creates a new type from `T` including only keys where the value is assignable to type `TValue`.

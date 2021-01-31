@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-test",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-test",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -46,6 +46,7 @@
     "utils"
   ],
   "dependencies": {
+    "@kablamo/kerosene": "^0.0.28",
     "@types/lodash": "^4.14.184",
     "@types/sinon": "^10.0.13",
     "lodash": "^4.17.21",

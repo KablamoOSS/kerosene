@@ -103,6 +103,85 @@ export type MergedUnion<T extends object> = __MergedUnion__<T, T>;
 export type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 
 /**
+ * From an overloaded function `T`, infer each overload as a tuple element
+ */
+export type Overloads<T> = T extends {
+  (...args: infer P1): infer R1;
+  (...args: infer P2): infer R2;
+  (...args: infer P3): infer R3;
+  (...args: infer P4): infer R4;
+  (...args: infer P5): infer R5;
+  (...args: infer P6): infer R6;
+}
+  ? [
+      (...args: P1) => R1,
+      (...args: P2) => R2,
+      (...args: P3) => R3,
+      (...args: P4) => R4,
+      (...args: P5) => R5,
+      (...args: P6) => R6,
+    ]
+  : T extends {
+      (...args: infer P1): infer R1;
+      (...args: infer P2): infer R2;
+      (...args: infer P3): infer R3;
+      (...args: infer P4): infer R4;
+      (...args: infer P5): infer R5;
+    }
+  ? [
+      (...args: P1) => R1,
+      (...args: P2) => R2,
+      (...args: P3) => R3,
+      (...args: P4) => R4,
+      (...args: P5) => R5,
+    ]
+  : T extends {
+      (...args: infer P1): infer R1;
+      (...args: infer P2): infer R2;
+      (...args: infer P3): infer R3;
+      (...args: infer P4): infer R4;
+    }
+  ? [
+      (...args: P1) => R1,
+      (...args: P2) => R2,
+      (...args: P3) => R3,
+      (...args: P4) => R4,
+    ]
+  : T extends {
+      (...args: infer P1): infer R1;
+      (...args: infer P2): infer R2;
+      (...args: infer P3): infer R3;
+    }
+  ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3]
+  : T extends {
+      (...args: infer P1): infer R1;
+      (...args: infer P2): infer R2;
+    }
+  ? [(...args: P1) => R1, (...args: P2) => R2]
+  : T extends (...args: infer P1) => infer R1
+  ? [(...args: P1) => R1]
+  : never;
+
+/**
+ * For an overloaded function `T`, infer the union of parameters for all overloads
+ */
+export type OverloadedParameters<T> = Parameters<Overloads<T>[number]>;
+
+/**
+ * For an overloaded function `T`, infer the union of return types for all overloads
+ */
+export type OverloadedReturnType<T> = ReturnType<Overloads<T>[number]>;
+
+/**
+ * For an overloaded function `T`, infer the return type for the specific overload when parameters match `P`
+ */
+export type OverloadedReturnTypeWhen<T, P extends unknown[]> = T extends (
+  ...args: P
+) => infer R
+  ? R
+  : never;
+
+/**
  * Creates a new type from `T` including only keys where the value is assignable to type `TValue`
  */
 export type PickBy<T extends object, TValue> = {
