@@ -34,21 +34,21 @@ Stubs `properties` on the `target` object, and returns a function which restores
 
 #### `JestMock<T>`
 
-Shorthand for `jest.Mock<ReturnType<T>, Parameters<T>>;`.
+Shorthand for `jest.Mock<OverloadedReturnType<T>, OverloadedParameters<T>> & T;`.
 
 #### `JestSpied<T>`
 
-Shorthand for `jest.SpyInstance<ReturnType<T>, Parameters<T>>;`.
+Shorthand for `jest.SpyInstance<OverloadedReturnType<T>, OverloadedParameters<T>> & T;`.
 
 ### Sinon
 
 #### `SinonSpied<T>`
 
-Shorthand for `sinon.SinonSpy<Parameters<T>, ReturnType<T>>;`.
+Shorthand for `sinon.SinonSpy<OverloadedParameters<T>, OverloadedReturnType<T>> & T;`.
 
 #### `SinonStubbed<T>`
 
-Shorthand for `sinon.SinonStub<Parameters<T>, ReturnType<T>>;`.
+Shorthand for `sinon.SinonStub<OverloadedParameters<T>, OverloadedReturnType<T>> & T;`.
 
 ---
 
