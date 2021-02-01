@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+
 /**
  * Make all nested properties of `T` `Required` and `NonNullable`
  */

@@ -1,5 +1,5 @@
-import { identity, last } from "lodash";
 import { mount } from "enzyme";
+import { identity, last } from "lodash";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
@@ -31,7 +31,7 @@ describe("#usePopup", () => {
       );
 
       return (
-        <React.Fragment>
+        <>
           <div ref={ref as React.Ref<HTMLDivElement>}>
             <StubComponent onClick={() => setOpen(previous => !previous)} />
           </div>
@@ -49,7 +49,7 @@ describe("#usePopup", () => {
               </p>,
               portalEl.current,
             )}
-        </React.Fragment>
+        </>
       );
     };
 
@@ -81,9 +81,10 @@ describe("#usePopup", () => {
       overflow: "visible",
       pointerEvents: "none",
       zIndex: "",
-    }) as [keyof CSSStyleDeclaration, string | null][]).forEach(
-      ([key, value]) => expect(portalEl().style[key]).toBe(value),
-    );
+    }) as [
+      keyof CSSStyleDeclaration,
+      string | null,
+    ][]).forEach(([key, value]) => expect(portalEl().style[key]).toBe(value));
 
     root.find(StubComponent).simulate("click");
     // hack to trigger useEffect()

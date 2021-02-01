@@ -1,3 +1,5 @@
+/* global Cypress,cy */
+
 Cypress.Commands.add("visitStorybook", (path, storybookName, options = {}) => {
   cy.visit(
     `iframe.html?selectedKind=${encodeURIComponent(

@@ -1,6 +1,6 @@
-import { findLast, identity } from "lodash";
 import { mount } from "enzyme";
 import createSandbox from "jest-sandbox";
+import { findLast, identity } from "lodash";
 import * as React from "react";
 import useRect from "./useRect";
 

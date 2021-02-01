@@ -28,7 +28,12 @@
     "date-fns": "^2.14.0",
     "lodash": "^4.17.19"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-babel": "^5.2.3",
+    "jest-when": "^3.1.0",
+    "rollup": "^2.38.3",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
   "peerDependencies": {},
   "scripts": {
     "build": "npm-run-all -p build:rollup build:typings",

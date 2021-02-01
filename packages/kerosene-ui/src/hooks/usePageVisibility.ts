@@ -33,7 +33,7 @@ export default function usePageVisibility(
   }, [useState]);
 
   // Sync visibility when the component renders
-  React.useEffect(onVisibilityChange, []);
+  React.useEffect(onVisibilityChange, [onVisibilityChange]);
 
   // Listen to visibilitychange events and update accordingly
   React.useEffect(() => {
@@ -45,7 +45,7 @@ export default function usePageVisibility(
         onVisibilityChange,
         false,
       );
-  }, []);
+  }, [onVisibilityChange]);
 
   return useState
     ? [visible, visibility as React.RefObject<boolean>]

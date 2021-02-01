@@ -1,5 +1,5 @@
 import * as dateFns from "date-fns";
-import { Month, DayOfWeek, DAYS_PER_WEEK } from "../datetime";
+import { Month, DayOfWeek, DAYS_PER_WEEK } from ".";
 import getCalendarWeeks from "./getCalendarWeeks";
 
 const expectSameDay = (
@@ -81,11 +81,13 @@ describe("#getCalendarWeeks", () => {
       expectSameDay(
         day,
         2019,
+        /* eslint-disable no-nested-ternary */
         index < DayOfWeek.SATURDAY
           ? Month.AUGUST
           : index >= 30 + DayOfWeek.SATURDAY
           ? Month.OCTOBER
           : Month.SEPTEMBER,
+        /* eslint-enable no-nested-ternary */
         index < DayOfWeek.SATURDAY
           ? 31 - DayOfWeek.SATURDAY + index + 1
           : ((index - DayOfWeek.SATURDAY) % 30) + 1,

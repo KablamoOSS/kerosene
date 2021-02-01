@@ -2,11 +2,11 @@ import { ElementType } from "@kablamo/kerosene";
 import { isEqual, pick } from "lodash";
 import * as React from "react";
 import { SIDES } from "../utils/css";
-import useRafThrottle from "./useRafThrottle";
 import {
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
 } from "../utils/listeners";
+import useRafThrottle from "./useRafThrottle";
 
 type Rect = { [side in ElementType<typeof SIDES>]: number };
 

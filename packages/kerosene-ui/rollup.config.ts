@@ -7,8 +7,8 @@ import {
   ExternalOption,
 } from "rollup";
 import resolve from "rollup-plugin-node-resolve";
-import packageJson from "./package.json";
 import generateBabelConfig from "../../config/generateBabelConfig";
+import packageJson from "./package.json";
 
 const input = path.join(__dirname, "src", "index.ts");
 

@@ -10,7 +10,12 @@ describe("#product", () => {
   });
 
   it("should return the cartesian product of the source arrays", () => {
-    expect(product([1, 2], [3, 4])).toEqual([[1, 3], [1, 4], [2, 3], [2, 4]]);
+    expect(product([1, 2], [3, 4])).toEqual([
+      [1, 3],
+      [1, 4],
+      [2, 3],
+      [2, 4],
+    ]);
   });
 
   it("should return the cartesian product of the source arrays when there are more than 2", () => {

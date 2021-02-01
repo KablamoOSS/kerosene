@@ -33,7 +33,7 @@ export default function createStubStyles<C extends string, V extends {}>(
   return new Proxy(obj, {
     get: (target, property: string) => {
       if (property in target || ["__esModule"].includes(property)) {
-        return (target as any)[property];
+        return (target as Record<string, unknown>)[property];
       }
       throw new TypeError(
         `ERROR: The property '${property}' was not mocked in the stubbed CSS Modules mapping: ${JSON.stringify(

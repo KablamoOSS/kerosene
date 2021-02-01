@@ -20,7 +20,7 @@ describe("getViewportDimensions", () => {
         get: () => MOBILE_SAFARI_USER_AGENT,
         configurable: true,
       });
-      Object.defineProperties(screen, {
+      Object.defineProperties(window.screen, {
         height: { get: () => 896, configurable: true },
         width: { get: () => 414, configurable: true },
       });

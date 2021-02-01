@@ -1,8 +1,4 @@
-const elide = (
-  input: string,
-  maxLength: number,
-  elideWith: string = "...",
-): string => {
+const elide = (input: string, maxLength: number, elideWith = "..."): string => {
   if (input.length <= maxLength) {
     return input;
   }
@@ -11,7 +7,7 @@ const elide = (
 
   if (elideWith) {
     result = result.slice(0, -elideWith.length);
-    result = result + elideWith;
+    result += elideWith;
   }
 
   return result;

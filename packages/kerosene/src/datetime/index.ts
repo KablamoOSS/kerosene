@@ -1,9 +1,11 @@
-export * from "./constants";
-export { default as getCalendarWeeks } from "./getCalendarWeeks";
 import {
   CalendarWeek as _CalendarWeek,
   CalendarWeeks as _CalendarWeeks,
 } from "./getCalendarWeeks";
+
+export * from "./constants";
+export { default as getCalendarWeeks } from "./getCalendarWeeks";
+
 export type CalendarWeek = _CalendarWeek;
 export type CalendarWeeks = _CalendarWeeks;
 export { default as isAfterDay } from "./isAfterDay";

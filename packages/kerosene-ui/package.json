@@ -27,8 +27,14 @@
     "lodash": "^4.17.19"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^5.2.3",
+    "enzyme": "^3.11.0",
+    "jest-sandbox": "^1.1.2",
+    "jest-when": "^3.1.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "rollup": "^2.38.3",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "peerDependencies": {
     "react": "^16.8.6",

@@ -13,28 +13,35 @@ module.exports = {
     "plugin:@kablamo/recommended",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@kablamo", "@typescript-eslint", "prettier"],
   settings: {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx"],
     },
   },
   rules: {
     // ESLint rules
-    "arrow-parens": ["error", "always"],
     camelcase: "off",
     "max-classes-per-file": "off",
-    "sort-imports": "error",
+    "no-return-assign": ["error", "except-parens"],
+    "no-underscore-dangle": "off",
+    "no-unused-expressions": [
+      "error",
+      { allowShortCircuit: true, allowTernary: true },
+    ],
 
     // @typescript-eslint rules
     "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/ban-types": ["error", {
-      extendDefaults: true,
-      types: {
-        // False positives for <T extends {}>
-        "{}": false
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        extendDefaults: true,
+        types: {
+          // False positives for <T extends {}>
+          "{}": false,
+        },
       },
-    }],
+    ],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -51,13 +58,38 @@ module.exports = {
       },
     ],
     "import/no-cycle": "off",
+    "import/order": [
+      "error",
+      {
+        alphabetize: { order: "asc" },
+        groups: [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "index",
+          "sibling",
+        ],
+        "newlines-between": "never",
+      },
+    ],
 
     // eslint-plugin-react rules
-    "react/jsx-filename-extension": ["error", { allow: "always", extensions: [".tsx"] }],
+    "react/jsx-filename-extension": [
+      "error",
+      { allow: "always", extensions: [".tsx"] },
+    ],
     "react/jsx-props-no-spreading": "off",
+    // Not required with TypeScript
+    "react/require-default-props": "off",
     "react/static-property-placement": ["error", "static public field"],
   },
   overrides: [
+    {
+      files: ["*.js"],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
+      },
+    },
     {
       files: ["*.ts", "*.tsx"],
       rules: {
@@ -65,14 +97,18 @@ module.exports = {
         /**
          * @see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md#please-read-this-issue-before-using-this-rule-1856
          */
-        "no-shadow": "off",
+        "no-use-before-define": "off",
 
         // ESLint rules that are checked by TypeScript
         "no-undef": "off",
 
+        // eslint-plugin-import rules
+        // False positives for TypeScript overloads
+        "import/export": "off",
+
         // ESLint rules superseded by @typescript-eslint rules
+        "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
-        "no-use-before-define": "off",
       },
     },
   ],

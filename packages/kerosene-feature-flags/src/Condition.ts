@@ -19,10 +19,15 @@ type Runtime = { [key: string]: string | number | string[] | number[] };
 class Condition {
   // Grammar types
   public must: this = this;
+
   public to: this = this;
+
   public be: this = this;
+
   public any: this = this;
+
   public all: this = this;
+
   public not: this = this;
 
   private assertions: Assertion[] = [];
@@ -32,9 +37,7 @@ class Condition {
     // Check every assertion, against the runtime values
     return this.assertions
       .map(assert => {
-        const field = Object.keys(runtime).find(
-          field => assert.field === field,
-        );
+        const field = Object.keys(runtime).find(f => assert.field === f);
 
         if (typeof field === "undefined") {
           return null;
@@ -42,7 +45,7 @@ class Condition {
 
         const value = runtime[field];
 
-        let compare = undefined;
+        let compare;
 
         // Make the comparison
         switch (assert.comparison) {
@@ -97,6 +100,8 @@ class Condition {
             }
             compare = assert.exactly < value;
             break;
+          default:
+            compare = undefined;
         }
 
         // Check the comparion, matches our polarity
@@ -109,7 +114,8 @@ class Condition {
             return true;
           }
           return false;
-        } else if (assert.negate === true) {
+        }
+        if (assert.negate === true) {
           if (compare === false) {
             return true;
           }
@@ -118,7 +124,7 @@ class Condition {
         return false;
       })
       .filter(value => value !== null)
-      .every(result => result == true);
+      .every(result => result === true);
   }
 
   public condition(field: string): this {
@@ -144,9 +150,8 @@ class Condition {
         comparison: Comparison.EQUAL,
       };
       return this;
-    } else {
-      throw new Error("You didn't pass an number or string to flag.exactly");
     }
+    throw new Error("You didn't pass an number or string to flag.exactly");
   }
 
   public of(of: (string | number)[]): this {
@@ -192,8 +197,9 @@ class Condition {
 // Grammar helpers
 ["must", "to", "be"].forEach(word => {
   Object.defineProperty(Condition.prototype, word, {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     set: () => {},
-    get: function() {
+    get() {
       return this;
     },
   });
@@ -201,8 +207,9 @@ class Condition {
 
 // Comparison Setters
 Object.defineProperty(Condition.prototype, "not", {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   set: () => {},
-  get: function() {
+  get() {
     this.assertions[this.assertions.length - 1] = {
       ...this.assertions[this.assertions.length - 1],
       negate: true,
@@ -212,8 +219,9 @@ Object.defineProperty(Condition.prototype, "not", {
 });
 
 Object.defineProperty(Condition.prototype, "any", {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   set: () => {},
-  get: function() {
+  get() {
     this.assertions[this.assertions.length - 1] = {
       ...this.assertions[this.assertions.length - 1],
       comparison: Comparison.ANY,
@@ -223,8 +231,9 @@ Object.defineProperty(Condition.prototype, "any", {
 });
 
 Object.defineProperty(Condition.prototype, "all", {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   set: () => {},
-  get: function() {
+  get() {
     this.assertions[this.assertions.length - 1] = {
       ...this.assertions[this.assertions.length - 1],
       comparison: Comparison.ALL,

@@ -1,7 +1,7 @@
 import createSandbox from "jest-sandbox";
 import { when } from "jest-when";
-import measureCSSProperty from "./measureCSSProperty";
 import { JestMock } from "../../../kerosene-test/src";
+import measureCSSProperty from "./measureCSSProperty";
 
 describe("measureCSSProperty", () => {
   let sandbox: JestSandbox;
