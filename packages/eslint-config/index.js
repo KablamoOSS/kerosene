@@ -81,6 +81,8 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     // Not required with TypeScript
     "react/require-default-props": "off",
+    "react/prop-types": "off",
+    "react/state-in-constructor": "off",
     "react/static-property-placement": ["error", "static public field"],
   },
   overrides: [
@@ -109,6 +111,24 @@ module.exports = {
         // ESLint rules superseded by @typescript-eslint rules
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
+      },
+    },
+    {
+      files: ["*.d.ts"],
+      rules: {
+        // False positives across module declarations
+        "import/duplicates": "off",
+        // We can type devDependencies in *.d.ts
+        "import/no-extraneous-dependencies": "off",
+        // Ignore unresolved modules
+        "import/no-unresolved": "off",
+
+        "react/prefer-stateless-function": "off",
+
+        "@typescript-eslint/ban-types": "off",
+        // Declaration merging
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-namespace": "off",
       },
     },
   ],
