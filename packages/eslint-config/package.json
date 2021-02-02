@@ -24,7 +24,7 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
-    "@kablamo/eslint-plugin": "^1.0.1",
+    "@kablamo/eslint-plugin": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "eslint-config-airbnb": "^18.2.1",
