@@ -4,14 +4,10 @@ export * from "./datetime";
 
 export { default as isNetworkError } from "./fetch/isNetworkError";
 export { default as transform } from "./fetch/transform";
-export {
-  default as transformAndCheckStatus,
-} from "./fetch/transformAndCheckStatus";
+export { default as transformAndCheckStatus } from "./fetch/transformAndCheckStatus";
 
 export { default as timeout } from "./function/timeout";
-export {
-  default as waitForEventLoopToDrain,
-} from "./function/waitForEventLoopToDrain";
+export { default as waitForEventLoopToDrain } from "./function/waitForEventLoopToDrain";
 
 export { default as isEquivalentSet } from "./iterable/isEquivalentSet";
 

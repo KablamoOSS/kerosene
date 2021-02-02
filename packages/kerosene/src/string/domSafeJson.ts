@@ -13,6 +13,7 @@ const UNSAFE_CHARACTERS_REGEX = /([<\u007f-\uffff])/g;
  * @param value
  */
 export default function domSafeJson(value: any) {
-  return JSON.stringify(value)
-    .replace(UNSAFE_CHARACTERS_REGEX, character => escape(character));
+  return JSON.stringify(value).replace(UNSAFE_CHARACTERS_REGEX, character =>
+    escape(character),
+  );
 }

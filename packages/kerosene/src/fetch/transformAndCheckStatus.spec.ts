@@ -1,6 +1,6 @@
 import { when } from "jest-when";
-import transformAndCheckStatus from "./transformAndCheckStatus";
 import _transform from "./transform";
+import transformAndCheckStatus from "./transformAndCheckStatus";
 
 jest.mock("./transform");
 const transform = (_transform as unknown) as jest.MockInstance<

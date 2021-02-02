@@ -1,8 +1,8 @@
-import * as React from "react";
-import usePageVisibility from "./usePageVisibility";
-import { stubProperties, JestMock } from "../../../kerosene-test/src";
 import { mount } from "enzyme";
+import * as React from "react";
 import { act } from "react-dom/test-utils";
+import { stubProperties, JestMock } from "../../../kerosene-test/src";
+import usePageVisibility from "./usePageVisibility";
 
 const StateComponent = () => {
   const [visible, visibility] = usePageVisibility();
@@ -20,7 +20,7 @@ describe("usePageVisibility", () => {
   let restoreDocument: () => void;
   let addEventListener: JestMock<typeof document.addEventListener>;
   let removeEventListener: JestMock<typeof document.removeEventListener>;
-  let hidden: boolean | undefined = undefined;
+  let hidden: boolean | undefined;
   beforeEach(() => {
     hidden = undefined;
     addEventListener = jest.fn();

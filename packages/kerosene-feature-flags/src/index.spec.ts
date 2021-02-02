@@ -62,6 +62,9 @@ const cases: Case[] = [
   },
 ];
 
-test.each(cases)("Feature Flag", ({ conditions, flag, result }: Case) => {
-  expect(flag(conditions)).toEqual(result);
-});
+test.each(cases)(
+  "Feature Flag",
+  ({ conditions, flag: _flag, result }: Case) => {
+    expect(_flag(conditions)).toEqual(result);
+  },
+);

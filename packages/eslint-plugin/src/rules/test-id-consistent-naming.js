@@ -12,7 +12,7 @@ const enforceKey = (context, validName) => jsxAttribute => {
 
 module.exports = {
   create(context) {
-    const pragma = context.options[0] || "data-test-id";
+    const pragma = context.options[0] || "data-testid";
 
     const attributes = [
       "data-test-id",

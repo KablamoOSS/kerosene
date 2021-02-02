@@ -21,8 +21,8 @@ export default function getViewportDimensions(): ViewportDimensions {
     MOBILE_SAFARI_REGEX.test(navigator.userAgent) &&
     (navigator as Navigator & { standalone?: boolean }).standalone
   ) {
-    const max = Math.max(screen.height, screen.width);
-    const min = Math.min(screen.height, screen.width);
+    const max = Math.max(window.screen.height, window.screen.width);
+    const min = Math.min(window.screen.height, window.screen.width);
     const isPortrait = window.matchMedia("(orientation: portrait)").matches;
     return { height: isPortrait ? max : min, width: isPortrait ? min : max };
   }

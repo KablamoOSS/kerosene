@@ -5,17 +5,9 @@
 export type UnwrapComponent<T> = T extends React.MemoExoticComponent<
   infer TMemoComponent
 >
-  ? { 0: UnwrapComponent<TMemoComponent> }[TMemoComponent extends any
-      ? 0
-      : never]
+  ? UnwrapComponent<TMemoComponent>
   : T extends React.LazyExoticComponent<infer TLazyComponent>
-  ? { 0: UnwrapComponent<TLazyComponent> }[TLazyComponent extends any
-      ? 0
-      : never]
+  ? UnwrapComponent<TLazyComponent>
   : "WrappedComponent" extends keyof T
-  ? {
-      // @ts-ignore
-      0: UnwrapComponent<T["WrappedComponent"]>;
-      // @ts-ignore
-    }[T["WrappedComponent"] extends any ? 0 : never]
+  ? UnwrapComponent<T["WrappedComponent"]>
   : T;

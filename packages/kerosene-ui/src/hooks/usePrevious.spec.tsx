@@ -1,7 +1,6 @@
 import { mount } from "enzyme";
 import * as React from "react";
 import usePrevious from "./usePrevious";
-import { act } from "react-dom/test-utils";
 
 describe("usePrevious", () => {
   it("should remember the previous value, and default to undefined for the first render", () => {

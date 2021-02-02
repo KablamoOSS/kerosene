@@ -7,9 +7,7 @@ interface ShowWhenProps {
 
 export default class ShowWhen extends PureComponent<ShowWhenProps> {
   public render() {
-    if (this.props.when === false) {
-      return null;
-    }
-    return this.props.children;
+    const { children, when } = this.props;
+    return when ? children : null;
   }
 }

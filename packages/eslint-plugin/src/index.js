@@ -7,7 +7,7 @@ module.exports.configs = {
   recommended: {
     rules: {
       "@kablamo/test-id-prefix-match-path": "error",
-      "@kablamo/test-id-consistent-naming": ["error", "data-test-id"],
+      "@kablamo/test-id-consistent-naming": ["error", "data-testid"],
     },
   },
 };

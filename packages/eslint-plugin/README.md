@@ -18,20 +18,20 @@ module.exports = {
 This rule fixes the first argument of `createTestIds(prefix, [ ...ids])` to be a prefix derived from the files
 current directory. This ensures consistent unique prefixes per component.
 
-You can still suffix variables to the end of your test id for example `data-test-id={\`${testId.myId}-${uuid}\`}`.
+You can still suffix variables to the end of your test id for example `data-testid={\`${testId.myId}-${uuid}\`}`.
 
 ### `test-id-consistent-naming`
 
-This rule ensures common misspellings always get fixed to the kebab-case `data-test-id` by default.
+This rule ensures common misspellings always get fixed to the kebab-case `data-testid` by default.
 
-This can be configured to `data-testid`.
+This can be configured to `data-test-id`.
 
 ```js
 module.exports = {
   plugins: ["@kablamo"],
   extends: ["plugin:@kablamo/recommended"],
   rules: {
-    "test-id-consistent-naming": ["error", "data-testid"],
+    "@kablamo/test-id-consistent-naming": ["error", "data-test-id"],
   },
 };
 ```

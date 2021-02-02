@@ -71,6 +71,7 @@ export default function createStubComponent<
     );
   }
 
+  // eslint-disable-next-line react/prefer-stateless-function
   return class extends React.Component<Props> {
     public static displayName = displayName;
 
@@ -80,9 +81,11 @@ export default function createStubComponent<
       return (
         <div __displayName__={displayName} {...props}>
           {typeof children === "function"
-            ? transformRenderPropResult((children as (
-                ...args: RenderProps
-              ) => React.ReactNode)(...getRenderProps!(props)) as any)
+            ? transformRenderPropResult(
+                (children as (...args: RenderProps) => React.ReactNode)(
+                  ...getRenderProps!(props),
+                ) as any,
+              )
             : (children as React.ReactNode)}
         </div>
       );

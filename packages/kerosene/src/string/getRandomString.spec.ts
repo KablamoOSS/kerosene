@@ -5,6 +5,7 @@ describe("#getRandomString", () => {
     const ITERATIONS_TO_TRY = 250;
     const iterations = new Set();
 
+    // eslint-disable-next-line no-plusplus
     for (let ii = 0; ii < ITERATIONS_TO_TRY; ii++) {
       iterations.add(getRandomString());
     }

@@ -3,11 +3,14 @@
  * @param input
  */
 export default function escape(input: string) {
-  return input.split("")
+  return input
+    .split("")
     .map(
-      character => `\\u${character.charCodeAt(0)
-        .toString(16)
-        .padStart(4, "0")}`,
+      character =>
+        `\\u${character
+          .charCodeAt(0)
+          .toString(16)
+          .padStart(4, "0")}`,
     )
     .join("");
 }

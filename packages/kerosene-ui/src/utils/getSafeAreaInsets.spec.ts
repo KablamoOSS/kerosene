@@ -69,9 +69,9 @@ describe("getSafeAreaInsets", () => {
   it("should return insets as 0 if the styles can't be computed", () => {
     when(getComputedStyle)
       .calledWith(element)
-      .mockReturnValue(({} as Partial<
-        CSSStyleDeclaration
-      >) as CSSStyleDeclaration);
+      .mockReturnValue(
+        ({} as Partial<CSSStyleDeclaration>) as CSSStyleDeclaration,
+      );
 
     expect(getSafeAreaInsets()).toEqual({
       top: 0,

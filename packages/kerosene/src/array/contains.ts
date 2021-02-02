@@ -3,7 +3,7 @@ import { identity } from "lodash";
 export default function contains<T>(
   superset: readonly T[],
   subset: readonly T[],
-  iteratee: (i: T) => any = identity,
+  iteratee: (i: T) => unknown = identity,
 ) {
   if (superset === subset) {
     return true;

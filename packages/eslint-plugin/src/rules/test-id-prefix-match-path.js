@@ -16,7 +16,7 @@ const getPrefixFromFilePath = context => {
 module.exports = {
   create(context) {
     return {
-      CallExpression: function(node) {
+      CallExpression(node) {
         if (node && node.callee && node.callee.name === "createTestIds") {
           if (node.arguments.length < 0) {
             return context.report({
@@ -41,6 +41,7 @@ module.exports = {
             });
           }
         }
+        return undefined;
       },
     };
   },
