@@ -1,5 +1,5 @@
 import { Page, ElementHandle, WaitForSelectorOptions } from "puppeteer";
-const testIdAttribute = "data-test-id";
+const testIdAttribute = "data-testid";
 const valueAttribute = "value";
 
 const getTestId = (testId: string) => {
