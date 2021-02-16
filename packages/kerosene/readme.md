@@ -158,6 +158,12 @@ Converts the value in `degrees` to radians.
 
 Returns the provided `value` rounded to the number of significant `figures` provided.
 
+## Promise
+
+### `mapSeries(items, iteratee)`
+
+Maps over `items` with a promise-returning `iteratee` in series.
+
 ## String
 
 ### `caseInsensitiveEquals`
