@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-test",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-test",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -46,18 +46,18 @@
     "utils"
   ],
   "dependencies": {
-    "@types/lodash": "^4.14.157",
-    "@types/sinon": "^9.0.4",
-    "lodash": "^4.17.19",
-    "sinon": "^9.0.2"
+    "@types/lodash": "^4.14.168",
+    "@types/sinon": "^9.0.10",
+    "lodash": "^4.17.20",
+    "sinon": "^9.2.4"
   },
   "devDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   },
   "scripts": {
     "build": "tsc",

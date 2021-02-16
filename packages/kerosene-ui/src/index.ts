@@ -2,8 +2,10 @@ import { SafeAreaInsets as _SafeAreaInsets } from "./utils/getSafeAreaInsets";
 import { FontDetails as _FontDetails } from "./utils/getTextWidth";
 import { ViewportDimensions as _ViewportDimensions } from "./utils/getViewportDimensions";
 
+export { default as useAbortController } from "./hooks/useAbortController";
 export { default as useInterval } from "./hooks/useInterval";
 export { default as useKonamiCode } from "./hooks/useKonamiCode";
+export { default as useMergedRefs } from "./hooks/useMergedRefs";
 export { default as usePageVisibility } from "./hooks/usePageVisibility";
 export { default as usePopup } from "./hooks/usePopup";
 export { default as usePrevious } from "./hooks/usePrevious";
