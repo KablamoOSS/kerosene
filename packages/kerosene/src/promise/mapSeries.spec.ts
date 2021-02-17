@@ -1,0 +1,38 @@
+import { SECOND } from "../datetime";
+import timeout from "../function/timeout";
+import waitForEventLoopToDrain from "../function/waitForEventLoopToDrain";
+import mapSeries from "./mapSeries";
+
+jest.useFakeTimers();
+
+describe("mapSeries", () => {
+  it("should execute Promises in series, accumulating the results", async () => {
+    let concurrent = 0;
+    let maxConcurrent = 0;
+
+    const items = ["a", "b", "c"] as const;
+    const promise = mapSeries(items, async (value, index, array) => {
+      // eslint-disable-next-line no-plusplus
+      maxConcurrent = Math.max(maxConcurrent, ++concurrent);
+
+      await timeout(SECOND);
+
+      // eslint-disable-next-line no-plusplus
+      concurrent--;
+      return { value, index, array };
+    });
+
+    await waitForEventLoopToDrain();
+    jest.advanceTimersByTime(SECOND);
+    await waitForEventLoopToDrain();
+    jest.advanceTimersByTime(SECOND);
+    await waitForEventLoopToDrain();
+    jest.advanceTimersByTime(SECOND);
+
+    await expect(promise).resolves.toEqual(
+      items.map((value, index, array) => ({ value, index, array })),
+    );
+
+    expect(maxConcurrent).toBe(1);
+  });
+});

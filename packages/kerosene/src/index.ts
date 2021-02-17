@@ -21,6 +21,8 @@ export { default as toDegrees } from "./math/toDegrees";
 export { default as toRadians } from "./math/toRadians";
 export { default as toSignificantFigures } from "./math/toSignificantFigures";
 
+export { default as mapSeries } from "./promise/mapSeries";
+
 export * from "./string";
 
 export * from "./types";
