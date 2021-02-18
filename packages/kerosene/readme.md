@@ -102,7 +102,7 @@ Returns a Promise which transforms the body of a `fetch()` request according to 
 
 ## Function
 
-### `timeout(delay)`
+### `timeout(delay, { signal? }?)`
 
 Returns a `Promise` which resolves after the specified `delay` in milliseconds.
 

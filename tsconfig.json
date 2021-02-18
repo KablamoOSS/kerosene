@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "pretty": true,
-    "target": "esnext",
-    "module":"commonjs",
+    "target": "ES2015",
+    "lib": ["DOM", "ESNext"],
+    "module": "commonjs",
     "allowJs": true,
     "resolveJsonModule": true,
     "noEmit": true,

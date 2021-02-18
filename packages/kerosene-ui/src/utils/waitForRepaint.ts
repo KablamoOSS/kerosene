@@ -1,12 +1,25 @@
 /**
  * Returns a cancellable promise which resolves after a layout reflow/repaint
+ * @param options.signal
  */
-export default function waitForRepaint() {
+export default function waitForRepaint({
+  signal,
+}: { signal?: AbortSignal } = {}) {
   let handle: number | null = null;
   let rejectPromise: ((reason?: unknown) => void) | null = null;
+
+  const onAbort = () => {
+    handle && window.cancelAnimationFrame(handle);
+    rejectPromise?.(new Error("Aborted"));
+    rejectPromise = null;
+  };
+  signal?.addEventListener("abort", onAbort);
+
   const cancel = () => {
     handle && window.cancelAnimationFrame(handle);
-    rejectPromise && rejectPromise(new Error("waitForRepaint was cancelled"));
+    rejectPromise?.(new Error("waitForRepaint was cancelled"));
+    rejectPromise = null;
+    signal?.removeEventListener("abort", onAbort);
   };
 
   return Object.assign(

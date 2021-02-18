@@ -18,6 +18,10 @@ Unwraps the decorated typings from a decorator-wrapped components to provide the
 
 ## React Hooks
 
+### `useAbortController()`
+
+Custom hook which manages a series of `AbortController`s, aborting the previous when requesting the `next`, and aborting the final controller on unmount.
+
 ### `useInterval(callback, delay)`
 
 Custom hook that makes `setInterval` work declaritively with hooks. See https://overreacted.io/making-setinterval-declarative-with-react-hooks/ for more details.
@@ -25,6 +29,10 @@ Custom hook that makes `setInterval` work declaritively with hooks. See https://
 ### `useKonamiCode(code, callback)`
 
 Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.
+
+### `useMergedRefs(...refs)`
+
+Custom hook which creates a new callback ref that effectively merges all provided `refs`.
 
 ### `usePageVisibility(useState = true)`
 
@@ -86,7 +94,7 @@ Returns a new callback ref that effectively merges all provided `refs`.
 
 Returns a throttled version of the provided `callback`. Uses `requestAnimationFrame` to throttle. To cancel any pending async operations, call `.cancel()` on the throttled version of the function.
 
-### `waitForRepaint()`
+### `waitForRepaint({ signal? }?)`
 
 Returns a `Promise` that waits for a repaint/reflow to occur. May be cancelled by calling `.cancel()` on the returned `Promise`.
 
