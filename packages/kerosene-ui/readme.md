@@ -94,7 +94,7 @@ Returns a new callback ref that effectively merges all provided `refs`.
 
 Returns a throttled version of the provided `callback`. Uses `requestAnimationFrame` to throttle. To cancel any pending async operations, call `.cancel()` on the throttled version of the function.
 
-### `waitForRepaint()`
+### `waitForRepaint({ signal? }?)`
 
 Returns a `Promise` that waits for a repaint/reflow to occur. May be cancelled by calling `.cancel()` on the returned `Promise`.
 

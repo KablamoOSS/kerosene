@@ -27,4 +27,13 @@ describe("#waitForRepaint", () => {
     await expect(promise).rejects.toThrowError("waitForRepaint was cancelled");
     expect(cAF).toHaveBeenCalledTimes(1);
   });
+
+  it("should allow the promise to be aborted", async () => {
+    const controller = new AbortController();
+    const promise = waitForRepaint({ signal: controller.signal });
+    jest.runTimersToTime(17);
+    controller.abort();
+    await expect(promise).rejects.toThrowError("Aborted");
+    expect(cAF).toHaveBeenCalledTimes(1);
+  });
 });
