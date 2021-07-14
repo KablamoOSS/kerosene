@@ -186,7 +186,9 @@ Returns `false` otherwise
 
 ### `parseSearch(search)`
 
-Uses `querystring.parse` to parse `Location#search`. When search is an empty string or contains no parameters, this will return an empty object.
+Deprecated in favour of `URLSearchParams`.
+
+See https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams or https://nodejs.org/api/url.html#url_class_urlsearchparams for documentation.
 
 ### `removeLineBreaks`
 

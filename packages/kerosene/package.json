@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
