@@ -1752,6 +1752,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/seed-random@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/seed-random/-/seed-random-2.2.1.tgz#afb78531610f87140802e25d603ea3df639315df"
+  integrity sha512-A7DyRnftEWLEbdrN08XdnEASrT97y7GL/zDKaijo7gbQn05O13f7lDxmgq+SuI4JD7sAqd9XkAR2LDkkzp4s+w==
+
 "@types/semver@^6.0.0", "@types/semver@^6.0.1":
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-6.2.2.tgz#5c27df09ca39e3c9beb4fae6b95f4d71426df0a9"
@@ -7047,6 +7052,11 @@ scheduler@^0.19.1:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+seed-random@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/seed-random/-/seed-random-2.2.0.tgz#2a9b19e250a817099231a5b99a4daf80b7fbed54"
+  integrity sha1-KpsZ4lCoFwmSMaW5mk2vgLf77VQ=
 
 sembear@^0.5.0:
   version "0.5.2"

@@ -1,6 +1,15 @@
+import seedRandom from "seed-random";
 import getRandomString from "./getRandomString";
 
 describe("#getRandomString", () => {
+  beforeEach(() => {
+    seedRandom("getRandomString", { global: true });
+  });
+
+  afterEach(() => {
+    seedRandom.resetGlobal();
+  });
+
   it("should return a different string every time", () => {
     const ITERATIONS_TO_TRY = 250;
     const iterations = new Set();
