@@ -100,6 +100,10 @@ Returns a Promise which transforms the body of a `fetch()` request according to 
 
 Returns a Promise which transforms the body of a `fetch()` request according to content type header and rejects if the status is not 2xx.
 
+If the status is in the 4XX range, it will throw a ClientError.
+
+If the status is in the 5XX range, it will throw a ServerError.
+
 ## Function
 
 ### `timeout(delay, { signal? }?)`
