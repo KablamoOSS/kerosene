@@ -1,4 +1,5 @@
 import ClientError from "./clientError";
+import HttpError from "./httpError";
 import ServerError from "./serverError";
 import transform from "./transform";
 
@@ -20,10 +21,6 @@ export default function transformAndCheckStatus(
       throw new ServerError(response.statusText, response.status, transformed);
     }
 
-    // Any other errors
-    throw Object.assign(new Error(response.statusText), {
-      status: response.status,
-      response: transformed,
-    });
+    throw new HttpError(response.statusText, response.status, transformed);
   });
 }
