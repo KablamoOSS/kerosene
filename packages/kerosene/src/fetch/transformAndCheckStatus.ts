@@ -10,7 +10,7 @@ import transform from "./transform";
 export default function transformAndCheckStatus(
   response: Response,
 ): Promise<unknown> {
-  return transform(response).then(transformed => {
+  return transform(response).then((transformed) => {
     if (response.status >= 200 && response.status < 300) return transformed;
 
     if (response.status >= 400 && response.status < 500) {

@@ -17,9 +17,7 @@ describe("transformAndCheckStatus", () => {
     const response = ({
       status: 200,
     } as Partial<Response>) as Response;
-    when(transform)
-      .calledWith(response)
-      .mockResolvedValue(transformed);
+    when(transform).calledWith(response).mockResolvedValue(transformed);
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
     );
@@ -31,14 +29,12 @@ describe("transformAndCheckStatus", () => {
       status: 308,
       statusText: "Permanent Redirect",
     } as Partial<Response>) as Response;
-    when(transform)
-      .calledWith(response)
-      .mockResolvedValue(transformed);
+    when(transform).calledWith(response).mockResolvedValue(transformed);
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
       },
-      error => {
+      (error) => {
         expect(error instanceof HttpError).toBe(true);
         expect(error instanceof ClientError).toBe(false);
         expect(error instanceof ServerError).toBe(false);
@@ -55,14 +51,12 @@ describe("transformAndCheckStatus", () => {
       status: 404,
       statusText: "Not Found",
     } as Partial<Response>) as Response;
-    when(transform)
-      .calledWith(response)
-      .mockResolvedValue(transformed);
+    when(transform).calledWith(response).mockResolvedValue(transformed);
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
       },
-      error => {
+      (error) => {
         expect(error instanceof ClientError).toBe(true);
         expect(error.message).toBe(response.statusText);
         expect(error.status).toBe(response.status);
@@ -76,14 +70,12 @@ describe("transformAndCheckStatus", () => {
       status: 500,
       statusText: "Internal Server Error",
     } as Partial<Response>) as Response;
-    when(transform)
-      .calledWith(response)
-      .mockResolvedValue(undefined);
+    when(transform).calledWith(response).mockResolvedValue(undefined);
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
       },
-      error => {
+      (error) => {
         expect(error instanceof ServerError).toBe(true);
         expect(error.message).toBe(response.statusText);
         expect(error.status).toBe(response.status);
