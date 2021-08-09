@@ -1,5 +1,6 @@
 import { when } from "jest-when";
 import ClientError from "./clientError";
+import HttpError from "./httpError";
 import ServerError from "./serverError";
 import _transform from "./transform";
 import transformAndCheckStatus from "./transformAndCheckStatus";
@@ -38,6 +39,9 @@ describe("transformAndCheckStatus", () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
       },
       error => {
+        expect(error instanceof HttpError).toBe(true);
+        expect(error instanceof ClientError).toBe(false);
+        expect(error instanceof ServerError).toBe(false);
         expect(error.message).toBe(response.statusText);
         expect(error.status).toBe(response.status);
         expect(error.response).toBe(transformed);
