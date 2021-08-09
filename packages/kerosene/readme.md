@@ -104,6 +104,8 @@ If the status is in the 4XX range, it will throw a ClientError.
 
 If the status is in the 5XX range, it will throw a ServerError.
 
+All other non-2XX statuses are thrown as an HttpError.
+
 ## Function
 
 ### `timeout(delay, { signal? }?)`
