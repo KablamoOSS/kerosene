@@ -1,3 +1,6 @@
+import ClientError from "./clientError";
+import HttpError from "./httpError";
+import ServerError from "./serverError";
 import transform from "./transform";
 
 /**
@@ -7,12 +10,17 @@ import transform from "./transform";
 export default function transformAndCheckStatus(
   response: Response,
 ): Promise<unknown> {
-  return transform(response).then(transformed => {
+  return transform(response).then((transformed) => {
     if (response.status >= 200 && response.status < 300) return transformed;
 
-    throw Object.assign(new Error(response.statusText), {
-      status: response.status,
-      response: transformed,
-    });
+    if (response.status >= 400 && response.status < 500) {
+      throw new ClientError(response.statusText, response.status, transformed);
+    }
+
+    if (response.status >= 500 && response.status < 600) {
+      throw new ServerError(response.statusText, response.status, transformed);
+    }
+
+    throw new HttpError(response.statusText, response.status, transformed);
   });
 }
