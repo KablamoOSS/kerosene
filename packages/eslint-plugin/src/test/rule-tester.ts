@@ -1,7 +1,7 @@
 import { RuleTester } from "eslint";
 
 export default new RuleTester({
-  parser: require.resolve("babel-eslint"),
+  parser: require.resolve("@babel/eslint-parser"),
   parserOptions: {
     parserOptions: {
       ecmaVersion: 6,

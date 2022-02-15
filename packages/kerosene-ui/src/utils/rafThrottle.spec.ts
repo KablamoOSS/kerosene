@@ -9,7 +9,7 @@ describe("#rafThrottle", () => {
 
     throttled();
     throttled();
-    jest.runTimersToTime(17);
+    jest.advanceTimersByTime(17);
 
     expect(callback).toHaveBeenCalledTimes(1);
   });
@@ -19,10 +19,10 @@ describe("#rafThrottle", () => {
     const throttled = rafThrottle(callback);
 
     throttled.cancel();
-    jest.runTimersToTime(17);
+    jest.advanceTimersByTime(17);
     throttled();
     throttled.cancel();
-    jest.runTimersToTime(17);
+    jest.advanceTimersByTime(17);
 
     expect(callback).toHaveBeenCalledTimes(0);
   });
@@ -34,7 +34,7 @@ describe("#rafThrottle", () => {
     throttled(1);
     throttled(2);
     throttled(3);
-    jest.runTimersToTime(17);
+    jest.advanceTimersByTime(17);
 
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith(1);

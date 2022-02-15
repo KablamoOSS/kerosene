@@ -7,7 +7,7 @@ export default function timeout(
   delay: number,
   { signal }: { signal?: AbortSignal } = {},
 ) {
-  let handle: number | null = null;
+  let handle: ReturnType<typeof setTimeout> | null = null;
   let rejectPromise: ((reason?: unknown) => void) | null = null;
 
   const onAbort = () => {

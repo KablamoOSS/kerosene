@@ -6,7 +6,7 @@ jest.useFakeTimers();
 describe("#timeout", () => {
   it("should resolve after the timeout period", async () => {
     const promise = timeout(SECOND);
-    jest.runTimersToTime(SECOND);
+    jest.advanceTimersByTime(SECOND);
     await expect(promise).resolves.toBeUndefined();
   });
 

@@ -1,28 +1,40 @@
-import createSandbox from "jest-sandbox";
+import FakeTimers from "@sinonjs/fake-timers";
 import waitForRepaint from "./waitForRepaint";
 
-const sandbox = createSandbox();
-
-const rAF = sandbox.spyOn(window, "requestAnimationFrame");
-const cAF = sandbox.spyOn(window, "cancelAnimationFrame");
-
-jest.useFakeTimers();
-
 describe("#waitForRepaint", () => {
+  let clock: FakeTimers.InstalledClock;
+  let rAF: jest.SpiedFunction<typeof window.requestAnimationFrame>;
+  let cAF: jest.SpiedFunction<typeof window.cancelAnimationFrame>;
+  beforeEach(() => {
+    clock = FakeTimers.install();
+    rAF = jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation(
+        clock.requestAnimationFrame as typeof window.requestAnimationFrame,
+      );
+    cAF = jest
+      .spyOn(window, "cancelAnimationFrame")
+      .mockImplementation(
+        clock.cancelAnimationFrame as typeof window.cancelAnimationFrame,
+      );
+  });
+
   afterEach(() => {
-    sandbox.clear();
+    clock.uninstall();
+    jest.restoreAllMocks();
   });
 
   it("should call requestAnimationFrame twice", async () => {
     const promise = waitForRepaint();
-    jest.runTimersToTime(34);
+    clock.runToFrame();
+    clock.runToFrame();
     await expect(promise).resolves.toBe(undefined);
     expect(rAF).toHaveBeenCalledTimes(2);
   });
 
   it("should allow the promise to be cancelled", async () => {
     const promise = waitForRepaint();
-    jest.runTimersToTime(17);
+    clock.runToFrame();
     promise.cancel();
     await expect(promise).rejects.toThrowError("waitForRepaint was cancelled");
     expect(cAF).toHaveBeenCalledTimes(1);
@@ -31,7 +43,7 @@ describe("#waitForRepaint", () => {
   it("should allow the promise to be aborted", async () => {
     const controller = new AbortController();
     const promise = waitForRepaint({ signal: controller.signal });
-    jest.runTimersToTime(17);
+    clock.runToFrame();
     controller.abort();
     await expect(promise).rejects.toThrowError("Aborted");
     expect(cAF).toHaveBeenCalledTimes(1);

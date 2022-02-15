@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import createSandbox from "jest-sandbox";
 import { findLast, identity } from "lodash";
 import * as React from "react";
@@ -10,8 +10,6 @@ jest.mock("../utils/listeners", () => ({
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS: { capture: true, passive: true },
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS: { capture: true },
 }));
-
-const StubComponent = ({ ...props }) => <div {...props} />;
 
 const sandbox = createSandbox();
 const _addEventListener: jest.Mock<
@@ -47,13 +45,15 @@ describe("useRect", () => {
       const [ref, rect, scroll] = useRect();
       return (
         <div ref={ref as React.Ref<HTMLDivElement>}>
-          <StubComponent rect={rect} scroll={scroll} />
+          <div
+            data-testid="stub"
+            data-rect={JSON.stringify(rect)}
+            data-scroll={JSON.stringify(scroll)}
+          />
         </div>
       );
     };
-    const root = mount(<Component />);
-    // hack to force useEffect() to trigger
-    root.setProps({});
+    const result = render(<Component />);
 
     expect(_addEventListener).toHaveBeenCalledWith(
       "resize",
@@ -66,25 +66,25 @@ describe("useRect", () => {
     );
     const onResize = findLast(
       _addEventListener.mock.calls,
-      args => args[0] === "resize",
+      (args) => args[0] === "resize",
     )![1] as EventListener;
     const onScroll = findLast(
       _addEventListener.mock.calls,
-      args => args[0] === "scroll",
+      (args) => args[0] === "scroll",
     )![1] as EventListener;
 
-    expect(root.find(StubComponent)).toHaveProp("rect", {
+    expect(JSON.parse(result.getByTestId("stub").dataset.rect!)).toEqual({
       top: 1,
       left: 2,
       bottom: 3,
       right: 4,
     });
-    expect(root.find(StubComponent)).toHaveProp("scroll", {
+    expect(JSON.parse(result.getByTestId("stub").dataset.scroll!)).toEqual({
       scrollX: 6,
       scrollY: 7,
     });
 
-    root.unmount();
+    result.unmount();
 
     expect(_removeEventListener).toHaveBeenCalledWith("resize", onResize);
     expect(_removeEventListener).toHaveBeenCalledWith("scroll", onScroll, {
@@ -101,16 +101,14 @@ describe("useRect", () => {
       const [ref] = useRect(false, eventList);
       return (
         <div ref={ref as React.Ref<HTMLDivElement>}>
-          <StubComponent />
+          <div />
         </div>
       );
     };
     let props: React.ComponentPropsWithoutRef<typeof Component> = {
       eventList: ["transitionend"],
     };
-    const root = mount(<Component {...props} />);
-    // hack to force useEffect() to trigger
-    root.setProps(props);
+    const result = render(<Component {...props} />);
 
     expect(_addEventListener).toHaveBeenCalledWith(
       "transitionend",
@@ -126,12 +124,12 @@ describe("useRect", () => {
     const getOnTransitionEnd = () =>
       findLast(
         _addEventListener.mock.calls,
-        args => args[0] === "transitionend",
+        (args) => args[0] === "transitionend",
       )![1] as EventListener;
     const getOnScroll = () =>
       findLast(
         _addEventListener.mock.calls,
-        args => args[0] === "scroll",
+        (args) => args[0] === "scroll",
       )![1] as EventListener;
 
     const onTransitionEnd1 = getOnTransitionEnd();
@@ -139,9 +137,7 @@ describe("useRect", () => {
 
     _addEventListener.mockReset();
     props = { eventList: ["transitionend", "click"] };
-    root.setProps(props);
-    // hack to trigger useEffect()
-    root.setProps(props);
+    result.rerender(<Component {...props} />);
 
     expect(_removeEventListener).toHaveBeenCalledWith(
       "transitionend",
@@ -173,12 +169,12 @@ describe("useRect", () => {
     const onTransitionEnd2 = getOnTransitionEnd();
     const onClick = findLast(
       _addEventListener.mock.calls,
-      args => args[0] === "click",
+      (args) => args[0] === "click",
     )![1] as EventListener;
     const onScroll2 = getOnScroll();
 
     _removeEventListener.mockReset();
-    root.unmount();
+    result.unmount();
 
     expect(_removeEventListener).toHaveBeenCalledWith(
       "transitionend",

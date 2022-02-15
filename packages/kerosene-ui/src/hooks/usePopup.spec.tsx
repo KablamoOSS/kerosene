@@ -1,13 +1,11 @@
-import { mount } from "enzyme";
-import { identity, last } from "lodash";
+import FakeTimers from "@sinonjs/fake-timers";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { last } from "lodash";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
 import usePopup from "./usePopup";
-
-jest.mock("./useRafThrottle", () => identity);
-
-const StubComponent = ({ ...props }) => <div {...props} />;
 
 const _addEventListener = jest.spyOn(window, "addEventListener");
 Element.prototype.getBoundingClientRect = jest.fn().mockReturnValue({
@@ -24,20 +22,34 @@ Object.assign(window, {
 });
 
 describe("#usePopup", () => {
+  let clock: FakeTimers.InstalledClock;
+  beforeEach(() => {
+    clock = FakeTimers.install();
+  });
+
+  afterEach(() => {
+    clock.uninstall();
+  });
+
   it("should create an element for a portal and return the props", () => {
     const Component = ({ zIndex }: { zIndex?: string | null }) => {
-      const { open, setOpen, ref, rect, portalEl, scrollX, scrollY } = usePopup(
-        zIndex,
-      );
+      const { open, setOpen, ref, rect, portalEl, scrollX, scrollY } =
+        usePopup(zIndex);
 
       return (
         <>
-          <div ref={ref as React.Ref<HTMLDivElement>}>
-            <StubComponent onClick={() => setOpen(previous => !previous)} />
+          <div ref={ref as React.Ref<HTMLDivElement>} data-testid="ref">
+            <button
+              type="button"
+              onClick={() => setOpen((previous) => !previous)}
+            >
+              Click me
+            </button>
           </div>
           {portalEl.current &&
             ReactDOM.createPortal(
               <p
+                data-testid="popup"
                 data-open={open}
                 style={{
                   top: scrollY + rect.bottom,
@@ -53,77 +65,67 @@ describe("#usePopup", () => {
       );
     };
 
-    const root = mount(<Component />);
-    // hack to trigger useEffect()
-    root.setProps({});
+    const result = render(<Component />);
+    result.rerender(<Component />);
 
     const onClickOutside = (e: Event) =>
       act(() => {
-        (last(
-          _addEventListener.mock.calls.filter(args => args[0] === "click"),
-        )![1] as EventListener)(e);
+        (
+          last(
+            _addEventListener.mock.calls.filter((args) => args[0] === "click"),
+          )![1] as EventListener
+        )(e);
       });
 
-    const popup = () => root.find("p");
+    const popup = () => screen.getByTestId("popup");
 
-    const open = () => popup().prop("data-open") as boolean;
+    const open = () => popup().getAttribute("data-open") === "true";
 
     expect(open()).toBe(false);
-    expect(popup()).toHaveText("Test");
+    expect(popup()).toHaveTextContent("Test");
 
     const portalEl = () => document.body.lastChild as HTMLDivElement;
-    (Object.entries({
-      position: "absolute",
-      top: "0px",
-      left: "0px",
-      bottom: "0px",
-      right: "0px",
-      overflow: "visible",
-      pointerEvents: "none",
-      zIndex: "",
-    }) as [
-      keyof CSSStyleDeclaration,
-      string | null,
-    ][]).forEach(([key, value]) => expect(portalEl().style[key]).toBe(value));
+    (
+      Object.entries({
+        position: "absolute",
+        top: "0px",
+        left: "0px",
+        bottom: "0px",
+        right: "0px",
+        overflow: "visible",
+        pointerEvents: "none",
+        zIndex: "",
+      }) as [keyof CSSStyleDeclaration, string | null][]
+    ).forEach(([key, value]) => expect(portalEl().style[key]).toBe(value));
 
-    root.find(StubComponent).simulate("click");
-    // hack to trigger useEffect()
-    root.setProps({});
+    userEvent.click(result.getByRole("button"));
 
-    expect(open()).toBe(true);
-    expect(popup()).toHaveProp("style", {
-      top: 3 + 7,
-      left: 6 + 2,
-      width: 4 - 2,
+    act(() => {
+      clock.runToFrame();
     });
 
-    [
-      root
-        .find("div")
-        .at(0)
-        .getDOMNode(),
-      portalEl(),
-    ].forEach(target => {
-      onClickOutside(({
+    expect(open()).toBe(true);
+    expect(popup().style.top).toBe(`${3 + 7}px`);
+    expect(popup().style.left).toBe(`${6 + 2}px`);
+    expect(popup().style.width).toBe(`${4 - 2}px`);
+
+    [result.getByTestId("ref"), portalEl()].forEach((target) => {
+      onClickOutside({
         target,
-      } as Partial<Event>) as Event);
-      // hack to trigger useEffect()
-      root.setProps({});
+      } as Partial<Event> as Event);
 
       expect(open()).toBe(true);
     });
 
-    onClickOutside(({
+    onClickOutside({
       target: document.body,
-    } as Partial<Event>) as Event);
-    // hack to trigger useEffect()
-    root.setProps({});
+    } as Partial<Event> as Event);
     expect(open()).toBe(false);
 
-    root.setProps({ zIndex: "1" });
-    // hack to trigger useEffect()
-    root.setProps({ zIndex: "1" });
+    result.rerender(<Component zIndex="1" />);
 
-    expect(portalEl().style.zIndex).toBe("1");
+    expect(portalEl()).toHaveStyle({
+      zIndex: "1",
+    });
   });
 });

@@ -1,45 +1,39 @@
-import { shallow } from "enzyme";
+import { render } from "@testing-library/react";
 import * as React from "react";
 import ShowWhen from ".";
 
-interface Case {
-  name: string;
-  when: boolean;
-  children: React.ReactNode;
-}
+const text = "Test";
 
-const cases: Case[] = [
-  {
-    name: "Should return Test as text",
-    when: true,
-    children: "Test",
-  },
-  {
-    name: "Should return Test in a <span />",
-    when: true,
-    children: <span>Test</span>,
-  },
-  {
-    name: "Should return null",
-    when: false,
-    children: "Test",
-  },
-];
+describe("ShowWhen", () => {
+  it.each([
+    {
+      name: "Should return Test as text",
+      when: true,
+      children: text,
+    },
+    {
+      name: "Should return Test in a <span />",
+      when: true,
+      children: <span>{text}</span>,
+    },
+    {
+      name: "Should return null",
+      when: false,
+      children: text,
+    },
+  ])("ShowWhen %j", ({ name, when, children }) => {
+    const result = render(<ShowWhen when={when}>{children}</ShowWhen>);
 
-test.each(cases)("ShowWhen %j", ({ name, when, children }: Case) => {
-  const wrapper = shallow(<ShowWhen when={when}>{children}</ShowWhen>);
-
-  if (when === false) {
-    expect(wrapper.getElement()).toBeNull();
-  }
-
-  if (when === true) {
-    expect(wrapper.text()).not.toBeNull();
-    expect(wrapper.text()).toMatchSnapshot(name);
-
-    if (typeof children === "string") {
-      expect(wrapper.text()).not.toBeNull();
-      expect(wrapper.text()).toEqual(children);
+    if (when === false) {
+      expect(result.queryByText(text)).not.toBeInTheDocument();
     }
-  }
+
+    if (when === true) {
+      expect(result.queryByText(text)).toBeInTheDocument();
+
+      if (typeof children !== "string") {
+        expect(result.container.querySelector("span")).toBeInTheDocument();
+      }
+    }
+  });
 });

@@ -1,25 +1,14 @@
-import { mount } from "enzyme";
-import * as React from "react";
+import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
-import { stubProperties, JestMock } from "../../../kerosene-test/src";
+import { stubProperties } from "../../../kerosene-test/src";
 import usePageVisibility from "./usePageVisibility";
-
-const StateComponent = () => {
-  const [visible, visibility] = usePageVisibility();
-  return (
-    <span data-visibility={visibility}>{visible ? "visible" : "hidden"}</span>
-  );
-};
-
-const RefComponent = () => {
-  const visibility = usePageVisibility(false);
-  return <span data-visibility={visibility} />;
-};
 
 describe("usePageVisibility", () => {
   let restoreDocument: () => void;
-  let addEventListener: JestMock<typeof document.addEventListener>;
-  let removeEventListener: JestMock<typeof document.removeEventListener>;
+  let addEventListener: jest.MockedFunction<typeof document.addEventListener>;
+  let removeEventListener: jest.MockedFunction<
+    typeof document.removeEventListener
+  >;
   let hidden: boolean | undefined;
   beforeEach(() => {
     hidden = undefined;
@@ -38,30 +27,26 @@ describe("usePageVisibility", () => {
 
   it("should be useable in output and as a ref when useState===true", () => {
     hidden = false;
-    const root = mount(<StateComponent />);
-    const getRef = () =>
-      root.find("span").prop("data-visibility") as React.RefObject<boolean>;
+    const utils = renderHook(() => usePageVisibility(true));
 
-    expect(root).toHaveText("visible");
-    expect(getRef()).toEqual({ current: true });
+    expect(utils.result.current).toEqual([true, { current: true }]);
 
-    expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       expect.any(Function),
       false,
     );
-    const onVisibilityChange = addEventListener.mock
-      .calls[0][1] as EventListener;
+    const onVisibilityChange = addEventListener.mock.calls.find(
+      (call) => call[0] === "visibilitychange",
+    )![1] as EventListener;
 
     hidden = true;
     act(() => {
-      onVisibilityChange((Symbol("Event") as unknown) as Event);
+      onVisibilityChange(new Event("visibilitychange"));
     });
-    expect(root).toHaveText("hidden");
-    expect(getRef()).toEqual({ current: false });
+    expect(utils.result.current).toEqual([false, { current: false }]);
 
-    root.unmount();
+    utils.unmount();
     expect(removeEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       onVisibilityChange,
@@ -71,28 +56,26 @@ describe("usePageVisibility", () => {
 
   it("should be usable as a ref when useState===false", () => {
     hidden = false;
-    const root = mount(<RefComponent />);
-    const getRef = () =>
-      root.find("span").prop("data-visibility") as React.RefObject<boolean>;
+    const utils = renderHook(() => usePageVisibility(false));
 
-    expect(getRef()).toEqual({ current: true });
+    expect(utils.result.current).toEqual({ current: true });
 
-    expect(addEventListener).toHaveBeenCalledTimes(1);
     expect(addEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       expect.any(Function),
       false,
     );
-    const onVisibilityChange = addEventListener.mock
-      .calls[0][1] as EventListener;
+    const onVisibilityChange = addEventListener.mock.calls.find(
+      (call) => call[0] === "visibilitychange",
+    )![1] as EventListener;
 
     hidden = true;
     act(() => {
-      onVisibilityChange((Symbol("Event") as unknown) as Event);
+      onVisibilityChange(Symbol("Event") as unknown as Event);
     });
-    expect(getRef()).toEqual({ current: false });
+    expect(utils.result.current).toEqual({ current: false });
 
-    root.unmount();
+    utils.unmount();
     expect(removeEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       onVisibilityChange,
@@ -101,7 +84,7 @@ describe("usePageVisibility", () => {
   });
 
   it("should fallback to always visible when the page visibility API is not available", () => {
-    const root = mount(<StateComponent />);
-    expect(root).toHaveText("visible");
+    const root = renderHook(() => usePageVisibility());
+    expect(root.result.current[0]).toBe(true);
   });
 });
