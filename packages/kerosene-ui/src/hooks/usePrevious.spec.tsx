@@ -1,35 +1,21 @@
-import { mount } from "enzyme";
+import { renderHook } from "@testing-library/react-hooks";
 import * as React from "react";
 import usePrevious from "./usePrevious";
 
 describe("usePrevious", () => {
   it("should remember the previous value, and default to undefined for the first render", () => {
-    const Component = ({ value }: { value: number }) => {
-      const previous = usePrevious(value);
-      return <span data-value={previous} />;
-    };
+    const utils = renderHook((value = 1) => usePrevious(value));
+    expect(utils.result.current).toBe(undefined);
 
-    const root = mount(<Component value={1} />);
-    const getValue = () => root.find("span").prop("data-value");
-
-    expect(getValue()).toBe(undefined);
-
-    root.setProps({ value: 2 });
-    expect(getValue()).toBe(1);
+    utils.rerender(2);
+    expect(utils.result.current).toBe(1);
   });
 
   it("should use the initialValue for initial render, remembering the value from previous render", () => {
-    const Component = ({ value }: { value: number }) => {
-      const previous = usePrevious(value, 0);
-      return <span data-value={previous} />;
-    };
+    const utils = renderHook((value = 1) => usePrevious(value, 0));
+    expect(utils.result.current).toBe(0);
 
-    const root = mount(<Component value={1} />);
-    const getValue = () => root.find("span").prop("data-value");
-
-    expect(getValue()).toBe(0);
-
-    root.setProps({ value: 2 });
-    expect(getValue()).toBe(1);
+    utils.rerender(2);
+    expect(utils.result.current).toBe(1);
   });
 });

@@ -1,15 +1,10 @@
-import { mount } from "enzyme";
-import * as React from "react";
+import { renderHook } from "@testing-library/react-hooks";
 import useKonamiCode from "./useKonamiCode";
 
 describe("useKonamiCode", () => {
-  let _addEventListener: jest.Mock<
-    void,
-    Parameters<typeof window.addEventListener>
-  >;
-  let _removeEventListener: jest.Mock<
-    void,
-    Parameters<typeof window.removeEventListener>
+  let _addEventListener: jest.MockedFunction<typeof window.addEventListener>;
+  let _removeEventListener: jest.MockedFunction<
+    typeof window.removeEventListener
   >;
 
   beforeEach(() => {
@@ -39,13 +34,7 @@ describe("useKonamiCode", () => {
   ].forEach(({ type, code }) => {
     it(`should listen for the correct ${type} code and call the callback`, () => {
       const callback = jest.fn();
-      const Component = () => {
-        useKonamiCode(code, callback);
-        return null;
-      };
-      const root = mount(<Component />);
-      // hack to trigger useEffect()
-      root.setProps({});
+      const utils = renderHook(() => useKonamiCode(code, callback));
 
       expect(_addEventListener).toHaveBeenCalledWith(
         "keydown",
@@ -53,20 +42,20 @@ describe("useKonamiCode", () => {
         false,
       );
       const onKeyDown = _addEventListener.mock.calls.find(
-        args => args[0] === "keydown",
+        (args) => args[0] === "keydown",
       )![1] as EventListener;
 
-      [..."foo"].forEach(key =>
-        onKeyDown(({ key } as Partial<KeyboardEvent>) as KeyboardEvent),
+      [..."foo"].forEach((key) =>
+        onKeyDown({ key } as Partial<KeyboardEvent> as KeyboardEvent),
       );
       expect(callback).toHaveBeenCalledTimes(0);
 
-      [...code].forEach(key =>
-        onKeyDown(({ key } as Partial<KeyboardEvent>) as KeyboardEvent),
+      [...code].forEach((key) =>
+        onKeyDown({ key } as Partial<KeyboardEvent> as KeyboardEvent),
       );
       expect(callback).toHaveBeenCalledTimes(1);
 
-      root.unmount();
+      utils.unmount();
       expect(_removeEventListener).toHaveBeenCalledWith(
         "keydown",
         onKeyDown,

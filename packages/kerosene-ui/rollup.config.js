@@ -1,2 +1,2 @@
 require("../../babel-register");
-module.exports = require("./rollup.config.ts");
+module.exports = require("./rollup-config.ts");

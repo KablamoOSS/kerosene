@@ -1,38 +1,24 @@
-import { mount } from "enzyme";
-import * as React from "react";
+import { renderHook } from "@testing-library/react-hooks";
 import useAbortController from "./useAbortController";
 
 describe("#useAbortController", () => {
   it("should manage a series of AbortControllers", () => {
-    const Component = ({
-      resultRef,
-    }: {
-      resultRef: React.MutableRefObject<ReturnType<typeof useAbortController>>;
-    }) => {
-      const result = useAbortController();
-      // eslint-disable-next-line no-param-reassign
-      resultRef.current = result;
-      return null;
-    };
-    const result = ({ current: undefined } as Partial<
-      React.MutableRefObject<ReturnType<typeof useAbortController>>
-    >) as React.MutableRefObject<ReturnType<typeof useAbortController>>;
-    const root = mount(<Component resultRef={result} />);
-    expect(result.current.ref).toEqual({ current: undefined });
+    const utils = renderHook(() => useAbortController());
+    expect(utils.result.current.ref.current).toBe(undefined);
 
-    const first = result.current.next();
+    const first = utils.result.current.next();
     expect(first).toBeInstanceOf(AbortController);
     expect(first.signal.aborted).toBe(false);
-    expect(result.current.ref.current).toBe(first);
+    expect(utils.result.current.ref.current).toBe(first);
 
-    const second = result.current.next();
+    const second = utils.result.current.next();
     expect(second).toBeInstanceOf(AbortController);
     expect(second.signal.aborted).toBe(false);
-    expect(result.current.ref.current).toBe(second);
+    expect(utils.result.current.ref.current).toBe(second);
 
     expect(first.signal.aborted).toBe(true);
 
-    root.unmount();
+    utils.unmount();
     expect(second.signal.aborted).toBe(true);
   });
 });

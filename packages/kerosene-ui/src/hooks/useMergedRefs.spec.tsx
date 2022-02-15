@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import * as React from "react";
 import useMergedRefs from "./useMergedRefs";
 
@@ -10,14 +10,14 @@ describe("#useMergedRefs", () => {
       refs: ReadonlyArray<React.Ref<HTMLDivElement> | undefined>;
     }) => {
       const setRef = useMergedRefs(...refs);
-      return <div ref={setRef} />;
+      return <div data-testid="ref" ref={setRef} />;
     };
 
     const ref = React.createRef<HTMLDivElement>();
     let node: HTMLDivElement | null = null;
     const ref2 = (instance: typeof node) => (node = instance);
-    const root = mount(<Component refs={[ref, ref2, null, undefined]} />);
-    expect(ref.current).toBe(root.find("div").getDOMNode());
-    expect(node).toBe(root.find("div").getDOMNode());
+    const result = render(<Component refs={[ref, ref2, null, undefined]} />);
+    expect(ref.current).toBe(result.getByTestId("ref"));
+    expect(node).toBe(result.getByTestId("ref"));
   });
 });

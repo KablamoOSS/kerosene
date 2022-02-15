@@ -12,7 +12,7 @@ export default function contains<T>(
   const mappedSubset = subset.map(iteratee);
   const mappedSuperset = superset.map(iteratee);
 
-  return mappedSubset.every(value => {
+  return mappedSubset.every((value) => {
     return mappedSuperset.includes(value);
   });
 }

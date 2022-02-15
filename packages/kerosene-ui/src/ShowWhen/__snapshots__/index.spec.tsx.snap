@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ShowWhen {"name":"Should return Test as text","when":true,"children":"Test"}: Should return Test as text 1`] = `"Test"`;
-
-exports[`ShowWhen {"name":"Should return Test in a <span />","when":true,"children":{"type":"span","key":null,"ref":null,"props":{"children":"Test"},"_owner":null,"_store":{}}}: Should return Test in a <span /> 1`] = `"Test"`;

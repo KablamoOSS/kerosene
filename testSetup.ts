@@ -1,10 +1,10 @@
+import "@testing-library/jest-dom";
 import "core-js/features/array/flat";
 import "core-js/features/array/flat-map";
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import "jest-enzyme";
+import { setImmediate } from "timers";
 
-configure({ adapter: new Adapter() });
+// Required for Jest 27
+global.setImmediate = setImmediate;
 
 Object.assign(window, {
   requestAnimationFrame: (callback: FrameRequestCallback) =>
