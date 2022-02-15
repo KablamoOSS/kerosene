@@ -14,11 +14,11 @@ export default function stubProperties<T>(
   const previousProperties = Object.keys(properties).reduce((acc, property) => {
     const descriptor = Object.getOwnPropertyDescriptor(target, property);
     return descriptor ? { ...acc, [property]: descriptor } : acc;
-  }, {} as PropertyDescriptorMap & ThisType<any>);
+  }, {} as PropertyDescriptorMap & ThisType<T>);
 
   Object.defineProperties(
     target,
-    properties as PropertyDescriptorMap & ThisType<any>,
+    properties as PropertyDescriptorMap & ThisType<T>,
   );
 
   return () => {

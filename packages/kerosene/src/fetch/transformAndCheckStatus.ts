@@ -7,9 +7,9 @@ import transform from "./transform";
  * Transforms the response, rejecting if the status is not 2xx
  * @param response
  */
-export default function transformAndCheckStatus(
+export default function transformAndCheckStatus<T = unknown>(
   response: Response,
-): Promise<unknown> {
+): Promise<T> {
   return transform(response).then((transformed) => {
     if (response.status >= 200 && response.status < 300) return transformed;
 

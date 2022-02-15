@@ -7,7 +7,8 @@
  * - Safari: Network error
  * - Fetch polyfill: Network request failed
  */
-const NETWORK_ERROR_MESSAGE_REGEX = /Failed to fetch|NetworkError|Network error|Network request failed/i;
+const NETWORK_ERROR_MESSAGE_REGEX =
+  /Failed to fetch|NetworkError|Network error|Network request failed/i;
 
 /**
  * Returns whether or not `error` is a fetch() Network Error, accounting for browser differences

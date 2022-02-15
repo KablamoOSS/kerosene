@@ -2,6 +2,8 @@ export * from "./array";
 
 export * from "./datetime";
 
+export { default as ExtendableError } from "./error/ExtendableError";
+
 export { default as isNetworkError } from "./fetch/isNetworkError";
 export { default as transform } from "./fetch/transform";
 export { default as transformAndCheckStatus } from "./fetch/transformAndCheckStatus";

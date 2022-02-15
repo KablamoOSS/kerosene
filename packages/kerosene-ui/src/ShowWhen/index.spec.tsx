@@ -21,7 +21,7 @@ describe("ShowWhen", () => {
       when: false,
       children: text,
     },
-  ])("ShowWhen %j", ({ name, when, children }) => {
+  ])("ShowWhen %j", ({ when, children }) => {
     const result = render(<ShowWhen when={when}>{children}</ShowWhen>);
 
     if (when === false) {

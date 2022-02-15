@@ -25,9 +25,9 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue(({ matches: false } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: false,
+        } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: undefined });
     });
 
@@ -40,9 +40,9 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue(({ matches: false } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: false,
+        } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: false });
     });
 
@@ -55,9 +55,9 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue(({ matches: true } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: true,
+        } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: undefined });
     });
 
@@ -70,9 +70,9 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue(({ matches: false } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: false,
+        } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: true });
     });
 

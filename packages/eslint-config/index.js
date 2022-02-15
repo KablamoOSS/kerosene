@@ -7,8 +7,6 @@ module.exports = {
     "airbnb",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/react",
     "plugin:prettier/recommended",
     "plugin:@kablamo/recommended",
   ],
@@ -74,6 +72,7 @@ module.exports = {
     ],
 
     // eslint-plugin-react rules
+    "react/function-component-definition": "off",
     "react/jsx-filename-extension": [
       "error",
       { allow: "always", extensions: [".tsx"] },

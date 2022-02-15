@@ -13,5 +13,7 @@ const { setImmediate } = globalThis;
  * like `sinon` do not replace the internal `setImmediate` used to wait for the event loop to drain
  */
 export default function waitForEventLoopToDrain(): Promise<void> {
-  return new Promise<void>(resolve => setImmediate(resolve));
+  return new Promise<void>((resolve) => {
+    setImmediate(resolve);
+  });
 }

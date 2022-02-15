@@ -27,7 +27,7 @@ describe("#remove", () => {
     const needle = "hello";
     const haystack = [1, 2, 3, 4, 5];
 
-    const result = remove(needle, haystack as any[]);
+    const result = remove(needle, haystack as unknown[]);
     expect(result).not.toBe(haystack);
 
     expect(result).toEqual(haystack);

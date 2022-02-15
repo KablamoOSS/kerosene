@@ -4,21 +4,19 @@ import { DeepPartial } from "../types";
 import transform from "./transform";
 
 jest.mock("content-type");
-const contentType = (_contentType as unknown) as jest.Mocked<
-  typeof _contentType
->;
+const contentType = _contentType as unknown as jest.Mocked<typeof _contentType>;
 
 describe("transform", () => {
   it("should resolve a 204 status as null", async () => {
     await expect(
-      transform(({ status: 204 } as Partial<Response>) as Response),
+      transform({ status: 204 } as Partial<Response> as Response),
     ).resolves.toBe(null);
   });
 
   it("should resolve a response without a content type as text", async () => {
     const text = "Text";
     await expect(
-      transform(({
+      transform({
         status: 200,
         headers: {
           get: jest.fn().mockReturnValue(null),
@@ -26,7 +24,7 @@ describe("transform", () => {
         async text() {
           return text;
         },
-      } as DeepPartial<Response>) as Response),
+      } as DeepPartial<Response> as Response),
     ).resolves.toBe(text);
   });
 
@@ -61,13 +59,11 @@ describe("transform", () => {
       const header = `${type}; charset=utf-8`;
       when(contentType.parse)
         .calledWith(header)
-        .mockReturnValue(({
+        .mockReturnValue({
           type,
-        } as Partial<ParsedMediaType>) as ParsedMediaType);
+        } as Partial<ParsedMediaType> as ParsedMediaType);
       const getHeaders = jest.fn();
-      when(getHeaders)
-        .calledWith("Content-Type")
-        .mockReturnValue(header);
+      when(getHeaders).calledWith("Content-Type").mockReturnValue(header);
       await expect(
         transform({
           status: 200,
@@ -75,7 +71,7 @@ describe("transform", () => {
             get: getHeaders,
           },
           [method]: async () => content,
-        } as any),
+        } as DeepPartial<Response> as Response),
       ).resolves.toEqual(content);
     });
   });

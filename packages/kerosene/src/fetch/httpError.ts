@@ -1,13 +1,10 @@
-class HttpError extends Error {
-  public response: unknown;
+import ExtendableError from "../error/ExtendableError";
 
-  public status: number;
-
-  constructor(message: string, status: number, response?: any) {
+class HttpError extends ExtendableError {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(message: string, public status: number, public response?: any) {
     super(message);
     this.name = "HttpError";
-    this.status = status;
-    this.response = response;
   }
 }
 

@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { identity } from "lodash";
 import * as React from "react";
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends readonly any[] = any[]
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  RenderProps extends readonly any[] = any[],
 >(displayName: string, functional?: false): React.ComponentClass<Props>;
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends readonly any[] = any[]
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  RenderProps extends readonly any[] = any[],
 >(displayName: string, functional: true): React.FunctionComponent<Props>;
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends readonly any[] = any[]
+  RenderProps extends readonly any[] = any[],
 >(
   displayName: string,
   functional: false | undefined,
@@ -27,7 +31,7 @@ export default function createStubComponent<
 
 export default function createStubComponent<
   Props extends {} = { [prop: string]: unknown },
-  RenderProps extends readonly any[] = any[]
+  RenderProps extends readonly any[] = any[],
 >(
   displayName: string,
   functional: true,
@@ -49,11 +53,11 @@ export default function createStubComponent<
  */
 export default function createStubComponent<
   Props extends { children?: unknown } = { [prop: string]: unknown },
-  RenderProps extends readonly any[] = any[]
+  RenderProps extends readonly any[] = any[],
 >(
   displayName: string,
   functional = false,
-  getRenderProps?: (props: Omit<Props, "children">) => RenderProps,
+  getRenderProps: (props: Omit<Props, "children">) => RenderProps = identity,
   transformRenderPropResult: (
     result: (props: any) => React.ReactNode,
   ) => React.ReactNode = identity,

@@ -7,7 +7,7 @@ describe("#toTitleCase", () => {
   });
 
   it("should leave excluded words uncapitalised", () => {
-    TITLE_CASE_LOWERCASE_WORDS.forEach(word => {
+    TITLE_CASE_LOWERCASE_WORDS.forEach((word) => {
       expect(toTitleCase(`few ${word} far between`)).toBe(
         `Few ${word} Far Between`,
       );
@@ -15,13 +15,13 @@ describe("#toTitleCase", () => {
   });
 
   it("should capitalise the first word even if it is on the list", () => {
-    TITLE_CASE_LOWERCASE_WORDS.forEach(word => {
+    TITLE_CASE_LOWERCASE_WORDS.forEach((word) => {
       expect(toTitleCase(`${word} title`)).toBe(`${capitalize(word)} Title`);
     });
   });
 
   it("should capitalise the last word even if it is on the list", () => {
-    TITLE_CASE_LOWERCASE_WORDS.forEach(word => {
+    TITLE_CASE_LOWERCASE_WORDS.forEach((word) => {
       expect(toTitleCase(`far ${word}`)).toBe(`Far ${capitalize(word)}`);
     });
   });

@@ -1,6 +1,6 @@
 "use strict";
 
-const enforceKey = (context, validName) => jsxAttribute => {
+const enforceKey = (context, validName) => (jsxAttribute) => {
   context.report({
     node: jsxAttribute,
     message: `Test ID attribute should be named ${validName}`,
@@ -27,7 +27,7 @@ module.exports = {
     ];
 
     return attributes
-      .filter(name => name !== pragma)
+      .filter((name) => name !== pragma)
       .reduce(
         (acc, name) => ({
           ...acc,

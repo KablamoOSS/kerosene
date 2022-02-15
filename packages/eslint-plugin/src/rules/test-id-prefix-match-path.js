@@ -2,13 +2,13 @@
 
 const path = require("path");
 
-const getPrefixFromFilePath = context => {
+const getPrefixFromFilePath = (context) => {
   const filePath = path.relative(process.cwd(), context.getFilename());
   const { dir } = path.parse(filePath);
 
   return dir
     .split(path.sep)
-    .filter(elem => !["packages", "src"].includes(elem))
+    .filter((elem) => !["packages", "src"].includes(elem))
     .filter(Boolean)
     .join("-");
 };

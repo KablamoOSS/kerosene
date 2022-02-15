@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * Shorthand for `jest.Mock<ReturnType<T>, Parameters<T>>;`
  */

@@ -2,10 +2,10 @@ import createSandbox from "jest-sandbox";
 import { when } from "jest-when";
 import getSafeAreaInsets from "./getSafeAreaInsets";
 
-const element = ({
+const element = {
   tagName: "div",
   style: {},
-} as Partial<HTMLElement>) as HTMLElement;
+} as Partial<HTMLElement> as HTMLElement;
 
 describe("getSafeAreaInsets", () => {
   let sandbox: JestSandbox;
@@ -25,9 +25,7 @@ describe("getSafeAreaInsets", () => {
     sandbox = createSandbox();
     createElement = jest.fn();
     document.createElement = createElement;
-    when(createElement)
-      .calledWith("div")
-      .mockReturnValue(element);
+    when(createElement).calledWith("div").mockReturnValue(element);
     appendChild = jest.fn();
     document.body.appendChild = appendChild as typeof document.body.appendChild;
     getComputedStyle = jest.fn();
@@ -41,12 +39,12 @@ describe("getSafeAreaInsets", () => {
   it("should return an object containing the insets", () => {
     when(getComputedStyle)
       .calledWith(element)
-      .mockReturnValue(({
+      .mockReturnValue({
         top: "21px",
         left: "44px",
         bottom: "21px",
         right: "44px",
-      } as Partial<CSSStyleDeclaration>) as CSSStyleDeclaration);
+      } as Partial<CSSStyleDeclaration> as CSSStyleDeclaration);
 
     expect(getSafeAreaInsets()).toEqual({
       top: 21,
@@ -70,7 +68,7 @@ describe("getSafeAreaInsets", () => {
     when(getComputedStyle)
       .calledWith(element)
       .mockReturnValue(
-        ({} as Partial<CSSStyleDeclaration>) as CSSStyleDeclaration,
+        {} as Partial<CSSStyleDeclaration> as CSSStyleDeclaration,
       );
 
     expect(getSafeAreaInsets()).toEqual({

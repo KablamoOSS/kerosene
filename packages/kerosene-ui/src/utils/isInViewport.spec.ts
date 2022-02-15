@@ -112,9 +112,9 @@ describe("#isInViewport", () => {
   ].forEach(({ message, clientRect, isIn }) => {
     it(message, () => {
       expect(
-        isInViewport(({
+        isInViewport({
           getBoundingClientRect: () => clientRect as ClientRect,
-        } as Partial<HTMLElement>) as HTMLElement),
+        } as Partial<HTMLElement> as HTMLElement),
       ).toBe(isIn);
     });
   });

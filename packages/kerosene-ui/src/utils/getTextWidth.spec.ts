@@ -34,9 +34,9 @@ describe("#getTextWidth", () => {
     document.createElement = createElement;
     when(createElement)
       .calledWith("canvas")
-      .mockReturnValue(({
+      .mockReturnValue({
         getContext,
-      } as Partial<HTMLCanvasElement>) as HTMLCanvasElement);
+      } as Partial<HTMLCanvasElement> as HTMLCanvasElement);
   });
 
   afterEach(() => {
@@ -46,17 +46,17 @@ describe("#getTextWidth", () => {
   it("should calculate the width of the text re-using a canvas element", () => {
     when(getContext)
       .calledWith("2d", { alpha: false })
-      .mockReturnValue(({
+      .mockReturnValue({
         set font(value: string) {
           setFont(value);
         },
         measureText,
-      } as Partial<CanvasRenderingContext2D>) as CanvasRenderingContext2D);
+      } as Partial<CanvasRenderingContext2D> as CanvasRenderingContext2D);
     when(measureText)
       .calledWith(text)
-      .mockReturnValue(({
+      .mockReturnValue({
         width,
-      } as Partial<TextMetrics>) as TextMetrics);
+      } as Partial<TextMetrics> as TextMetrics);
 
     expect(getTextWidth(text, font)).toBe(width);
     expect(getTextWidth(text, font)).toBe(width);

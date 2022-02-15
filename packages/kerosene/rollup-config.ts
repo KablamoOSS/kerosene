@@ -7,6 +7,7 @@ import {
   RollupOptions,
 } from "rollup";
 import resolve from "rollup-plugin-node-resolve";
+// eslint-disable-next-line import/no-relative-packages
 import generateBabelConfig from "../../config/generateBabelConfig";
 import packageJson from "./package.json";
 
@@ -26,9 +27,9 @@ const externals = [
   ),
 ];
 
-const external: ExternalOption = source =>
+const external: ExternalOption = (source) =>
   externals.includes(source) ||
-  externals.some(mod => source.startsWith(`${mod}/`));
+  externals.some((mod) => source.startsWith(`${mod}/`));
 
 const extensions = [".js", ".ts"];
 

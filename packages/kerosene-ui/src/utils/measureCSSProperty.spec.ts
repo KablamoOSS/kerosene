@@ -1,6 +1,6 @@
+import { JestMock } from "@kablamo/kerosene-test";
 import createSandbox from "jest-sandbox";
 import { when } from "jest-when";
-import { JestMock } from "../../../kerosene-test/src";
 import measureCSSProperty from "./measureCSSProperty";
 
 describe("measureCSSProperty", () => {
@@ -26,9 +26,7 @@ describe("measureCSSProperty", () => {
     };
 
     const noscript = { tagName: "NOSCRIPT", style: {} } as HTMLElement;
-    when(createElement)
-      .calledWith("noscript")
-      .mockReturnValue(noscript);
+    when(createElement).calledWith("noscript").mockReturnValue(noscript);
 
     when(getComputedStyle)
       .calledWith({
@@ -39,7 +37,7 @@ describe("measureCSSProperty", () => {
 
     expect(
       measureCSSProperty(
-        (el as Partial<Element>) as Element,
+        el as Partial<Element> as Element,
         "paddingTop",
         "var(--header-height, 0px)",
       ),
