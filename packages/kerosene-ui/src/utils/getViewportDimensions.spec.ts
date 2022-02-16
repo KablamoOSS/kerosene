@@ -30,9 +30,9 @@ describe("getViewportDimensions", () => {
       Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
-        .mockReturnValue(({ matches: true } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: true,
+        } as Partial<MediaQueryList> as MediaQueryList);
 
       expect(getViewportDimensions()).toEqual({
         height: 896,
@@ -44,9 +44,9 @@ describe("getViewportDimensions", () => {
       Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
-        .mockReturnValue(({ matches: false } as Partial<
-          MediaQueryList
-        >) as MediaQueryList);
+        .mockReturnValue({
+          matches: false,
+        } as Partial<MediaQueryList> as MediaQueryList);
 
       expect(getViewportDimensions()).toEqual({
         height: 414,

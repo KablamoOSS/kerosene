@@ -15,7 +15,7 @@ try {
   };
   window.addEventListener("test", noop, options);
   window.removeEventListener("test", noop, {});
-} catch (e) {
+} catch (e) /* istanbul ignore next */ {
   isPassiveSupported = false;
 }
 
@@ -29,25 +29,27 @@ try {
   };
   window.addEventListener("test", noop, options);
   window.removeEventListener("test", noop, { capture: true });
-} catch (e) {
+} catch (e) /* istanbul ignore next */ {
   isCapturePassiveSupported = false;
 }
 
 export const ADD_EVENT_LISTENER_PASSIVE_OPTIONS = isPassiveSupported
   ? ({ passive: true } as const)
-  : false;
+  : /* istanbul ignore next */ false;
 export const REMOVE_EVENT_LISTENER_PASSIVE_OPTIONS = isPassiveSupported
   ? ({} as const)
-  : false;
+  : /* istanbul ignore next */ false;
 
-export const ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS = isCapturePassiveSupported
-  ? ({
-      capture: true,
-      passive: true,
-    } as const)
-  : true;
-export const REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS = isCapturePassiveSupported
-  ? ({
-      capture: true,
-    } as const)
-  : true;
+export const ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS =
+  isCapturePassiveSupported
+    ? ({
+        capture: true,
+        passive: true,
+      } as const)
+    : /* istanbul ignore next */ true;
+export const REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS =
+  isCapturePassiveSupported
+    ? ({
+        capture: true,
+      } as const)
+    : /* istanbul ignore next */ true;

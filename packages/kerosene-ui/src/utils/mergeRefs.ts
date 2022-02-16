@@ -6,7 +6,7 @@ import { Mutable } from "@kablamo/kerosene";
  */
 export default function mergeRefs<T>(...refs: Array<React.Ref<T> | undefined>) {
   return (instance: T | null) => {
-    refs.forEach(ref => {
+    refs.forEach((ref) => {
       if (typeof ref === "function") {
         ref(instance);
       } else if (ref) {

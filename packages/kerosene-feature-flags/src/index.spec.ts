@@ -13,7 +13,7 @@ const cases: Case[] = [
       group: "beta",
       browser: "Firefox",
     },
-    flag: flag(c => [
+    flag: flag((c) => [
       c.condition("environment").must.be.any.of(["development", "staging"]),
       c.condition("environment").must.not.be.exactly("production"),
       c.condition("group").must.be.exactly("beta"),
@@ -25,14 +25,18 @@ const cases: Case[] = [
     conditions: {
       groups: ["beta", "users"],
     },
-    flag: flag(c => [c.condition("groups").must.be.all.of(["beta", "users"])]),
+    flag: flag((c) => [
+      c.condition("groups").must.be.all.of(["beta", "users"]),
+    ]),
     result: true,
   },
   {
     conditions: {
       groups: ["beta"],
     },
-    flag: flag(c => [c.condition("groups").must.be.all.of(["beta", "users"])]),
+    flag: flag((c) => [
+      c.condition("groups").must.be.all.of(["beta", "users"]),
+    ]),
     result: false,
   },
   {
@@ -41,7 +45,7 @@ const cases: Case[] = [
       group: "users",
       browser: "Firefox",
     },
-    flag: flag(c => [
+    flag: flag((c) => [
       c.condition("environment").must.not.be.any.of(["development", "staging"]),
       c.condition("group").must.not.be.exactly("beta"),
       c.condition("browser").must.not.be.exactly("Chrome"),
@@ -52,7 +56,7 @@ const cases: Case[] = [
     conditions: {
       num: 50,
     },
-    flag: flag(c => [
+    flag: flag((c) => [
       c.condition("num").must.be.greaterThan(40),
       c.condition("num").must.be.lessThan(60),
       c.condition("num").must.not.be.greaterThan(70),

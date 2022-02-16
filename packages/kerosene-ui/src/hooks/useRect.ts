@@ -62,7 +62,7 @@ export default function useRect(
   React.useEffect(() => {
     if (!disable) {
       window.addEventListener("resize", update);
-      events.forEach(event =>
+      events.forEach((event) =>
         window.addEventListener(
           event,
           update,
@@ -73,7 +73,7 @@ export default function useRect(
 
     return () => {
       window.removeEventListener("resize", update);
-      events.forEach(event =>
+      events.forEach((event) =>
         window.removeEventListener(
           event,
           update,

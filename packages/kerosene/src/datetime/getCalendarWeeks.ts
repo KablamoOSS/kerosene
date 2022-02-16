@@ -48,8 +48,8 @@ export default function getCalendarWeeks(
     afterDays;
 
   return range(totalDays / DAYS_PER_WEEK).map(
-    week =>
-      range(DAYS_PER_WEEK).map(dayOfWeek => {
+    (week) =>
+      range(DAYS_PER_WEEK).map((dayOfWeek) => {
         const delta = week * DAYS_PER_WEEK - priorDays + dayOfWeek;
         return dateFns.addDays(firstOfMonth, delta);
       }) as CalendarWeek,

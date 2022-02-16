@@ -15,12 +15,12 @@ function flag(callback: FlagCallback): Flag {
   return (runtime: any): boolean => {
     return (
       checks
-        .map(check => {
+        .map((check) => {
           // Check the assertion is valid
           return check.validate(runtime);
         })
         // check every assertion is valid with a result of true
-        .every(result => result === true)
+        .every((result) => result === true)
     );
   };
 }

@@ -36,8 +36,8 @@ class Condition {
   public validate(runtime: Runtime): boolean {
     // Check every assertion, against the runtime values
     return this.assertions
-      .map(assert => {
-        const field = Object.keys(runtime).find(f => assert.field === f);
+      .map((assert) => {
+        const field = Object.keys(runtime).find((f) => assert.field === f);
 
         if (typeof field === "undefined") {
           return null;
@@ -57,7 +57,9 @@ class Condition {
               // Any can't handle array
               return false;
             }
-            compare = assert.of.some(conditonValue => conditonValue === value);
+            compare = assert.of.some(
+              (conditonValue) => conditonValue === value,
+            );
             break;
           case Comparison.ALL:
             if (typeof assert.of === "undefined") {
@@ -123,8 +125,8 @@ class Condition {
         }
         return false;
       })
-      .filter(value => value !== null)
-      .every(result => result === true);
+      .filter((value) => value !== null)
+      .every((result) => result === true);
   }
 
   public condition(field: string): this {
@@ -195,7 +197,7 @@ class Condition {
 }
 
 // Grammar helpers
-["must", "to", "be"].forEach(word => {
+["must", "to", "be"].forEach((word) => {
   Object.defineProperty(Condition.prototype, word, {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     set: () => {},

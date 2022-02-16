@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 
 /**
  * Make all nested properties of `T` `Required` and `NonNullable`
@@ -19,17 +19,16 @@ export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
  * - `Map<any, T>`
  * - `{ [key: string]: T }`
  */
-export type ElementType<
-  TCollection
-> = TCollection extends readonly (infer TArrayElement)[]
-  ? TArrayElement
-  : TCollection extends Set<infer TSetElement>
-  ? TSetElement
-  : TCollection extends Map<any, infer TMapElement>
-  ? TMapElement
-  : TCollection extends { readonly [key: string]: infer TObjectElement }
-  ? TObjectElement
-  : never;
+export type ElementType<TCollection> =
+  TCollection extends readonly (infer TArrayElement)[]
+    ? TArrayElement
+    : TCollection extends Set<infer TSetElement>
+    ? TSetElement
+    : TCollection extends Map<any, infer TMapElement>
+    ? TMapElement
+    : TCollection extends { readonly [key: string]: infer TObjectElement }
+    ? TObjectElement
+    : never;
 
 /**
  * Infers the union of all object entry tuples for type `T`
@@ -45,7 +44,7 @@ export type KeysOfUnion<T> = T extends any ? keyof T : never;
 /**
  * Creates a union of all keys of `T` where `T[key]` has type `TValue`
  */
-export type KeysWhere<T extends object, TValue extends unknown> = {
+export type KeysWhere<T extends object, TValue> = {
   [Key in keyof T]: T extends { [key in Key]: TValue } ? Key : never;
 }[keyof T];
 
@@ -58,8 +57,7 @@ export type KeysWhere<T extends object, TValue extends unknown> = {
 type __MergedUnion__<T1 extends object, T2 extends object> = T1 extends any
   ? {
       [K in Exclude<KeysOfUnion<T2>, keyof T1>]?: undefined;
-    } &
-      T1
+    } & T1
   : never;
 
 /**

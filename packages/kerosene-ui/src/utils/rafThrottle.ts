@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * Throttles the provided `callback` with `window.requestAnimationFrame`
  * @param callback
@@ -7,10 +9,12 @@ export default function rafThrottle<T extends any[]>(
 ) {
   let id: number | null = null;
 
-  const deferred = (...args: T) => () => {
-    id = null;
-    callback(...args);
-  };
+  const deferred =
+    (...args: T) =>
+    () => {
+      id = null;
+      callback(...args);
+    };
 
   return Object.assign(
     (...args: T) => {

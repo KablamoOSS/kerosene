@@ -16,6 +16,7 @@
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "lint": "eslint --ext=\".js,.jsx,.ts,.tsx\" .",
+    "lint:fix": "eslint --ext=\".js,.jsx,.ts,.tsx\" . --fix",
     "prettier:check": "prettier --check packages/**/*.ts packages/**/*.tsx",
     "test": "jest --expand --coverage",
     "test:coverage": "jest --coverage --coverageReporters=lcov --coverageDirectory=coverage",
@@ -31,6 +32,11 @@
     "transform": {
       "^.+\\.(?:[jt]sx?)$": "ts-jest"
     },
+    "collectCoverageFrom": [
+      "packages/**/*.(js|jsx|ts|tsx)",
+      "packages/*/(.dist|es|lib)/**/*",
+      "!**/*.(spec|test).*"
+    ],
     "globals": {
       "ts-jest": {
         "diagnostics": false

@@ -43,7 +43,7 @@ export default function product<T>(...sources: ReadonlyArray<T>[]): T[][];
 export default function product<T>(...sources: ReadonlyArray<T>[]): T[][] {
   return sources.reduce(
     (acc, current) =>
-      acc.flatMap(list => current.map(item => list.concat([item]))),
+      acc.flatMap((list) => current.map((item) => list.concat([item]))),
     [[]] as T[][],
   );
 }

@@ -24,6 +24,7 @@ module.exports = {
           "**/*.spec.*",
           "**/*.test.*",
           "**/rollup.config.*",
+          "**/rollup-config.*",
         ],
       },
     ],

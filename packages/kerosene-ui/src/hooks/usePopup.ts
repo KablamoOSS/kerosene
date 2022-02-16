@@ -44,7 +44,7 @@ export default function usePopup(
       const isInside =
         target instanceof Node &&
         [portalEl, ref, ...inside].some(
-          elRef => !!elRef.current && elRef.current.contains(target),
+          (elRef) => !!elRef.current && elRef.current.contains(target),
         );
 
       if (!isInside && open) {

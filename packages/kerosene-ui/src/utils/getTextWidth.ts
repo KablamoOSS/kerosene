@@ -23,8 +23,10 @@ export default function getTextWidth(text: string, font: FontDetails) {
 
   if (!context) return text.length * parseInt(font.size, 10);
 
-  context.font = ([font.style, font.weight, font.size, font.family].filter(
-    identity,
-  ) as string[]).join(" ");
+  context.font = (
+    [font.style, font.weight, font.size, font.family].filter(
+      identity,
+    ) as string[]
+  ).join(" ");
   return Math.ceil(context.measureText(text).width);
 }

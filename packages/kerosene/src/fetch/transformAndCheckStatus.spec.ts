@@ -6,7 +6,7 @@ import _transform from "./transform";
 import transformAndCheckStatus from "./transformAndCheckStatus";
 
 jest.mock("./transform");
-const transform = (_transform as unknown) as jest.MockInstance<
+const transform = _transform as unknown as jest.MockInstance<
   ReturnType<typeof _transform>,
   Parameters<typeof _transform>
 >;
@@ -14,9 +14,9 @@ const transform = (_transform as unknown) as jest.MockInstance<
 describe("transformAndCheckStatus", () => {
   it("should resolve a transformed response for 2xx", async () => {
     const transformed = { key: "value" };
-    const response = ({
+    const response = {
       status: 200,
-    } as Partial<Response>) as Response;
+    } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
@@ -25,10 +25,10 @@ describe("transformAndCheckStatus", () => {
 
   it("should reject with a generic Error for a non-2xx response, but transform the response anyway", async () => {
     const transformed = { error: "An Error" };
-    const response = ({
+    const response = {
       status: 308,
       statusText: "Permanent Redirect",
-    } as Partial<Response>) as Response;
+    } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
     await transformAndCheckStatus(response).then(
       () => {
@@ -47,10 +47,10 @@ describe("transformAndCheckStatus", () => {
 
   it("should reject with a ClientError for a 4xx response", async () => {
     const transformed = { error: "An Error" };
-    const response = ({
+    const response = {
       status: 404,
       statusText: "Not Found",
-    } as Partial<Response>) as Response;
+    } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
     await transformAndCheckStatus(response).then(
       () => {
@@ -66,10 +66,10 @@ describe("transformAndCheckStatus", () => {
   });
 
   it("should reject with a ServerError for a 5xx response", async () => {
-    const response = ({
+    const response = {
       status: 500,
       statusText: "Internal Server Error",
-    } as Partial<Response>) as Response;
+    } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(undefined);
     await transformAndCheckStatus(response).then(
       () => {

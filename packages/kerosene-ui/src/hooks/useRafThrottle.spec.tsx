@@ -6,6 +6,7 @@ jest.mock("../utils/rafThrottle");
 
 const rafThrottle = _rafThrottle as jest.MockedFunction<typeof _rafThrottle>;
 const cancel: jest.Mock<void, []> = jest.fn();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 rafThrottle.mockImplementation(<T extends any[]>(fn: (...args: T) => void) =>
   Object.assign((...args: T) => fn(...args), { cancel }),
 );
