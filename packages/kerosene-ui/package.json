@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-ui",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-ui",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -22,14 +22,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
-    "@kablamo/kerosene": "^0.0.23",
+    "@kablamo/kerosene": "^0.0.24",
     "@types/lodash": "^4.14.178",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@kablamo/kerosene-test": "^0.0.10",
     "@rollup/plugin-babel": "^5.3.0",
-    "@sinonjs/fake-timers": "^9.1.0",
+    "@sinonjs/fake-timers": "^9.1.1",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
