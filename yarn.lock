@@ -1579,6 +1579,13 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@sinonjs/fake-timers@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/fake-timers/-/fake-timers-9.1.1.tgz#7b698e0b9d12d93611f06ee143c30ced848e2840"
+  integrity sha512-Wp5vwlZ0lOqpSYGKqr53INws9HLkt6JDc/pDZcPf7bchQnrXJMXPns8CXx0hFikMSGSWfvtvvpb2gtMVfkWagA==
+  dependencies:
+    "@sinonjs/commons" "^1.7.0"
+
 "@sinonjs/samsam@^6.1.1":
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-6.1.1.tgz#627f7f4cbdb56e6419fa2c1a3e4751ce4f6a00b1"
