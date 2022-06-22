@@ -1,4 +1,4 @@
-import { ElementType } from "@kablamo/kerosene";
+import type { ElementType } from "@kablamo/kerosene";
 import { SIDES } from "./css";
 
 let SAFE_AREA_INSET_TEST_ELEMENT: HTMLDivElement | null = null;

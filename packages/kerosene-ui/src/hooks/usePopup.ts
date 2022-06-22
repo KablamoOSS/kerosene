@@ -1,9 +1,10 @@
-import { Mutable } from "@kablamo/kerosene";
+import type { Mutable } from "@kablamo/kerosene";
 import * as React from "react";
 import {
   ADD_EVENT_LISTENER_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_PASSIVE_OPTIONS,
 } from "../utils/listeners";
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 import useRect from "./useRect";
 
 /**
@@ -20,7 +21,7 @@ export default function usePopup(
   const [ref, rect, scroll] = useRect(!open);
 
   const portalEl = React.useRef<HTMLDivElement>(null);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const el = document.createElement("div");
     Object.assign(el.style, {
       position: "absolute",

@@ -1,4 +1,4 @@
-import { JestMock } from "@kablamo/kerosene-test";
+import type { JestMock } from "@kablamo/kerosene-test";
 import createSandbox from "jest-sandbox";
 import { when } from "jest-when";
 import measureCSSProperty from "./measureCSSProperty";

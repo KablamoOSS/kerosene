@@ -1,4 +1,4 @@
-import { Rule } from "eslint";
+import type { Rule } from "eslint";
 import ruleTester from "../test/rule-tester";
 import rule from "./test-id-consistent-naming";
 

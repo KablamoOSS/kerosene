@@ -1,6 +1,6 @@
 import babel from "@rollup/plugin-babel";
 import path from "path";
-import {
+import type {
   ExternalOption,
   ModuleFormat,
   OutputOptions,
