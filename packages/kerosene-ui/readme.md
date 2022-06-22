@@ -22,6 +22,10 @@ Unwraps the decorated typings from a decorator-wrapped components to provide the
 
 Custom hook which manages a series of `AbortController`s, aborting the previous when requesting the `next`, and aborting the final controller on unmount.
 
+### `useCollapsable(open, { immediate?, transitionDuration?, transitionTimingFunction? }?)`
+
+Custom hook which manages height transitions on the element that `ref` is applied to using `maxHeight`.
+
 ### `useInterval(callback, delay)`
 
 Custom hook that makes `setInterval` work declaritively with hooks. See https://overreacted.io/making-setinterval-declarative-with-react-hooks/ for more details.
@@ -29,6 +33,10 @@ Custom hook that makes `setInterval` work declaritively with hooks. See https://
 ### `useKonamiCode(code, callback)`
 
 Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.
+
+### `useMediaQuery(query, { defaultMatches? }?)`
+
+Custom hook which returns the result of the provided media `query`, watching for changes.
 
 ### `useMergedRefs(...refs)`
 

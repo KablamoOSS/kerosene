@@ -1,4 +1,4 @@
-import { Mutable } from "@kablamo/kerosene";
+import type { Mutable } from "@kablamo/kerosene";
 
 /**
  * Returns a new callback ref that effectively merges all provided `refs`

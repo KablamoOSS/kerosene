@@ -1,5 +1,5 @@
 import { stubProperties } from "@kablamo/kerosene-test";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import usePageVisibility from "./usePageVisibility";
 

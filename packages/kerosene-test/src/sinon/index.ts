@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import sinon from "sinon";
+import type * as sinon from "sinon";
 
 /**
  * Shorthand for `sinon.SinonSpy<Parameters<T>, ReturnType<T>>;`

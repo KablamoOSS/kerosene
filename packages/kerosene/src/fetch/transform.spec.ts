@@ -1,6 +1,6 @@
 import _contentType, { ParsedMediaType } from "content-type";
 import { when } from "jest-when";
-import { DeepPartial } from "../types";
+import type { DeepPartial } from "../types";
 import transform from "./transform";
 
 jest.mock("content-type");

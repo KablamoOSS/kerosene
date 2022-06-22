@@ -1,7 +1,7 @@
 // This test almost works
 // eslint isn't being pulled in and configure correctly to run it yet
 
-import { Rule } from "eslint";
+import type { Rule } from "eslint";
 import ruleTester from "../test/rule-tester";
 import rule from "./test-id-prefix-match-path";
 

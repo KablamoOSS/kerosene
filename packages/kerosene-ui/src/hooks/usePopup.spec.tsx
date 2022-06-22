@@ -1,10 +1,10 @@
-import FakeTimers from "@sinonjs/fake-timers";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { last } from "lodash";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
+import waitForRepaint from "../utils/waitForRepaint";
 import usePopup from "./usePopup";
 
 const _addEventListener = jest.spyOn(window, "addEventListener");
@@ -22,16 +22,7 @@ Object.assign(window, {
 });
 
 describe("#usePopup", () => {
-  let clock: FakeTimers.InstalledClock;
-  beforeEach(() => {
-    clock = FakeTimers.install();
-  });
-
-  afterEach(() => {
-    clock.uninstall();
-  });
-
-  it("should create an element for a portal and return the props", () => {
+  it("should create an element for a portal and return the props", async () => {
     const Component = ({ zIndex }: { zIndex?: string | null }) => {
       const { open, setOpen, ref, rect, portalEl, scrollX, scrollY } =
         usePopup(zIndex);
@@ -98,10 +89,10 @@ describe("#usePopup", () => {
       }) as [keyof CSSStyleDeclaration, string | null][]
     ).forEach(([key, value]) => expect(portalEl().style[key]).toBe(value));
 
-    userEvent.click(result.getByRole("button"));
+    await userEvent.click(result.getByRole("button"));
 
-    act(() => {
-      clock.runToFrame();
+    await act(async () => {
+      await waitForRepaint();
     });
 
     expect(open()).toBe(true);

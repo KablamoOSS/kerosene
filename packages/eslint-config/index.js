@@ -83,6 +83,14 @@ module.exports = {
     "react/prop-types": "off",
     "react/state-in-constructor": "off",
     "react/static-property-placement": ["error", "static public field"],
+
+    // eslint-plugin-react-hooks rules
+    "react-hooks/exhaustive-deps": [
+      "error",
+      {
+        additionalHooks: "use.*Effect",
+      },
+    ],
   },
   overrides: [
     {

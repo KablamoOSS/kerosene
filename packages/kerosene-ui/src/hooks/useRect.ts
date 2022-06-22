@@ -1,4 +1,4 @@
-import { ElementType } from "@kablamo/kerosene";
+import type { ElementType } from "@kablamo/kerosene";
 import { isEqual, pick } from "lodash";
 import * as React from "react";
 import { SIDES } from "../utils/css";
@@ -6,6 +6,7 @@ import {
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
 } from "../utils/listeners";
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 import useRafThrottle from "./useRafThrottle";
 
 type Rect = { [side in ElementType<typeof SIDES>]: number };
@@ -55,7 +56,7 @@ export default function useRect(
     if (!isEqual(scroll, newScroll)) setScroll(newScroll);
   });
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!disable) update();
   });
 
