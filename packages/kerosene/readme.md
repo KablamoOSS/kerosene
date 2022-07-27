@@ -160,6 +160,10 @@ Returns the provided `value` rounded to the number of significant `figures` prov
 
 ## Promise
 
+### `Deferred`
+
+Deferred is a class that allows a Promise to be created in advance of the code that will `resolve`/`reject` it.
+
 ### `mapSeries(items, iteratee)`
 
 Maps over `items` with a promise-returning `iteratee` in series.
