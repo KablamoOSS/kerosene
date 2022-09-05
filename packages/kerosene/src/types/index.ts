@@ -36,6 +36,31 @@ export type ElementType<TCollection> =
 export type Entries<T> = { [P in keyof T]: [P, T[P]] }[keyof T];
 
 /**
+ * Like `Omit<T, K>`, but distributes across all members of a union.
+ *
+ * e.g.
+ * ```typescript
+ * type Base = Omit<{ base: string } & ({ a: string } | { b: string; }) & { common: string }, "common">;
+ * // equivalent to (note that a and b are missing)
+ * type Base = { base: string };
+ *
+ * type AorB = DistributiveOmit<{ base: string } & ({ base: string; a: string } | { base: string; b: string; }) & { common: strubg }, "common">;
+ * // equivalent to (note that a and b are present)
+ * type AorB = { base: string } & ({ a: string } | { b: string });
+ * ```
+ */
+export type DistributiveOmit<T, K extends PropertyKey> = T extends any
+  ? Omit<T, K>
+  : never;
+
+/**
+ * Like `Pick<T, K>`, but distributes across all memebrs of a union.
+ */
+export type DistributivePick<T, K extends KeysOfUnion<T>> = T extends any
+  ? Pick<T, K>
+  : never;
+
+/**
  * Like `keyof T`, but distributes across all members of unions to include all keys (including those
  * not shared by all members)
  */
