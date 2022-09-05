@@ -65,6 +65,7 @@ export default function createStubComponent<
   if (functional) {
     return Object.assign(
       ({ children, ...props }: Props) => (
+        // eslint-disable-next-line react/no-unknown-property
         <div __displayName__={displayName} {...props}>
           {typeof children === "function"
             ? transformRenderPropResult(children(...getRenderProps!(props)))
@@ -83,6 +84,7 @@ export default function createStubComponent<
       const { children, ...props } = this.props;
 
       return (
+        // eslint-disable-next-line react/no-unknown-property
         <div __displayName__={displayName} {...props}>
           {typeof children === "function"
             ? transformRenderPropResult(
