@@ -78,6 +78,8 @@ module.exports = {
       { allow: "always", extensions: [".tsx"] },
     ],
     "react/jsx-props-no-spreading": "off",
+    // Allow Emotion css prop
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
     // Not required with TypeScript
     "react/require-default-props": "off",
     "react/prop-types": "off",
