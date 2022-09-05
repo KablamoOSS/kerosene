@@ -238,6 +238,14 @@ Infers the element type `T` from `T[]`, `Set<T>`, `Map<any, T>`, or `{ [key: str
 
 Infers the union of all object entry tuples for type `T`.
 
+### `DistributiveOmit<T, K>`
+
+Like `Omit<T, K>`, but distributes across all members of a union.
+
+### `DistributivePick<T, K>`
+
+Like `Pick<T, K>`, but distributes across all members of a union.
+
 ### `KeysOfUnion<T>`
 
 Like `keyof T`, but distributes across all members of unions to include all keys (including those not shared by all members).
