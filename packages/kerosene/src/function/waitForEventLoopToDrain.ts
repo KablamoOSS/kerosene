@@ -1,7 +1,7 @@
 import globalThis from "core-js-pure/features/global-this";
 
-// Grab a reference to the global `setImmediate` so mocking libraries like `sinon` don't interfere
-const { setImmediate } = globalThis;
+// Grab a reference to the global `setImmediate` and `setTimeout` so mocking libraries like `sinon` don't interfere
+const { setImmediate, setTimeout } = globalThis;
 
 /**
  * Returns a Promise that resolves when the event loop has drained
@@ -14,6 +14,20 @@ const { setImmediate } = globalThis;
  */
 export default function waitForEventLoopToDrain(): Promise<void> {
   return new Promise<void>((resolve) => {
-    setImmediate(resolve);
+    if (setImmediate) {
+      setImmediate(resolve);
+    } else if (
+      typeof jest !== "undefined" &&
+      typeof jest.requireActual === "function"
+    ) {
+      // jest-environment-jsdom removes `setImmediate` from the Node globals, so instead use jest to require the Node
+      // API from the "timers" module. We can't just do `import { setImmediate } from "timers";` because of the browser
+      jest
+        .requireActual<typeof import("timers")>("timers")
+        .setImmediate(resolve);
+    } else {
+      // Fallback to setTimeout
+      setTimeout(resolve, 0);
+    }
   });
 }
