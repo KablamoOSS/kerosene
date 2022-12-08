@@ -21,21 +21,21 @@
     "node": ">= 14.15.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.9",
+    "@babel/runtime": "^7.20.6",
     "@kablamo/kerosene": "^0.0.28",
-    "@types/lodash": "^4.14.184",
+    "@types/lodash": "^4.14.191",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@kablamo/kerosene-test": "^0.0.11",
     "@rollup/plugin-babel": "^5.3.1",
-    "@sinonjs/fake-timers": "^9.1.2",
-    "@testing-library/dom": "^8.17.1",
+    "@sinonjs/fake-timers": "^10.0.0",
+    "@testing-library/dom": "^8.19.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/sinonjs__fake-timers": "^8.1.2",
     "jest-sandbox": "^1.1.2",
-    "jest-when": "^3.5.1",
+    "jest-when": "^3.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.79.0",

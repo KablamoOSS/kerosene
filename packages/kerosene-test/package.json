@@ -47,10 +47,10 @@
   ],
   "dependencies": {
     "@kablamo/kerosene": "^0.0.28",
-    "@types/lodash": "^4.14.184",
+    "@types/lodash": "^4.14.191",
     "@types/sinon": "^10.0.13",
     "lodash": "^4.17.21",
-    "sinon": "^14.0.0"
+    "sinon": "^15.0.0"
   },
   "devDependencies": {
     "react": "^18.2.0",
