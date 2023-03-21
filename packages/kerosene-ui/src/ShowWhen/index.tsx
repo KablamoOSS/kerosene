@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode } from "react";
+import { PureComponent, type ReactNode } from "react";
 
 interface ShowWhenProps {
   when: boolean;

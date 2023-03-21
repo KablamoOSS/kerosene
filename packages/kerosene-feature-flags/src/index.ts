@@ -1,4 +1,4 @@
-import { Condition, Runtime } from "./Condition";
+import { Condition, type Runtime } from "./Condition";
 
 type Flag = (runtime: Runtime) => boolean;
 
@@ -25,4 +25,4 @@ function flag(callback: FlagCallback): Flag {
   };
 }
 
-export { flag, Flag };
+export { flag, type Flag };

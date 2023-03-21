@@ -1,7 +1,7 @@
 declare class JestSandbox {
-  fn: typeof jest["fn"];
+  fn: (typeof jest)["fn"];
 
-  spyOn: typeof jest["spyOn"];
+  spyOn: (typeof jest)["spyOn"];
 
   clear(): void;
 

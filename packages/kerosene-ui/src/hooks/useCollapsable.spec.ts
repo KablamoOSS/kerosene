@@ -1,7 +1,7 @@
 import type { Mutable } from "@kablamo/kerosene";
-import { act, renderHook, RenderHookResult } from "@testing-library/react";
+import { act, renderHook, type RenderHookResult } from "@testing-library/react";
 import { when } from "jest-when";
-import useCollapsable, { UseCollapsableReturn } from "./useCollapsable";
+import useCollapsable, { type UseCollapsableReturn } from "./useCollapsable";
 
 const mockUseMediaQuery: jest.MockedFunction<
   typeof import("./useMediaQuery")["default"]
