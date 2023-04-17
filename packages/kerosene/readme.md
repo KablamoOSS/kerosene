@@ -226,6 +226,54 @@ The default list of `lowercaseWords` is exported as such.
 
 ## Types
 
+### `AngleDegrees`
+
+Marked type for an angle that should be specified in degrees
+
+### `AngleRadians`
+
+Marked type for an angle that should be specified in radians
+
+### `AnyConstructor`
+
+Alias for any constructor function
+
+### `AnyFunction`
+
+Alias for any function
+
+### `BrandType<T, Brand>`
+
+Brands type `T` with the provided `Brand`
+
+### `MarkType<T, Brand>`
+
+Marks type `T` with the provided `Brand`. Differs from `BrandType` in that the branding is optional.
+
+### `OpaqueType<T, Brand>`
+
+Brands type `T` as an opaque type (no runtime effect). To use as `T`, consumers must explicitly unwrap the value.
+
+### `Underlying<T>`
+
+For a branded type `T`, provides the underlying type
+
+### `brandT<BrandType>(underlying)`
+
+Returns the value `underlying` branded according to the type parameter
+
+### `opaqueT<OpaqueType>(underlying)`
+
+Returns the value `underlying` as the `OpaqueType` specified as the type parameter
+
+### `underlyingT<Branding>(branded)`
+
+Unwraps the `branded` type to return the underlying value
+
+### `DeepMutable<T>`
+
+Recursively traverses `T` to make all properties mutable
+
 ### `DeepNonNullable<T>`
 
 Recursively traverses `T` to make all properties `Required` and `NonNullable`.
@@ -249,6 +297,18 @@ Like `Omit<T, K>`, but distributes across all members of a union.
 ### `DistributivePick<T, K>`
 
 Like `Pick<T, K>`, but distributes across all members of a union.
+
+### `InferrableTupleOf<T>`
+
+Utility type which allows a generic constraint to be inferred as a tuple of T instead of an array of T
+
+### `IsUnknownOrAny<T>`
+
+Utility type which returns a boolean type for whether `T` is `unknown` or `any`
+
+### `isRecord<T>`
+
+Custom type predicate which checks whether a type is assignable to `Record<PropertyKey, unknown>`. If the type `T` of `obj` is known (not `unknown` or `any`), then the type will be narrowed.
 
 ### `KeysOfUnion<T>`
 
@@ -289,3 +349,11 @@ Creates a new type from `T` including only keys where the value is assignable to
 ### `RequireAtLeastOne<T>`
 
 Creates a new type from `T` where at least one key is required and all others are optional.
+
+### `RequiredKeys`
+
+Utility type which acts like `keyof T`, but only includes required keys
+
+### `RequireKeys<T, K>`
+
+Creates a new type from `T` where keys `K` are marked as required

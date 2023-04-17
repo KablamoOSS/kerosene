@@ -1,6 +1,104 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 
 /**
+ * Alias for any constructor function
+ */
+export type AnyConstructor = new (...args: any) => any;
+
+/**
+ * Alias for any function
+ */
+export type AnyFunction = (...args: any) => any;
+
+/**
+ * This symbol does not exist at runtime, but rather only exists to support branding of types
+ */
+declare const BRAND: unique symbol;
+
+/**
+ * This symbol does not exist at runtime, but rather only exists to support branding of types
+ */
+declare const UNDERLYING: unique symbol;
+
+type Branding<T, Brand> = {
+  [BRAND]?: Brand;
+  [UNDERLYING]?: { T: T };
+};
+
+/**
+ * Brands type `T` with the provided `Brand`
+ */
+export type BrandType<T, Brand> = T & Required<Branding<T, Brand>>;
+
+/**
+ * Marks type `T` with the provided `Brand`. Differs from `BrandType` in that the branding is optional.
+ */
+export type MarkType<T, Brand> = T & Branding<T, Brand>;
+
+/**
+ * Brands type `T` as an opaque type (no runtime effect). To use as `T`, consumers must explicitly unwrap the value.
+ */
+export type OpaqueType<T, Brand> = Required<Branding<T, Brand>>;
+
+/**
+ * For a branded type `T`, provides the underlying type
+ */
+export type Underlying<T extends Branding<unknown, unknown>> = NonNullable<
+  T[typeof UNDERLYING]
+>["T"];
+
+/**
+ * Returns the value `underlying` branded according to the type parameter
+ * @param underlying
+ * @example
+ * ```ts
+ * const radians = brandT<BrandType<number, "AngleRadians">>(Math.PI);
+ * ```
+ */
+export function brandT<T extends BrandType<unknown, unknown>>(
+  underlying: Underlying<T>,
+): T {
+  return underlying as T;
+}
+
+/**
+ * Returns the value `underlying` as the `OpaqueType` specified as the type parameter
+ * @param underlying
+ * @example
+ * ```tsx
+ * const filename = opaqueT<OpaqueType<string, "S3Filename">>(response.filename);
+ * // $ExpectError filename may not be passed directly to <img /> tag and should be included as part of a signed URL
+ * const img = <img src={filename} />;
+ * ```
+ */
+export function opaqueT<T extends OpaqueType<unknown, unknown>>(
+  underlying: Underlying<T>,
+): T {
+  return underlying as T;
+}
+
+/**
+ * Unwraps the `branded` type to return the underlying value
+ * @param branded
+ * @example
+ * ```ts
+ * async function getSignedUrl(filename: OpaqueType<string, "S3Filename">): string {
+ *   return getSignedUrl(s3Client, new GetObjectCommand({ Bucket, Key: underlyingT(filename) }));
+ * }
+ * ```
+ */
+export function underlyingT<T extends Branding<unknown, unknown>>(
+  branded: T,
+): Underlying<T> {
+  return branded as Underlying<T>;
+}
+
+/**
+ * Recursively traverses `T` to make all properties mutable
+ */
+export type DeepMutable<T> = { -readonly [P in keyof T]: DeepMutable<T[P]> };
+
+/**
  * Make all nested properties of `T` `Required` and `NonNullable`
  */
 export type DeepNonNullable<T> = {
@@ -44,7 +142,7 @@ export type Entries<T> = { [P in keyof T]: [P, T[P]] }[keyof T];
  * // equivalent to (note that a and b are missing)
  * type Base = { base: string };
  *
- * type AorB = DistributiveOmit<{ base: string } & ({ base: string; a: string } | { base: string; b: string; }) & { common: strubg }, "common">;
+ * type AorB = DistributiveOmit<{ base: string } & ({ base: string; a: string } | { base: string; b: string; }) & { common: string }, "common">;
  * // equivalent to (note that a and b are present)
  * type AorB = { base: string } & ({ a: string } | { b: string });
  * ```
@@ -59,6 +157,49 @@ export type DistributiveOmit<T, K extends PropertyKey> = T extends any
 export type DistributivePick<T, K extends KeysOfUnion<T>> = T extends any
   ? Pick<T, K>
   : never;
+
+/**
+ * Utility type which allows a generic constraint to be inferred as a tuple of T instead of an array of T
+ *
+ * @example
+ * ```ts
+ * type Box<T> = { prop: T };
+ *
+ * function badBoxesIdentity<TBoxes extends readonly Box<unknown>[]>(boxes: TBoxes): TBoxes;
+ * // $ExpectType readonly Box<string | number>[]
+ * const badBoxes = badBoxesIdentity([{ prop: "a" }, { prop: 1 }]);
+ *
+ * function boxesIdentity<TBoxes extends InferrableTupleOf<Box<unknown>>(boxes: TBoxes): TBoxes;
+ * // $ExpectType readonly [Box<string>, Box<number>]
+ * const boxes = boxesIdentity([{ prop: "a" }, { prop: 1 }]);
+ * ```
+ * @see https://github.com/microsoft/TypeScript/issues/6310#issuecomment-168365222
+ */
+export type InferrableTupleOf<T> = readonly [never] | ReadonlyArray<T>;
+
+/**
+ * Utility type which returns a boolean type for whether `T` is `unknown` or `any`
+ */
+export type IsUnknownOrAny<T> = T extends unknown
+  ? unknown extends T
+    ? true
+    : false
+  : false;
+
+/**
+ * Custom type predicate which checks whether a type is assignable to `Record<PropertyKey, unknown>`. If the type `T` of
+ * `obj` is known (not `unknown` or `any`), then the type will be narrowed.
+ * @param obj
+ */
+export function isRecord<T = unknown>(
+  obj: T,
+): obj is IsUnknownOrAny<T> extends true
+  ? Record<PropertyKey, unknown> extends T
+    ? Record<PropertyKey, unknown>
+    : Extract<T, object>
+  : Extract<T, object> {
+  return typeof obj === "object" && obj !== null;
+}
 
 /**
  * Like `keyof T`, but distributes across all members of unions to include all keys (including those
@@ -194,3 +335,18 @@ export type PickBy<T extends object, TValue> = {
 export type RequireAtLeastOne<T> = {
   [K in keyof T]: Partial<Pick<T, Exclude<keyof T, K>>> & Required<Pick<T, K>>;
 }[keyof T];
+
+/**
+ * Utility type which acts like `keyof T`, but only includes required keys
+ */
+export type RequiredKeys<T extends object> = T extends unknown
+  ? {
+      [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+    }[keyof T]
+  : never;
+
+/**
+ * Creates a new type from `T` where keys `K` are marked as required
+ */
+export type RequireKeys<T, K extends keyof T> = Omit<T, K> &
+  Required<Pick<T, K>>;

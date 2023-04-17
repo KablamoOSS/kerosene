@@ -36,6 +36,7 @@ export * from "./utils/listeners";
 export { default as measureCSSProperty } from "./utils/measureCSSProperty";
 export { default as mergeRefs } from "./utils/mergeRefs";
 export { default as rafThrottle } from "./utils/rafThrottle";
+export * from "./utils/svg";
 export { default as waitForRepaint } from "./utils/waitForRepaint";
 
 export { default as createTestIds } from "./utils/createTestIds";
