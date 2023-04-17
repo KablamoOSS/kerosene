@@ -21,11 +21,9 @@ const output = (file: string, format: ModuleFormat): OutputOptions => ({
 });
 
 const externals = [
-  "querystring",
-  ...[packageJson.dependencies, packageJson.peerDependencies].flatMap(
-    Object.keys,
-  ),
-];
+  packageJson.dependencies,
+  packageJson.peerDependencies,
+].flatMap(Object.keys);
 
 const external: ExternalOption = (source) =>
   externals.includes(source) ||
