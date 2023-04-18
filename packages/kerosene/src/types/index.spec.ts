@@ -1,6 +1,6 @@
 import {
   brandT,
-  OpaqueType,
+  type OpaqueType,
   type BrandType,
   opaqueT,
   underlyingT,

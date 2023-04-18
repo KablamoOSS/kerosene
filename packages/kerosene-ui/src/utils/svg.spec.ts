@@ -1,4 +1,4 @@
-import { Point2D, d, point2DPlusPolarVector } from "./svg";
+import { type Point2D, d, point2DPlusPolarVector } from "./svg";
 
 describe("SVG utils", () => {
   describe("d", () => {
