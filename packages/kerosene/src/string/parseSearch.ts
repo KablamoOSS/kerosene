@@ -1,5 +1,7 @@
-// Using default import here due to faulty ESBuild polyfills with named exports
-import qs from "querystring";
+/**
+ * @deprecated Use builtin `URLSearchParams` instead
+ */
+type ParsedUrlQuery = NodeJS.Dict<string | string[]>;
 
 /**
  * Parse query parameters from Location.search
@@ -10,7 +12,17 @@ import qs from "querystring";
  *
  * @param search Location.search
  */
-export default function parseSearch(search: string) {
-  const [, querystring = ""] = search.split("?", 2);
-  return qs.parse(querystring);
+export default function parseSearch(search: string): ParsedUrlQuery {
+  const searchParams = new URLSearchParams(search);
+  const parsed: ParsedUrlQuery = Object.create(null);
+  searchParams.forEach((value, key) => {
+    if (typeof parsed[key] === "undefined") {
+      parsed[key] = value;
+    } else if (Array.isArray(parsed[key])) {
+      (parsed[key] as string[]).push(value);
+    } else {
+      parsed[key] = [parsed[key] as string, value];
+    }
+  });
+  return parsed;
 }
