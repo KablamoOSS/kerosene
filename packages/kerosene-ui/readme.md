@@ -68,6 +68,16 @@ Custom hook which measures the bounding rect of the element attached to `ref`. L
 
 Returns `[ref, rect, { scrollX, scrollY }]`.
 
+## SVG Utilities
+
+### `d`
+
+A collection of SVG path construction utilities which add documentation to available path commands.
+
+### `point2DPlusPolarVector([x, y], [r, theta])`
+
+Adds the vector `[r, theta]` to Point2D `[x, y]`
+
 ## Available functions
 
 ### `getSafeAreaInsets()`

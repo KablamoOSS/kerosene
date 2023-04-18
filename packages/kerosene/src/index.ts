@@ -25,6 +25,7 @@ export { default as divmod } from "./math/divmod";
 export { default as toDegrees } from "./math/toDegrees";
 export { default as toRadians } from "./math/toRadians";
 export { default as toSignificantFigures } from "./math/toSignificantFigures";
+export * from "./math/types";
 
 export { default as Deferred } from "./promise/Deferred";
 export { default as mapSeries } from "./promise/mapSeries";
