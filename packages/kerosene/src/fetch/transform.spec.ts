@@ -1,4 +1,4 @@
-import _contentType, { ParsedMediaType } from "content-type";
+import _contentType, { type ParsedMediaType } from "content-type";
 import { when } from "jest-when";
 import type { DeepPartial } from "../types";
 import transform from "./transform";

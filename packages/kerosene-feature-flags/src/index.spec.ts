@@ -1,4 +1,4 @@
-import { Flag, flag } from ".";
+import { type Flag, flag } from ".";
 
 interface Case {
   conditions: any;

@@ -244,4 +244,4 @@ Object.defineProperty(Condition.prototype, "all", {
   },
 });
 
-export { Condition, Runtime };
+export { Condition, type Runtime };

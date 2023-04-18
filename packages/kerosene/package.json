@@ -21,19 +21,19 @@
     "node": ">= 14.15.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.6",
+    "@babel/runtime": "^7.21.0",
     "@types/lodash": "^4.14.191",
-    "content-type": "^1.0.4",
-    "core-js-pure": "^3.26.1",
+    "content-type": "^1.0.5",
+    "core-js-pure": "^3.29.1",
     "date-fns": "^2.29.3",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "^5.3.1",
-    "@sinonjs/fake-timers": "^10.0.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@sinonjs/fake-timers": "^10.0.2",
     "@types/seed-random": "^2.2.1",
     "jest-when": "^3.5.2",
-    "rollup": "^2.79.0",
+    "rollup": "^3.20.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "seed-random": "^2.2.0"
   },
