@@ -6,6 +6,7 @@ export {
 export { default as useInterval } from "./hooks/useInterval";
 export { default as useIsomorphicLayoutEffect } from "./hooks/useIsomorphicLayoutEffect";
 export { default as useKonamiCode } from "./hooks/useKonamiCode";
+export { default as useMediaQuery } from "./hooks/useMediaQuery";
 export { default as useMergedRefs } from "./hooks/useMergedRefs";
 export { default as usePageVisibility } from "./hooks/usePageVisibility";
 export { default as usePopup } from "./hooks/usePopup";
