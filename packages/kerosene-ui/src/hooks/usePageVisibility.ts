@@ -1,4 +1,8 @@
 import * as React from "react";
+// Using shim for React 16 & 17 support instead of React.useSyncExternalStore
+import { useSyncExternalStore } from "use-sync-external-store/shim";
+
+const getServerSnapshot = () => true;
 
 export default function usePageVisibility(
   useState?: true,
@@ -16,36 +20,30 @@ export default function usePageVisibility(
 export default function usePageVisibility(
   useState = true,
 ): [boolean, React.RefObject<boolean>] | React.RefObject<boolean> {
-  const [visible, setVisible] = React.useState(!document.hidden);
-  const visibility = React.useRef(!document.hidden);
+  const visibility = React.useRef(true);
 
-  const onVisibilityChange = React.useCallback(() => {
-    // Fallback to `document.hidden=false` if the API is not present
+  const subscribe = React.useCallback((callback: () => void) => {
+    document.addEventListener("visibilitychange", callback);
+
+    return () => document.removeEventListener("visibilitychange", callback);
+  }, []);
+
+  const getSnapshot = React.useCallback(() => {
+    // In React 16 & 17, the `useSyncExternalStore` shim always uses `getSnapshot()`, even on the server
+    if (typeof document === "undefined") return true;
+
     const { hidden = false } = document;
 
-    // Always update the ref
     visibility.current = !hidden;
-
-    // Only set the state when `useState` is `true`
-    if (useState) {
-      setVisible(!hidden);
-    }
+    // Always returning true when not using state to prevent component updates
+    return useState ? visibility.current : true;
   }, [useState]);
 
-  // Sync visibility when the component renders
-  React.useEffect(onVisibilityChange, [onVisibilityChange]);
-
-  // Listen to visibilitychange events and update accordingly
-  React.useEffect(() => {
-    document.addEventListener("visibilitychange", onVisibilityChange, false);
-
-    return () =>
-      document.removeEventListener(
-        "visibilitychange",
-        onVisibilityChange,
-        false,
-      );
-  }, [onVisibilityChange]);
+  const visible = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   return useState
     ? [visible, visibility as React.RefObject<boolean>]

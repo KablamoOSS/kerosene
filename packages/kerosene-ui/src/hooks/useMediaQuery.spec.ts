@@ -1,6 +1,4 @@
-import type { Mutable } from "@kablamo/kerosene";
 import { act, renderHook } from "@testing-library/react";
-import { when } from "jest-when";
 import useMediaQuery from "./useMediaQuery";
 
 const mockMatchMedia: jest.Mock<
@@ -21,38 +19,50 @@ const createMockMediaQueryList = ({
   matches,
   query,
 }: {
-  matches: boolean;
+  matches: () => boolean;
   query: string;
 }): jest.Mocked<MediaQueryList> => ({
   addEventListener: jest.fn(),
   addListener: jest.fn(),
   dispatchEvent: jest.fn(),
-  matches,
+  get matches() {
+    return matches();
+  },
   media: query,
   onchange: null,
   removeListener: jest.fn(),
   removeEventListener: jest.fn(),
 });
-const update = (matches: boolean) =>
-  act(() => {
-    const list = getReturnValue(mockMatchMedia.mock.results[0]) as Mutable<
-      jest.Mocked<MediaQueryList>
-    >;
-    list.matches = matches;
-    list.addListener.mock.calls[0][0]!.call(list, {
-      matches: list.matches,
-      media: list.media,
-    } as MediaQueryListEvent);
-  });
 
 const query = "(prefers-color-scheme: dark)";
+let matches: boolean;
+
+const update = (_matches: boolean) =>
+  act(() => {
+    matches = _matches;
+    mockMatchMedia.mock.calls
+      .flatMap(([_query], index) =>
+        query === _query
+          ? [getReturnValue(mockMatchMedia.mock.results[index])]
+          : [],
+      )
+      .forEach((list) =>
+        list.addListener.mock.calls.forEach(([listener]) => {
+          listener!.call(list, {
+            matches: list.matches,
+            media: list.media,
+          } as MediaQueryListEvent);
+        }),
+      );
+  });
 
 describe("useMediaQuery", () => {
   let originalmatchMedia: typeof window.matchMedia;
   beforeEach(() => {
     originalmatchMedia = window.matchMedia;
+    matches = false;
     mockMatchMedia.mockImplementation((_query) =>
-      createMockMediaQueryList({ matches: false, query: _query }),
+      createMockMediaQueryList({ matches: () => matches, query: _query }),
     );
     window.matchMedia = mockMatchMedia;
   });
@@ -79,9 +89,7 @@ describe("useMediaQuery", () => {
   });
 
   it("should return true when the query matches", async () => {
-    when(mockMatchMedia)
-      .calledWith(query)
-      .mockReturnValue(createMockMediaQueryList({ matches: true, query }));
+    matches = true;
     const { result } = renderHook(() => useMediaQuery(query));
 
     expect(result.current).toBe(true);
@@ -99,11 +107,11 @@ describe("useMediaQuery", () => {
     expect(result.current).toBe(false);
 
     unmount();
-    expect(
-      getReturnValue(mockMatchMedia.mock.results[0]).removeListener,
-    ).toBeCalledWith(
-      getReturnValue(mockMatchMedia.mock.results[0]).addListener.mock
-        .calls[0][0]!,
-    );
+    mockMatchMedia.mock.results.forEach((r) => {
+      const list = getReturnValue(r);
+      list.addListener.mock.calls.forEach(([callback]) => {
+        expect(list.removeListener).toHaveBeenCalledWith(callback);
+      });
+    });
   });
 });

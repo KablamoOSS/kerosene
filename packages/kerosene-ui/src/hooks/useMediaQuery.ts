@@ -1,6 +1,7 @@
 import { noop } from "lodash";
 import * as React from "react";
-import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
+// Using shim for React 16 & 17 support instead of React.useSyncExternalStore
+import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 export interface UseMediaQueryOptions {
   /**
@@ -19,36 +20,53 @@ export default function useMediaQuery(
   query: string,
   { defaultMatches = false }: UseMediaQueryOptions = {},
 ): boolean {
-  const [matches, setMatches] = React.useState(defaultMatches);
+  const subscribe = React.useCallback(
+    (callback: () => void) => {
+      // This branch should only occur in tests
+      if (
+        typeof window === "undefined" ||
+        typeof window.matchMedia !== "function"
+      ) {
+        return noop;
+      }
 
-  useIsomorphicLayoutEffect(() => {
-    // This is necessary due to a bug in Safari where unsubscribing from a MediaQueryList does not work
-    let subscribed = true;
+      // This is necessary due to a bug in Safari where unsubscribing from a MediaQueryList does not work
+      const controller = new AbortController();
 
-    // JSDOM
-    if (typeof window.matchMedia !== "function") {
-      return noop;
+      const onUpdate = () => {
+        if (controller.signal.aborted) return;
+        callback();
+      };
+
+      const list = window.matchMedia(query);
+
+      // NOTE: using `addListener` (deprecated) instead of `addEventListener` for Safari <14 support
+      list.addListener(onUpdate);
+
+      return () => {
+        list.removeListener(onUpdate);
+        controller.abort();
+      };
+    },
+    [query],
+  );
+
+  const getSnapshot = React.useCallback(() => {
+    // In React 16 & 17, the `useSyncExternalStore` shim always uses `getSnapshot()`, even on the server
+    if (
+      typeof window === "undefined" ||
+      typeof window.matchMedia !== "function"
+    ) {
+      return defaultMatches;
     }
 
-    const list = window.matchMedia(query);
+    return window.matchMedia(query).matches;
+  }, [defaultMatches, query]);
 
-    const update = () => {
-      // This is neccessary due to a bug in Safari
-      if (!subscribed) return;
+  const getServerSnapshot = React.useCallback(
+    () => defaultMatches,
+    [defaultMatches],
+  );
 
-      setMatches(list.matches);
-    };
-
-    // NOTE: using `addListener` (deprecated) instead of `addEventListener` as Safari has only recently added support
-    list.addListener(update);
-
-    update();
-
-    return () => {
-      list.removeListener(update);
-      subscribed = false;
-    };
-  }, [query]);
-
-  return matches;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
