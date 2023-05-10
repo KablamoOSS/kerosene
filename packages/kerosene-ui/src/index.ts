@@ -3,6 +3,11 @@ export {
   default as useCollapsable,
   type UseCollapsableReturn,
 } from "./hooks/useCollapsable";
+export {
+  default as useCurrentTime,
+  CurrentTimeProvider,
+  type CurrentTimeProviderProps,
+} from "./hooks/useCurrentTime";
 export { default as useInterval } from "./hooks/useInterval";
 export { default as useIsomorphicLayoutEffect } from "./hooks/useIsomorphicLayoutEffect";
 export { default as useKonamiCode } from "./hooks/useKonamiCode";

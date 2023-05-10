@@ -200,7 +200,7 @@ export interface CurrentTimeProviderProps {
 }
 
 /**
- * Context Provider for the CurrentTimeEmitter used internally by `useCurrentTime`.
+ * Context Provider for the CurrentTimeEmitter used internally by the `useCurrentTime` hook.
  * Recommended for use when using SSR so that on initial render and hydration a consistent and correct time will be used.
  * @param props.children
  * @param props.defaultPeriod
