@@ -26,6 +26,10 @@ Custom hook which manages a series of `AbortController`s, aborting the previous 
 
 Custom hook which manages height transitions on the element that `ref` is applied to using `maxHeight`.
 
+### `useCurrentTime(period?)`
+
+Custom hook which uses a shared `CurrentTimeEmitter` class to listen for time updates in a performant way. Will update at least once every `period` milliseconds whilst the page is visible. Uses only a single interval to avoid overloading the browser when there are a large number of components listening to the time. Whilst this hook will attempt to updates components only as-required, it is not recommended to use this hook for extremely frequent updates (sub 1-second) and for such specific cases, `requestAnimationFrame` should be used instead.
+
 ### `useInterval(callback, delay)`
 
 Custom hook that makes `setInterval` work declaritively with hooks. See https://overreacted.io/making-setinterval-declarative-with-react-hooks/ for more details.
@@ -33,6 +37,10 @@ Custom hook that makes `setInterval` work declaritively with hooks. See https://
 ### `useKonamiCode(code, callback)`
 
 Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.
+
+### `useLocalStorage(key, defaultValue, isT)`
+
+Custom hook which allows reading/writing of `localStorage` in a manner similar to `React.useState`.
 
 ### `useMediaQuery(query, { defaultMatches? }?)`
 

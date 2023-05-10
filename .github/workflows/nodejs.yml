@@ -16,8 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # TODO: Remove after 2023-04-30
-          - lts/fermium
           - lts/gallium
           - lts/hydrogen
           - current

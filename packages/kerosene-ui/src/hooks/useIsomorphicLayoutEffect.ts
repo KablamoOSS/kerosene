@@ -2,7 +2,8 @@ import * as React from "react";
 
 /**
  * Please avoid using this unless it is absolutely required. Most of the time, what you actually want is just
- * `React.useEffect()`.
+ * `React.useEffect()`, or may be accomplished more correctly with
+ * `React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)`.
  *
  * Most of the time `React.useEffect()` should be used if what you need doesn't need to happen before the render is
  * ready for the user, e.g. making a network call.
@@ -13,7 +14,9 @@ import * as React from "react";
  * intermediate state would be shown anyway before React finishes hydrating.
  *
  * But when moving between pages client side, you want to avoid an intermediate flash which could result after a change
- * in `React.useEffect()`, but not `React.useLayoutEffect()` (which is called synchronously after render).
+ * in `React.useEffect()`, but not `React.useLayoutEffect()` (which is called synchronously after render). It may also
+ * be worth checking whether `React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)` is a better fit
+ * for your use case, and would avoid a double render.
  */
 const useIsomorphicLayoutEffect =
   typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;

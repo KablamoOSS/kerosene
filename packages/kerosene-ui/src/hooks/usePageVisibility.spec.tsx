@@ -34,7 +34,6 @@ describe("usePageVisibility", () => {
     expect(addEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       expect.any(Function),
-      false,
     );
     const onVisibilityChange = addEventListener.mock.calls.find(
       (call) => call[0] === "visibilitychange",
@@ -50,7 +49,6 @@ describe("usePageVisibility", () => {
     expect(removeEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       onVisibilityChange,
-      false,
     );
   });
 
@@ -63,7 +61,6 @@ describe("usePageVisibility", () => {
     expect(addEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       expect.any(Function),
-      false,
     );
     const onVisibilityChange = addEventListener.mock.calls.find(
       (call) => call[0] === "visibilitychange",
@@ -79,7 +76,6 @@ describe("usePageVisibility", () => {
     expect(removeEventListener).toHaveBeenCalledWith(
       "visibilitychange",
       onVisibilityChange,
-      false,
     );
   });
 
