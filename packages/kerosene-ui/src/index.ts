@@ -31,7 +31,7 @@ export { default as useRect } from "./hooks/useRect";
 export { default as useStableIdentity } from "./hooks/useStableIdentity";
 export { default as useUpdatingRef } from "./hooks/useUpdatingRef";
 
-export { default as ShowWhen } from "./ShowWhen";
+export { default as ShowWhen } from "./components/ShowWhen";
 
 export * from "./types";
 

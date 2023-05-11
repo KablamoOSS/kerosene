@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "target": "ES2015",
     "declaration": true,
     "outDir": ".dist",
     "noEmit": false

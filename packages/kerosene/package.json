@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene",
-  "version": "0.0.29",
+  "version": "0.0.35",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -8,9 +8,18 @@
   "homepage": "https://github.com/KablamoOSS/kerosene",
   "private": false,
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "dist/index.d.ts",
   "directories": {
     "doc": "readme.md"
   },
@@ -42,6 +51,6 @@
     "build": "npm-run-all -p build:rollup build:typings",
     "build:rollup": "rollup -c",
     "build:typings": "tsc -p ./config/tsconfig.json",
-    "clean": "rimraf es lib"
+    "clean": "rimraf dist"
   }
 }

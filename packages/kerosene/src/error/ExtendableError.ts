@@ -11,8 +11,8 @@
  * @see https://github.com/Microsoft/TypeScript/issues/13965
  */
 export default class ExtendableError extends Error {
-  constructor(message?: string) {
-    super(message);
+  constructor(...args: ConstructorParameters<ErrorConstructor>) {
+    super(...args);
 
     // NOTE: This is required for some environments like Jest where ES6 classes are downleveled to ES5 syntax. This
     // breaks the the `instanceof` operator for `class MyError extends Error {}`

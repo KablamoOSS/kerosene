@@ -19,6 +19,7 @@
   "homepage": "https://github.com/KablamoOSS/kerosene",
   "private": false,
   "license": "MIT",
+  "type": "module",
   "main": ".dist/index.js",
   "browser": ".dist/index.js",
   "directories": {

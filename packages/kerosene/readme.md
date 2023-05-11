@@ -160,9 +160,9 @@ Returns the provided `value` rounded to the number of significant `figures` prov
 
 ## Promise
 
-### `Deferred`
+### `Deferred<T>`
 
-Deferred is a class that allows a Promise to be created in advance of the code that will `resolve`/`reject` it.
+Deferred is a class that allows a Promise to be created in advance of the code that will `resolve`/`reject` it. Deprecated in favour of `Promise.withResolvers<T>()`.
 
 ### `mapSeries(items, iteratee)`
 
@@ -300,7 +300,7 @@ Like `Pick<T, K>`, but distributes across all members of a union.
 
 ### `InferrableTupleOf<T>`
 
-Utility type which allows a generic constraint to be inferred as a tuple of T instead of an array of T
+Utility type which allows a generic constraint to be inferred as a tuple of `T` instead of an array of `T`. Deprecated in favour of `const` type parameters.
 
 ### `IsUnknownOrAny<T>`
 

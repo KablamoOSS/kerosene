@@ -161,6 +161,8 @@ export type DistributivePick<T, K extends KeysOfUnion<T>> = T extends any
 /**
  * Utility type which allows a generic constraint to be inferred as a tuple of T instead of an array of T
  *
+ * @deprecated Use const type parameters instead
+ *
  * @example
  * ```ts
  * type Box<T> = { prop: T };
@@ -169,7 +171,11 @@ export type DistributivePick<T, K extends KeysOfUnion<T>> = T extends any
  * // $ExpectType readonly Box<string | number>[]
  * const badBoxes = badBoxesIdentity([{ prop: "a" }, { prop: 1 }]);
  *
- * function boxesIdentity<TBoxes extends InferrableTupleOf<Box<unknown>>(boxes: TBoxes): TBoxes;
+ * function boxesIdentity<TBoxes extends InferrableTupleOf<Box<unknown>>>(boxes: TBoxes): TBoxes;
+ * // $ExpectType readonly [Box<string>, Box<number>]
+ * const boxes = boxesIdentity([{ prop: "a" }, { prop: 1 }]);
+ *
+ * function boxesIdentity<const TBoxes extends readonly Box<unknown>[]>(boxes: TBoxes): TBoxes;
  * // $ExpectType readonly [Box<string>, Box<number>]
  * const boxes = boxesIdentity([{ prop: "a" }, { prop: 1 }]);
  * ```
