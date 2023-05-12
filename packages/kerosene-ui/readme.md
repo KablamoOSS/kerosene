@@ -80,6 +80,10 @@ Custom hook which measures the bounding rect of the element attached to `ref`. L
 
 Returns `[ref, rect, { scrollX, scrollY }]`.
 
+### `useSessionStorage(key, defaultValue, isT)`
+
+Custom hook which allows reading/writing of `sessionStorage` in a manner similar to `React.useState`.
+
 ## SVG Utilities
 
 ### `d`

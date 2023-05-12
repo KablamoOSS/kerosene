@@ -1,61 +1,73 @@
 import { act, renderHook } from "@testing-library/react";
 import { isBoolean } from "lodash";
-import useLocalStorage, {
+import {
+  useLocalStorage,
+  useSessionStorage,
   type CustomStorageEventInit,
-} from "./useLocalStorage";
+} from "./storage";
 
 const key = "key";
 
-describe("useLocalStorage", () => {
-  let _localStorage: Storage;
+describe.each([
+  {
+    name: "useLocalStorage",
+    useStorage: useLocalStorage,
+    storageArea: "localStorage",
+  },
+  {
+    name: "useSessionStorage",
+    useStorage: useSessionStorage,
+    storageArea: "sessionStorage",
+  },
+] as const)("$name", ({ useStorage, storageArea }) => {
+  let _storage: Storage;
   beforeEach(() => {
-    _localStorage = window.localStorage;
+    _storage = window[storageArea];
   });
 
   afterEach(() => {
-    window.localStorage = _localStorage;
-    window.localStorage.clear();
+    window[storageArea] = _storage;
+    window[storageArea].clear();
   });
 
   it("should return the defaultValue for server render", () => {
-    // @ts-expect-error
-    delete window.localStorage;
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+    delete window[storageArea];
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toEqual(false);
   });
 
   it("should return the defaultValue", () => {
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toEqual(false);
   });
 
-  it("should return a setValue function that updates localStorage", () => {
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+  it("should return a setValue function that updates the storageArea", () => {
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
 
     // Plain update
     act(() => {
       result.current[1](true);
     });
     expect(result.current[0]).toEqual(true);
-    expect(localStorage.getItem(key)).toEqual(JSON.stringify(true));
+    expect(window[storageArea].getItem(key)).toEqual(JSON.stringify(true));
 
     // Updater function
     act(() => {
       result.current[1]((previous) => !previous);
     });
     expect(result.current[0]).toEqual(false);
-    expect(localStorage.getItem(key)).toEqual(JSON.stringify(false));
+    expect(window[storageArea].getItem(key)).toEqual(JSON.stringify(false));
   });
 
   it("should return the value from localStorage", () => {
-    localStorage.setItem(key, JSON.stringify(true));
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+    window[storageArea].setItem(key, JSON.stringify(true));
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toEqual(true);
   });
 
   it("should return the defaultValue when localStorage does not match the type", () => {
-    localStorage.setItem(key, JSON.stringify("true"));
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+    window[storageArea].setItem(key, JSON.stringify("true"));
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toEqual(false);
   });
 
@@ -66,7 +78,7 @@ describe("useLocalStorage", () => {
         key,
         newValue: JSON.stringify(true),
         oldValue: null,
-        storageArea: window.localStorage,
+        storageArea: window[storageArea],
       }),
     },
     {
@@ -78,16 +90,18 @@ describe("useLocalStorage", () => {
           detail: {
             key,
             newValue: JSON.stringify(true),
-            storageArea: window.localStorage,
+            oldValue: null,
+            storageArea: window[storageArea],
+            url: window.location.href,
           },
         },
       ),
     },
   ])("should update on '$name' event", ({ event }) => {
-    const { result } = renderHook(() => useLocalStorage(key, false, isBoolean));
+    const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toBe(false);
     act(() => {
-      localStorage.setItem(key, JSON.stringify(true));
+      window[storageArea].setItem(key, JSON.stringify(true));
       window.dispatchEvent(event);
     });
     expect(result.current[0]).toBe(true);
