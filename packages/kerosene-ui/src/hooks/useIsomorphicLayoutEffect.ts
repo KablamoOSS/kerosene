@@ -19,6 +19,8 @@ import * as React from "react";
  * for your use case, and would avoid a double render.
  */
 const useIsomorphicLayoutEffect =
-  typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
+  typeof window === "undefined"
+    ? /* istanbul ignore next */ React.useEffect
+    : React.useLayoutEffect;
 
 export default useIsomorphicLayoutEffect;

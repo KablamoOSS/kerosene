@@ -30,6 +30,7 @@ export default function usePageVisibility(
 
   const getSnapshot = React.useCallback(() => {
     // In React 16 & 17, the `useSyncExternalStore` shim always uses `getSnapshot()`, even on the server
+    /* istanbul ignore if */
     if (typeof document === "undefined") return true;
 
     const { hidden = false } = document;
