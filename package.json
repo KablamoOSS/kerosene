@@ -30,7 +30,13 @@
       "./testSetup.ts"
     ],
     "transform": {
-      "^.+\\.(?:[jt]sx?)$": "ts-jest"
+      "^.+\\.(?:[jt]sx?)$": [
+        "ts-jest",
+        {
+          "diagnostics": false,
+          "isolatedModules": true
+        }
+      ]
     },
     "collectCoverageFrom": [
       "<rootDir>/packages/**/*.(js|jsx|ts|tsx)",
@@ -39,12 +45,7 @@
       "!**/babel.config.js",
       "!**/rollup.config.js",
       "!**/rollup-config.ts"
-    ],
-    "globals": {
-      "ts-jest": {
-        "diagnostics": false
-      }
-    }
+    ]
   },
   "dependencies": {
     "@babel/core": "^7.21.3",

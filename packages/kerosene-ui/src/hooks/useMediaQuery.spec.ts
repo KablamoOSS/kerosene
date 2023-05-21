@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
+import { identity } from "lodash";
 import useMediaQuery from "./useMediaQuery";
 
 const mockMatchMedia: jest.Mock<
@@ -113,5 +114,17 @@ describe("useMediaQuery", () => {
         expect(list.removeListener).toHaveBeenCalledWith(callback);
       });
     });
+  });
+
+  it("should return defaultMatches on hydration", () => {
+    matches = false;
+    const onRender: jest.Mock<boolean, [boolean]> = jest
+      .fn()
+      .mockImplementation(identity);
+    renderHook(() => onRender(useMediaQuery(query, { defaultMatches: true })), {
+      hydrate: true,
+    });
+    expect(onRender).toHaveBeenNthCalledWith(1, true);
+    expect(onRender).toHaveBeenLastCalledWith(false);
   });
 });

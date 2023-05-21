@@ -8,13 +8,19 @@ export {
   CurrentTimeProvider,
   type CurrentTimeProviderProps,
 } from "./hooks/useCurrentTime";
+export {
+  default as useInlineCSS,
+  type CSSStylePropertyKey,
+  type UseInlineCSSOptions,
+} from "./hooks/useInlineCSS";
 export { default as useInterval } from "./hooks/useInterval";
 export { default as useIsomorphicLayoutEffect } from "./hooks/useIsomorphicLayoutEffect";
 export { default as useKonamiCode } from "./hooks/useKonamiCode";
 export {
-  default as useLocalStorage,
+  useLocalStorage,
+  useSessionStorage,
   type CustomStorageEventInit,
-} from "./hooks/useLocalStorage";
+} from "./hooks/storage";
 export { default as useMediaQuery } from "./hooks/useMediaQuery";
 export { default as useMergedRefs } from "./hooks/useMergedRefs";
 export { default as usePageVisibility } from "./hooks/usePageVisibility";
@@ -22,6 +28,8 @@ export { default as usePopup } from "./hooks/usePopup";
 export { default as usePrevious } from "./hooks/usePrevious";
 export { default as useRafThrottle } from "./hooks/useRafThrottle";
 export { default as useRect } from "./hooks/useRect";
+export { default as useStableIdentity } from "./hooks/useStableIdentity";
+export { default as useUpdatingRef } from "./hooks/useUpdatingRef";
 
 export { default as ShowWhen } from "./ShowWhen";
 

@@ -34,6 +34,7 @@ export default function useMediaQuery(
       const controller = new AbortController();
 
       const onUpdate = () => {
+        /* istanbul ignore if */
         if (controller.signal.aborted) return;
         callback();
       };

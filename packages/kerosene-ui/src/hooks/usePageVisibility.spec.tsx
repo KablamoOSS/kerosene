@@ -1,5 +1,6 @@
 import { stubProperties } from "@kablamo/kerosene-test";
 import { renderHook } from "@testing-library/react";
+import { identity } from "lodash";
 import { act } from "react-dom/test-utils";
 import usePageVisibility from "./usePageVisibility";
 
@@ -82,5 +83,22 @@ describe("usePageVisibility", () => {
   it("should fallback to always visible when the page visibility API is not available", () => {
     const root = renderHook(() => usePageVisibility());
     expect(root.result.current[0]).toBe(true);
+  });
+
+  it("should return true on hydration", () => {
+    hidden = true;
+    const onRender: jest.Mock<boolean, [boolean]> = jest
+      .fn()
+      .mockImplementation(identity);
+    renderHook(
+      () => {
+        const [visible] = usePageVisibility();
+        return onRender(visible);
+      },
+      { hydrate: true },
+    );
+
+    expect(onRender).toHaveBeenNthCalledWith(1, true);
+    expect(onRender).toHaveBeenLastCalledWith(false);
   });
 });
