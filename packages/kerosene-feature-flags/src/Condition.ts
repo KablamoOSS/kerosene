@@ -18,17 +18,41 @@ type Runtime = { [key: string]: string | number | string[] | number[] };
 
 class Condition {
   // Grammar types
-  public must: this = this;
+  public get must() {
+    return this;
+  }
 
-  public to: this = this;
+  public get to() {
+    return this;
+  }
 
-  public be: this = this;
+  public get be() {
+    return this;
+  }
 
-  public any: this = this;
+  public get any() {
+    this.assertions[this.assertions.length - 1] = {
+      ...this.assertions[this.assertions.length - 1],
+      comparison: Comparison.ANY,
+    };
+    return this;
+  }
 
-  public all: this = this;
+  public get all() {
+    this.assertions[this.assertions.length - 1] = {
+      ...this.assertions[this.assertions.length - 1],
+      comparison: Comparison.ALL,
+    };
+    return this;
+  }
 
-  public not: this = this;
+  public get not() {
+    this.assertions[this.assertions.length - 1] = {
+      ...this.assertions[this.assertions.length - 1],
+      negate: true,
+    };
+    return this;
+  }
 
   private assertions: Assertion[] = [];
 
@@ -195,53 +219,5 @@ class Condition {
     return this;
   }
 }
-
-// Grammar helpers
-["must", "to", "be"].forEach((word) => {
-  Object.defineProperty(Condition.prototype, word, {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    set: () => {},
-    get() {
-      return this;
-    },
-  });
-});
-
-// Comparison Setters
-Object.defineProperty(Condition.prototype, "not", {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  set: () => {},
-  get() {
-    this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
-      negate: true,
-    };
-    return this;
-  },
-});
-
-Object.defineProperty(Condition.prototype, "any", {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  set: () => {},
-  get() {
-    this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
-      comparison: Comparison.ANY,
-    };
-    return this;
-  },
-});
-
-Object.defineProperty(Condition.prototype, "all", {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  set: () => {},
-  get() {
-    this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
-      comparison: Comparison.ALL,
-    };
-    return this;
-  },
-});
 
 export { Condition, type Runtime };

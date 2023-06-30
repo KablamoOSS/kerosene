@@ -1,14 +1,8 @@
 const path = require("path");
 
+/** @satisfies {import("eslint").Linter.Config} */
 module.exports = {
   extends: path.join(__dirname, "packages", "eslint-config", "index.js"),
-  settings: {
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
-  },
   rules: {
     "import/no-extraneous-dependencies": [
       "error",

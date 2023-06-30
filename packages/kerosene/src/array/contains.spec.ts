@@ -45,13 +45,14 @@ describe("#contains", () => {
   });
 
   describe("with a user-defined iteratee", () => {
-    const stringifier = (input: any): string => JSON.stringify(input);
-    const randomizer = (input: any) => Math.random();
+    const randomizer = () => Math.random();
     const lowerCaser = (input: string): string => input.toLowerCase();
     const routeDown = (input: number): number => Math.floor(input);
 
     it("should call the iteratee when passed one, passing each value into it", () => {
-      const iteratee = jest.fn();
+      const iteratee: jest.MockedFn<
+        NonNullable<Parameters<typeof contains>[2]>
+      > = jest.fn();
 
       const someValues = [
         Math.random(),
@@ -61,11 +62,11 @@ describe("#contains", () => {
         Math.random(),
       ];
 
-      const result = contains(someValues, someValues.slice(1, 3), iteratee);
+      contains(someValues, someValues.slice(1, 3), iteratee);
 
       expect(
-        iteratee.mock.calls.every((calledArgs: any[]) => {
-          return someValues.includes(calledArgs[0]);
+        iteratee.mock.calls.every((calledArgs) => {
+          return someValues.includes(calledArgs[0] as number);
         }),
       ).toBe(true);
     });

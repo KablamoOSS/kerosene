@@ -1,7 +1,8 @@
 import { type Flag, flag } from ".";
+import type { Runtime } from "./Condition";
 
 interface Case {
-  conditions: any;
+  conditions: Runtime;
   flag: Flag;
   result: boolean;
 }
@@ -66,9 +67,6 @@ const cases: Case[] = [
   },
 ];
 
-test.each(cases)(
-  "Feature Flag",
-  ({ conditions, flag: _flag, result }: Case) => {
-    expect(_flag(conditions)).toEqual(result);
-  },
-);
+test.each(cases)("Feature Flag", ({ conditions, flag: _flag, result }) => {
+  expect(_flag(conditions)).toEqual(result);
+});

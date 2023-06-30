@@ -15,6 +15,7 @@ export default function mapSeries<TItems extends any[], U>(
 ): Promise<{ [Index in keyof TItems]: U }> {
   return items.reduce(
     (acc, item, index, array) =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       acc.then((previous) =>
         iteratee(item, index, array as TItems).then((result) => [
           ...previous,
