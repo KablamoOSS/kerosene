@@ -68,7 +68,7 @@ export default function createStubComponent<
         // eslint-disable-next-line react/no-unknown-property
         <div __displayName__={displayName} {...props}>
           {typeof children === "function"
-            ? transformRenderPropResult(children(...getRenderProps!(props)))
+            ? transformRenderPropResult(children(...getRenderProps(props)))
             : (children as React.ReactNode)}
         </div>
       ),
@@ -89,7 +89,7 @@ export default function createStubComponent<
           {typeof children === "function"
             ? transformRenderPropResult(
                 (children as (...args: RenderProps) => React.ReactNode)(
-                  ...getRenderProps!(props),
+                  ...getRenderProps(props),
                 ) as any,
               )
             : (children as React.ReactNode)}

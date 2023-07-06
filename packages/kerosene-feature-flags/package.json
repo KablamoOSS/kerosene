@@ -28,7 +28,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">=16.13.0"
   },
   "keywords": [
     "feature-flags",
@@ -40,7 +40,7 @@
   "devDependencies": {},
   "peerDependencies": {},
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf .dist"
   }
 }

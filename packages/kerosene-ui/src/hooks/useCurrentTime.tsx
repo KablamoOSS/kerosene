@@ -156,6 +156,7 @@ class CurrentTimeEmitter {
 
           // Force an update soon, just in case the last interval was about to fire before it was cleared
           this.markAllForUpdate();
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           Promise.resolve().then(() => this.update());
         }
       }

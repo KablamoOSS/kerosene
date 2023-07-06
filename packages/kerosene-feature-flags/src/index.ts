@@ -12,7 +12,7 @@ function flag(callback: FlagCallback): Flag {
 
   // Return a function to be called at runtime, to check if the flag
   // is enabled
-  return (runtime: any): boolean => {
+  return (runtime: Runtime): boolean => {
     return (
       checks
         .map((check) => {
