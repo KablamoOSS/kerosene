@@ -37,6 +37,8 @@ module.exports = {
     // ESLint rules
     camelcase: "off",
     "max-classes-per-file": "off",
+    // The motivations behind this rule are outdated, and we find this is a useful pattern in a number of circumstances
+    "no-await-in-loop": "off",
     // Same as eslint-config-airbnb, but removes the restrcition on ForOfStatement now that there is wide browser support
     "no-restricted-syntax": [
       "error",
