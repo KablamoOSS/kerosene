@@ -14,6 +14,10 @@ Context Provider for the CurrentTimeEmitter used internally by the `useCurrentTi
 
 ### `<ShowWhen />`
 
+### `<TimeZoneProvider />`
+
+Context Provider for the `useTimeZone` hook. May be used to override the default `"Etc/UTC"` `timeZone` value during SSR and hydration.
+
 ## Utility Types
 
 ### `UnwrapComponent<T>`
@@ -95,6 +99,12 @@ Custom hook which allows reading/writing of `sessionStorage` in a manner similar
 ### `useStableIdentity(value, isEqual?)`
 
 Custom hook which provides a stable identity between renders for `value` which is equal to the previous value according to the `isEqual` function.
+
+### `useTimeZone()`
+
+Custom hook which returns the current `timeZone`.
+
+Defaults to `"Etc/UTC"` during SSR and hydration, but this may be overriden with a provider `<TimeZoneProvider ssrTimeZone={timeZone}>`. Ensure that the value used during SSR and hydration is the same.
 
 ### `useUpdatingRef(value)`
 
