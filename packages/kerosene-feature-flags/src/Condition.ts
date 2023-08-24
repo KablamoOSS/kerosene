@@ -32,7 +32,7 @@ class Condition {
 
   public get any() {
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       comparison: Comparison.ANY,
     };
     return this;
@@ -40,7 +40,7 @@ class Condition {
 
   public get all() {
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       comparison: Comparison.ALL,
     };
     return this;
@@ -48,7 +48,7 @@ class Condition {
 
   public get not() {
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       negate: true,
     };
     return this;
@@ -114,7 +114,7 @@ class Condition {
               // Less Than can't handle array
               return false;
             }
-            compare = assert.exactly > value;
+            compare = assert.exactly > value!;
             break;
           case Comparison.GREATER_THAN:
             if (typeof assert.exactly === "undefined") {
@@ -124,7 +124,7 @@ class Condition {
               // Greater Than can't handle array
               return false;
             }
-            compare = assert.exactly < value;
+            compare = assert.exactly < value!;
             break;
           default:
             compare = undefined;
@@ -171,7 +171,7 @@ class Condition {
     }
     if (typeof exactly === "number" || typeof exactly === "string") {
       this.assertions[this.assertions.length - 1] = {
-        ...this.assertions[this.assertions.length - 1],
+        ...this.assertions[this.assertions.length - 1]!,
         exactly,
         comparison: Comparison.EQUAL,
       };
@@ -185,7 +185,7 @@ class Condition {
       throw new Error("You didn't pass an array to flag.of");
     }
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       of,
     };
 
@@ -198,7 +198,7 @@ class Condition {
     }
 
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       exactly,
       comparison: Comparison.LESS_THAN,
     };
@@ -211,7 +211,7 @@ class Condition {
       throw new Error("You didn't pass an number to flag.greaterThan");
     }
     this.assertions[this.assertions.length - 1] = {
-      ...this.assertions[this.assertions.length - 1],
+      ...this.assertions[this.assertions.length - 1]!,
       exactly,
       comparison: Comparison.GREATER_THAN,
     };

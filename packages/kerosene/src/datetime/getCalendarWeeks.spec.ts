@@ -59,9 +59,9 @@ describe("#getCalendarWeeks", () => {
       expectSameDay(
         day,
         2019,
-        index < DayOfWeek.FRIDAY ? Month.MAY : Month.JUNE,
+        (index as DayOfWeek) < DayOfWeek.FRIDAY ? Month.MAY : Month.JUNE,
         index +
-          (index < DayOfWeek.FRIDAY
+          ((index as DayOfWeek) < DayOfWeek.FRIDAY
             ? 31 - DayOfWeek.FRIDAY
             : -DayOfWeek.FRIDAY) +
           1,
@@ -82,13 +82,13 @@ describe("#getCalendarWeeks", () => {
         day,
         2019,
         /* eslint-disable no-nested-ternary */
-        index < DayOfWeek.SATURDAY
+        (index as DayOfWeek) < DayOfWeek.SATURDAY
           ? Month.AUGUST
           : index >= 30 + DayOfWeek.SATURDAY
           ? Month.OCTOBER
           : Month.SEPTEMBER,
         /* eslint-enable no-nested-ternary */
-        index < DayOfWeek.SATURDAY
+        (index as DayOfWeek) < DayOfWeek.SATURDAY
           ? 31 - DayOfWeek.SATURDAY + index + 1
           : ((index - DayOfWeek.SATURDAY) % 30) + 1,
       );

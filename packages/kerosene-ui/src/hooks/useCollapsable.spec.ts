@@ -4,7 +4,7 @@ import { when } from "jest-when";
 import useCollapsable, { type UseCollapsableReturn } from "./useCollapsable";
 
 const mockUseMediaQuery: jest.MockedFunction<
-  typeof import("./useMediaQuery")["default"]
+  (typeof import("./useMediaQuery"))["default"]
 > = jest.fn();
 jest.mock("./useMediaQuery", () => ({
   __esModule: true,

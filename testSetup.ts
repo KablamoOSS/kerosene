@@ -40,7 +40,7 @@ Object.assign(window, {
       addEventListener: noop,
       removeEventListener: noop,
       onchange: null,
-    } as Partial<MediaQueryList> as MediaQueryList)) as Window["matchMedia"],
+    }) as Partial<MediaQueryList> as MediaQueryList) as Window["matchMedia"],
   requestAnimationFrame: (callback: FrameRequestCallback) =>
     setTimeout(() => callback(Date.now()), 17),
   cancelAnimationFrame: (handle: number) => clearTimeout(handle),

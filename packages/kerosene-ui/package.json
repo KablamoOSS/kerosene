@@ -21,26 +21,26 @@
     "node": ">=16.13.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
+    "@babel/runtime": "^7.22.10",
     "@kablamo/kerosene": "^0.0.29",
-    "@types/lodash": "^4.14.191",
+    "@types/lodash": "^4.14.197",
     "lodash": "^4.17.21",
     "use-sync-external-store": "^1.2.0"
   },
   "devDependencies": {
-    "@kablamo/kerosene-test": "^0.0.12",
+    "@kablamo/kerosene-test": "^0.0.13",
     "@rollup/plugin-babel": "^6.0.3",
-    "@sinonjs/fake-timers": "^10.0.2",
-    "@testing-library/dom": "^9.0.1",
+    "@sinonjs/fake-timers": "^11.1.0",
+    "@testing-library/dom": "^9.3.1",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/sinonjs__fake-timers": "^8.1.2",
     "@types/use-sync-external-store": "^0.0.3",
     "jest-sandbox": "^1.1.2",
-    "jest-when": "^3.5.2",
+    "jest-when": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.26.1",
+    "rollup": "^3.28.1",
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "peerDependencies": {

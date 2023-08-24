@@ -109,7 +109,10 @@ describe("SVG utils", () => {
         ],
         expected: [-1, -1],
       },
-    ] satisfies ReadonlyArray<{ args: Parameters<typeof point2DPlusPolarVector>; expected: Point2D }>)(
+    ] satisfies ReadonlyArray<{
+      args: Parameters<typeof point2DPlusPolarVector>;
+      expected: Point2D;
+    }>)(
       "should return $expected for ([$args.0.0, $args.0.1], [$args.1.0, $args.1.1])",
       ({ args, expected: [x, y] }) => {
         expect(point2DPlusPolarVector(...args)).toEqual([
