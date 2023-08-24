@@ -74,14 +74,14 @@ describe("useMediaQuery", () => {
   });
 
   it("should return false by default when window.matchMedia is unavailable", () => {
-    // @ts-ignore
+    // @ts-expect-error property is required in the browser
     delete window.matchMedia;
     const { result } = renderHook(() => useMediaQuery(query));
     expect(result.current).toBe(false);
   });
 
   it("should return true when window.matchMedia is unavailable and defaultMatches=true", () => {
-    // @ts-ignore
+    // @ts-expect-error property is required in the browser
     delete window.matchMedia;
     const { result } = renderHook(() =>
       useMediaQuery(query, { defaultMatches: true }),

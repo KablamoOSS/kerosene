@@ -4,19 +4,19 @@ import { identity } from "lodash";
 import * as React from "react";
 
 export default function createStubComponent<
-  Props extends {} = { [prop: string]: unknown },
+  Props extends Record<string, unknown> = Record<string, unknown>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RenderProps extends readonly any[] = any[],
 >(displayName: string, functional?: false): React.ComponentClass<Props>;
 
 export default function createStubComponent<
-  Props extends {} = { [prop: string]: unknown },
+  Props extends Record<string, unknown> = Record<string, unknown>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RenderProps extends readonly any[] = any[],
 >(displayName: string, functional: true): React.FunctionComponent<Props>;
 
 export default function createStubComponent<
-  Props extends {} = { [prop: string]: unknown },
+  Props extends Record<string, unknown> = Record<string, unknown>,
   RenderProps extends readonly any[] = any[],
 >(
   displayName: string,
@@ -30,7 +30,7 @@ export default function createStubComponent<
 >;
 
 export default function createStubComponent<
-  Props extends {} = { [prop: string]: unknown },
+  Props extends Record<string, unknown> = Record<string, unknown>,
   RenderProps extends readonly any[] = any[],
 >(
   displayName: string,

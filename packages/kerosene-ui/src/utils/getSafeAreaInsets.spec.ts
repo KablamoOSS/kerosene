@@ -54,7 +54,7 @@ describe("getSafeAreaInsets", () => {
     });
     getSafeAreaInsets();
 
-    const testDiv = appendChild.mock.calls[0][0] as HTMLDivElement;
+    const testDiv = appendChild.mock.calls[0]![0] as HTMLDivElement;
     expect(testDiv.style).toEqual({
       pointerEvents: "none",
       top: "env(safe-area-inset-top, 0px)",

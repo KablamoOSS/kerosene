@@ -2,13 +2,13 @@ import { kebabCase } from "lodash";
 
 /**
  * Returns an object mapping local classNames to faked global equivalents along with any exported values.
- * @param classNames List of local classNames from styles file
- * @param values Map of exported values (values MUST be strings)
+ * @param classNames array of local classNames from styles file
+ * @param values Record containing exported values
  */
-export default function createStubStyles<C extends string, V extends {}>(
-  classNames: C[],
-  values = {} as V,
-): V & { [key in C]: string } {
+export default function createStubStyles<
+  C extends string,
+  V extends Record<string, string> = Record<string, never>,
+>(classNames: readonly C[], values: V = {} as V): V & { [key in C]: string } {
   Object.entries(values).forEach(([property, value]) => {
     const type = typeof value;
     if (type !== "string") {
@@ -18,16 +18,17 @@ export default function createStubStyles<C extends string, V extends {}>(
     }
   });
 
-  const obj = classNames.reduce<V & { [key in C]: string }>(
-    (acc, className) =>
-      ({
-        ...(acc as V & { [key in C]: string }),
-        [className]: `${kebabCase(className)}-local-class ${kebabCase(
+  const obj = {
+    ...values,
+    ...(Object.fromEntries(
+      classNames.map<[C, string]>((className) => [
+        className,
+        `${kebabCase(className)}-local-class ${kebabCase(
           className,
         )}-webpack-composed-class`,
-      } as V & { [key in C]: string }),
-    values as V & { [key in C]: string },
-  );
+      ]),
+    ) as Record<C, string>),
+  };
 
   // Use a Proxy to throw an error when trying to access styles which haven't been stubbed
   return new Proxy(obj, {

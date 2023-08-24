@@ -98,7 +98,7 @@ function createUseStorage(storageArea: "localStorage" | "sessionStorage") {
       (value: React.SetStateAction<T>) => {
         const oldValue = getSnapshot();
         const newValue = JSON.stringify(
-          // @ts-expect-error
+          // @ts-expect-error TS2349 because TS doesn't curently have a way to indicate type T cannot be a function
           typeof value === "function" ? value(selector(oldValue)) : value,
         );
 
