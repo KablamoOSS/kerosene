@@ -17,6 +17,7 @@ const output = (file: string, format: ModuleFormat): OutputOptions => ({
   dir: path.dirname(file),
   format,
   indent: false,
+  preserveModules: true,
   sourcemap: true,
 });
 
@@ -56,6 +57,5 @@ export default [
     ],
     external,
     plugins,
-    preserveModules: true,
   },
 ] as RollupOptions[];

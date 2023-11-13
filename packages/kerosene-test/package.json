@@ -32,7 +32,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=18.12.0"
   },
   "keywords": [
     "jest",
@@ -47,10 +47,10 @@
   ],
   "dependencies": {
     "@kablamo/kerosene": "^0.0.29",
-    "@types/lodash": "^4.14.197",
-    "@types/sinon": "^10.0.13",
+    "@types/lodash": "^4.14.201",
+    "@types/sinon": "^17.0.1",
     "lodash": "^4.17.21",
-    "sinon": "^15.0.2"
+    "sinon": "^17.0.1"
   },
   "devDependencies": {
     "react": "^18.2.0",

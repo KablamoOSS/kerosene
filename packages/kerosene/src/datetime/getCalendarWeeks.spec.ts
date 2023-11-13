@@ -85,8 +85,8 @@ describe("#getCalendarWeeks", () => {
         (index as DayOfWeek) < DayOfWeek.SATURDAY
           ? Month.AUGUST
           : index >= 30 + DayOfWeek.SATURDAY
-          ? Month.OCTOBER
-          : Month.SEPTEMBER,
+            ? Month.OCTOBER
+            : Month.SEPTEMBER,
         /* eslint-enable no-nested-ternary */
         (index as DayOfWeek) < DayOfWeek.SATURDAY
           ? 31 - DayOfWeek.SATURDAY + index + 1

@@ -16,13 +16,13 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - lts/gallium
           - lts/hydrogen
+          - lts/iron
           - current
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -48,7 +48,7 @@ jobs:
 
       - name: Coveralls
         if: ${{ matrix.node-version == 'current'}}
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
@@ -61,20 +61,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js Gallium
+      - name: Setup Node.js Hydrogen
         uses: actions/setup-node@v3
         with:
-          node-version: lts/gallium
+          node-version: lts/hydrogen
 
       - name: Install dependencies
         run: yarn
 
       - name: Publish to npm
-        uses: changesets/action@master
+        uses: changesets/action@v1
         with:
           publish: yarn release
         env:

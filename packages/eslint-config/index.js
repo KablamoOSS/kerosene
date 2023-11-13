@@ -68,6 +68,59 @@ module.exports = {
     // @typescript-eslint rules
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "default",
+        format: ["camelCase"],
+        leadingUnderscore: "allowSingleOrDouble",
+        trailingUnderscore: "allowSingleOrDouble",
+      },
+      {
+        selector: "import",
+        format: ["camelCase", "PascalCase"],
+        leadingUnderscore: "allowSingleOrDouble",
+        trailingUnderscore: "allowSingleOrDouble",
+      },
+      {
+        selector: "variable",
+        format: ["camelCase", "PascalCase", "UPPER_CASE"],
+        leadingUnderscore: "allowSingleOrDouble",
+        trailingUnderscore: "allowSingleOrDouble",
+      },
+      {
+        selector: "typeLike",
+        format: ["PascalCase"],
+        leadingUnderscore: "allowSingleOrDouble",
+        trailingUnderscore: "allowSingleOrDouble",
+      },
+      {
+        selector: "enum",
+        format: ["PascalCase"],
+      },
+      {
+        selector: "enumMember",
+        format: ["UPPER_CASE"],
+      },
+      {
+        selector: ["method", "property"],
+        format: null,
+      },
+      {
+        selector: [
+          "classProperty",
+          "objectLiteralProperty",
+          "typeProperty",
+          "classMethod",
+          "objectLiteralMethod",
+          "typeMethod",
+          "accessor",
+          "enumMember",
+        ],
+        format: null,
+        modifiers: ["requiresQuotes"],
+      },
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
 
     // eslint-plugin-import rules

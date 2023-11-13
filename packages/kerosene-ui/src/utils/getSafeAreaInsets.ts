@@ -13,9 +13,8 @@ export default function getSafeAreaInsets(): SafeAreaInsets {
     SAFE_AREA_INSET_TEST_ELEMENT = document.createElement("div");
     SAFE_AREA_INSET_TEST_ELEMENT.style.pointerEvents = "none";
     SIDES.forEach((side) => {
-      SAFE_AREA_INSET_TEST_ELEMENT!.style[
-        side
-      ] = `env(safe-area-inset-${side}, 0px)`;
+      SAFE_AREA_INSET_TEST_ELEMENT!.style[side] =
+        `env(safe-area-inset-${side}, 0px)`;
     });
     document.body.appendChild(SAFE_AREA_INSET_TEST_ELEMENT);
   }

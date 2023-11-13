@@ -19,12 +19,7 @@ function generateBabelConfig(modules = "commonjs") {
       "@babel/preset-react",
       "@babel/preset-typescript",
     ],
-    plugins: [
-      ["@babel/plugin-proposal-class-properties", { loose: false }],
-      "@babel/plugin-proposal-numeric-separator",
-      "@babel/plugin-transform-runtime",
-      "babel-plugin-lodash",
-    ],
+    plugins: ["@babel/plugin-transform-runtime", "babel-plugin-lodash"],
   };
 }
 
