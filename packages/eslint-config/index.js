@@ -70,42 +70,54 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/naming-convention": [
       "error",
+      // camelCase is the default
       {
         selector: "default",
         format: ["camelCase"],
         leadingUnderscore: "allowSingleOrDouble",
         trailingUnderscore: "allowSingleOrDouble",
       },
+      // imports should be camelCase or PascalCase
       {
         selector: "import",
         format: ["camelCase", "PascalCase"],
         leadingUnderscore: "allowSingleOrDouble",
         trailingUnderscore: "allowSingleOrDouble",
       },
+      // variables can be camelCase, PascalCase, or UPPER_CASE
       {
         selector: "variable",
         format: ["camelCase", "PascalCase", "UPPER_CASE"],
         leadingUnderscore: "allowSingleOrDouble",
         trailingUnderscore: "allowSingleOrDouble",
       },
+      // destructuring variables from 3rd party sources which do not follow our naming conventions is okay
+      { selector: "variable", format: null, modifiers: ["destructured"] },
+      // functions should be camelCase or PascalCase
+      {
+        selector: "function",
+        format: ["camelCase", "PascalCase"],
+        leadingUnderscore: "allowSingleOrDouble",
+        trailingUnderscore: "allowSingleOrDouble",
+      },
+      // types should be PascalCase
       {
         selector: "typeLike",
         format: ["PascalCase"],
         leadingUnderscore: "allowSingleOrDouble",
         trailingUnderscore: "allowSingleOrDouble",
       },
-      {
-        selector: "enum",
-        format: ["PascalCase"],
-      },
+      // enum members should be UPPER_CASE
       {
         selector: "enumMember",
         format: ["UPPER_CASE"],
       },
+      // 3rd party APIs do not always follow our naming conventions
       {
-        selector: ["method", "property"],
+        selector: ["method", "parameter", "parameterProperty", "property"],
         format: null,
       },
+      // ignore properties that require quotes
       {
         selector: [
           "classProperty",
