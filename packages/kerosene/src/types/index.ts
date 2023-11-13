@@ -121,12 +121,12 @@ export type ElementType<TCollection> =
   TCollection extends readonly (infer TArrayElement)[]
     ? TArrayElement
     : TCollection extends Set<infer TSetElement>
-    ? TSetElement
-    : TCollection extends Map<any, infer TMapElement>
-    ? TMapElement
-    : TCollection extends { readonly [key: string]: infer TObjectElement }
-    ? TObjectElement
-    : never;
+      ? TSetElement
+      : TCollection extends Map<any, infer TMapElement>
+        ? TMapElement
+        : TCollection extends { readonly [key: string]: infer TObjectElement }
+          ? TObjectElement
+          : never;
 
 /**
  * Infers the union of all object entry tuples for type `T`
@@ -263,45 +263,45 @@ export type Overloads<T> = T extends {
       (...args: P6) => R6,
     ]
   : T extends {
-      (...args: infer P1): infer R1;
-      (...args: infer P2): infer R2;
-      (...args: infer P3): infer R3;
-      (...args: infer P4): infer R4;
-      (...args: infer P5): infer R5;
-    }
-  ? [
-      (...args: P1) => R1,
-      (...args: P2) => R2,
-      (...args: P3) => R3,
-      (...args: P4) => R4,
-      (...args: P5) => R5,
-    ]
-  : T extends {
-      (...args: infer P1): infer R1;
-      (...args: infer P2): infer R2;
-      (...args: infer P3): infer R3;
-      (...args: infer P4): infer R4;
-    }
-  ? [
-      (...args: P1) => R1,
-      (...args: P2) => R2,
-      (...args: P3) => R3,
-      (...args: P4) => R4,
-    ]
-  : T extends {
-      (...args: infer P1): infer R1;
-      (...args: infer P2): infer R2;
-      (...args: infer P3): infer R3;
-    }
-  ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3]
-  : T extends {
-      (...args: infer P1): infer R1;
-      (...args: infer P2): infer R2;
-    }
-  ? [(...args: P1) => R1, (...args: P2) => R2]
-  : T extends (...args: infer P1) => infer R1
-  ? [(...args: P1) => R1]
-  : never;
+        (...args: infer P1): infer R1;
+        (...args: infer P2): infer R2;
+        (...args: infer P3): infer R3;
+        (...args: infer P4): infer R4;
+        (...args: infer P5): infer R5;
+      }
+    ? [
+        (...args: P1) => R1,
+        (...args: P2) => R2,
+        (...args: P3) => R3,
+        (...args: P4) => R4,
+        (...args: P5) => R5,
+      ]
+    : T extends {
+          (...args: infer P1): infer R1;
+          (...args: infer P2): infer R2;
+          (...args: infer P3): infer R3;
+          (...args: infer P4): infer R4;
+        }
+      ? [
+          (...args: P1) => R1,
+          (...args: P2) => R2,
+          (...args: P3) => R3,
+          (...args: P4) => R4,
+        ]
+      : T extends {
+            (...args: infer P1): infer R1;
+            (...args: infer P2): infer R2;
+            (...args: infer P3): infer R3;
+          }
+        ? [(...args: P1) => R1, (...args: P2) => R2, (...args: P3) => R3]
+        : T extends {
+              (...args: infer P1): infer R1;
+              (...args: infer P2): infer R2;
+            }
+          ? [(...args: P1) => R1, (...args: P2) => R2]
+          : T extends (...args: infer P1) => infer R1
+            ? [(...args: P1) => R1]
+            : never;
 
 /**
  * For an overloaded function `T`, infer the union of parameters for all overloads
