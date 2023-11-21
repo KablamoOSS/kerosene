@@ -206,9 +206,6 @@ module.exports = {
         "*.mjsx",
         "*.mtsx",
       ],
-      parserOptions: {
-        project: true,
-      },
       rules: {
         "@typescript-eslint/naming-convention": [
           "error",
