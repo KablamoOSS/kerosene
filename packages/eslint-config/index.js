@@ -68,71 +68,6 @@ module.exports = {
     // @typescript-eslint rules
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/naming-convention": [
-      "error",
-      // camelCase is the default
-      {
-        selector: "default",
-        format: ["camelCase"],
-        leadingUnderscore: "allowSingleOrDouble",
-        trailingUnderscore: "allowSingleOrDouble",
-      },
-      // imports should be camelCase or PascalCase
-      {
-        selector: "import",
-        format: ["camelCase", "PascalCase"],
-        leadingUnderscore: "allowSingleOrDouble",
-        trailingUnderscore: "allowSingleOrDouble",
-      },
-      // variables can be camelCase, PascalCase, or UPPER_CASE
-      {
-        selector: "variable",
-        format: ["camelCase", "PascalCase", "UPPER_CASE"],
-        leadingUnderscore: "allowSingleOrDouble",
-        trailingUnderscore: "allowSingleOrDouble",
-      },
-      // destructuring variables from 3rd party sources which do not follow our naming conventions is okay
-      { selector: "variable", format: null, modifiers: ["destructured"] },
-      // functions should be camelCase or PascalCase
-      {
-        selector: "function",
-        format: ["camelCase", "PascalCase"],
-        leadingUnderscore: "allowSingleOrDouble",
-        trailingUnderscore: "allowSingleOrDouble",
-      },
-      // types should be PascalCase
-      {
-        selector: "typeLike",
-        format: ["PascalCase"],
-        leadingUnderscore: "allowSingleOrDouble",
-        trailingUnderscore: "allowSingleOrDouble",
-      },
-      // enum members should be UPPER_CASE
-      {
-        selector: "enumMember",
-        format: ["UPPER_CASE"],
-      },
-      // 3rd party APIs do not always follow our naming conventions
-      {
-        selector: ["method", "parameter", "parameterProperty", "property"],
-        format: null,
-      },
-      // ignore properties that require quotes
-      {
-        selector: [
-          "classProperty",
-          "objectLiteralProperty",
-          "typeProperty",
-          "classMethod",
-          "objectLiteralMethod",
-          "typeMethod",
-          "accessor",
-          "enumMember",
-        ],
-        format: null,
-        modifiers: ["requiresQuotes"],
-      },
-    ],
     "@typescript-eslint/no-non-null-assertion": "off",
 
     // eslint-plugin-import rules
@@ -254,6 +189,92 @@ module.exports = {
         // Declaration merging
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-namespace": "off",
+      },
+    },
+    {
+      files: [
+        "*.js",
+        "*.ts",
+        "*.jsx",
+        "*.tsx",
+        "*.cjs",
+        "*.cts",
+        "*.cjsx",
+        "*.ctsx",
+        "*.mjs",
+        "*.mts",
+        "*.mjsx",
+        "*.mtsx",
+      ],
+      parserOptions: {
+        project: true,
+      },
+      rules: {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          // camelCase is the default
+          {
+            selector: "default",
+            format: ["camelCase"],
+            leadingUnderscore: "allowSingleOrDouble",
+            trailingUnderscore: "allowSingleOrDouble",
+          },
+          // imports should be camelCase or PascalCase
+          {
+            selector: "import",
+            format: ["camelCase", "PascalCase"],
+            leadingUnderscore: "allowSingleOrDouble",
+            trailingUnderscore: "allowSingleOrDouble",
+          },
+          // variables can be camelCase, PascalCase, or UPPER_CASE
+          {
+            selector: "variable",
+            format: ["camelCase", "PascalCase", "UPPER_CASE"],
+            leadingUnderscore: "allowSingleOrDouble",
+            trailingUnderscore: "allowSingleOrDouble",
+          },
+          // destructuring variables from 3rd party sources which do not follow our naming conventions is okay
+          { selector: "variable", format: null, modifiers: ["destructured"] },
+          // functions should be camelCase or PascalCase
+          {
+            selector: "function",
+            format: ["camelCase", "PascalCase"],
+            leadingUnderscore: "allowSingleOrDouble",
+            trailingUnderscore: "allowSingleOrDouble",
+          },
+          // types should be PascalCase
+          {
+            selector: "typeLike",
+            format: ["PascalCase"],
+            leadingUnderscore: "allowSingleOrDouble",
+            trailingUnderscore: "allowSingleOrDouble",
+          },
+          // enum members should be UPPER_CASE
+          {
+            selector: "enumMember",
+            format: ["UPPER_CASE"],
+          },
+          // 3rd party APIs do not always follow our naming conventions
+          {
+            selector: ["method", "parameter", "parameterProperty", "property"],
+            format: null,
+          },
+          // ignore properties that require quotes
+          {
+            selector: [
+              "classProperty",
+              "objectLiteralProperty",
+              "typeProperty",
+              "classMethod",
+              "objectLiteralMethod",
+              "typeMethod",
+              "accessor",
+              "enumMember",
+            ],
+            format: null,
+            modifiers: ["requiresQuotes"],
+          },
+        ],
       },
     },
   ],
