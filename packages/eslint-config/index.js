@@ -154,6 +154,17 @@ module.exports = {
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
 
+        // Autofix for type-only imports
+        "@typescript-eslint/consistent-type-imports": [
+          "error",
+          {
+            prefer: "type-imports",
+            disallowTypeAnnotations: false,
+            fixStyle: "inline-type-imports",
+          },
+        ],
+        "@typescript-eslint/no-import-type-side-effects": "error",
+
         // @typesript-eslint type-aware rules
         // Too opinionated for now, revisit later
         "@typescript-eslint/no-unsafe-argument": "off",
