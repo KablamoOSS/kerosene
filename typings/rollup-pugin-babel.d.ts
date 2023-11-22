@@ -1,7 +1,7 @@
 declare module "@rollup/plugin-babel" {
-  import { TransformOptions } from "@babel/core";
+  import type { TransformOptions } from "@babel/core";
   // eslint-disable-next-line import/no-extraneous-dependencies
-  import { Plugin } from "rollup";
+  import type { Plugin } from "rollup";
 
   export default function babel(
     options?: TransformOptions & {

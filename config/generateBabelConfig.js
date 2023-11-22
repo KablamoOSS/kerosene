@@ -19,7 +19,17 @@ function generateBabelConfig(modules = "commonjs") {
       "@babel/preset-react",
       "@babel/preset-typescript",
     ],
-    plugins: ["@babel/plugin-transform-runtime", "babel-plugin-lodash"],
+    plugins: [
+      "@babel/plugin-transform-runtime",
+      [
+        "babel-plugin-import",
+        {
+          libraryName: "lodash",
+          libraryDirectory: "",
+          camel2DashComponentName: false,
+        },
+      ],
+    ],
   };
 }
 
