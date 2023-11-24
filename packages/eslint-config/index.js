@@ -1,5 +1,15 @@
 // @ts-check
 
+const TS_EXTS = /** @type {const} */ ([".ts", ".cts", ".mts"]);
+const JS_EXTS = /** @type {const} */ ([".js", ".cjs", ".mjs"]);
+const TSX_EXTS = TS_EXTS.map((ext) => /** @type {const} */ (`${ext}x`));
+const JSX_EXTS = JS_EXTS.map((ext) => /** @type {const} */ (`${ext}x`));
+const STAR_TS_EXTS = TS_EXTS.map((ext) => /** @type {const} */ (`*${ext}`));
+const STAR_TSX_EXTS = TSX_EXTS.map((ext) => /** @type {const} */ (`*${ext}`));
+const STAR_JS_EXTS = JS_EXTS.map((ext) => /** @type {const} */ (`*${ext}`));
+const STAR_JSX_EXTS = JSX_EXTS.map((ext) => /** @type {const} */ (`*${ext}`));
+const STAR_DTS_EXTS = TS_EXTS.map((ext) => /** @type {const} */ (`.d${ext}`));
+
 /** @satisfies {import("eslint").Linter.Config} */
 module.exports = {
   env: {
@@ -17,18 +27,11 @@ module.exports = {
   plugins: ["@kablamo", "@typescript-eslint", "prettier"],
   settings: {
     "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx",
-        ".cts",
-        ".ctsx",
-        ".mts",
-        ".mtsx",
-      ],
+      "@typescript-eslint/parser": [...TS_EXTS, ...TSX_EXTS],
     },
     "import/resolver": {
       node: {
-        extensions: [".ts", ".tsx", ".cts", ".ctsx", ".mts", ".mtsx"],
+        extensions: [...TS_EXTS, ...TSX_EXTS],
       },
       typescript: true,
     },
@@ -101,9 +104,11 @@ module.exports = {
     "react/function-component-definition": "off",
     "react/jsx-filename-extension": [
       "error",
-      { allow: "always", extensions: [".tsx"] },
+      { allow: "always", extensions: [...TSX_EXTS, ...JSX_EXTS] },
     ],
+    "react/react-in-jsx-scope": "off",
     "react/jsx-key": "error",
+    "react/jsx-no-useless-fragment": ["error", { allowExpressions: true }],
     "react/jsx-props-no-spreading": "off",
     // Allow Emotion css prop
     "react/no-unknown-property": ["error", { ignore: ["css"] }],
@@ -123,13 +128,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.js"],
+      // CommonJS files only
+      files: ["*.js", "*.cjs"],
       rules: {
         "@typescript-eslint/no-var-requires": "off",
       },
     },
     {
-      files: ["*.ts", "*.tsx", "*.cts", ".ctsx", "*.mts", "*.mtsx"],
+      files: [...STAR_TS_EXTS, ...STAR_TSX_EXTS],
       extends: [
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
@@ -153,6 +159,9 @@ module.exports = {
         // ESLint rules superseded by @typescript-eslint rules
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
+        // Allow void to be used to signify intentional ignoring of a Promise result
+        "no-void": "off",
+        "@typescript-eslint/no-meaningless-void-operator": "error",
 
         // Autofix for type-only imports
         "@typescript-eslint/consistent-type-imports": [
@@ -185,7 +194,7 @@ module.exports = {
       },
     },
     {
-      files: ["*.d.ts", "*.d.cts", "*.d.mts"],
+      files: STAR_DTS_EXTS,
       rules: {
         // False positives across module declarations
         "import/duplicates": "off",
@@ -204,18 +213,10 @@ module.exports = {
     },
     {
       files: [
-        "*.js",
-        "*.ts",
-        "*.jsx",
-        "*.tsx",
-        "*.cjs",
-        "*.cts",
-        "*.cjsx",
-        "*.ctsx",
-        "*.mjs",
-        "*.mts",
-        "*.mjsx",
-        "*.mtsx",
+        ...STAR_TS_EXTS,
+        ...STAR_TSX_EXTS,
+        ...STAR_JS_EXTS,
+        ...STAR_JSX_EXTS,
       ],
       rules: {
         "@typescript-eslint/naming-convention": [

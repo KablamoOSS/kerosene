@@ -21,9 +21,9 @@
     "node": ">=18.12.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.23.4",
     "@kablamo/kerosene": "^0.0.29",
-    "@types/lodash": "^4.14.201",
+    "@types/lodash": "^4.14.202",
     "lodash": "^4.17.21",
     "use-sync-external-store": "^1.2.0"
   },
@@ -32,7 +32,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@sinonjs/fake-timers": "^11.2.2",
     "@testing-library/dom": "^9.3.3",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
     "@types/sinonjs__fake-timers": "^8.1.5",
     "@types/use-sync-external-store": "^0.0.6",
@@ -40,7 +40,7 @@
     "jest-when": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^4.4.0",
+    "rollup": "^4.5.1",
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "peerDependencies": {
