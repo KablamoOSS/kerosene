@@ -80,7 +80,7 @@ export default function createStubComponent<
   return class extends React.Component<Props> {
     public static displayName = displayName;
 
-    public render() {
+    public override render() {
       const { children, ...props } = this.props;
 
       return (

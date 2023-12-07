@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
     "pretty": true,
-    "target": "ES2015",
+    "target": "ESNext",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolvePackageJsonExports": true,
+    "resolvePackageJsonImports": true,
     "allowJs": true,
     "resolveJsonModule": true,
     "noEmit": true,
     "verbatimModuleSyntax": true,
     "strict": true,
-    "moduleResolution": "node",
+    "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react"
   },
-  "include": ["**/*"],
+  "include": ["**/*", "**/.*", "**/.*/**/*", "**/.*/**/.*"],
   "exclude": [
-    "**/packages/**/dist",
-    "**/packages/**/es",
-    "**/packages/**/lib",
+    "**/.dist",
+    "**/dist",
+    "./packages/*/es",
+    "./packages/*/lib",
     "**/node_modules"
   ]
 }

@@ -25,7 +25,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.js"],
+      files: ["*.js", "*.cjs"],
       rules: {
         "global-require": "off",
         strict: "off",

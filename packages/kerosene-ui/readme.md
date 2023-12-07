@@ -176,6 +176,36 @@ Returns `{ capture: true, passive: true }` when capture passive event listeners 
 
 Returns `{ capture: true }` when capture passive event listeners are supported, otherwise `true`.
 
+## React Query
+
+We also include some useful helpers and components when working with [React Query][https://react-query.tanstack.com/]. These aren't included in the main entrypoint for `@kablamo/kerosene-ui`, and instead must be imported like this:
+
+```ts
+import {} from "@kablamo/kerosene-ui/react-query";
+```
+
+### `isDefinedQueryObserverResult(query)`
+
+Returns whether a given query has a defined result. This includes the success state of the query, as well as the states for refetch in progress, as well as the refetch error state with stale data.
+
+### `isQueryObserverLoadingErrorResult(query)`
+
+Returns whether a given query is in the error state with no defined result. This includes the error state when data is refetching.
+
+### `isQueryObserverLoadingResult(query)`
+
+Returns whether a given query is in the loading state with no defined result. This includes the error state when data is refetching.
+
+### `<QueryBoundary />`
+
+Utility component for managing the loading and error states for a single React Query query. Specifying the query automatically infers the type of the success state of the query in the render prop children (if used).
+
+### `<QueriesBoundary />`
+
+Utility component for managing the loading and error states for multiple React Query queries. Specifying the queries automatically infers the types of the success state of the queries in the render prop children (if used).
+
+### `<SuspenseBoundary />`
+
 ---
 
 kablamo.com.au
