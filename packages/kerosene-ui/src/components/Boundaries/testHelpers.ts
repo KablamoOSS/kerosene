@@ -1,5 +1,4 @@
 import type {
-  QueryKey,
   QueryObserverBaseResult,
   QueryObserverLoadingErrorResult,
   QueryObserverLoadingResult,
@@ -10,7 +9,7 @@ import type {
 function createQueryObserverBaseResult<
   TData = unknown,
   TError = unknown,
->(): QueryObserverBaseResult<TData, TError> & { queryKey: QueryKey } {
+>(): QueryObserverBaseResult<TData, TError> {
   return {
     data: undefined,
     dataUpdatedAt: 0,
@@ -33,7 +32,6 @@ function createQueryObserverBaseResult<
     isRefetching: false,
     isStale: false,
     isSuccess: false,
-    queryKey: [],
     refetch: jest.fn(),
     status: "pending",
     fetchStatus: "idle",
@@ -42,7 +40,7 @@ function createQueryObserverBaseResult<
 
 export function createQueryObserverSuccessResult<TData, TError = never>(
   data: TData,
-): QueryObserverSuccessResult<TData, TError> & { queryKey: QueryKey } {
+): QueryObserverSuccessResult<TData, TError> {
   return {
     ...createQueryObserverBaseResult<TData, TError>(),
     data,
@@ -60,10 +58,7 @@ export function createQueryObserverSuccessResult<TData, TError = never>(
 export function createQueryObserverRefetchErrorResult<
   TData = unknown,
   TError = unknown,
->(
-  data: TData,
-  error: TError,
-): QueryObserverRefetchErrorResult<TData, TError> & { queryKey: QueryKey } {
+>(data: TData, error: TError): QueryObserverRefetchErrorResult<TData, TError> {
   return {
     ...createQueryObserverBaseResult<TData, TError>(),
     data,
@@ -81,9 +76,7 @@ export function createQueryObserverRefetchErrorResult<
 export function createQueryObserverLoadingErrorResult<
   TData = unknown,
   TError = unknown,
->(
-  error: TError,
-): QueryObserverLoadingErrorResult<TData, TError> & { queryKey: QueryKey } {
+>(error: TError): QueryObserverLoadingErrorResult<TData, TError> {
   return {
     ...createQueryObserverBaseResult<TData, TError>(),
     data: undefined,
@@ -101,7 +94,7 @@ export function createQueryObserverLoadingErrorResult<
 export function createQueryObserverLoadingResult<
   TData = unknown,
   TError = unknown,
->(): QueryObserverLoadingResult<TData, TError> & { queryKey: QueryKey } {
+>(): QueryObserverLoadingResult<TData, TError> {
   return {
     ...createQueryObserverBaseResult<TData, TError>(),
     data: undefined,

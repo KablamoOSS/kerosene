@@ -38,5 +38,5 @@ export function isQueryObserverLoadingErrorResult<
 export function isQueryObserverLoadingResult<TData = unknown, TError = unknown>(
   query: UseQueryResult<TData, TError>,
 ): query is QueryObserverLoadingResult<TData, TError> {
-  return query.data === undefined && query.isLoading;
+  return query.data === undefined && query.isPending;
 }
