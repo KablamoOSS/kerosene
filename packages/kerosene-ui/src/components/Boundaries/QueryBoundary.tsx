@@ -74,7 +74,7 @@ const QueryBoundary = <
     return <>{typeof children === "function" ? children(query) : children}</>;
   }
 
-  if (query.isLoading) {
+  if (query.isPending) {
     return <>{loadingFallback}</>;
   }
 
