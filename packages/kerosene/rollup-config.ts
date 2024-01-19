@@ -1,9 +1,7 @@
-import babel from "@rollup/plugin-babel";
+import { optimizeLodashImports } from "@optimize-lodash/rollup-plugin";
 import path from "path";
 import type { ExternalOption, RollupOptions } from "rollup";
-import resolve from "rollup-plugin-node-resolve";
-// eslint-disable-next-line import/no-relative-packages
-import generateBabelConfig from "../../config/generateBabelConfig";
+import esbuild from "rollup-plugin-esbuild";
 import packageJson from "./package.json";
 
 const input = path.join(__dirname, "src", "index.ts");
@@ -19,23 +17,7 @@ const external: ExternalOption = (source) =>
   externals.includes(source) ||
   externals.some((mod) => source.startsWith(`${mod}/`));
 
-const extensions = [".js", ".ts"];
-
-const plugins = [
-  resolve({
-    customResolveOptions: {
-      moduleDirectory: __dirname,
-    },
-    extensions,
-  }),
-  babel({
-    ...generateBabelConfig(false),
-    configFile: false,
-    babelrc: false,
-    extensions,
-    babelHelpers: "runtime",
-  }),
-];
+const plugins = [esbuild(), optimizeLodashImports()];
 
 export default [
   {
@@ -45,13 +27,14 @@ export default [
         entryFileNames: "[name].cjs",
         dir: outputDir,
         format: "commonjs",
+        interop: "auto",
         preserveModules: true,
         sourcemap: true,
       },
       {
         entryFileNames: "[name].mjs",
         dir: outputDir,
-        format: "esm",
+        format: "es",
         preserveModules: true,
         sourcemap: true,
       },
