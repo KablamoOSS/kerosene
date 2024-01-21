@@ -15,7 +15,8 @@
     "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
+    "skipLibCheck": true
   },
   "include": ["**/*", "**/.*", "**/.*/**/*", "**/.*/**/.*"],
   "exclude": [

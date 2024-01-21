@@ -9,8 +9,6 @@ module.exports = {
       {
         devDependencies: [
           ".eslintrc.js",
-          "babel-register.js",
-          "babel.config.js",
           "config/**/*",
           "typings/**/*",
           "**/es/**/*",
