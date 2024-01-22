@@ -1,6 +1,13 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "Node10",
+    "resolvePackageJsonExports": false,
+    "resolvePackageJsonImports": false,
+    "verbatimModuleSyntax": false,
+    "isolatedModules": true,
     "outDir": "dist",
     "noEmit": false,
     "allowJs": false,

@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@kablamo/kerosene-test": "^0.0.15",
-    "@kablamo/rollup-plugin-resolve-externals": "^0.0.1",
+    "@kablamo/rollup-plugin-resolve-externals": "^0.0.2",
     "@optimize-lodash/rollup-plugin": "^4.0.4",
     "@sinonjs/fake-timers": "^11.2.2",
     "@tanstack/react-query": "^5.12.2",

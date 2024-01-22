@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/rollup-plugin-resolve-externals",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/rollup-plugin-resolve-externals",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
