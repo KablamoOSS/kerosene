@@ -1,7 +1,7 @@
 {
-  "name": "@kablamo/kerosene-test",
-  "version": "0.0.15",
-  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-test",
+  "name": "@kablamo/rollup-plugin-resolve-externals",
+  "version": "0.0.1",
+  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/rollup-plugin-resolve-externals",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },
@@ -14,17 +14,13 @@
       "name": "Nathan Hardy",
       "email": "nathan.hardy@kablamo.com.au",
       "url": "https://nhardy.id.au"
-    },
-    {
-      "name": "George El-Khoury",
-      "email": "george.elkhoury@kablamo.com.au",
-      "url": "https://gekdesign.com.au"
     }
   ],
   "homepage": "https://github.com/KablamoOSS/kerosene",
   "private": false,
   "license": "MIT",
-  "main": ".dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "directories": {
     "doc": "readme.md"
   },
@@ -35,30 +31,21 @@
     "node": ">=18.12.0"
   },
   "keywords": [
-    "jest",
     "kablamo",
     "kerosene",
-    "mock",
-    "react",
-    "sinon",
-    "stub",
-    "test",
-    "utils"
+    "rollup",
+    "plugin",
+    "externals",
+    "resolve"
   ],
   "dependencies": {
-    "@kablamo/kerosene": "^0.0.39",
-    "@types/lodash": "^4.14.202",
-    "@types/sinon": "^17.0.2",
-    "lodash": "^4.17.21",
-    "sinon": "^17.0.1"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "rollup": "^4.5.1"
   },
   "peerDependencies": {
-    "react": ">=16.8.6",
-    "react-dom": ">=16.8.6"
+    "rollup": "^4.5.1"
   },
   "scripts": {
     "build": "tsc",

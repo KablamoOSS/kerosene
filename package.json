@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "postinstall": "manypkg check",
-    "prebuild": "yarn workspace @kablamo/kerosene run build",
+    "prebuild": "yarn workspace @kablamo/rollup-plugin-resolve-externals run build && yarn workspace @kablamo/kerosene run build",
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "lint": "eslint .",

@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": false,
+    "allowJs": false,
+    "declaration": true,
+    "declarationDir": "dist"
+  },
+  "include": ["src/**/*.ts"]
+}

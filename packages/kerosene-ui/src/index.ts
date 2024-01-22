@@ -29,6 +29,11 @@ export { default as usePrevious } from "./hooks/usePrevious";
 export { default as useRafThrottle } from "./hooks/useRafThrottle";
 export { default as useRect } from "./hooks/useRect";
 export { default as useStableIdentity } from "./hooks/useStableIdentity";
+export {
+  default as useTimeZone,
+  TimeZoneProvider,
+  type TimeZoneProviderProps,
+} from "./hooks/useTimeZone";
 export { default as useUpdatingRef } from "./hooks/useUpdatingRef";
 
 export { default as ShowWhen } from "./components/ShowWhen";

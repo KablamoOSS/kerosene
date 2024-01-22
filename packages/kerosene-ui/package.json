@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-ui",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-ui",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -35,14 +35,15 @@
     "node": ">=18.12.0"
   },
   "dependencies": {
-    "@kablamo/kerosene": "^0.0.38",
+    "@kablamo/kerosene": "^0.0.39",
     "@types/lodash": "^4.14.202",
     "esbuild-register": "^3.5.0",
     "lodash": "^4.17.21",
     "use-sync-external-store": "^1.2.0"
   },
   "devDependencies": {
-    "@kablamo/kerosene-test": "^0.0.14",
+    "@kablamo/kerosene-test": "^0.0.15",
+    "@kablamo/rollup-plugin-resolve-externals": "^0.0.1",
     "@optimize-lodash/rollup-plugin": "^4.0.4",
     "@sinonjs/fake-timers": "^11.2.2",
     "@tanstack/react-query": "^5.12.2",
