@@ -37,7 +37,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@kablamo/rollup-plugin-resolve-externals": "^0.0.1",
+    "@kablamo/rollup-plugin-resolve-externals": "^0.0.2",
     "@optimize-lodash/rollup-plugin": "^4.0.4",
     "@sinonjs/fake-timers": "^11.2.2",
     "@types/seed-random": "^2.2.4",
