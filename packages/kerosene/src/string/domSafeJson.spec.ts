@@ -1,12 +1,12 @@
 import domSafeJson from "./domSafeJson";
 
 describe("domSafeJson", () => {
-  it("should escape the opening angle bracket", () => {
+  it("should escape ampersand and angle brackets", () => {
     expect(
       domSafeJson({
-        field: "</script>",
+        field: "&</script>",
       }),
-    ).toBe('{"field":"\\u003c/script>"}');
+    ).toBe('{"field":"\\u0026\\u003c/script\\u003e"}');
   });
 
   it("should escape unicode characters in the range 007f to ffff", () => {

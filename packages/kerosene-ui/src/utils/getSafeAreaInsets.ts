@@ -22,7 +22,7 @@ export default function getSafeAreaInsets(): SafeAreaInsets {
   return SIDES.reduce(
     (acc, side) => ({
       ...acc,
-      [side]: (computed[side] && parseInt(computed[side]!, 10)) || 0,
+      [side]: (computed[side] && parseInt(computed[side], 10)) || 0,
     }),
     {} as Partial<SafeAreaInsets> as SafeAreaInsets,
   );

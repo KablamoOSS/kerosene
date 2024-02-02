@@ -3,7 +3,7 @@ import escape from "./escape";
 /**
  * These characters are unsafe
  */
-const UNSAFE_CHARACTERS_REGEX = /([<\u007f-\uffff])/g;
+const UNSAFE_CHARACTERS_REGEX = /([&><\u007f-\uffff])/g;
 
 /**
  * Like `JSON.stringify(value)`, but escaped for safe insertion into the DOM, such as inside a `<script>` tag for SSR
