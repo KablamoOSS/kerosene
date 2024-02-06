@@ -1,6 +1,5 @@
 __snapshots__
 config
-babel.config.js
 rollup-config.ts
 rollup.config.js
 **.spec.ts

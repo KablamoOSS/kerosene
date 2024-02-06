@@ -42,27 +42,27 @@ Otherwise, immutably removes that item from the array.
 
 ### `SECOND`
 
-1000 milliseconds
+Milliseconds in one second (1,000).
 
 ### `MINUTE`
 
-60,000 milliseconds
+Milliseconds in one minute (60,000).
 
 ### `HOUR`
 
-3,600,000 milliseconds
+Milliseconds in one hour (3,600,000).
 
 ### `DAY`
 
-86,400,000 milliseconds
+Milliseconds in one 24-hour day (86,400,000).
 
 ### `Month`
 
-A 0-indexed enum for the months of the Gregorian Calendar
+A 0-indexed enum for the months of the Gregorian Calendar.
 
 ### `DayOfWeek`
 
-A 0-indexed enum for the days of the week
+A 0-indexed enum for the days of the week, starting at Sunday.
 
 ### `getCalendarWeeks(month, startOfWeek)`
 

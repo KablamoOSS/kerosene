@@ -28,6 +28,8 @@ export type CalendarWeeks =
  * to the timezone of the environment).
  * @param month Date for the month
  * @param firstDayOfWeek 0-indexed `DayOfWeek`
+ *
+ * @deprecated Use a library like `react-aria-components` which accounts for internationalisation
  */
 export default function getCalendarWeeks(
   month: Date | number,

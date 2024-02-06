@@ -42,10 +42,10 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "rollup": "^4.5.1"
+    "rollup": "^4.9.6"
   },
   "peerDependencies": {
-    "rollup": "^4.5.1"
+    "rollup": "^4.9.6"
   },
   "scripts": {
     "build": "tsc",
