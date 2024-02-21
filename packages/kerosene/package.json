@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene",
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
@@ -30,9 +30,8 @@
     "node": ">=18.12.0"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.202",
     "content-type": "^1.0.5",
-    "core-js-pure": "^3.35.1",
+    "core-js-pure": "^3.36.0",
     "date-fns": "^3.3.1",
     "lodash": "^4.17.21"
   },
@@ -41,11 +40,12 @@
     "@optimize-lodash/rollup-plugin": "^4.0.4",
     "@sinonjs/fake-timers": "^11.2.2",
     "@types/content-type": "^1.1.8",
+    "@types/lodash": "^4.14.202",
     "@types/seed-random": "^2.2.4",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.20.1",
     "esbuild-register": "^3.5.0",
     "jest-when": "^3.6.0",
-    "rollup": "^4.9.6",
+    "rollup": "^4.12.0",
     "rollup-plugin-esbuild": "^6.1.1",
     "seed-random": "^2.2.0"
   },
