@@ -21,6 +21,8 @@ const rejectedPromise = Promise.reject(error);
 // A .catch() handler must be added synchronously to prevent PromiseRejectionUnhandledWarning
 rejectedPromise.catch(noop);
 
+const pendingPromise = new Promise<never>(noop);
+
 describe("QueriesBoundary", () => {
   it.each([
     {
@@ -83,6 +85,15 @@ describe("QueriesBoundary", () => {
       },
       value1: rejectedPromise,
       value2: rejectedPromise,
+    },
+    {
+      expected: "errorFallback",
+      props: {
+        children: "Success",
+        errorFallback: <>errorFallback</>,
+      },
+      value1: rejectedPromise,
+      value2: pendingPromise,
     },
   ] satisfies Array<{
     expected: string;

@@ -130,10 +130,6 @@ const QueriesBoundary = <
     [queries],
   );
 
-  if (queries.some((query) => isQueryObserverLoadingResult(query))) {
-    return <>{loadingFallback}</>;
-  }
-
   if (error) {
     if (React.isValidElement(errorFallback)) {
       return <>{errorFallback}</>;
@@ -156,6 +152,10 @@ const QueriesBoundary = <
     throw new Error(
       "QueriesBoundary requires either errorFallback, errorFallbackRender, or ErrorFallbackComponent prop",
     );
+  }
+
+  if (queries.some((query) => isQueryObserverLoadingResult(query))) {
+    return <>{loadingFallback}</>;
   }
 
   return (
