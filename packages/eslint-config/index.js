@@ -68,6 +68,10 @@ module.exports = {
       { allowShortCircuit: true, allowTernary: true },
     ],
 
+    // ESLint rules superseded by @typescript-eslint rules
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+
     // @typescript-eslint rules
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -159,6 +163,8 @@ module.exports = {
         // ESLint rules superseded by @typescript-eslint rules
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
+        "no-throw-literal": "off",
+        "@typescript-eslint/no-throw-literal": "error",
         // Allow void to be used to signify intentional ignoring of a Promise result
         "no-void": "off",
         "@typescript-eslint/no-meaningless-void-operator": "error",
