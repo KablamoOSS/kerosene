@@ -5,7 +5,7 @@ import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
  * Custom hook which creates a ref to the `value` which is kept up-to-date after each render in `useLayoutEffect`
  * @param value
  */
-export default function useUpdatingRef<T>(value: T): React.RefObject<T> {
+export default function useUpdatingRef<T>(value: T) {
   const ref = React.useRef(value);
 
   // NOTE: This must occur in an effect, as writing to a ref during the render phase can lead to unexpected consequences
