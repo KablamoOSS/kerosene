@@ -19,9 +19,9 @@ export default function parseSearch(search: string): ParsedUrlQuery {
     if (typeof parsed[key] === "undefined") {
       parsed[key] = value;
     } else if (Array.isArray(parsed[key])) {
-      (parsed[key] as string[]).push(value);
+      parsed[key].push(value);
     } else {
-      parsed[key] = [parsed[key] as string, value];
+      parsed[key] = [parsed[key], value];
     }
   });
   return parsed;
