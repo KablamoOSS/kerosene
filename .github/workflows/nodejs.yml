@@ -16,8 +16,8 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - lts/hydrogen
           - lts/iron
+          - lts/jod
           - current
 
     steps:
@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -65,10 +65,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js Hydrogen
-        uses: actions/setup-node@v3
+      - name: Setup Node.js Jod
+        uses: actions/setup-node@v4
         with:
-          node-version: lts/hydrogen
+          node-version: lts/jod
 
       - name: Install dependencies
         run: yarn

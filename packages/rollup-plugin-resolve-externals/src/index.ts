@@ -37,7 +37,7 @@ export default function resolveExternals({
       const match = deepExternalRegex.exec(source);
       if (match) {
         const [, mod, importPath] = match;
-        // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
+        // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
         const pkgJson = require(`${mod}/package.json`) as Record<
           string,
           unknown

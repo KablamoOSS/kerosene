@@ -5,6 +5,7 @@ import type {
   QueryObserverRefetchErrorResult,
   QueryObserverSuccessResult,
 } from "@tanstack/react-query";
+import { noop } from "lodash";
 
 function createQueryObserverBaseResult<
   TData = unknown,
@@ -32,6 +33,7 @@ function createQueryObserverBaseResult<
     isRefetching: false,
     isStale: false,
     isSuccess: false,
+    promise: new Promise<TData>(noop),
     refetch: jest.fn(),
     status: "pending",
     fetchStatus: "idle",
@@ -51,6 +53,7 @@ export function createQueryObserverSuccessResult<TData, TError = never>(
     isPending: false,
     isRefetchError: false,
     isSuccess: true,
+    promise: Promise.resolve(data),
     status: "success",
   };
 }

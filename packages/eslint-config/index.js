@@ -136,6 +136,7 @@ module.exports = {
       files: ["*.js", "*.cjs"],
       rules: {
         "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-require-imports": "off",
       },
     },
     {
@@ -164,7 +165,7 @@ module.exports = {
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
         "no-throw-literal": "off",
-        "@typescript-eslint/no-throw-literal": "error",
+        "@typescript-eslint/only-throw-error": "error",
         // Allow void to be used to signify intentional ignoring of a Promise result
         "no-void": "off",
         "@typescript-eslint/no-meaningless-void-operator": "error",
@@ -193,7 +194,14 @@ module.exports = {
         "@typescript-eslint/require-await": "off",
         // Too opinionated for now, revisit later
         "@typescript-eslint/restrict-template-expressions": "off",
-        "@typescript-eslint/switch-exhaustiveness-check": "error",
+        "@typescript-eslint/switch-exhaustiveness-check": [
+          "error",
+          {
+            allowDefaultCaseForExhaustiveSwitch: true,
+            considerDefaultExhaustiveForUnions: true,
+            requireDefaultForNonUnion: true,
+          },
+        ],
         // Causes false positives with Jest mocks
         // @see https://typescript-eslint.io/rules/unbound-method/#when-not-to-use-it
         "@typescript-eslint/unbound-method": "off",

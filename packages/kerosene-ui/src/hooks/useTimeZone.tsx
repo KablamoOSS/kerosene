@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 declare global {
   interface WindowEventHandlersEventMap {
@@ -44,7 +43,7 @@ export default function useTimeZone() {
   const ssrTimeZone = React.useContext(SSRTimeZoneContext);
   const getServerSnapshot = React.useCallback(() => ssrTimeZone, [ssrTimeZone]);
 
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export interface TimeZoneProviderProps {

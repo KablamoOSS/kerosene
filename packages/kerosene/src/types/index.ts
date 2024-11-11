@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Alias for any constructor function
@@ -347,6 +347,7 @@ export type RequireAtLeastOne<T> = {
  */
 export type RequiredKeys<T extends object> = T extends unknown
   ? {
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
     }[keyof T]
   : never;

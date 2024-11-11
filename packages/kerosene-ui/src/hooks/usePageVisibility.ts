@@ -1,6 +1,4 @@
 import * as React from "react";
-// Using shim for React 16 & 17 support instead of React.useSyncExternalStore
-import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 const getServerSnapshot = () => true;
 
@@ -40,7 +38,7 @@ export default function usePageVisibility(
     return useState ? visibility.current : true;
   }, [useState]);
 
-  const visible = useSyncExternalStore(
+  const visible = React.useSyncExternalStore(
     subscribe,
     getSnapshot,
     getServerSnapshot,

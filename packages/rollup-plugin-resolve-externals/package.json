@@ -28,7 +28,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=18.12.0"
+    "node": ">=20.9.0"
   },
   "keywords": [
     "kablamo",
@@ -42,7 +42,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "rollup": "^4.22.4"
+    "rollup": "^4.25.0"
   },
   "peerDependencies": {
     "rollup": "^4.9.6"
