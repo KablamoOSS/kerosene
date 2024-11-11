@@ -1,6 +1,5 @@
 import { MINUTE } from "@kablamo/kerosene";
 import * as React from "react";
-import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 interface CurrentTimeSubscription {
   lastUpdatedAt: number;
@@ -187,7 +186,7 @@ export default function useCurrentTime(period?: number): number {
     [emitter, period],
   );
 
-  return useSyncExternalStore(
+  return React.useSyncExternalStore(
     subscribe,
     emitter.getCurrentTime,
     emitter.getSsrTime,

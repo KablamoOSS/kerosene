@@ -11,14 +11,14 @@ export default function timeout(
   let rejectPromise: ((reason?: unknown) => void) | null = null;
 
   const onAbort = () => {
-    handle && clearTimeout(handle);
+    if (handle) clearTimeout(handle);
     rejectPromise?.(new Error("Aborted"));
     rejectPromise = null;
   };
   signal?.addEventListener("abort", onAbort);
 
   const cancel = () => {
-    handle && clearTimeout(handle);
+    if (handle) clearTimeout(handle);
     rejectPromise?.(new Error("Cancelled"));
     rejectPromise = null;
     signal?.removeEventListener("abort", onAbort);

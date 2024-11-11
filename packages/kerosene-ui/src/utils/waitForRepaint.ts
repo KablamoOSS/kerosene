@@ -9,14 +9,14 @@ export default function waitForRepaint({
   let rejectPromise: ((reason?: unknown) => void) | null = null;
 
   const onAbort = () => {
-    handle && window.cancelAnimationFrame(handle);
+    if (handle) window.cancelAnimationFrame(handle);
     rejectPromise?.(new Error("Aborted"));
     rejectPromise = null;
   };
   signal?.addEventListener("abort", onAbort);
 
   const cancel = () => {
-    handle && window.cancelAnimationFrame(handle);
+    if (handle) window.cancelAnimationFrame(handle);
     rejectPromise?.(new Error("waitForRepaint was cancelled"));
     rejectPromise = null;
     signal?.removeEventListener("abort", onAbort);

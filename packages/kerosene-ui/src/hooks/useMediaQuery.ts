@@ -1,7 +1,5 @@
 import { noop } from "lodash";
 import * as React from "react";
-// Using shim for React 16 & 17 support instead of React.useSyncExternalStore
-import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 export interface UseMediaQueryOptions {
   /**
@@ -69,5 +67,5 @@ export default function useMediaQuery(
     [defaultMatches],
   );
 
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

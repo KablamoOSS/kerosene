@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "use-sync-external-store/shim";
+import * as React from "react";
 import {
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
@@ -42,5 +42,5 @@ const getServerSnapshot = () => false;
  * Custom hook which returns whether there is any element on the page which has the :focus-visible pseudo class
  */
 export default function useFocusVisible() {
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

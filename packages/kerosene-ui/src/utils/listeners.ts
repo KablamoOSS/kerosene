@@ -15,7 +15,7 @@ try {
   };
   window.addEventListener("test", noop, options);
   window.removeEventListener("test", noop, {});
-} catch (e) /* istanbul ignore next */ {
+} catch /* istanbul ignore next */ {
   isPassiveSupported = false;
 }
 
@@ -29,7 +29,7 @@ try {
   };
   window.addEventListener("test", noop, options);
   window.removeEventListener("test", noop, { capture: true });
-} catch (e) /* istanbul ignore next */ {
+} catch /* istanbul ignore next */ {
   isCapturePassiveSupported = false;
 }
 

@@ -48,10 +48,10 @@
   "dependencies": {
     "@kablamo/kerosene": "^0.0.41",
     "lodash": "^4.17.21",
-    "sinon": "^17.0.1"
+    "sinon": "^19.0.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.6",
+    "@types/lodash": "^4.17.13",
     "@types/sinon": "^17.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

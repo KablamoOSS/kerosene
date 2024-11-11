@@ -14,11 +14,14 @@
     "clean": "exit 0",
     "test": "src/test.js"
   },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "peerDependencies": {
-    "eslint": "^7 || ^8"
+    "eslint": "^8"
   },
   "devDependencies": {
-    "@types/eslint": "^8.56.10",
-    "eslint": "^8.57.0"
+    "@types/eslint": "^8.56.12",
+    "eslint": "^8.57.1"
   }
 }

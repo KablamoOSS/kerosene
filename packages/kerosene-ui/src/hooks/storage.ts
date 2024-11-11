@@ -79,7 +79,7 @@ function createUseStorage(storageArea: "localStorage" | "sessionStorage") {
             ? (JSON.parse(stored) as unknown)
             : defaultValue;
           return isT(parsed) ? parsed : defaultValue;
-        } catch (error) {
+        } catch {
           return defaultValue;
         }
       },
