@@ -220,8 +220,11 @@ module.exports = {
         "react/prefer-stateless-function": "off",
 
         "@typescript-eslint/ban-types": "off",
+
         // Declaration merging
         "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
+
         "@typescript-eslint/no-namespace": "off",
       },
     },
