@@ -84,6 +84,16 @@ Returns whether the day of `date` is the same or after the day of `dateToCompare
 
 Returns whether the day of `date` is the same or before the day of `dateToCompare`.
 
+## Error
+
+### `catchAbortError(error)`
+
+Function that will re-throw any non-AbortError.
+
+### `isAbortError(error)`
+
+Returns whether the provided `error` is an `"AbortError"` by `name`.
+
 ## Fetch
 
 ### `isNetworkError(error)`
@@ -117,6 +127,10 @@ Returns a `Promise` which resolves after the specified `delay` in milliseconds.
 Returns a `Promise` which resolves after the current event loop drains.
 
 ## Iterable
+
+### `intersects(iterable1, iterable2)`
+
+Returns whether any elements are shared between `iterable1` and `iterable2`.
 
 ### `isEquivalentSet(iterable1, iterable2)`
 

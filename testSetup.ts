@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom";
-import "core-js/features/array/flat";
-import "core-js/features/array/flat-map";
+import "core-js/features/set/is-disjoint-from";
 import { noop } from "lodash";
 import { setImmediate } from "timers";
 

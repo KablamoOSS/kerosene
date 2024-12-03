@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "manypkg check",
+    "postinstall": "patch-package && manypkg check",
     "prebuild": "yarn workspace @kablamo/rollup-plugin-resolve-externals run build && yarn workspace @kablamo/kerosene run build",
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
@@ -27,7 +27,7 @@
     "preset": "ts-jest/presets/js-with-ts",
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
-      "./testSetup.ts"
+      "<rootDir>/testSetup.ts"
     ],
     "transform": {
       "^.+\\.(?:[jt]sx?)$": [
@@ -53,11 +53,11 @@
     "@types/jest": "^29.5.14",
     "@types/jest-when": "^3.5.5",
     "@types/lodash": "^4.17.13",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "^8.13.0",
-    "@typescript-eslint/parser": "^8.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
     "core-js": "^3.39.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
@@ -70,11 +70,13 @@
     "jsdom-global": "^3.0.2",
     "lodash": "^4.17.21",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.3.3",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
+    "prettier": "^3.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   }
 }

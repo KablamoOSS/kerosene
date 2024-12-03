@@ -2,7 +2,9 @@ export * from "./array";
 
 export * from "./datetime";
 
+export { default as catchAbortError } from "./error/catchAbortError";
 export { default as ExtendableError } from "./error/ExtendableError";
+export { default as isAbortError } from "./error/isAbortError";
 
 export { default as isNetworkError } from "./fetch/isNetworkError";
 export { default as transform } from "./fetch/transform";
@@ -14,6 +16,7 @@ export { default as ServerError } from "./fetch/serverError";
 export { default as timeout } from "./function/timeout";
 export { default as waitForEventLoopToDrain } from "./function/waitForEventLoopToDrain";
 
+export { default as intersects } from "./iterable/intersects";
 export { default as isEquivalentSet } from "./iterable/isEquivalentSet";
 
 export { default as ceil } from "./math/ceil";

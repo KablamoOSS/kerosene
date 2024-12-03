@@ -9,6 +9,9 @@ export default function usePrevious<T, U>(value: T, initialValue: U): T | U;
 
 /**
  * Custom hook which remembers the value from the previous render
+ *
+ * @deprecated Violates rules of hooks by reading from a ref during render
+ *
  * @param value
  * @param initialValue
  */

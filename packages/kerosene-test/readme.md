@@ -18,6 +18,26 @@ Creates a StubComponent for unit testing.
 
 Creates a stub React Context for unit testing.
 
+### `createQueryObserverBaseResult(queryKey?)`
+
+Creates a fake query observer result useful for mocking React Query.
+
+### `createQueryObserverSuccessResult(data, queryKey?)`
+
+Creates a fake query observer success result useful for mocking React Query.
+
+### `createQueryObserverRefetchErrorResult(data, error, queryKey?)`
+
+Creates a fake query observer refetch error result useful for mocking React Query.
+
+### `createQueryObserverLoadingErrorResult(error, queryKey?)`
+
+Creates a fake query observer loading error result useful for mocking React Query.
+
+### `createQueryObserverLoadingResult(queryKey?)`
+
+Creates a fake query observer loading result useful for mocking React Query.
+
 ### Stubs
 
 #### `createStubStyles(classNames, values?)`

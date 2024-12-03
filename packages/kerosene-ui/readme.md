@@ -50,6 +50,10 @@ Custom hook which applies a CSS `property` `value` with `priority` to the elemen
 
 Custom hook that makes `setInterval` work declaritively with hooks. See https://overreacted.io/making-setinterval-declarative-with-react-hooks/ for more details.
 
+### `useIsOnline()`
+
+Custom hook which returns the current value of `navigator.onLine`, watching for changes via the `"online"` and `"offline"` events.
+
 ### `useKonamiCode(code, callback)`
 
 Custom hook which listens for keydown events for the specified `code` and triggers the callback when the code is entered.

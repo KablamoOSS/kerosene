@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
+  DataTag,
+  QueryKey,
   QueryObserverBaseResult,
   QueryObserverLoadingErrorResult,
   QueryObserverLoadingResult,
@@ -10,7 +13,12 @@ import { noop } from "lodash";
 function createQueryObserverBaseResult<
   TData = unknown,
   TError = unknown,
->(): QueryObserverBaseResult<TData, TError> {
+  TQueryKey extends QueryKey = any[],
+>(
+  queryKey: TQueryKey = [] as unknown as TQueryKey,
+): QueryObserverBaseResult<TData, TError> & {
+  queryKey: DataTag<TQueryKey, TData>;
+} {
   return {
     data: undefined,
     dataUpdatedAt: 0,
@@ -37,14 +45,22 @@ function createQueryObserverBaseResult<
     refetch: jest.fn(),
     status: "pending",
     fetchStatus: "idle",
+    queryKey: queryKey as DataTag<TQueryKey, TData>,
   };
 }
 
-export function createQueryObserverSuccessResult<TData, TError = never>(
+export function createQueryObserverSuccessResult<
+  TData,
+  TError = never,
+  TQueryKey extends QueryKey = any[],
+>(
   data: TData,
-): QueryObserverSuccessResult<TData, TError> {
+  queryKey?: TQueryKey,
+): QueryObserverSuccessResult<TData, TError> & {
+  queryKey: DataTag<TQueryKey, TData>;
+} {
   return {
-    ...createQueryObserverBaseResult<TData, TError>(),
+    ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error: null,
     isError: false,
@@ -61,9 +77,16 @@ export function createQueryObserverSuccessResult<TData, TError = never>(
 export function createQueryObserverRefetchErrorResult<
   TData = unknown,
   TError = unknown,
->(data: TData, error: TError): QueryObserverRefetchErrorResult<TData, TError> {
+  TQueryKey extends QueryKey = any[],
+>(
+  data: TData,
+  error: TError,
+  queryKey?: TQueryKey,
+): QueryObserverRefetchErrorResult<TData, TError> & {
+  queryKey: DataTag<TQueryKey, TData>;
+} {
   return {
-    ...createQueryObserverBaseResult<TData, TError>(),
+    ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error,
     isError: true,
@@ -79,9 +102,15 @@ export function createQueryObserverRefetchErrorResult<
 export function createQueryObserverLoadingErrorResult<
   TData = unknown,
   TError = unknown,
->(error: TError): QueryObserverLoadingErrorResult<TData, TError> {
+  TQueryKey extends QueryKey = any[],
+>(
+  error: TError,
+  queryKey?: TQueryKey,
+): QueryObserverLoadingErrorResult<TData, TError> & {
+  queryKey: DataTag<TQueryKey, TData>;
+} {
   return {
-    ...createQueryObserverBaseResult<TData, TError>(),
+    ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error,
     isError: true,
@@ -97,9 +126,14 @@ export function createQueryObserverLoadingErrorResult<
 export function createQueryObserverLoadingResult<
   TData = unknown,
   TError = unknown,
->(): QueryObserverLoadingResult<TData, TError> {
+  TQueryKey extends QueryKey = any[],
+>(
+  queryKey?: TQueryKey,
+): QueryObserverLoadingResult<TData, TError> & {
+  queryKey: DataTag<TQueryKey, TData>;
+} {
   return {
-    ...createQueryObserverBaseResult<TData, TError>(),
+    ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error: null,
     isError: false,
