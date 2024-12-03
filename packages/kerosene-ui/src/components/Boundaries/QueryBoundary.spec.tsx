@@ -1,4 +1,5 @@
 import { Deferred, type DistributiveOmit } from "@kablamo/kerosene";
+import { createQueryObserverLoadingErrorResult } from "@kablamo/kerosene-test";
 import {
   useQuery,
   QueryClientProvider,
@@ -10,7 +11,6 @@ import { noop } from "lodash";
 import * as React from "react";
 import type { FallbackProps } from "react-error-boundary";
 import QueryBoundary, { type QueryBoundaryProps } from "./QueryBoundary";
-import { createQueryObserverLoadingErrorResult } from "./testHelpers";
 
 const error = new Error("an error");
 const rejectedPromise = Promise.reject(error);
@@ -31,7 +31,7 @@ describe("QueryBoundary", () => {
       expected: "data",
       props: {
         // eslint-disable-next-line react/jsx-no-useless-fragment
-        children: ({ data }) => <>{data}</>,
+        children: ({ data }) => <>{data as string}</>,
         errorFallback: <>errorFallback</>,
       },
       value: "data",

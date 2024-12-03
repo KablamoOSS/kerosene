@@ -1,4 +1,5 @@
 import { Deferred, type DistributiveOmit } from "@kablamo/kerosene";
+import { createQueryObserverLoadingErrorResult } from "@kablamo/kerosene-test";
 import {
   useQuery,
   QueryClientProvider,
@@ -14,7 +15,6 @@ import QueriesBoundary, {
   AggregateQueriesError,
   type QueriesBoundaryProps,
 } from "./QueriesBoundary";
-import { createQueryObserverLoadingErrorResult } from "./testHelpers";
 
 const error = new Error("an error");
 const rejectedPromise = Promise.reject(error);

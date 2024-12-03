@@ -1,0 +1,39 @@
+diff --git a/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/aborting/AbortSignal-impl.js b/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/aborting/AbortSignal-impl.js
+index 25b29e1..918a821 100644
+--- a/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/aborting/AbortSignal-impl.js
++++ b/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/aborting/AbortSignal-impl.js
+@@ -21,6 +21,12 @@ class AbortSignalImpl extends EventTargetImpl {
+     return this.reason !== undefined;
+   }
+ 
++  throwIfAborted() {
++    if (this.aborted) {
++      throw this.reason;
++    }
++  }
++
+   static abort(globalObject, reason) {
+     const abortSignal = AbortSignal.createImpl(globalObject, []);
+     if (reason !== undefined) {
+diff --git a/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/AbortSignal.js b/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/AbortSignal.js
+index c336223..4f8175a 100644
+--- a/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/AbortSignal.js
++++ b/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/AbortSignal.js
+@@ -107,6 +107,17 @@ exports.install = (globalObject, globalNames) => {
+       return esValue[implSymbol]["aborted"];
+     }
+ 
++    throwIfAborted() {
++      const esValue = this !== null && this !== undefined ? this : globalObject;
++      if (!exports.is(esValue)) {
++        throw new globalObject.TypeError(
++          "'throwIfAborted' called on an object that is not a valid instance of AbortSignal."
++        );
++      }
++
++      return esValue[implSymbol].throwIfAborted();
++    }
++
+     get reason() {
+       const esValue = this !== null && this !== undefined ? this : globalObject;
+ 
