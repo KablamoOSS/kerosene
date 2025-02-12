@@ -51,7 +51,7 @@
     "@types/lodash": "^4.17.13",
     "@types/sinonjs__fake-timers": "^8.1.5",
     "@types/use-sync-external-store": "^0.0.6",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "esbuild-register": "^3.6.0",
     "jest-sandbox": "^1.1.2",
     "jest-when": "^3.6.0",
