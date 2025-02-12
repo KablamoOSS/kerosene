@@ -42,7 +42,7 @@
     "@types/content-type": "^1.1.8",
     "@types/lodash": "^4.17.13",
     "@types/seed-random": "^2.2.4",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "esbuild-register": "^3.6.0",
     "jest-when": "^3.6.0",
     "rollup": "^4.28.0",
