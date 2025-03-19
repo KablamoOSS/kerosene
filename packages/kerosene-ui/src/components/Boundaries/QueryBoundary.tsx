@@ -63,7 +63,7 @@ const QueryBoundary = <
   ErrorFallbackComponent,
   loadingFallback,
   query,
-}: QueryBoundaryProps<TData, TError>): JSX.Element => {
+}: QueryBoundaryProps<TData, TError>): React.JSX.Element => {
   const { refetch } = query;
   const resetErrorBoundary = React.useCallback(() => {
     void refetch();

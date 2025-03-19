@@ -45,7 +45,7 @@ export default function useInlineCSS<
   T extends HTMLElement | SVGElement,
 >(
   { property, value, priority }: UseInlineCSSOptions<PropertyKey>,
-  refOrSelector: React.RefObject<T> | "html" | "body" = "html",
+  refOrSelector: React.RefObject<T | null> | "html" | "body" = "html",
 ) {
   // If we're using a selector, we can apply the styles immediately, before rendering
   useInsertionEffect(() => {

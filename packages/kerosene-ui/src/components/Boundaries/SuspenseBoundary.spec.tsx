@@ -36,14 +36,14 @@ describe("SuspenseBoundary", () => {
       value: "Success",
     },
     {
-      errorFallbackProps: {
+      props: {
         errorFallback: <>errorFallback</>,
       },
       expected: "errorFallback",
       value: rejectedPromise,
     },
     {
-      errorFallbackProps: {
+      props: {
         errorFallbackRender: jest
           .fn()
           .mockImplementation(() => <>errorFallbackRender</>),
@@ -52,7 +52,7 @@ describe("SuspenseBoundary", () => {
       value: rejectedPromise,
     },
     {
-      errorFallbackProps: {
+      props: {
         ErrorFallbackComponent: jest
           .fn()
           .mockImplementation(() => <>ErrorFallbackComponent</>),
@@ -61,19 +61,15 @@ describe("SuspenseBoundary", () => {
       value: rejectedPromise,
     },
   ] satisfies Array<{
-    errorFallbackProps?: ErrorFallbackProps;
+    props?: ErrorFallbackProps;
     expected: string;
     value: string | Promise<string>;
   }>)(
     "should render a loading state and then $expected",
-    async ({
-      errorFallbackProps = { errorFallback: <>Error</> },
-      expected,
-      value,
-    }) => {
+    async ({ props = { errorFallback: <>Error</> }, expected, value }) => {
       const deferred = new Deferred<string>();
       render(
-        <SuspenseBoundary loadingFallback="Loading" {...errorFallbackProps}>
+        <SuspenseBoundary loadingFallback="Loading" {...props}>
           <SuspendingComponent queryFn={() => deferred.promise} />
         </SuspenseBoundary>,
         {
@@ -99,19 +95,19 @@ describe("SuspenseBoundary", () => {
       await waitFor(() =>
         expect(screen.getByText(expected)).toBeInTheDocument(),
       );
-      if (errorFallbackProps.errorFallbackRender) {
-        expect(errorFallbackProps.errorFallbackRender).toHaveBeenCalledWith({
+      if (props.errorFallbackRender) {
+        expect(props.errorFallbackRender).toHaveBeenCalledWith({
           error,
           resetErrorBoundary: expect.any(Function),
         });
       }
-      if (errorFallbackProps.ErrorFallbackComponent) {
-        expect(errorFallbackProps.ErrorFallbackComponent).toHaveBeenCalledWith(
+      if (props.ErrorFallbackComponent) {
+        expect(props.ErrorFallbackComponent).toHaveBeenCalledWith(
           {
             error,
             resetErrorBoundary: expect.any(Function),
           },
-          expect.anything(),
+          undefined,
         );
       }
     },

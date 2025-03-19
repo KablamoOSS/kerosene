@@ -3,7 +3,7 @@ import type { Mutable } from "../types";
 /**
  * Deferred is a class that allows a Promise to be created in advance of the code that will `resolve`/`reject` it.
  *
- * @deprecated Use `const { promise, resolve, reject } Promise.withResolvers<T>()` with a polyfill if necessary instead
+ * @deprecated Use `const { promise, resolve, reject } = Promise.withResolvers<T>()` with a polyfill if necessary instead
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
  */
 export default class Deferred<T> {

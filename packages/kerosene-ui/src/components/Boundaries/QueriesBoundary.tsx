@@ -100,7 +100,7 @@ const QueriesBoundary = <
   ErrorFallbackComponent,
   loadingFallback,
   queries,
-}: QueriesBoundaryProps<TQueries>): JSX.Element => {
+}: QueriesBoundaryProps<TQueries>): React.JSX.Element => {
   /**
    * If any of the queries are in the error state, combine them into a single `AggregateError`
    */

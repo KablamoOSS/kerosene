@@ -19,7 +19,7 @@ import * as React from "react";
  * ```
  */
 export default function useAbortController() {
-  const ref = React.useRef<AbortController | undefined>();
+  const ref = React.useRef<AbortController>(undefined);
 
   React.useEffect(
     () => () => {

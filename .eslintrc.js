@@ -9,6 +9,7 @@ module.exports = {
       {
         devDependencies: [
           ".eslintrc.js",
+          "testSetup.ts",
           "config/**/*",
           "typings/**/*",
           "**/es/**/*",

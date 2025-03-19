@@ -163,7 +163,7 @@ describe("QueriesBoundary", () => {
             error: expect.any(AggregateQueriesError),
             resetErrorBoundary: expect.any(Function),
           },
-          expect.anything(),
+          undefined,
         );
       }
 

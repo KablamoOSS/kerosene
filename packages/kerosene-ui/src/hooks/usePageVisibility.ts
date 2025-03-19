@@ -44,7 +44,5 @@ export default function usePageVisibility(
     getServerSnapshot,
   );
 
-  return useState
-    ? [visible, visibility as React.RefObject<boolean>]
-    : (visibility as React.RefObject<boolean>);
+  return useState ? [visible, visibility] : visibility;
 }
