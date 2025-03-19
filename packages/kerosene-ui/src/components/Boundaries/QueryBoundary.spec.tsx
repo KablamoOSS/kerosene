@@ -124,7 +124,7 @@ describe("QueryBoundary", () => {
             error,
             resetErrorBoundary: expect.any(Function),
           },
-          expect.anything(),
+          undefined,
         );
       }
 
