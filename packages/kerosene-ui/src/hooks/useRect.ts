@@ -31,8 +31,8 @@ const DEFAULT_RECT: Rect = {
 export default function useRect(
   disable = false,
   eventList: ReadonlyArray<keyof WindowEventMap> = [],
-): [React.RefObject<Element>, Rect, ScrollPosition] {
-  const ref = React.useRef<Element>(null);
+): [React.RefObject<Element | null>, Rect, ScrollPosition] {
+  const ref = React.useRef<Element | null>(null);
   const [rect, setRect] = React.useState(DEFAULT_RECT);
   const [scroll, setScroll] = React.useState<ScrollPosition>({
     scrollX: 0,

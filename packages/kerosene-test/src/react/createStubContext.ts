@@ -10,20 +10,23 @@ export default function createStubContext<T = unknown>(
   displayName: string,
   getter?: () => T,
 ): React.Context<T> & { readonly _currentValue: T } {
-  return {
-    Consumer: Object.assign(
-      (props: React.ConsumerProps<T>) => props.children(getter!()),
-      { displayName: `${displayName}.Consumer` },
-    ) as unknown as React.Context<T>["Consumer"],
-    Provider: createStubComponent(
-      `${displayName}.Provider`,
-    ) as unknown as React.Context<T>["Provider"],
-    displayName,
-    /**
-     * `_currentValue` is used by the `useContext(context)` hook
-     */
-    get _currentValue() {
-      return getter!();
+  return Object.assign(
+    createStubComponent(displayName) as unknown as React.Context<T>["Provider"],
+    {
+      Consumer: Object.assign(
+        (props: React.ConsumerProps<T>) => props.children(getter!()),
+        { displayName: `${displayName}.Consumer` },
+      ) as unknown as React.Context<T>["Consumer"],
+      Provider: createStubComponent(
+        `${displayName}.Provider`,
+      ) as unknown as React.Context<T>["Provider"],
+      displayName,
+      /**
+       * `_currentValue` is used by the `useContext(context)` hook
+       */
+      get _currentValue() {
+        return getter!();
+      },
     },
-  };
+  );
 }

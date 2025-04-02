@@ -7,7 +7,7 @@ import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 import useMediaQuery from "./useMediaQuery";
 
 export interface UseCollapsableReturn {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   /**
    * Until `HTMLElement.inert` has widespread support, this flag can be used to determine whether to render child elements
    * of the collapsable container so that they are excluded from the accessibility tree and are not interactable via
