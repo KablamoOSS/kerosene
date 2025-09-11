@@ -3,9 +3,7 @@ import ClientError from "./clientError";
 import HttpError from "./httpError";
 import ServerError from "./serverError";
 import _transform from "./transform";
-import transformAndCheckStatus, {
-  type TransformOptions,
-} from "./transformAndCheckStatus";
+import transformJsonAndCheckStatus from "./transformJsonAndCheckStatus";
 
 jest.mock("./transform");
 const transform = _transform as unknown as jest.MockInstance<
@@ -13,14 +11,15 @@ const transform = _transform as unknown as jest.MockInstance<
   Parameters<typeof _transform>
 >;
 
-describe("transformAndCheckStatus", () => {
+describe("transformJsonAndCheckStatus", () => {
   it("should resolve a transformed response for 2xx", async () => {
     const transformed = { key: "value" };
     const response = {
       status: 200,
+      json: () => Promise.resolve(transformed),
     } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
-    await expect(transformAndCheckStatus(response)).resolves.toEqual(
+    await expect(transformJsonAndCheckStatus(response)).resolves.toEqual(
       transformed,
     );
   });
@@ -31,23 +30,8 @@ describe("transformAndCheckStatus", () => {
       status: 204,
     } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
-    await expect(transformAndCheckStatus(response)).resolves.toEqual(
+    await expect(transformJsonAndCheckStatus(response)).resolves.toEqual(
       transformed,
-    );
-  });
-
-  it("should resolve a custom transformed response for 2xx if a transform is provided", async () => {
-    const transformed = { key: "value" };
-    const customTransform = { key: "transformedValue" };
-    const response = {
-      status: 200,
-    } as Partial<Response> as Response;
-    const options = {
-      responseTransform: () => Promise.resolve(customTransform),
-    } as const satisfies TransformOptions;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
-    await expect(transformAndCheckStatus(response, options)).resolves.toEqual(
-      customTransform,
     );
   });
 
@@ -56,11 +40,12 @@ describe("transformAndCheckStatus", () => {
     const response = {
       status: 308,
       statusText: "Permanent Redirect",
+      json: () => Promise.resolve(transformed),
     } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
-    await transformAndCheckStatus(response).then(
+    await transformJsonAndCheckStatus(response).then(
       () => {
-        throw new Error("Expected transformAndCheckStatus to be rejected");
+        throw new Error("Expected transformJsonAndCheckStatus to be rejected");
       },
       (error) => {
         expect(error instanceof HttpError).toBe(true);
@@ -78,11 +63,12 @@ describe("transformAndCheckStatus", () => {
     const response = {
       status: 404,
       statusText: "Not Found",
+      json: () => Promise.resolve(transformed),
     } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(transformed);
-    await transformAndCheckStatus(response).then(
+    await transformJsonAndCheckStatus(response).then(
       () => {
-        throw new Error("Expected transformAndCheckStatus to be rejected");
+        throw new Error("Expected transformJsonAndCheckStatus to be rejected");
       },
       (error) => {
         expect(error instanceof ClientError).toBe(true);
@@ -97,11 +83,12 @@ describe("transformAndCheckStatus", () => {
     const response = {
       status: 500,
       statusText: "Internal Server Error",
+      json: () => Promise.resolve(undefined),
     } as Partial<Response> as Response;
     when(transform).calledWith(response).mockResolvedValue(undefined);
-    await transformAndCheckStatus(response).then(
+    await transformJsonAndCheckStatus(response).then(
       () => {
-        throw new Error("Expected transformAndCheckStatus to be rejected");
+        throw new Error("Expected transformJsonAndCheckStatus to be rejected");
       },
       (error) => {
         expect(error instanceof ServerError).toBe(true);

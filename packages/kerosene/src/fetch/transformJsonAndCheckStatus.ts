@@ -3,22 +3,20 @@ import HttpError from "./httpError";
 import ServerError from "./serverError";
 import transform from "./transform";
 
-export type TransformOptions<T = unknown> = {
-  responseTransform?: (response: Response) => Promise<T>;
-};
-
 /**
  * Transforms the response, rejecting if the status is not 2xx
  * @param response
- * @param options
  */
 export default function transformAndCheckStatus<T = unknown>(
   response: Response,
-  options?: TransformOptions<T>,
 ): Promise<T | null> {
-  const transformHandler = options?.responseTransform || transform;
+  return transform(response).then(async (originalTransformed) => {
+    // 204 statuses return null in the original transform, so keep that behaviour here
+    if (originalTransformed === null) return originalTransformed;
 
-  return transformHandler(response).then((transformed) => {
+    // Otherwise we use .json directly, to avoid incorrect transformations when Content-Type is missing
+    const transformed = await response.json();
+
     if (response.status >= 200 && response.status < 300) return transformed;
 
     if (response.status >= 400 && response.status < 500) {
