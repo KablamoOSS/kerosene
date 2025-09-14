@@ -1,34 +1,47 @@
 import ClientError from "./clientError";
 import HttpError from "./httpError";
 import ServerError from "./serverError";
-import transform from "./transform";
-
-export type TransformOptions<T = unknown> = {
-  responseTransform?: (response: Response) => Promise<T>;
-};
+import { createTransform, type CreateTransformOptions } from "./transform";
 
 /**
- * Transforms the response, rejecting if the status is not 2xx
+ * Takes a fetch response and attempts to transform the response automatically according to the status code and
+ * Content-Type header (if provided)
  * @param response
- * @param options
  */
-export default function transformAndCheckStatus<T = unknown>(
-  response: Response,
-  options?: TransformOptions<T>,
-): Promise<T | null> {
-  const transformHandler = options?.responseTransform || transform;
+export function createTransformAndCheckStatus(
+  options: CreateTransformOptions = {},
+) {
+  return <T = unknown>(response: Response): Promise<T> => {
+    const transformHandler = createTransform(options);
 
-  return transformHandler(response).then((transformed) => {
-    if (response.status >= 200 && response.status < 300) return transformed;
+    return transformHandler(response).then((transformed) => {
+      if (response.status >= 200 && response.status < 300) return transformed;
 
-    if (response.status >= 400 && response.status < 500) {
-      throw new ClientError(response.statusText, response.status, transformed);
-    }
+      if (response.status >= 400 && response.status < 500) {
+        throw new ClientError(
+          response.statusText,
+          response.status,
+          transformed,
+        );
+      }
 
-    if (response.status >= 500 && response.status < 600) {
-      throw new ServerError(response.statusText, response.status, transformed);
-    }
+      if (response.status >= 500 && response.status < 600) {
+        throw new ServerError(
+          response.statusText,
+          response.status,
+          transformed,
+        );
+      }
 
-    throw new HttpError(response.statusText, response.status, transformed);
-  });
+      throw new HttpError(response.statusText, response.status, transformed);
+    });
+  };
 }
+
+export const transformAndCheckStatusDefaultJson = createTransformAndCheckStatus(
+  { defaultTransform: (response) => response.json() },
+);
+
+const transformAndCheckStatus = createTransformAndCheckStatus();
+
+export default transformAndCheckStatus;

@@ -2,15 +2,19 @@ import { when } from "jest-when";
 import ClientError from "./clientError";
 import HttpError from "./httpError";
 import ServerError from "./serverError";
-import _transform from "./transform";
+import {
+  createTransform as _createTransform,
+  type CreateTransformOptions,
+} from "./transform";
 import transformAndCheckStatus, {
-  type TransformOptions,
+  createTransformAndCheckStatus,
+  transformAndCheckStatusDefaultJson,
 } from "./transformAndCheckStatus";
 
 jest.mock("./transform");
-const transform = _transform as unknown as jest.MockInstance<
-  ReturnType<typeof _transform>,
-  Parameters<typeof _transform>
+const createTransform = _createTransform as unknown as jest.MockInstance<
+  ReturnType<typeof _createTransform>,
+  Parameters<typeof _createTransform>
 >;
 
 describe("transformAndCheckStatus", () => {
@@ -19,7 +23,9 @@ describe("transformAndCheckStatus", () => {
     const response = {
       status: 200,
     } as Partial<Response> as Response;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
+    when(createTransform)
+      .calledWith({})
+      .mockReturnValueOnce(() => Promise.resolve(transformed));
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
     );
@@ -30,24 +36,11 @@ describe("transformAndCheckStatus", () => {
     const response = {
       status: 204,
     } as Partial<Response> as Response;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
+    when(createTransform)
+      .calledWith({})
+      .mockReturnValueOnce(() => Promise.resolve(transformed));
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
-    );
-  });
-
-  it("should resolve a custom transformed response for 2xx if a transform is provided", async () => {
-    const transformed = { key: "value" };
-    const customTransform = { key: "transformedValue" };
-    const response = {
-      status: 200,
-    } as Partial<Response> as Response;
-    const options = {
-      responseTransform: () => Promise.resolve(customTransform),
-    } as const satisfies TransformOptions;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
-    await expect(transformAndCheckStatus(response, options)).resolves.toEqual(
-      customTransform,
     );
   });
 
@@ -57,7 +50,9 @@ describe("transformAndCheckStatus", () => {
       status: 308,
       statusText: "Permanent Redirect",
     } as Partial<Response> as Response;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
+    when(createTransform)
+      .calledWith({})
+      .mockReturnValueOnce(() => Promise.resolve(transformed));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -79,7 +74,9 @@ describe("transformAndCheckStatus", () => {
       status: 404,
       statusText: "Not Found",
     } as Partial<Response> as Response;
-    when(transform).calledWith(response).mockResolvedValue(transformed);
+    when(createTransform)
+      .calledWith({})
+      .mockReturnValueOnce(() => Promise.resolve(transformed));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -98,7 +95,9 @@ describe("transformAndCheckStatus", () => {
       status: 500,
       statusText: "Internal Server Error",
     } as Partial<Response> as Response;
-    when(transform).calledWith(response).mockResolvedValue(undefined);
+    when(createTransform)
+      .calledWith({})
+      .mockReturnValueOnce(() => Promise.resolve(undefined));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -108,6 +107,36 @@ describe("transformAndCheckStatus", () => {
         expect(error.message).toBe(response.statusText);
         expect(error.status).toBe(response.status);
       },
+    );
+  });
+});
+
+describe("createTransformAndCheckStatus", () => {
+  it("should resolve a custom transformed response for 2xx if a transform is provided", async () => {
+    const transformed = { key: "transformedValue" };
+    const defaultTransform = () => Promise.resolve(transformed);
+    const options: CreateTransformOptions = { defaultTransform };
+    const response = {
+      status: 200,
+    } as Partial<Response> as Response;
+    when(createTransform)
+      .calledWith(options)
+      .mockReturnValueOnce(defaultTransform);
+    await expect(
+      createTransformAndCheckStatus(options)(response),
+    ).resolves.toEqual(transformed);
+  });
+});
+
+describe("transformAndCheckStatusDefaultJson", () => {
+  it("should resolve a json response for 2xx", async () => {
+    const transformed = { key: "transformedValue" };
+    const response = {
+      status: 200,
+    } as Partial<Response> as Response;
+    createTransform.mockReturnValueOnce(() => Promise.resolve(transformed));
+    await expect(transformAndCheckStatusDefaultJson(response)).resolves.toEqual(
+      transformed,
     );
   });
 });
