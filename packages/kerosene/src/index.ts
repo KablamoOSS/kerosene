@@ -7,8 +7,17 @@ export { default as ExtendableError } from "./error/ExtendableError";
 export { default as isAbortError } from "./error/isAbortError";
 
 export { default as isNetworkError } from "./fetch/isNetworkError";
-export { default as transform } from "./fetch/transform";
-export { default as transformAndCheckStatus } from "./fetch/transformAndCheckStatus";
+export {
+  default as transform,
+  type CreateTransformOptions,
+  createTransform,
+  transformDefaultJson,
+} from "./fetch/transform";
+export {
+  default as transformAndCheckStatus,
+  createTransformAndCheckStatus,
+  transformAndCheckStatusDefaultJson,
+} from "./fetch/transformAndCheckStatus";
 export { default as ClientError } from "./fetch/clientError";
 export { default as HttpError } from "./fetch/httpError";
 export { default as ServerError } from "./fetch/serverError";
