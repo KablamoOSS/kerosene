@@ -4,9 +4,8 @@ import ServerError from "./serverError";
 import { createTransform, type CreateTransformOptions } from "./transform";
 
 /**
- * Takes a fetch response and attempts to transform the response automatically according to the status code and
- * Content-Type header (if provided)
- * @param response
+ * Create a handler for parsing fetch responses, using the status code and Content-Type header if provided, and falling back to an option custom transform if not. This is only necessary if you want to provide a defaultTransform for `transformAndCheckStatus` different to the existing behaviour
+ * @param options
  */
 export function createTransformAndCheckStatus(
   options: CreateTransformOptions = {},
@@ -38,10 +37,20 @@ export function createTransformAndCheckStatus(
   };
 }
 
+/**
+ * Takes a fetch response and attempts to transform the response automatically according to the status code and
+ * Content-Type header (if provided), falling back to the JSON response if a matching type is not found
+ * @param response
+ */
 export const transformAndCheckStatusDefaultJson = createTransformAndCheckStatus(
   { defaultTransform: (response) => response.json() },
 );
 
+/**
+ * Takes a fetch response and attempts to transform the response automatically according to the status code and
+ * Content-Type header (if provided)
+ * @param response
+ */
 const transformAndCheckStatus = createTransformAndCheckStatus();
 
 export default transformAndCheckStatus;
