@@ -1,4 +1,4 @@
-import { isEqual as _isEqual } from "lodash";
+import _isEqual from "lodash/isEqual";
 import * as React from "react";
 
 /**

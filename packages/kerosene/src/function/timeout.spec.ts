@@ -13,13 +13,13 @@ describe("#timeout", () => {
   it("should allow the promise to be cancelled", async () => {
     const promise = timeout(SECOND);
     promise.cancel();
-    await expect(promise).rejects.toThrowError("Cancelled");
+    await expect(promise).rejects.toThrow("Cancelled");
   });
 
   it("should allow the promise to be aborted", async () => {
     const controller = new AbortController();
     const promise = timeout(SECOND, { signal: controller.signal });
     controller.abort();
-    await expect(promise).rejects.toThrowError("Aborted");
+    await expect(promise).rejects.toThrow("Aborted");
   });
 });

@@ -60,7 +60,7 @@ describe("#getTextWidth", () => {
 
     expect(getTextWidth(text, font)).toBe(width);
     expect(getTextWidth(text, font)).toBe(width);
-    expect(setFont).toBeCalledWith("13px FontFamily");
+    expect(setFont).toHaveBeenCalledWith("13px FontFamily");
   });
 
   it("should fall back to font.size * text.length when the canvas context is not available", () => {

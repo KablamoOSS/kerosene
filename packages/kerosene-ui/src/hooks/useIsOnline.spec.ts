@@ -1,6 +1,6 @@
 import { stubProperties } from "@kablamo/kerosene-test";
 import { renderHook } from "@testing-library/react";
-import { identity } from "lodash";
+import identity from "lodash/identity";
 import { act } from "react";
 import useIsOnline from "./useIsOnline";
 

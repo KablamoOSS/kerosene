@@ -1,6 +1,7 @@
 import type { AnyFunction } from "@kablamo/kerosene";
 import { renderHook } from "@testing-library/react";
-import { identity, isBoolean } from "lodash";
+import identity from "lodash/identity";
+import isBoolean from "lodash/isBoolean";
 import { act } from "react";
 import {
   useLocalStorage,

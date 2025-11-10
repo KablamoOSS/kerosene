@@ -1,4 +1,4 @@
-import { identity } from "lodash";
+import identity from "lodash/identity";
 
 export interface FontDetails {
   family: string;

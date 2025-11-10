@@ -18,16 +18,17 @@ jobs:
         node-version:
           - lts/iron
           - lts/jod
+          - lts/krypton
           - current
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -61,14 +62,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Setup Node.js Jod
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: lts/jod
+          node-version: lts/krypton
 
       - name: Install dependencies
         run: yarn

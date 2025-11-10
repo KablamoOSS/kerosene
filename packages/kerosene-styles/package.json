@@ -1,7 +1,11 @@
 {
   "name": "@kablamo/kerosene-styles",
   "version": "0.0.1",
-  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/kerosene-styles",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/kerosene-styles"
+  },
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },

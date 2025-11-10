@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { when } from "jest-when";
-import { identity } from "lodash";
+import identity from "lodash/identity";
 import {
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,

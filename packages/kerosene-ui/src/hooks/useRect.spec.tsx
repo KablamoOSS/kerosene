@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import createSandbox from "jest-sandbox";
-import { findLast, identity } from "lodash";
+import findLast from "lodash/findLast";
+import identity from "lodash/identity";
 import * as React from "react";
 import useRect from "./useRect";
 

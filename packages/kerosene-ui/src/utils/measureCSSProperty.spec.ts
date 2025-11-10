@@ -42,11 +42,11 @@ describe("measureCSSProperty", () => {
         "var(--header-height, 0px)",
       ),
     ).toBe("48px");
-    expect(el.appendChild).toBeCalledWith(noscript);
+    expect(el.appendChild).toHaveBeenCalledWith(noscript);
     expect(noscript.style).toHaveProperty(
       ["paddingTop"],
       "var(--header-height, 0px)",
     );
-    expect(el.removeChild).toBeCalledWith(noscript);
+    expect(el.removeChild).toHaveBeenCalledWith(noscript);
   });
 });

@@ -1,6 +1,5 @@
 __snapshots__
 config
-rollup-config.ts
-rollup.config.js
+tsdown.config.ts
 **.spec.ts
 **.spec.tsx

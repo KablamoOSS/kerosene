@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import { identity } from "lodash";
+import identity from "lodash/identity";
 import useMediaQuery from "./useMediaQuery";
 
 const mockMatchMedia: jest.Mock<

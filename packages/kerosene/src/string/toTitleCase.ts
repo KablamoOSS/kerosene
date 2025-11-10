@@ -1,4 +1,4 @@
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 
 export const TITLE_CASE_LOWERCASE_WORDS = [
   "a",

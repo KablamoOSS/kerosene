@@ -1,6 +1,6 @@
 import { MINUTE, SECOND, waitForEventLoopToDrain } from "@kablamo/kerosene";
 import { act, renderHook } from "@testing-library/react";
-import { identity } from "lodash";
+import identity from "lodash/identity";
 import * as React from "react";
 import useCurrentTime, { CurrentTimeProvider } from "./useCurrentTime";
 

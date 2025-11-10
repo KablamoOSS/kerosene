@@ -8,7 +8,7 @@ import type {
   QueryObserverRefetchErrorResult,
   QueryObserverSuccessResult,
 } from "@tanstack/react-query";
-import { noop } from "lodash";
+import noop from "lodash/noop";
 
 function createQueryObserverBaseResult<
   TData = unknown,
@@ -27,6 +27,7 @@ function createQueryObserverBaseResult<
     failureCount: 0,
     failureReason: null,
     errorUpdateCount: 0,
+    isEnabled: false,
     isError: false,
     isFetched: false,
     isFetchedAfterMount: false,
@@ -63,6 +64,7 @@ export function createQueryObserverSuccessResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error: null,
+    isEnabled: true,
     isError: false,
     isLoading: false,
     isLoadingError: false,
@@ -90,6 +92,7 @@ export function createQueryObserverRefetchErrorResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error,
+    isEnabled: true,
     isError: true,
     isLoading: false,
     isLoadingError: false,
@@ -115,6 +118,7 @@ export function createQueryObserverLoadingErrorResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error,
+    isEnabled: true,
     isError: true,
     isLoading: false,
     isLoadingError: true,
@@ -139,6 +143,7 @@ export function createQueryObserverLoadingResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error: null,
+    isEnabled: true,
     isError: false,
     isInitialLoading: true,
     isLoading: true,
