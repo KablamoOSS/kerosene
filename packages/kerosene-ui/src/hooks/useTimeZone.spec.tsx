@@ -1,17 +1,17 @@
+// @vitest-environment jsdom
+
 import { act, renderHook } from "@testing-library/react";
 import identity from "lodash/identity";
-import * as React from "react";
+import type { Mock } from "vitest";
 import useTimeZone, { TimeZoneProvider } from "./useTimeZone";
 
 describe("useTimeZone", () => {
-  let onRender: jest.Mock<string, [string]>;
-  let resolvedOptions: jest.SpiedFunction<
-    Intl.DateTimeFormat["resolvedOptions"]
-  >;
+  let onRender: Mock<(value: string) => string>;
+  let resolvedOptions: Mock<Intl.DateTimeFormat["resolvedOptions"]>;
   beforeEach(() => {
     window.ontimezonechange = null;
-    onRender = jest.fn().mockImplementation(identity);
-    resolvedOptions = jest.spyOn(
+    onRender = vi.fn().mockImplementation(identity);
+    resolvedOptions = vi.spyOn(
       Intl.DateTimeFormat.prototype,
       "resolvedOptions",
     );
@@ -21,7 +21,7 @@ describe("useTimeZone", () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should return Australia/Sydney", () => {

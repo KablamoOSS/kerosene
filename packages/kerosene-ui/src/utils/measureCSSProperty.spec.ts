@@ -1,39 +1,38 @@
-import type { JestMock } from "@kablamo/kerosene-test";
-import createSandbox from "jest-sandbox";
-import { when } from "jest-when";
+// @vitest-environment jsdom
+
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import measureCSSProperty from "./measureCSSProperty";
 
 describe("measureCSSProperty", () => {
-  let sandbox: JestSandbox;
-  let createElement: JestMock<Document["createElement"]>;
-  let getComputedStyle: JestMock<Window["getComputedStyle"]>;
+  let createElement: Mock<Document["createElement"]>;
+  let getComputedStyle: Mock<Window["getComputedStyle"]>;
   beforeEach(() => {
-    sandbox = createSandbox();
-    createElement = jest.fn();
+    createElement = vi.fn();
     document.createElement = createElement;
-    getComputedStyle = jest.fn();
+    getComputedStyle = vi.fn();
     window.getComputedStyle = getComputedStyle;
   });
 
   afterEach(() => {
-    sandbox.restore();
+    createElement.mockRestore();
   });
 
   it("should inject a noscript tag and return the computed style", () => {
     const el = {
-      appendChild: jest.fn(),
-      removeChild: jest.fn(),
+      appendChild: vi.fn(),
+      removeChild: vi.fn(),
     };
 
     const noscript = { tagName: "NOSCRIPT", style: {} } as HTMLElement;
-    when(createElement).calledWith("noscript").mockReturnValue(noscript);
+    when(createElement).calledWith("noscript").thenReturn(noscript);
 
     when(getComputedStyle)
       .calledWith({
         ...noscript,
         style: { ...noscript.style, paddingTop: "var(--header-height, 0px)" },
       } as HTMLElement)
-      .mockReturnValue({ paddingTop: "48px" } as CSSStyleDeclaration);
+      .thenReturn({ paddingTop: "48px" } as CSSStyleDeclaration);
 
     expect(
       measureCSSProperty(

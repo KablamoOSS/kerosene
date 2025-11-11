@@ -1,5 +1,7 @@
-import createSandbox from "jest-sandbox";
-import { when } from "jest-when";
+// @vitest-environment jsdom
+
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import getTextWidth from "./getTextWidth";
 
 const font = {
@@ -10,43 +12,32 @@ const text = "$2,000.00";
 const width = 67;
 
 describe("#getTextWidth", () => {
-  let sandbox: JestSandbox;
-  let createElement: jest.Mock<
-    ReturnType<typeof document.createElement>,
-    Parameters<typeof document.createElement>
-  >;
-  let getContext: jest.Mock<
-    ReturnType<HTMLCanvasElement["getContext"]>,
-    Parameters<HTMLCanvasElement["getContext"]>
-  >;
-  let setFont: jest.Mock<void, [string]>;
-  let measureText: jest.Mock<
-    ReturnType<CanvasRenderingContext2D["measureText"]>,
-    Parameters<CanvasRenderingContext2D["measureText"]>
-  >;
+  let createElement: Mock<typeof document.createElement>;
+  let getContext: Mock<HTMLCanvasElement["getContext"]>;
+  let setFont: Mock<(font: string) => void>;
+  let measureText: Mock<CanvasRenderingContext2D["measureText"]>;
   beforeEach(() => {
-    sandbox = createSandbox();
-    setFont = sandbox.fn();
-    measureText = sandbox.fn();
-    getContext = sandbox.fn();
+    setFont = vi.fn();
+    measureText = vi.fn();
+    getContext = vi.fn();
     getContext.mockReturnValue(null);
-    createElement = sandbox.fn();
+    createElement = vi.fn();
     document.createElement = createElement;
     when(createElement)
       .calledWith("canvas")
-      .mockReturnValue({
+      .thenReturn({
         getContext,
       } as Partial<HTMLCanvasElement> as HTMLCanvasElement);
   });
 
   afterEach(() => {
-    sandbox.restore();
+    vi.resetAllMocks();
   });
 
   it("should calculate the width of the text re-using a canvas element", () => {
     when(getContext)
       .calledWith("2d", { alpha: false })
-      .mockReturnValue({
+      .thenReturn({
         set font(value: string) {
           setFont(value);
         },
@@ -54,7 +45,7 @@ describe("#getTextWidth", () => {
       } as Partial<CanvasRenderingContext2D> as CanvasRenderingContext2D);
     when(measureText)
       .calledWith(text)
-      .mockReturnValue({
+      .thenReturn({
         width,
       } as Partial<TextMetrics> as TextMetrics);
 

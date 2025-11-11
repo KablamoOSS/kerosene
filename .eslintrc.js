@@ -22,6 +22,7 @@ module.exports = {
           "testSetup.ts",
           "config/**/*",
           "typings/**/*",
+          "vitest.config.ts",
           "**/es/**/*",
           "**/lib/**/*",
           "**/*.spec.*",

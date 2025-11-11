@@ -44,9 +44,9 @@
     "@types/content-type": "^1.1.9",
     "@types/lodash": "^4.17.20",
     "@types/seed-random": "^2.2.4",
-    "jest-when": "^3.7.0",
     "seed-random": "^2.2.0",
-    "tsdown": "^0.16.1"
+    "tsdown": "^0.16.1",
+    "vitest-when": "^0.9.0"
   },
   "peerDependencies": {},
   "scripts": {

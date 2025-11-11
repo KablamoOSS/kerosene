@@ -1,4 +1,6 @@
-import { Deferred, type DistributiveOmit } from "@kablamo/kerosene";
+// @vitest-environment jsdom
+
+import type { DistributiveOmit } from "@kablamo/kerosene";
 import { createQueryObserverLoadingErrorResult } from "@kablamo/kerosene-test";
 import {
   useQuery,
@@ -47,7 +49,7 @@ describe("QueryBoundary", () => {
       expected: "errorFallbackRender",
       props: {
         children: "Success",
-        errorFallbackRender: jest
+        errorFallbackRender: vi
           .fn()
           .mockImplementation(({ resetErrorBoundary }: FallbackProps) => (
             <button type="button" onClick={resetErrorBoundary}>
@@ -61,7 +63,7 @@ describe("QueryBoundary", () => {
       expected: "ErrorFallbackComponent",
       props: {
         children: "Success",
-        ErrorFallbackComponent: jest
+        ErrorFallbackComponent: vi
           .fn()
           .mockImplementation(({ resetErrorBoundary }: FallbackProps) => (
             <button type="button" onClick={resetErrorBoundary}>
@@ -78,7 +80,7 @@ describe("QueryBoundary", () => {
   }>)(
     "should render a loading state and then $expected",
     async ({ expected, props, value }) => {
-      let deferred = new Deferred<string>();
+      let deferred = Promise.withResolvers<string>();
       const Component = () => {
         const query = useQuery({
           queryKey: ["QueryBoundary", "Component"],
@@ -128,7 +130,7 @@ describe("QueryBoundary", () => {
       }
 
       if (props.errorFallbackRender || props.ErrorFallbackComponent) {
-        deferred = new Deferred<string>();
+        deferred = Promise.withResolvers<string>();
         void userEvent.click(screen.getByRole("button"));
         await waitFor(() =>
           expect(screen.getByText("Loading")).toBeInTheDocument(),

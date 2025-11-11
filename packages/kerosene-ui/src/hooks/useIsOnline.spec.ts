@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import { stubProperties } from "@kablamo/kerosene-test";
 import { renderHook } from "@testing-library/react";
 import identity from "lodash/identity";
@@ -30,7 +32,7 @@ describe("useIsOnline", () => {
   it("should always return true during hydration and update after", () => {
     update(false);
 
-    const monitor = jest.fn<boolean, [boolean]>(identity);
+    const monitor = vi.fn<(value: boolean) => boolean>(identity);
     const utils = renderHook(() => monitor(useIsOnline()), { hydrate: true });
 
     // Hydration

@@ -1,15 +1,16 @@
+// @vitest-environment jsdom
+
 import { renderHook } from "@testing-library/react";
+import type { Mock } from "vitest";
 import useKonamiCode from "./useKonamiCode";
 
 describe("useKonamiCode", () => {
-  let _addEventListener: jest.MockedFunction<typeof window.addEventListener>;
-  let _removeEventListener: jest.MockedFunction<
-    typeof window.removeEventListener
-  >;
+  let _addEventListener: Mock<typeof window.addEventListener>;
+  let _removeEventListener: Mock<typeof window.removeEventListener>;
 
   beforeEach(() => {
-    _addEventListener = jest.fn();
-    _removeEventListener = jest.fn();
+    _addEventListener = vi.fn();
+    _removeEventListener = vi.fn();
     window.addEventListener = _addEventListener;
     window.removeEventListener = _removeEventListener;
   });
@@ -33,7 +34,7 @@ describe("useKonamiCode", () => {
     },
   ].forEach(({ type, code }) => {
     it(`should listen for the correct ${type} code and call the callback`, () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       const utils = renderHook(() => useKonamiCode(code, callback));
 
       expect(_addEventListener).toHaveBeenCalledWith(

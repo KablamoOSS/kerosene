@@ -1,16 +1,13 @@
-import createSandbox from "jest-sandbox";
-import { when } from "jest-when";
+// @vitest-environment jsdom
+
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import isPwa from "./isPwa";
 
 describe("#isPwa", () => {
-  let sandbox: JestSandbox;
-  let matchMedia: jest.Mock<
-    ReturnType<typeof window.matchMedia>,
-    Parameters<typeof window.matchMedia>
-  >;
+  let matchMedia: Mock<typeof window.matchMedia>;
   beforeEach(() => {
-    sandbox = createSandbox();
-    matchMedia = sandbox.fn();
+    matchMedia = vi.fn();
     matchMedia.mockImplementation(() => {
       throw new Error("matchMedia was called with incorrect args");
     });
@@ -18,14 +15,14 @@ describe("#isPwa", () => {
   });
 
   afterEach(() => {
-    sandbox.restore();
+    matchMedia.mockRestore();
   });
 
   describe("when not in a PWA (not Safari)", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue({
+        .thenReturn({
           matches: false,
         } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: undefined });
@@ -40,7 +37,7 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue({
+        .thenReturn({
           matches: false,
         } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: false });
@@ -55,7 +52,7 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue({
+        .thenReturn({
           matches: true,
         } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: undefined });
@@ -70,7 +67,7 @@ describe("#isPwa", () => {
     beforeEach(() => {
       when(matchMedia)
         .calledWith("(display-mode: standalone)")
-        .mockReturnValue({
+        .thenReturn({
           matches: false,
         } as Partial<MediaQueryList> as MediaQueryList);
       Object.assign(navigator, { standalone: true });

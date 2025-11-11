@@ -1,12 +1,12 @@
 import { SECOND } from "../datetime";
 import timeout from "./timeout";
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe("#timeout", () => {
   it("should resolve after the timeout period", async () => {
     const promise = timeout(SECOND);
-    jest.advanceTimersByTime(SECOND);
+    vi.advanceTimersByTime(SECOND);
     await expect(promise).resolves.toBeUndefined();
   });
 

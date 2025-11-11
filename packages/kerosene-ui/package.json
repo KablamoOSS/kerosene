@@ -53,12 +53,11 @@
     "@types/lodash": "^4.17.20",
     "@types/sinonjs__fake-timers": "^15.0.1",
     "@types/use-sync-external-store": "^1.5.0",
-    "jest-sandbox": "^1.1.2",
-    "jest-when": "^3.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-error-boundary": "^5.0.0",
-    "tsdown": "^0.16.1"
+    "tsdown": "^0.16.1",
+    "vitest-when": "^0.9.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0 <6.0.0",

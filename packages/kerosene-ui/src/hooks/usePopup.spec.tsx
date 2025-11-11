@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import last from "lodash/last";
@@ -7,8 +9,8 @@ import { act } from "react-dom/test-utils";
 import waitForRepaint from "../utils/waitForRepaint";
 import usePopup from "./usePopup";
 
-const _addEventListener = jest.spyOn(window, "addEventListener");
-Element.prototype.getBoundingClientRect = jest.fn().mockReturnValue({
+const _addEventListener = vi.spyOn(window, "addEventListener");
+Element.prototype.getBoundingClientRect = vi.fn().mockReturnValue({
   top: 1,
   left: 2,
   bottom: 3,

@@ -1,10 +1,13 @@
 import _contentType, { type ParsedMediaType } from "content-type";
-import { when } from "jest-when";
+import type { MockedObject } from "vitest";
+import { when } from "vitest-when";
 import type { DeepPartial } from "../types";
 import transform, { createTransform, transformDefaultJson } from "./transform";
 
-jest.mock("content-type");
-const contentType = _contentType as unknown as jest.Mocked<typeof _contentType>;
+vi.mock("content-type");
+const contentType = _contentType as unknown as MockedObject<
+  typeof _contentType
+>;
 
 const contentTypes = [
   {
@@ -57,7 +60,7 @@ describe("transform", () => {
       transform({
         status: 200,
         headers: {
-          get: jest.fn().mockReturnValue(null),
+          get: vi.fn().mockReturnValue(null),
         },
         async text() {
           return text;
@@ -71,11 +74,11 @@ describe("transform", () => {
       const header = `${type}; charset=utf-8`;
       when(contentType.parse)
         .calledWith(header)
-        .mockReturnValue({
+        .thenReturn({
           type,
         } as Partial<ParsedMediaType> as ParsedMediaType);
-      const getHeaders = jest.fn();
-      when(getHeaders).calledWith("Content-Type").mockReturnValue(header);
+      const getHeaders = vi.fn();
+      when(getHeaders).calledWith("Content-Type").thenReturn(header);
       await expect(
         transform({
           status: 200,
@@ -106,7 +109,7 @@ describe("createTransform", () => {
       customTransform({
         status: 200,
         headers: {
-          get: jest.fn().mockReturnValue(null),
+          get: vi.fn().mockReturnValue(null),
         },
       } as DeepPartial<Response> as Response),
     ).resolves.toBe(result);
@@ -126,11 +129,11 @@ describe("createTransform", () => {
         const header = `${type}; charset=utf-8`;
         when(contentType.parse)
           .calledWith(header)
-          .mockReturnValue({
+          .thenReturn({
             type,
           } as Partial<ParsedMediaType> as ParsedMediaType);
-        const getHeaders = jest.fn();
-        when(getHeaders).calledWith("Content-Type").mockReturnValue(header);
+        const getHeaders = vi.fn();
+        when(getHeaders).calledWith("Content-Type").thenReturn(header);
         await expect(
           customTransform({
             status: 200,
@@ -160,7 +163,7 @@ describe("transformDefaultJson", () => {
       transformDefaultJson({
         status: 200,
         headers: {
-          get: jest.fn().mockReturnValue(null),
+          get: vi.fn().mockReturnValue(null),
         },
         json: () => Promise.resolve(result),
       } as DeepPartial<Response> as Response),
@@ -177,11 +180,11 @@ describe("transformDefaultJson", () => {
         const header = `${type}; charset=utf-8`;
         when(contentType.parse)
           .calledWith(header)
-          .mockReturnValue({
+          .thenReturn({
             type,
           } as Partial<ParsedMediaType> as ParsedMediaType);
-        const getHeaders = jest.fn();
-        when(getHeaders).calledWith("Content-Type").mockReturnValue(header);
+        const getHeaders = vi.fn();
+        when(getHeaders).calledWith("Content-Type").thenReturn(header);
         await expect(
           transformDefaultJson({
             status: 200,

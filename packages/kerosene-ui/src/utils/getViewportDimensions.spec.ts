@@ -1,4 +1,7 @@
-import { when } from "jest-when";
+// @vitest-environment jsdom
+
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import getViewportDimensions from "./getViewportDimensions";
 
 const MOBILE_SAFARI_USER_AGENT =
@@ -6,10 +9,7 @@ const MOBILE_SAFARI_USER_AGENT =
 const DESKTOP_SAFARI_USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Safari/605.1.15";
 
-const _matchMedia = jest.fn() as jest.Mock<
-  ReturnType<typeof window.matchMedia>,
-  Parameters<typeof window.matchMedia>
->;
+const _matchMedia: Mock<typeof window.matchMedia> = vi.fn();
 window.matchMedia = _matchMedia;
 
 describe("getViewportDimensions", () => {
@@ -30,7 +30,7 @@ describe("getViewportDimensions", () => {
       Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
-        .mockReturnValue({
+        .thenReturn({
           matches: true,
         } as Partial<MediaQueryList> as MediaQueryList);
 
@@ -44,7 +44,7 @@ describe("getViewportDimensions", () => {
       Object.assign(navigator, { standalone: true });
       when(_matchMedia)
         .calledWith("(orientation: portrait)")
-        .mockReturnValue({
+        .thenReturn({
           matches: false,
         } as Partial<MediaQueryList> as MediaQueryList);
 

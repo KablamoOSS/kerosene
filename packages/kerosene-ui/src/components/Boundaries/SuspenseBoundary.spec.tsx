@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -42,7 +44,7 @@ describe("SuspenseBoundary", () => {
     },
     {
       props: {
-        errorFallbackRender: jest
+        errorFallbackRender: vi
           .fn()
           .mockImplementation(() => <>errorFallbackRender</>),
       },
@@ -51,7 +53,7 @@ describe("SuspenseBoundary", () => {
     },
     {
       props: {
-        ErrorFallbackComponent: jest
+        ErrorFallbackComponent: vi
           .fn()
           .mockImplementation(() => <>ErrorFallbackComponent</>),
       },

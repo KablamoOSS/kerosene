@@ -43,7 +43,9 @@ function createQueryObserverBaseResult<
     isStale: false,
     isSuccess: false,
     promise: new Promise<TData>(noop),
-    refetch: jest.fn(),
+    refetch: async () => {
+      throw new Error("Not implemented");
+    },
     status: "pending",
     fetchStatus: "idle",
     queryKey: queryKey as DataTag<TQueryKey, TData>,

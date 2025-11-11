@@ -1,35 +1,33 @@
+// @vitest-environment jsdom
+
 import { render } from "@testing-library/react";
-import createSandbox from "jest-sandbox";
 import findLast from "lodash/findLast";
 import identity from "lodash/identity";
 import * as React from "react";
+import type { Mock } from "vitest";
 import useRect from "./useRect";
 
-jest.mock("./useRafThrottle", () => identity);
+vi.mock("./useRafThrottle", () => ({ default: identity }));
 
-jest.mock("../utils/listeners", () => ({
+vi.mock("../utils/listeners", () => ({
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS: { capture: true, passive: true },
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS: { capture: true },
 }));
 
-const sandbox = createSandbox();
-const _addEventListener: jest.Mock<
-  void,
-  Parameters<Window["addEventListener"]>
-> = sandbox.fn();
-const _removeEventListener: jest.Mock<
-  void,
-  Parameters<Window["removeEventListener"]>
-> = sandbox.fn();
+const _addEventListener: Mock<Window["addEventListener"]> = vi.fn();
+const _removeEventListener: Mock<Window["removeEventListener"]> = vi.fn();
 window.addEventListener = _addEventListener;
 window.removeEventListener = _removeEventListener;
-Element.prototype.getBoundingClientRect = sandbox.fn().mockReturnValue({
-  top: 1,
-  left: 2,
-  bottom: 3,
-  right: 4,
-  width: 5,
-} as ClientRect);
+const _getBoundingClientRect: Mock<Element["getBoundingClientRect"]> = vi
+  .fn()
+  .mockReturnValue({
+    top: 1,
+    left: 2,
+    bottom: 3,
+    right: 4,
+    width: 5,
+  } as ClientRect);
+Element.prototype.getBoundingClientRect = _getBoundingClientRect;
 
 Object.assign(window, {
   pageXOffset: 6,
@@ -38,7 +36,9 @@ Object.assign(window, {
 
 describe("useRect", () => {
   beforeEach(() => {
-    sandbox.clear();
+    _addEventListener.mockClear();
+    _removeEventListener.mockClear();
+    _getBoundingClientRect.mockClear();
   });
 
   it("should return a ref, rect and scroll positions for the element", () => {
