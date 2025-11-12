@@ -54,30 +54,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           CI: true
-
-  release:
-    name: Release
-    needs: build
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Setup latest Node.JS LTS
-        uses: actions/setup-node@v6
-        with:
-          node-version: lts/*
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Publish to npm
-        uses: changesets/action@v1
-        with:
-          publish: yarn release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
