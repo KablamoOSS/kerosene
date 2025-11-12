@@ -4,6 +4,16 @@ const path = require("path");
 module.exports = {
   extends: path.join(__dirname, "packages", "eslint-config", "index.js"),
   rules: {
+    "no-restricted-syntax": [
+      "error",
+      {
+        // ban `import { method } from "lodash";` but permit `import type { Thing } from "lodash";`
+        selector:
+          'ImportDeclaration[importKind!="type"][source.value="lodash"]',
+        message:
+          'Prefer `import method from "lodash/method";` over `import { method } from "lodash";`',
+      },
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -12,12 +22,12 @@ module.exports = {
           "testSetup.ts",
           "config/**/*",
           "typings/**/*",
+          "vitest.config.ts",
           "**/es/**/*",
           "**/lib/**/*",
           "**/*.spec.*",
           "**/*.test.*",
-          "**/rollup.config.*",
-          "**/rollup-config.*",
+          "**/tsdown.config.*",
         ],
       },
     ],

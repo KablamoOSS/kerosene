@@ -1,24 +1,27 @@
+// @vitest-environment jsdom
+
 import { MINUTE, SECOND, waitForEventLoopToDrain } from "@kablamo/kerosene";
 import { act, renderHook } from "@testing-library/react";
-import { identity } from "lodash";
+import identity from "lodash/identity";
 import * as React from "react";
+import type { Mock } from "vitest";
 import useCurrentTime, { CurrentTimeProvider } from "./useCurrentTime";
 
 const tick = (ms: number) =>
   act(() => {
-    jest.advanceTimersByTime(ms);
+    vi.advanceTimersByTime(ms);
   });
 
 describe("useCurrentTime", () => {
-  let documentHidden: jest.SpyInstance<boolean, []>;
+  let documentHidden: Mock<() => boolean>;
   beforeEach(() => {
-    jest.useFakeTimers();
-    documentHidden = jest.spyOn(document, "hidden", "get");
+    vi.useFakeTimers();
+    documentHidden = vi.spyOn(document, "hidden", "get");
   });
 
   afterEach(() => {
-    jest.useRealTimers();
-    jest.restoreAllMocks();
+    vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it("should return the current time and update every minute", () => {
@@ -74,7 +77,7 @@ describe("useCurrentTime", () => {
 
   it("should override defaults with context", () => {
     const ssrTime = new Date("2000-01-01T01:23:45.678Z").getTime();
-    const useHistory: jest.Mock<number, [number]> = jest
+    const useHistory: Mock<(value: number) => number> = vi
       .fn()
       .mockImplementation(identity);
     const utils = renderHook(() => useHistory(useCurrentTime()), {

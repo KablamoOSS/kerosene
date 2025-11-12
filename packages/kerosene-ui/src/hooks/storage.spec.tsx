@@ -1,7 +1,11 @@
+// @vitest-environment jsdom
+
 import type { AnyFunction } from "@kablamo/kerosene";
 import { renderHook } from "@testing-library/react";
-import { identity, isBoolean } from "lodash";
+import identity from "lodash/identity";
+import isBoolean from "lodash/isBoolean";
 import { act } from "react";
+import type { Mock } from "vitest";
 import {
   useLocalStorage,
   useSessionStorage,
@@ -82,10 +86,11 @@ describe.each([
 
   it("should return the defaultValue during hydration", () => {
     window[storageArea].setItem(key, JSON.stringify(true));
-    const onRender: jest.Mock<
-      readonly [boolean, AnyFunction],
-      [readonly [boolean, AnyFunction]]
-    > = jest.fn().mockImplementation(identity);
+    const onRender: Mock<
+      (
+        value: readonly [boolean, AnyFunction],
+      ) => readonly [boolean, AnyFunction]
+    > = vi.fn().mockImplementation(identity);
     const { result } = renderHook(
       () => onRender(useStorage(key, false, isBoolean)),
       {
@@ -151,7 +156,7 @@ describe.each([
       ),
       expected: false,
     },
-  ])("should return $expected after '$name' event", ({ event, expected }) => {
+  ])("should return $expected after $name event", ({ event, expected }) => {
     const { result } = renderHook(() => useStorage(key, false, isBoolean));
     expect(result.current[0]).toBe(false);
 

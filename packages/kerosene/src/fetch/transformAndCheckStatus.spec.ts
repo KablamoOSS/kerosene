@@ -1,4 +1,5 @@
-import { when } from "jest-when";
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import ClientError from "./clientError";
 import HttpError from "./httpError";
 import ServerError from "./serverError";
@@ -11,11 +12,14 @@ import transformAndCheckStatus, {
   transformAndCheckStatusDefaultJson,
 } from "./transformAndCheckStatus";
 
-jest.mock("./transform");
-const createTransform = _createTransform as unknown as jest.MockInstance<
-  ReturnType<typeof _createTransform>,
-  Parameters<typeof _createTransform>
+vi.mock("./transform");
+const createTransform = _createTransform as unknown as Mock<
+  typeof _createTransform
 >;
+
+beforeEach(() => {
+  createTransform.mockReset();
+});
 
 describe("transformAndCheckStatus", () => {
   it("should resolve a transformed response for 2xx", async () => {
@@ -25,7 +29,7 @@ describe("transformAndCheckStatus", () => {
     } as Partial<Response> as Response;
     when(createTransform)
       .calledWith({})
-      .mockReturnValueOnce(() => Promise.resolve(transformed));
+      .thenReturn(() => Promise.resolve(transformed));
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
     );
@@ -38,7 +42,7 @@ describe("transformAndCheckStatus", () => {
     } as Partial<Response> as Response;
     when(createTransform)
       .calledWith({})
-      .mockReturnValueOnce(() => Promise.resolve(transformed));
+      .thenReturn(() => Promise.resolve(transformed));
     await expect(transformAndCheckStatus(response)).resolves.toEqual(
       transformed,
     );
@@ -52,7 +56,7 @@ describe("transformAndCheckStatus", () => {
     } as Partial<Response> as Response;
     when(createTransform)
       .calledWith({})
-      .mockReturnValueOnce(() => Promise.resolve(transformed));
+      .thenReturn(() => Promise.resolve(transformed));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -76,7 +80,7 @@ describe("transformAndCheckStatus", () => {
     } as Partial<Response> as Response;
     when(createTransform)
       .calledWith({})
-      .mockReturnValueOnce(() => Promise.resolve(transformed));
+      .thenReturn(() => Promise.resolve(transformed));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -97,7 +101,7 @@ describe("transformAndCheckStatus", () => {
     } as Partial<Response> as Response;
     when(createTransform)
       .calledWith({})
-      .mockReturnValueOnce(() => Promise.resolve(undefined));
+      .thenReturn(() => Promise.resolve(undefined));
     await transformAndCheckStatus(response).then(
       () => {
         throw new Error("Expected transformAndCheckStatus to be rejected");
@@ -119,9 +123,7 @@ describe("createTransformAndCheckStatus", () => {
     const response = {
       status: 200,
     } as Partial<Response> as Response;
-    when(createTransform)
-      .calledWith(options)
-      .mockReturnValueOnce(defaultTransform);
+    when(createTransform).calledWith(options).thenReturn(defaultTransform);
     await expect(
       createTransformAndCheckStatus(options)(response),
     ).resolves.toEqual(transformed);

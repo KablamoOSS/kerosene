@@ -6,9 +6,10 @@ import type {
   QueryObserverLoadingErrorResult,
   QueryObserverLoadingResult,
   QueryObserverRefetchErrorResult,
+  QueryObserverResult,
   QueryObserverSuccessResult,
 } from "@tanstack/react-query";
-import { noop } from "lodash";
+import noop from "lodash/noop";
 
 function createQueryObserverBaseResult<
   TData = unknown,
@@ -27,6 +28,7 @@ function createQueryObserverBaseResult<
     failureCount: 0,
     failureReason: null,
     errorUpdateCount: 0,
+    isEnabled: false,
     isError: false,
     isFetched: false,
     isFetchedAfterMount: false,
@@ -42,7 +44,11 @@ function createQueryObserverBaseResult<
     isStale: false,
     isSuccess: false,
     promise: new Promise<TData>(noop),
-    refetch: jest.fn(),
+    refetch: async () => {
+      return createQueryObserverBaseResult<TData, TError, TQueryKey>(
+        queryKey,
+      ) as QueryObserverResult<TData, TError>;
+    },
     status: "pending",
     fetchStatus: "idle",
     queryKey: queryKey as DataTag<TQueryKey, TData>,
@@ -63,6 +69,7 @@ export function createQueryObserverSuccessResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error: null,
+    isEnabled: true,
     isError: false,
     isLoading: false,
     isLoadingError: false,
@@ -71,6 +78,12 @@ export function createQueryObserverSuccessResult<
     isRefetchError: false,
     isSuccess: true,
     promise: Promise.resolve(data),
+    refetch: async () => {
+      return createQueryObserverSuccessResult<TData, TError, TQueryKey>(
+        data,
+        queryKey,
+      );
+    },
     status: "success",
   };
 }
@@ -90,6 +103,7 @@ export function createQueryObserverRefetchErrorResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data,
     error,
+    isEnabled: true,
     isError: true,
     isLoading: false,
     isLoadingError: false,
@@ -97,6 +111,13 @@ export function createQueryObserverRefetchErrorResult<
     isPlaceholderData: false,
     isRefetchError: true,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverRefetchErrorResult<TData, TError, TQueryKey>(
+        data,
+        error,
+        queryKey,
+      );
+    },
     status: "error",
   };
 }
@@ -115,6 +136,7 @@ export function createQueryObserverLoadingErrorResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error,
+    isEnabled: true,
     isError: true,
     isLoading: false,
     isLoadingError: true,
@@ -122,6 +144,12 @@ export function createQueryObserverLoadingErrorResult<
     isPlaceholderData: false,
     isRefetchError: false,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverLoadingErrorResult<TData, TError, TQueryKey>(
+        error,
+        queryKey,
+      );
+    },
     status: "error",
   };
 }
@@ -139,6 +167,7 @@ export function createQueryObserverLoadingResult<
     ...createQueryObserverBaseResult<TData, TError, TQueryKey>(queryKey),
     data: undefined,
     error: null,
+    isEnabled: true,
     isError: false,
     isInitialLoading: true,
     isLoading: true,
@@ -147,6 +176,11 @@ export function createQueryObserverLoadingResult<
     isPlaceholderData: false,
     isRefetchError: false,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverLoadingResult<TData, TError, TQueryKey>(
+        queryKey,
+      );
+    },
     status: "pending",
     fetchStatus: "fetching",
   };

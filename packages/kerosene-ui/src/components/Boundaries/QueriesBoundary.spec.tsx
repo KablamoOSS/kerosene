@@ -1,4 +1,6 @@
-import { Deferred, type DistributiveOmit } from "@kablamo/kerosene";
+// @vitest-environment jsdom
+
+import type { DistributiveOmit } from "@kablamo/kerosene";
 import { createQueryObserverLoadingErrorResult } from "@kablamo/kerosene-test";
 import {
   useQuery,
@@ -8,8 +10,7 @@ import {
 } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { noop } from "lodash";
-import * as React from "react";
+import noop from "lodash/noop";
 import type { FallbackProps } from "react-error-boundary";
 import QueriesBoundary, {
   AggregateQueriesError,
@@ -60,7 +61,7 @@ describe("QueriesBoundary", () => {
       expected: "errorFallbackRender",
       props: {
         children: "Success",
-        errorFallbackRender: jest
+        errorFallbackRender: vi
           .fn()
           .mockImplementation(({ resetErrorBoundary }: FallbackProps) => (
             <button type="button" onClick={resetErrorBoundary}>
@@ -75,7 +76,7 @@ describe("QueriesBoundary", () => {
       expected: "ErrorFallbackComponent",
       props: {
         children: "Success",
-        ErrorFallbackComponent: jest
+        ErrorFallbackComponent: vi
           .fn()
           .mockImplementation(({ resetErrorBoundary }: FallbackProps) => (
             <button type="button" onClick={resetErrorBoundary}>
@@ -108,8 +109,8 @@ describe("QueriesBoundary", () => {
   }>)(
     "should render a loading state and then $expected",
     async ({ expected, props, value1, value2 }) => {
-      let deferred1 = new Deferred<string>();
-      let deferred2 = new Deferred<string>();
+      let deferred1 = Promise.withResolvers<string>();
+      let deferred2 = Promise.withResolvers<string>();
       const Component = () => {
         const query1 = useQuery({
           queryKey: ["QueriesBoundary", "Component", "query1"],
@@ -168,8 +169,8 @@ describe("QueriesBoundary", () => {
       }
 
       if (props.errorFallbackRender || props.ErrorFallbackComponent) {
-        deferred1 = new Deferred<string>();
-        deferred2 = new Deferred<string>();
+        deferred1 = Promise.withResolvers<string>();
+        deferred2 = Promise.withResolvers<string>();
         void userEvent.click(screen.getByRole("button"));
         await waitFor(() =>
           expect(screen.getByText("Loading")).toBeInTheDocument(),

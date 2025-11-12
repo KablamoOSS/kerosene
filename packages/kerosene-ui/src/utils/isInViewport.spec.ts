@@ -1,8 +1,12 @@
+// @vitest-environment jsdom
+
 import isInViewport from "./isInViewport";
 
-jest.mock("./getViewportDimensions", () => () => ({
-  height: window.innerHeight,
-  width: window.innerWidth,
+vi.mock("./getViewportDimensions", () => ({
+  default: () => ({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  }),
 }));
 
 describe("#isInViewport", () => {

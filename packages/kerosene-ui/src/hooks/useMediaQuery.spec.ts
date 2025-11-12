@@ -1,13 +1,13 @@
+// @vitest-environment jsdom
+
 import { act, renderHook } from "@testing-library/react";
-import { identity } from "lodash";
+import identity from "lodash/identity";
+import type { Mock, MockedObject, MockResult } from "vitest";
 import useMediaQuery from "./useMediaQuery";
 
-const mockMatchMedia: jest.Mock<
-  jest.Mocked<MediaQueryList>,
-  Parameters<Window["matchMedia"]>
-> = jest.fn();
+const mockMatchMedia: Mock<Window["matchMedia"]> = vi.fn();
 
-function getReturnValue<T>(result?: jest.MockResult<T>): T {
+function getReturnValue<T>(result?: MockResult<T>): T {
   if (result?.type !== "return") {
     throw new Error(
       `Expected result.type to be return, but was ${result?.type}`,
@@ -22,17 +22,17 @@ const createMockMediaQueryList = ({
 }: {
   matches: () => boolean;
   query: string;
-}): jest.Mocked<MediaQueryList> => ({
-  addEventListener: jest.fn(),
-  addListener: jest.fn(),
-  dispatchEvent: jest.fn(),
+}): MockedObject<MediaQueryList> => ({
+  addEventListener: vi.fn(),
+  addListener: vi.fn(),
+  dispatchEvent: vi.fn(),
   get matches() {
     return matches();
   },
   media: query,
   onchange: null,
-  removeListener: jest.fn(),
-  removeEventListener: jest.fn(),
+  removeListener: vi.fn(),
+  removeEventListener: vi.fn(),
 });
 
 const query = "(prefers-color-scheme: dark)";
@@ -48,12 +48,14 @@ const update = (_matches: boolean) =>
           : [],
       )
       .forEach((list) =>
-        list.addListener.mock.calls.forEach(([listener]) => {
-          listener!.call(list, {
-            matches: list.matches,
-            media: list.media,
-          } as MediaQueryListEvent);
-        }),
+        (list.addListener as Mock<typeof list.addListener>).mock.calls.forEach(
+          ([listener]) => {
+            listener!.call(list, {
+              matches: list.matches,
+              media: list.media,
+            } as MediaQueryListEvent);
+          },
+        ),
       );
   });
 
@@ -69,7 +71,7 @@ describe("useMediaQuery", () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.restoreAllMocks();
     window.matchMedia = originalmatchMedia;
   });
 
@@ -110,15 +112,17 @@ describe("useMediaQuery", () => {
     unmount();
     mockMatchMedia.mock.results.forEach((r) => {
       const list = getReturnValue(r);
-      list.addListener.mock.calls.forEach(([callback]) => {
-        expect(list.removeListener).toHaveBeenCalledWith(callback);
-      });
+      (list.addListener as Mock<typeof list.addListener>).mock.calls.forEach(
+        ([callback]) => {
+          expect(list.removeListener).toHaveBeenCalledWith(callback);
+        },
+      );
     });
   });
 
   it("should return defaultMatches on hydration", () => {
     matches = false;
-    const onRender: jest.Mock<boolean, [boolean]> = jest
+    const onRender: Mock<(value: boolean) => boolean> = vi
       .fn()
       .mockImplementation(identity);
     renderHook(() => onRender(useMediaQuery(query, { defaultMatches: true })), {

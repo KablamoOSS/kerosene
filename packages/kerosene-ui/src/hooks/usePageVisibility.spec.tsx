@@ -1,20 +1,21 @@
+// @vitest-environment jsdom
+
 import { stubProperties } from "@kablamo/kerosene-test";
 import { renderHook } from "@testing-library/react";
-import { identity } from "lodash";
-import { act } from "react-dom/test-utils";
+import identity from "lodash/identity";
+import { act } from "react";
+import type { Mock } from "vitest";
 import usePageVisibility from "./usePageVisibility";
 
 describe("usePageVisibility", () => {
   let restoreDocument: () => void;
-  let addEventListener: jest.MockedFunction<typeof document.addEventListener>;
-  let removeEventListener: jest.MockedFunction<
-    typeof document.removeEventListener
-  >;
+  let addEventListener: Mock<typeof document.addEventListener>;
+  let removeEventListener: Mock<typeof document.removeEventListener>;
   let hidden: boolean | undefined;
   beforeEach(() => {
     hidden = undefined;
-    addEventListener = jest.fn();
-    removeEventListener = jest.fn();
+    addEventListener = vi.fn();
+    removeEventListener = vi.fn();
     restoreDocument = stubProperties(document, {
       addEventListener: { configurable: true, value: addEventListener },
       removeEventListener: { configurable: true, value: removeEventListener },
@@ -87,7 +88,7 @@ describe("usePageVisibility", () => {
 
   it("should return true on hydration", () => {
     hidden = true;
-    const onRender: jest.Mock<boolean, [boolean]> = jest
+    const onRender: Mock<(value: boolean) => boolean> = vi
       .fn()
       .mockImplementation(identity);
     renderHook(

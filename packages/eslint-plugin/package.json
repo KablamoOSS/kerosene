@@ -2,7 +2,11 @@
   "name": "@kablamo/eslint-plugin",
   "version": "2.0.1",
   "main": "src/index.js",
-  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/eslint-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KablamoOSS/kerosene.git",
+    "directory": "packages/eslint-plugin"
+  },
   "bugs": {
     "url": "https://github.com/KablamoOSS/kerosene/issues"
   },

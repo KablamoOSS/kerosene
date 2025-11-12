@@ -1,6 +1,9 @@
+// @vitest-environment jsdom
+
 import { act, renderHook } from "@testing-library/react";
-import { when } from "jest-when";
-import { identity } from "lodash";
+import identity from "lodash/identity";
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import {
   ADD_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
   REMOVE_EVENT_LISTENER_CAPTURE_PASSIVE_OPTIONS,
@@ -9,12 +12,10 @@ import useFocusVisible from "./useFocusVisible";
 
 const FOCUS_EVENTS = ["focus", "blur"] as const;
 describe("useFocusVisible", () => {
-  let addEventListener: jest.SpiedFunction<typeof window.addEventListener>;
-  let removeEventListener: jest.SpiedFunction<
-    typeof window.removeEventListener
-  >;
-  let querySelector: jest.SpiedFunction<typeof document.querySelector>;
-  let supports: jest.SpiedFunction<typeof CSS.supports>;
+  let addEventListener: Mock<typeof window.addEventListener>;
+  let removeEventListener: Mock<typeof window.removeEventListener>;
+  let querySelector: Mock<typeof document.querySelector>;
+  let supports: Mock<typeof CSS.supports>;
   const update = () =>
     act(() => {
       addEventListener.mock.calls
@@ -28,17 +29,17 @@ describe("useFocusVisible", () => {
       ([name]) => name === "focus",
     )![1] as () => void;
   beforeEach(() => {
-    addEventListener = jest.spyOn(window, "addEventListener");
-    removeEventListener = jest.spyOn(window, "removeEventListener");
-    querySelector = jest.spyOn(document, "querySelector");
-    supports = jest.spyOn(CSS, "supports");
+    addEventListener = vi.spyOn(window, "addEventListener");
+    removeEventListener = vi.spyOn(window, "removeEventListener");
+    querySelector = vi.spyOn(document, "querySelector");
+    supports = vi.spyOn(CSS, "supports");
   });
 
   it("should return whether :focus-visible is present", () => {
-    when(supports).calledWith("selector(:focus-visible)").mockReturnValue(true);
+    when(supports).calledWith("selector(:focus-visible)").thenReturn(true);
     when(querySelector)
       .calledWith(":focus-visible")
-      .mockReturnValue({} as Element);
+      .thenReturn({} as Element);
 
     const { result, unmount } = renderHook(() => useFocusVisible());
 
@@ -52,7 +53,7 @@ describe("useFocusVisible", () => {
 
     expect(result.current).toBe(true);
 
-    when(querySelector).calledWith(":focus-visible").mockReturnValue(null);
+    when(querySelector).calledWith(":focus-visible").thenReturn(null);
     update();
 
     expect(result.current).toBe(false);
@@ -68,12 +69,10 @@ describe("useFocusVisible", () => {
   });
 
   it("should return whether :focus is present in a browser which doesn't support :focus-visible", () => {
-    when(supports)
-      .calledWith("selector(:focus-visible)")
-      .mockReturnValue(false);
+    when(supports).calledWith("selector(:focus-visible)").thenReturn(false);
     when(querySelector)
       .calledWith(":focus")
-      .mockReturnValue({} as Element);
+      .thenReturn({} as Element);
 
     const { result, unmount } = renderHook(() => useFocusVisible());
 
@@ -87,7 +86,7 @@ describe("useFocusVisible", () => {
 
     expect(result.current).toBe(true);
 
-    when(querySelector).calledWith(":focus").mockReturnValue(null);
+    when(querySelector).calledWith(":focus").thenReturn(null);
     update();
 
     expect(result.current).toBe(false);
@@ -103,12 +102,12 @@ describe("useFocusVisible", () => {
   });
 
   it("should return false during hydration", () => {
-    when(supports).calledWith("selector(:focus-visible)").mockReturnValue(true);
+    when(supports).calledWith("selector(:focus-visible)").thenReturn(true);
     when(querySelector)
       .calledWith(":focus-visible")
-      .mockReturnValue({} as Element);
+      .thenReturn({} as Element);
 
-    const onRender: jest.Mock<boolean, [boolean]> = jest
+    const onRender: Mock<(value: boolean) => boolean> = vi
       .fn()
       .mockImplementation(identity);
     const { result } = renderHook(() => onRender(useFocusVisible()), {

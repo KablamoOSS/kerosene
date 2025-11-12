@@ -1,5 +1,5 @@
 import * as dateFns from "date-fns";
-import { range } from "lodash";
+import range from "lodash/range";
 import { DAYS_PER_WEEK, type DayOfWeek } from "./constants";
 
 /**

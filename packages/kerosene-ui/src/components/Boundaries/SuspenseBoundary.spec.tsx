@@ -1,12 +1,12 @@
-import { Deferred } from "@kablamo/kerosene";
-// eslint-disable-next-line import/no-extraneous-dependencies
+// @vitest-environment jsdom
+
 import {
   QueryClient,
   QueryClientProvider,
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
-import { noop } from "lodash";
+import noop from "lodash/noop";
 import * as React from "react";
 import SuspenseBoundary from "./SuspenseBoundary";
 import type { ErrorFallbackProps } from "./types";
@@ -44,7 +44,7 @@ describe("SuspenseBoundary", () => {
     },
     {
       props: {
-        errorFallbackRender: jest
+        errorFallbackRender: vi
           .fn()
           .mockImplementation(() => <>errorFallbackRender</>),
       },
@@ -53,7 +53,7 @@ describe("SuspenseBoundary", () => {
     },
     {
       props: {
-        ErrorFallbackComponent: jest
+        ErrorFallbackComponent: vi
           .fn()
           .mockImplementation(() => <>ErrorFallbackComponent</>),
       },
@@ -67,7 +67,7 @@ describe("SuspenseBoundary", () => {
   }>)(
     "should render a loading state and then $expected",
     async ({ props = { errorFallback: <>Error</> }, expected, value }) => {
-      const deferred = new Deferred<string>();
+      const deferred = Promise.withResolvers<string>();
       render(
         <SuspenseBoundary loadingFallback="Loading" {...props}>
           <SuspendingComponent queryFn={() => deferred.promise} />

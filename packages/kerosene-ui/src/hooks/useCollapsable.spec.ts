@@ -1,12 +1,14 @@
+// @vitest-environment jsdom
+
 import type { Mutable } from "@kablamo/kerosene";
 import { act, renderHook, type RenderHookResult } from "@testing-library/react";
-import { when } from "jest-when";
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import useCollapsable, { type UseCollapsableReturn } from "./useCollapsable";
 
-const mockUseMediaQuery: jest.MockedFunction<
-  (typeof import("./useMediaQuery"))["default"]
-> = jest.fn();
-jest.mock("./useMediaQuery", () => ({
+const mockUseMediaQuery: Mock<(typeof import("./useMediaQuery"))["default"]> =
+  vi.fn();
+vi.mock("./useMediaQuery", () => ({
   __esModule: true,
   get default() {
     return mockUseMediaQuery;
@@ -25,15 +27,15 @@ describe("useCollapsable", () => {
   ) => RenderHookResult<UseCollapsableReturn, HookTestProps>;
   let el: HTMLElement;
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     // clock = FakeTimers.install();
     repaint = () =>
       act(async () => {
-        jest.advanceTimersByTime(34);
+        vi.advanceTimersByTime(34);
       });
     tick = (ms) =>
       act(async () => {
-        jest.advanceTimersByTime(ms);
+        vi.advanceTimersByTime(ms);
       });
     el = {
       scrollHeight: 500,
@@ -51,8 +53,8 @@ describe("useCollapsable", () => {
 
   afterEach(() => {
     // clock.uninstall();
-    jest.useRealTimers();
-    jest.restoreAllMocks();
+    vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it.each([
@@ -63,7 +65,7 @@ describe("useCollapsable", () => {
     ({ immediate, prefersReducedMotion }) => {
       when(mockUseMediaQuery)
         .calledWith("(prefers-reduced-motion: reduce)")
-        .mockReturnValue(prefersReducedMotion);
+        .thenReturn(prefersReducedMotion);
 
       const { result, rerender } = setup({ open: false, immediate });
       expect(result.current.render).toBe(false);
@@ -100,7 +102,7 @@ describe("useCollapsable", () => {
   it("should orchestrate transitions appropriately", async () => {
     when(mockUseMediaQuery)
       .calledWith("(prefers-reduced-motion: reduce)")
-      .mockReturnValue(false);
+      .thenReturn(false);
     const { result, rerender } = setup({ open: false });
     expect(result.current.render).toBe(false);
     expect(result.current.style).toEqual({

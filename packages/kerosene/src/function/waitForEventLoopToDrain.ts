@@ -17,14 +17,17 @@ export default function waitForEventLoopToDrain(): Promise<void> {
     if (setImmediate) {
       setImmediate(resolve);
     } else if (
+      // @ts-expect-error TS2708: Needed without @types/jest
       typeof jest !== "undefined" &&
+      // @ts-expect-error TS2708: Needed without @types/jest
       typeof jest.requireActual === "function"
     ) {
       // jest-environment-jsdom removes `setImmediate` from the Node globals, so instead use jest to require the Node
       // API from the "timers" module. We can't just do `import { setImmediate } from "timers";` because of the browser
-      jest
-        .requireActual<typeof import("timers")>("timers")
-        .setImmediate(resolve);
+      const requireTimers: (moduleName: "timers") => typeof import("timers") =
+        // @ts-expect-error TS2708: Needed without @types/jest
+        jest.requireActual;
+      requireTimers("timers").setImmediate(resolve);
     } else {
       // Fallback to setTimeout
       setTimeout(resolve, 0);

@@ -1,5 +1,7 @@
-import createSandbox from "jest-sandbox";
-import { when } from "jest-when";
+// @vitest-environment jsdom
+
+import type { Mock } from "vitest";
+import { when } from "vitest-when";
 import getSafeAreaInsets from "./getSafeAreaInsets";
 
 const element = {
@@ -8,38 +10,27 @@ const element = {
 } as Partial<HTMLElement> as HTMLElement;
 
 describe("getSafeAreaInsets", () => {
-  let sandbox: JestSandbox;
-  let createElement: jest.Mock<
-    ReturnType<typeof document.createElement>,
-    Parameters<typeof document.createElement>
-  >;
-  let appendChild: jest.Mock<
-    ReturnType<typeof document.body.appendChild>,
-    Parameters<typeof document.body.appendChild>
-  >;
-  let getComputedStyle: jest.Mock<
-    ReturnType<typeof window.getComputedStyle>,
-    Parameters<typeof window.getComputedStyle>
-  >;
+  let createElement: Mock<typeof document.createElement>;
+  let appendChild: Mock<typeof document.body.appendChild>;
+  let getComputedStyle: Mock<typeof window.getComputedStyle>;
   beforeEach(() => {
-    sandbox = createSandbox();
-    createElement = jest.fn();
+    createElement = vi.fn();
     document.createElement = createElement;
-    when(createElement).calledWith("div").mockReturnValue(element);
-    appendChild = jest.fn();
+    when(createElement).calledWith("div").thenReturn(element);
+    appendChild = vi.fn();
     document.body.appendChild = appendChild as typeof document.body.appendChild;
-    getComputedStyle = jest.fn();
+    getComputedStyle = vi.fn();
     window.getComputedStyle = getComputedStyle;
   });
 
   afterEach(() => {
-    sandbox.restore();
+    vi.resetAllMocks();
   });
 
   it("should return an object containing the insets", () => {
     when(getComputedStyle)
       .calledWith(element)
-      .mockReturnValue({
+      .thenReturn({
         top: "21px",
         left: "44px",
         bottom: "21px",
@@ -67,9 +58,7 @@ describe("getSafeAreaInsets", () => {
   it("should return insets as 0 if the styles can't be computed", () => {
     when(getComputedStyle)
       .calledWith(element)
-      .mockReturnValue(
-        {} as Partial<CSSStyleDeclaration> as CSSStyleDeclaration,
-      );
+      .thenReturn({} as Partial<CSSStyleDeclaration> as CSSStyleDeclaration);
 
     expect(getSafeAreaInsets()).toEqual({
       top: 0,

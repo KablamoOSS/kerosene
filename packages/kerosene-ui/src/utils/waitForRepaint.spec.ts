@@ -1,18 +1,21 @@
+// @vitest-environment jsdom
+
 import FakeTimers from "@sinonjs/fake-timers";
+import type { Mock } from "vitest";
 import waitForRepaint from "./waitForRepaint";
 
 describe("#waitForRepaint", () => {
   let clock: FakeTimers.InstalledClock;
-  let rAF: jest.SpiedFunction<typeof window.requestAnimationFrame>;
-  let cAF: jest.SpiedFunction<typeof window.cancelAnimationFrame>;
+  let rAF: Mock<typeof window.requestAnimationFrame>;
+  let cAF: Mock<typeof window.cancelAnimationFrame>;
   beforeEach(() => {
     clock = FakeTimers.install();
-    rAF = jest
+    rAF = vi
       .spyOn(window, "requestAnimationFrame")
       .mockImplementation(
         clock.requestAnimationFrame as typeof window.requestAnimationFrame,
       );
-    cAF = jest
+    cAF = vi
       .spyOn(window, "cancelAnimationFrame")
       .mockImplementation(
         clock.cancelAnimationFrame as typeof window.cancelAnimationFrame,
@@ -21,7 +24,7 @@ describe("#waitForRepaint", () => {
 
   afterEach(() => {
     clock.uninstall();
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should call requestAnimationFrame twice", async () => {
@@ -36,7 +39,7 @@ describe("#waitForRepaint", () => {
     const promise = waitForRepaint();
     clock.runToFrame();
     promise.cancel();
-    await expect(promise).rejects.toThrowError("waitForRepaint was cancelled");
+    await expect(promise).rejects.toThrow("waitForRepaint was cancelled");
     expect(cAF).toHaveBeenCalledTimes(1);
   });
 
@@ -45,7 +48,7 @@ describe("#waitForRepaint", () => {
     const promise = waitForRepaint({ signal: controller.signal });
     clock.runToFrame();
     controller.abort();
-    await expect(promise).rejects.toThrowError("Aborted");
+    await expect(promise).rejects.toThrow("Aborted");
     expect(cAF).toHaveBeenCalledTimes(1);
   });
 });

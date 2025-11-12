@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { Mock } from "vitest";
 import mergeRefs from "./mergeRefs";
 
 describe("#mergeRefs", () => {
@@ -25,9 +26,9 @@ describe("#mergeRefs", () => {
   });
 
   it("should throw if a callback ref returns a cleanup function", () => {
-    const cleanup: jest.Mock<void, []> = jest.fn();
+    const cleanup: Mock<() => void> = vi.fn();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const ref = jest.fn((_instance: typeof instance | null) => cleanup);
+    const ref = vi.fn((_instance: typeof instance | null) => cleanup);
 
     const merged = mergeRefs(ref);
 

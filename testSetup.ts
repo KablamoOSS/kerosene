@@ -1,6 +1,9 @@
+/// <reference types="vitest/globals" />
+
 import "@testing-library/jest-dom";
+import "core-js/features/promise/with-resolvers";
 import "core-js/features/set/is-disjoint-from";
-import { noop } from "lodash";
+import noop from "lodash/noop";
 import { setImmediate } from "timers";
 
 // Required for Jest 27
@@ -29,26 +32,28 @@ const CSS = class CSS {
 } satisfies Partial<typeof globalThis.CSS>;
 Object.assign(globalThis, { CSS });
 
-// NOTE: Including this to prevent noisy console logs from ErrorBoundary components. Even though the ErrorBoundary
-// catches the errors, React still logs these to the console unless, `e.defaultPrevented` is `true`
-window.addEventListener("error", (e) => {
-  e.preventDefault();
-});
+if (typeof window !== "undefined") {
+  // NOTE: Including this to prevent noisy console logs from ErrorBoundary components. Even though the ErrorBoundary
+  // catches the errors, React still logs these to the console unless, `e.defaultPrevented` is `true`
+  window.addEventListener("error", (e) => {
+    e.preventDefault();
+  });
 
-Object.assign(window, {
-  matchMedia: ((query) => ({
-    get matches(): boolean {
-      throw new Error("Not Implemented");
-    },
-    media: query,
-    dispatchEvent: () => true,
-    addEventListener: noop,
-    removeEventListener: noop,
-    addListener: noop,
-    removeListener: noop,
-    onchange: null,
-  })) satisfies Window["matchMedia"],
-  requestAnimationFrame: (callback: FrameRequestCallback) =>
-    setTimeout(() => callback(Date.now()), 17),
-  cancelAnimationFrame: (handle: number) => clearTimeout(handle),
-});
+  Object.assign(window, {
+    matchMedia: ((query) => ({
+      get matches(): boolean {
+        throw new Error("Not Implemented");
+      },
+      media: query,
+      dispatchEvent: () => true,
+      addEventListener: noop,
+      removeEventListener: noop,
+      addListener: noop,
+      removeListener: noop,
+      onchange: null,
+    })) satisfies Window["matchMedia"],
+    requestAnimationFrame: (callback: FrameRequestCallback) =>
+      setTimeout(() => callback(Date.now()), 17),
+    cancelAnimationFrame: (handle: number) => clearTimeout(handle),
+  });
+}

@@ -1,5 +1,8 @@
+// @vitest-environment jsdom
+
 import { render } from "@testing-library/react";
 import * as React from "react";
+import type { Mock } from "vitest";
 import useMergedRefs from "./useMergedRefs";
 
 describe("#useMergedRefs", () => {
@@ -28,9 +31,9 @@ describe("#useMergedRefs", () => {
   });
 
   it("should throw if a callback refs returns a cleanup function", () => {
-    const cleanup: jest.Mock<void, []> = jest.fn();
+    const cleanup: Mock<() => void> = vi.fn();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const ref = jest.fn((_instance: HTMLDivElement | null) => cleanup);
+    const ref = vi.fn((_instance: HTMLDivElement | null) => cleanup);
     expect(() => render(<Component refs={[ref]} />)).toThrow();
   });
 });

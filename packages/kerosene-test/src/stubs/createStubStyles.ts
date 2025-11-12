@@ -1,4 +1,4 @@
-import { kebabCase } from "lodash";
+import kebabCase from "lodash/kebabCase";
 
 /**
  * Returns an object mapping local classNames to faked global equivalents along with any exported values.

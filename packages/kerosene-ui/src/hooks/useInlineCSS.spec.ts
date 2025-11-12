@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import type { Mutable } from "@kablamo/kerosene";
 import { renderHook } from "@testing-library/react";
 import * as React from "react";

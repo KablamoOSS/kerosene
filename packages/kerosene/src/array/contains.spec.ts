@@ -1,3 +1,4 @@
+import type { Mock } from "vitest";
 import contains from "./contains";
 
 describe("#contains", () => {
@@ -50,9 +51,8 @@ describe("#contains", () => {
     const routeDown = (input: number): number => Math.floor(input);
 
     it("should call the iteratee when passed one, passing each value into it", () => {
-      const iteratee: jest.MockedFn<
-        NonNullable<Parameters<typeof contains>[2]>
-      > = jest.fn();
+      const iteratee: Mock<NonNullable<Parameters<typeof contains>[2]>> =
+        vi.fn();
 
       const someValues = [
         Math.random(),
