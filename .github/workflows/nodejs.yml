@@ -16,9 +16,9 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - lts/iron
-          - lts/jod
-          - lts/krypton
+          - lts/-2
+          - lts/-1
+          - lts/*
           - current
 
     steps:
@@ -66,10 +66,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js Jod
+      - name: Setup latest Node.JS LTS
         uses: actions/setup-node@v6
         with:
-          node-version: lts/krypton
+          node-version: lts/*
 
       - name: Install dependencies
         run: yarn

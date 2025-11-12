@@ -6,6 +6,7 @@ import type {
   QueryObserverLoadingErrorResult,
   QueryObserverLoadingResult,
   QueryObserverRefetchErrorResult,
+  QueryObserverResult,
   QueryObserverSuccessResult,
 } from "@tanstack/react-query";
 import noop from "lodash/noop";
@@ -44,7 +45,9 @@ function createQueryObserverBaseResult<
     isSuccess: false,
     promise: new Promise<TData>(noop),
     refetch: async () => {
-      throw new Error("Not implemented");
+      return createQueryObserverBaseResult<TData, TError, TQueryKey>(
+        queryKey,
+      ) as QueryObserverResult<TData, TError>;
     },
     status: "pending",
     fetchStatus: "idle",
@@ -75,6 +78,12 @@ export function createQueryObserverSuccessResult<
     isRefetchError: false,
     isSuccess: true,
     promise: Promise.resolve(data),
+    refetch: async () => {
+      return createQueryObserverSuccessResult<TData, TError, TQueryKey>(
+        data,
+        queryKey,
+      );
+    },
     status: "success",
   };
 }
@@ -102,6 +111,13 @@ export function createQueryObserverRefetchErrorResult<
     isPlaceholderData: false,
     isRefetchError: true,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverRefetchErrorResult<TData, TError, TQueryKey>(
+        data,
+        error,
+        queryKey,
+      );
+    },
     status: "error",
   };
 }
@@ -128,6 +144,12 @@ export function createQueryObserverLoadingErrorResult<
     isPlaceholderData: false,
     isRefetchError: false,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverLoadingErrorResult<TData, TError, TQueryKey>(
+        error,
+        queryKey,
+      );
+    },
     status: "error",
   };
 }
@@ -154,6 +176,11 @@ export function createQueryObserverLoadingResult<
     isPlaceholderData: false,
     isRefetchError: false,
     isSuccess: false,
+    refetch: async () => {
+      return createQueryObserverLoadingResult<TData, TError, TQueryKey>(
+        queryKey,
+      );
+    },
     status: "pending",
     fetchStatus: "fetching",
   };
