@@ -7,8 +7,8 @@ on:
     branches: [master]
 
 permissions:
-  id-token: write
-  contents: read
+  id-token: write # needed for OIDC
+  contents: write # write needed for tags
 
 jobs:
   release:
