@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@kablamo/kerosene-test": "^0.0.24",
+    "@kablamo/rollup-plugin-resolve-externals": "^0.0.2",
     "@optimize-lodash/rollup-plugin": "^6.0.0",
     "@sinonjs/fake-timers": "^15.0.0",
     "@tanstack/react-query": "^5.90.7",
@@ -57,7 +58,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-error-boundary": "^5.0.0",
-    "tsdown": "^0.16.1",
+    "tsdown": "^0.17.4",
     "vitest-when": "^0.9.0"
   },
   "peerDependencies": {
