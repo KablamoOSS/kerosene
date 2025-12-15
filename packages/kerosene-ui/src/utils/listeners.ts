@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "lodash";
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Safely_detecting_option_support

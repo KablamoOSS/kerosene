@@ -1,5 +1,5 @@
 import type { KeysWhere } from "@kablamo/kerosene";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import * as React from "react";
 import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 

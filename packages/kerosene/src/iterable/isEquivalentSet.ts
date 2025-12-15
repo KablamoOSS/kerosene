@@ -1,4 +1,4 @@
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash";
 
 /**
  * Returns whether `iterable1` is an equivalent set to `iterable2`

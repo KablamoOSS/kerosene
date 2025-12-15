@@ -1,4 +1,4 @@
-import identity from "lodash/identity";
+import { identity } from "lodash";
 
 export default function contains<T>(
   superset: readonly T[],

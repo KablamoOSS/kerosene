@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import identity from "lodash/identity";
+import { identity } from "lodash";
 import * as React from "react";
 
 export default function createStubComponent<

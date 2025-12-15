@@ -6,7 +6,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import * as React from "react";
 import SuspenseBoundary from "./SuspenseBoundary";
 import type { ErrorFallbackProps } from "./types";

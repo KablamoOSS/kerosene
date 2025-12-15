@@ -3,7 +3,7 @@
 import "@testing-library/jest-dom";
 import "core-js/features/promise/with-resolvers";
 import "core-js/features/set/is-disjoint-from";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import { setImmediate } from "timers";
 
 // Required for Jest 27
