@@ -1,8 +1,7 @@
 // @vitest-environment jsdom
 
 import { render } from "@testing-library/react";
-import findLast from "lodash/findLast";
-import identity from "lodash/identity";
+import { findLast, identity } from "lodash";
 import * as React from "react";
 import type { Mock } from "vitest";
 import useRect from "./useRect";

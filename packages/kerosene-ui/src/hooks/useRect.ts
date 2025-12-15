@@ -1,6 +1,5 @@
 import type { ElementType } from "@kablamo/kerosene";
-import isEqual from "lodash/isEqual";
-import pick from "lodash/pick";
+import { isEqual, pick } from "lodash";
 import * as React from "react";
 import { SIDES } from "../utils/css";
 import {

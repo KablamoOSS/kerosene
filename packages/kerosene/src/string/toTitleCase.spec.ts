@@ -1,4 +1,4 @@
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash";
 import toTitleCase, { TITLE_CASE_LOWERCASE_WORDS } from "./toTitleCase";
 
 describe("#toTitleCase", () => {

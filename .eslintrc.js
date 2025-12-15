@@ -4,14 +4,15 @@ const path = require("path");
 module.exports = {
   extends: path.join(__dirname, "packages", "eslint-config", "index.js"),
   rules: {
-    "no-restricted-syntax": [
+    "no-restricted-imports": [
       "error",
       {
-        // ban `import { method } from "lodash";` but permit `import type { Thing } from "lodash";`
-        selector:
-          'ImportDeclaration[importKind!="type"][source.value="lodash"]',
-        message:
-          'Prefer `import method from "lodash/method";` over `import { method } from "lodash";`',
+        patterns: [
+          {
+            group: ["lodash/*"],
+            message: 'Please use the default import from "lodash" instead.',
+          },
+        ],
       },
     ],
     "import/no-extraneous-dependencies": [

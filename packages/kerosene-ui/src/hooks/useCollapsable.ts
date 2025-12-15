@@ -1,5 +1,5 @@
 import { timeout } from "@kablamo/kerosene";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import waitForRepaint from "../utils/waitForRepaint";

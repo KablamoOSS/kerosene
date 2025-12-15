@@ -9,7 +9,7 @@ import type {
   QueryObserverResult,
   QueryObserverSuccessResult,
 } from "@tanstack/react-query";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 
 function createQueryObserverBaseResult<
   TData = unknown,

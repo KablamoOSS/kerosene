@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import type { FallbackProps } from "react-error-boundary";
 import QueriesBoundary, {
   AggregateQueriesError,

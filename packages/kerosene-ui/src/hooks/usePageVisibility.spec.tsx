@@ -2,7 +2,7 @@
 
 import { stubProperties } from "@kablamo/kerosene-test";
 import { renderHook } from "@testing-library/react";
-import identity from "lodash/identity";
+import { identity } from "lodash";
 import { act } from "react";
 import type { Mock } from "vitest";
 import usePageVisibility from "./usePageVisibility";

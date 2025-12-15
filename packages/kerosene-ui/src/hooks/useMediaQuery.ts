@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import * as React from "react";
 
 export interface UseMediaQueryOptions {
