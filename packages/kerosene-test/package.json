@@ -1,6 +1,6 @@
 {
   "name": "@kablamo/kerosene-test",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KablamoOSS/kerosene.git",
@@ -50,7 +50,7 @@
     "utils"
   ],
   "dependencies": {
-    "@kablamo/kerosene": "^0.0.51",
+    "@kablamo/kerosene": "^0.0.52",
     "lodash": "^4.17.21",
     "sinon": "^21.0.0"
   },

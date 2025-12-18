@@ -1,0 +1,73 @@
+{
+  "name": "@kablamo/rollup-plugin-resolve-externals",
+  "version": "0.0.2",
+  "repository": "https://github.com/KablamoOSS/kerosene/tree/master/packages/rollup-plugin-resolve-externals",
+  "bugs": {
+    "url": "https://github.com/KablamoOSS/kerosene/issues"
+  },
+  "contributors": [
+    {
+      "name": "Kablamo",
+      "url": "https://www.kablamo.com.au"
+    },
+    {
+      "name": "Nathan Hardy",
+      "email": "nathan.hardy@kablamo.com.au",
+      "url": "https://nhardy.id.au"
+    }
+  ],
+  "homepage": "https://github.com/KablamoOSS/kerosene",
+  "private": false,
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "doc": "readme.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "keywords": [
+    "kablamo",
+    "kerosene",
+    "rollup",
+    "plugin",
+    "externals",
+    "resolve"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@optimize-lodash/rollup-plugin": "^6.0.0",
+    "rolldown": "*",
+    "rollup": "^4.53.3",
+    "tsdown": "^0.17.4"
+  },
+  "peerDependencies": {
+    "rolldown": "*",
+    "rollup": "^4.9.6"
+  },
+  "peerDependenciesMeta": {
+    "rollup": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist"
+  }
+}
