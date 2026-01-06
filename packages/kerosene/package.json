@@ -40,7 +40,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@kablamo/rollup-plugin-resolve-externals": "^0.0.2",
+    "@kablamo/rollup-plugin-resolve-externals": "^0.0.3",
     "@optimize-lodash/rollup-plugin": "^6.0.0",
     "@sinonjs/fake-timers": "^15.0.0",
     "@types/content-type": "^1.1.9",
