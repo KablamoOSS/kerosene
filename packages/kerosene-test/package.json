@@ -51,7 +51,7 @@
   ],
   "dependencies": {
     "@kablamo/kerosene": "^0.0.52",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "sinon": "^21.0.0"
   },
   "devDependencies": {
