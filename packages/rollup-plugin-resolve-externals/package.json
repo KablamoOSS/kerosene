@@ -49,7 +49,7 @@
     "resolve"
   ],
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.23"
   },
   "devDependencies": {
     "@optimize-lodash/rollup-plugin": "^6.0.0",

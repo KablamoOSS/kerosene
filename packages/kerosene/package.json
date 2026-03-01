@@ -37,7 +37,7 @@
     "content-type": "^1.0.5",
     "core-js-pure": "^3.46.0",
     "date-fns": "^4.1.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.23"
   },
   "devDependencies": {
     "@kablamo/rollup-plugin-resolve-externals": "^0.0.4",
