@@ -37,10 +37,7 @@ describe("#catchAbortError", () => {
     { name: "undefined", error: undefined, shouldThrow: true },
   ])("should return $expected for $name", ({ error, shouldThrow }) => {
     if (shouldThrow) {
-      expect(() => catchAbortError(error)).toThrow(
-        // @ts-expect-error non-error values
-        error,
-      );
+      expect(() => catchAbortError(error)).toThrow(error);
     } else {
       expect(catchAbortError(error)).toBeUndefined();
     }
